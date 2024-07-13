@@ -133,7 +133,7 @@
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
             <?php
-              $conn = mysqli_connect('127.0.0.1.', 'u510162695_hmsystemdb', '1Hmsystemdb', 'u510162695_hmsystemdb','3306');
+              $conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME, DB_PORT);
               $id = $_SESSION['ADMIN_ID'];
               $sql = "SELECT * FROM `tbluseraccount` WHERE `USERID` = '$id'";
               $result = mysqli_query($conn, $sql);
