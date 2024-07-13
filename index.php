@@ -1,5 +1,5 @@
 <?php
-include 'config.php'; 
+ 
 require_once("includes/initialize.php");
 $content='home.php';
 $view = (isset($_GET['p']) && $_GET['p'] != '') ? $_GET['p'] : '';
