@@ -6,7 +6,7 @@
 * Revised By:		
 */
 
-require_once('includes/database.php');
+require_once('database.php');
 class User{
 	
 	protected static $tbl_name = "tbluseraccount";
