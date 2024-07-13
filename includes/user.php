@@ -5,6 +5,7 @@
 * Date Created:	Nov. 2, 2013
 * Revised By:		
 */
+require_once('config.php');
 require_once('database.php');
 class User{
 	
