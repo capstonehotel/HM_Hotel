@@ -17,7 +17,7 @@ $docRoot =$_SERVER['DOCUMENT_ROOT'];
 
 $webRoot  = str_replace(array($docRoot, 'includes/config.php'), '', $thisFile);
 $srvRoot  = str_replace('config/config.php','', $thisFile);
-$connection = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
+$connection = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME,3306);
 
 
 define('WEB_ROOT', $webRoot);
