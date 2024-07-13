@@ -309,7 +309,7 @@ CREATE TABLE `tbluseraccount` (
 --
 
 INSERT INTO `tbluseraccount` (`USERID`, `UNAME`, `USER_NAME`, `UPASS`, `ROLE`, `PHONE`) VALUES
-(1, 'Ms.Cristy Forrosuelo', 'Cristy@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'Administrator', '09090909099'),
+(1, 'Ms.Cristy Forrosuelo', 'Cristy@gmail.com', 'c08be12c1e5cca0928e9f332fa23374989cac47f', 'Administrator', '09090909099'),
 (3, 'John Wick', 'admin1@gmail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 'Administrator', '09683525733'),
 (5, 'mr.magic', 'magic@gmail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 'Guest In-charge', '09090909099'),
 (7, 'Jake quoe', 'jake@gmail.com', '76569cdd97019401110576e99febe314fc44a4b9', 'Guest In-charge', '09317622381'),
