@@ -26,27 +26,32 @@ class Database {
 	}
 	
 	public function open_connection() {
-        $this->conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
-        if (!$this->conn) {
-            die("Problem in database connection: " . mysqli_connect_error());
-        }
-    }
-
-    function setQuery($sql = '') {
-        $this->sql_string = $sql;
-    }
-
-    function executeQuery() {
-        $result = mysqli_query($this->conn, $this->sql_string);
-        $this->confirm_query($result);
-        return $result;
-    }
-
-    private function confirm_query($result) {
-        if (!$result) {
-            die("Database query failed: " . mysqli_error($this->conn));
-        }
-    }
+		$this->conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
+		if(!$this->conn){
+			echo "Problem in database connection! Contact administrator!";
+			exit();
+		}
+	}
+	
+	function setQuery($sql='') {
+		$this->sql_string=$sql;
+	}
+	
+	function executeQuery() {
+		$result = mysqli_query($this->conn, $this->sql_string);
+		$this->confirm_query($result);
+		return $result;
+	}	
+	
+	private function confirm_query($result) {
+		if(!$result){
+			$this->error_no = mysqli_errno( $this->conn );
+			$this->error_msg = mysqli_error( $this->conn );
+			return false;				
+		}
+		return $result;
+	} 
+	
 	function loadResultList( $key='' ) {
 		$cur = $this->executeQuery();
 		
