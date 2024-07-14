@@ -220,7 +220,7 @@ if (isset($_GET['viewed'])) {
 }
 ?>
 <?php
-$conn = new mysqli('localhost', 'root', '', 'hmsystemdb');
+$conn = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME, DB_PORT);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Mark the booking notification as new
