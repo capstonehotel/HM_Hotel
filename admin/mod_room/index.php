@@ -31,7 +31,7 @@ switch ($view) {
 		$content    = 'list.php';		
 }
   
-require_once '../themes/backendTemplate.php';
+require_once 'themes/backendTemplate.php';
 ?>
 
 
