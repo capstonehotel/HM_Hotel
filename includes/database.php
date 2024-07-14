@@ -20,7 +20,7 @@ class Database {
 	private $real_escape_string_exists;
 	
 	function __construct() {
-		$this->open_connection();
+		$this->open_connection(DB_SERVER, DB_USER, DB_PASS, DB_NAME, DB_PORT);
 		// $this->magic_quotes_active = get_magic_quotes_gpc();
 		$this->real_escape_string_exists = function_exists("mysqli_real_escape_string");
 	}
@@ -130,7 +130,7 @@ class Database {
 	}
 	
 } 
-$mydb = new Database();
+$mydb = new Database("127.0.0.1", "u510162695_hmsystemdb", "1Hmsystemdb", "u510162695_hmsystemdb","3306");
 
 
 ?>
