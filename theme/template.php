@@ -4,7 +4,7 @@
 if(isset($_POST['avail'])){
 $_SESSION['from'] = $_POST['from'];
 $_SESSION['to']  = $_POST['to'];
-  redirect("index.php?page=5");
+  redirect(WEB_ROOT. "index.php?page=5");
 }
 ?>
 
@@ -17,21 +17,21 @@ $_SESSION['to']  = $_POST['to'];
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.115.4">
-    <link rel="stylesheet" type="text/css" href="fonts/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="zfonts/css/font-awesome.min.css" />
     <title><?php echo isset($title) ? $title . ' | HM Hotel' : 'HM mini Hotel' ; ?></title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/navbars-offcanvas/">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
-    <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen" />
-    <link href="css/datepicker.css" rel="stylesheet" media="screen" />
+    <link href="<?php echo WEB_ROOT; ?>css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen" />
+    <link href="<?php echo WEB_ROOT; ?>css/datepicker.css" rel="stylesheet" media="screen" />
 
      <link href="cccss/galery.css" rel="stylesheet" media="screen" />
-    <link href="css/ekko-lightbox.css" rel="stylesheet" />
+    <link href="<?php echo WEB_ROOT; ?>css/ekko-lightbox.css" rel="stylesheet" />
 
 
-    <link href="theme/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo WEB_ROOT; ?>/theme/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <?php
         if (isset($_SESSION['monbela_cart'])){
