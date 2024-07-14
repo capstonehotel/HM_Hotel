@@ -38,9 +38,9 @@ class Database {
 	}
 	
 	function executeQuery() {
-		$result = mysqli_query($this->conn, $this->sql_string);
-		$this->confirm_query($result);
-		return $result;
+		if (empty($this->sql_string)) {
+			die("SQL query is empty.");
+		}
 	}	
 	
 	private function confirm_query($result) {
