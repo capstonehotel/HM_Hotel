@@ -12,15 +12,15 @@
     <title><?php echo isset($title) ? $title . ' | HM_HotelReservation' :  'HM_HotelReservation' ; ?></title>
 
     <!-- Custom fonts for this template-->
-    <link href="<?php echo WEB_ROOT; ?>/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="<?php echo WEB_ROOT; ?>/admin/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
- <link href="<?php echo WEB_ROOT; ?>admin/assets/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+ <link href="assets/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href=".../assets/bootstrap/css/bootstrap.min.css">
 
 <link href="<?php echo WEB_ROOT; ?>admin/css/dataTables.bootstrap.css" rel="stylesheet" media="screen">
@@ -133,7 +133,7 @@
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
             <?php
-              $conn = mysqli_connect('localhost', 'root', '', 'hmsystemdb');
+              $conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME, DB_PORT);
               $id = $_SESSION['ADMIN_ID'];
               $sql = "SELECT * FROM `tbluseraccount` WHERE `USERID` = '$id'";
               $result = mysqli_query($conn, $sql);
