@@ -62,7 +62,7 @@ $_SESSION['departure'] =date_format(date_create($_POST['departure']),"Y-m-d");
   ?>
 <div class="card rounded" style="padding: 10px;">
     <div  class="pagetitle">   
-        <h1  ><?php print $title ; ?> 
+        <h1  ><?php  $title ; ?> 
         </h1> 
     </div>
     <nav aria-label="breadcrumb" >
