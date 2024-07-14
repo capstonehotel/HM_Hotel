@@ -57,19 +57,19 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="<?php echo WEB_ROOT; ?>/admin/index.php">
+                <a class="nav-link" href="index.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
 
             <li class="nav-item active">
-                <a class="nav-link" href="<?php echo WEB_ROOT; ?>/admin/mod_room/index.php">
+                <a class="nav-link" href="../mod_room/index.php">
                     <i class="fas fa-fw fa-school"></i>
                     <span>Rooms</span></a>
             </li>
             
             <li class="nav-item active">
-                <a class="nav-link" href="<?php echo WEB_ROOT; ?>/admin/mod_accomodation/index.php">
+                <a class="nav-link" href="../mod_accomodation/index.php">
                     <i class="fas fa-fw fa-home"></i>
                     <span>Accomodation </a>
             </li>
@@ -83,7 +83,7 @@
                 foreach ($cur as $result) { 
                 ?>
             <li class="nav-item active">
-                <a class="nav-link" href="<?php echo WEB_ROOT; ?>admin/mod_reservation/index.php">
+                <a class="nav-link" href="../mod_reservation/index.php">
                     <i class="fas fa-fw fa-arrow-alt-circle-down"></i>
                     <span>Reservations</span></a>
             </li>
