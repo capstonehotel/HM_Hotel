@@ -18,20 +18,20 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="<?php echo WEB_ROOT; ?>/admin/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
  <link href="assets/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href=".../assets/bootstrap/css/bootstrap.min.css">
 
-<link href="<?php echo WEB_ROOT; ?>admin/css/dataTables.bootstrap.css" rel="stylesheet" media="screen">
-<link rel="stylesheet" type="text/css" href="<?php echo WEB_ROOT; ?>admin/css/jquery.dataTables.css">
-<link href="<?php echo WEB_ROOT; ?>admin/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
-<script type="text/javascript" language="javascript" src="<?php echo WEB_ROOT; ?>admin/js/jquery.js"></script>
-<script type="text/javascript" language="javascript" src="<?php echo WEB_ROOT; ?>admin/js/jquery.dataTables.js"></script>
-<script type="text/javascript" language="javascript" src="<?php echo WEB_ROOT; ?>admin/js/bootstrap.min.js"></script>
-<script type="text/javascript" language="javascript" src="<?php echo WEB_ROOT; ?>admin/js/bootstrap-modal.js"></script>
-<script type="text/javascript" src="<?php echo WEB_ROOT; ?>admin/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-<script type="text/javascript" src="<?php echo WEB_ROOT; ?>admin/js/locales/bootstrap-datetimepicker.uk.js" charset="UTF-8"></script>
+<link href="css/dataTables.bootstrap.css" rel="stylesheet" media="screen">
+<link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
+<link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+<script type="text/javascript" language="javascript" src="js/jquery.js"></script>
+<script type="text/javascript" language="javascript" src="js/jquery.dataTables.js"></script>
+<script type="text/javascript" language="javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" language="javascript" src="js/bootstrap-modal.js"></script>
+<script type="text/javascript" src="js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="js/locales/bootstrap-datetimepicker.uk.js" charset="UTF-8"></script>
 
 
 </head>
@@ -47,7 +47,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" >
                 <div class="sidebar-brand-icon ">         
-                 <img src="<?php echo WEB_ROOT; ?>/images/logo2.jpg" style="height:55px; width:55px; border-radius: 15px; margin-left: 2px;">
+                 <img src="images/logo2.jpg" style="height:55px; width:55px; border-radius: 15px; margin-left: 2px;">
                 </div>
                 <div class="sidebar-brand-text mx-3"> HM Hotel Reservation</div>
             </a>
@@ -57,19 +57,19 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="<?php echo WEB_ROOT; ?>/admin/index.php">
+                <a class="nav-link" href="index.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
 
             <li class="nav-item active">
-                <a class="nav-link" href="<?php echo WEB_ROOT; ?>/admin/mod_room/index.php">
+                <a class="nav-link" href="mod_room/index.php">
                     <i class="fas fa-fw fa-school"></i>
                     <span>Rooms</span></a>
             </li>
             
             <li class="nav-item active">
-                <a class="nav-link" href="<?php echo WEB_ROOT; ?>/admin/mod_accomodation/index.php">
+                <a class="nav-link" href="mod_accomodation/index.php">
                     <i class="fas fa-fw fa-home"></i>
                     <span>Accomodation </a>
             </li>
@@ -83,7 +83,7 @@
                 foreach ($cur as $result) { 
                 ?>
             <li class="nav-item active">
-                <a class="nav-link" href="<?php echo WEB_ROOT; ?>admin/mod_reservation/index.php">
+                <a class="nav-link" href="mod_reservation/index.php">
                     <i class="fas fa-fw fa-arrow-alt-circle-down"></i>
                     <span>Reservations</span></a>
             </li>
@@ -93,21 +93,21 @@
 
 
             <li class="nav-item active">
-                <a class="nav-link" href="<?php echo WEB_ROOT; ?>admin/mod_contact_us/index.php">
+                <a class="nav-link" href="mod_contact_us/index.php">
                     <i class="fas fa-fw fa-sms"></i>
                     <span>Messages</span></a>
             </li>
 
              
             <li class="nav-item active">
-                <a class="nav-link" href="<?php echo WEB_ROOT; ?>admin/mod_reports/index.php">
+                <a class="nav-link" href="mod_reports/index.php">
                     <i class="fas fa-fw fa-receipt"></i>
                     <span>Report</span></a>
             </li>
         
                <?php if($_SESSION['ADMIN_UROLE']=="Administrator"){ ?>
             <li class="nav-item active">
-                <a class="nav-link" href="<?php echo WEB_ROOT; ?>admin/mod_users/index.php">
+                <a class="nav-link" href="mod_users/index.php">
                     <i class="fas fa-fw fa-user"></i>
                     <span>Users</span></a>
             </li>
@@ -153,14 +153,14 @@
                         echo $row['ROLE'];
                        ?></span>
                                 <img class="img-profile rounded-circle"
-                                    src="<?php echo WEB_ROOT; ?>/admin/img/undraw_profile.svg">
+                                    src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
 
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
                                 <?php if($_SESSION['ADMIN_UROLE']=="Administrator"){ ?>
-                                <a class="dropdown-item" href="<?php echo WEB_ROOT; ?>admin/mod_users/index.php?view=edit&id=<?php echo $row['USERID']; ?>">
+                                <a class="dropdown-item" href="mod_users/index.php?view=edit&id=<?php echo $row['USERID']; ?>">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -234,27 +234,27 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="<?php echo WEB_ROOT; ?>/admin/vendor/jquery/jquery.min.js"></script>
-    <script src="<?php echo WEB_ROOT; ?>/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="<?php echo WEB_ROOT; ?>/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="<?php echo WEB_ROOT; ?>/admin/js/sb-admin-2.min.js"></script>
+    <script src="js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="<?php echo WEB_ROOT; ?>/admin/vendor/chart.js/Chart.min.js"></script>
+    <script src="vendor/chart.js/Chart.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="<?php echo WEB_ROOT; ?>/admin/js/demo/chart-area-demo.js"></script>
-    <script src="<?php echo WEB_ROOT; ?>/admin/js/demo/chart-pie-demo.js"></script>
-    <script src="<?php echo WEB_ROOT; ?>/admin/js/demo/datatables-demo.js"></script>
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
+    <script src="js/demo/datatables-demo.js"></script>
 
 
     <!-- Page level plugins -->
-    <script src="<?php echo WEB_ROOT; ?>/admin/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="<?php echo WEB_ROOT; ?>/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
     
