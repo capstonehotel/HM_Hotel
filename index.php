@@ -55,7 +55,7 @@ switch ($view) {
     $content ='home.php';   
 }
 
-require_once ('theme/template.php');
+include ('theme/template.php');
 
 ?>
  
