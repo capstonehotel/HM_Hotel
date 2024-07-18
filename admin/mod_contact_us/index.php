@@ -23,7 +23,7 @@ switch ($view) {
 		$content    = 'list.php';		
 }
   include '../modal.php';
-require_once '../themes/backendTemplate.php';
+require_once '../backendTemplate.php';
 
 
 ?>
