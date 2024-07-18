@@ -1,4 +1,6 @@
 <?php
+require_once("includes/accomodation.php");
+require_once("includes/functions.php");
 $msg = "";
 
 if(isset($_POST['booknow'])){
