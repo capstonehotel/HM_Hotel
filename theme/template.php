@@ -176,7 +176,7 @@ $_SESSION['to']  = $_POST['to'];
     </div>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
     <div class="container-fluid">
-      <a class="navbar-brand" href="<?php echo BASE_URL; ?>/index.php">
+      <a class="navbar-brand" href="index.php">
       <?php
     $imagePath = ($_SERVER['PHP_SELF'] == '/booking/booking.php') ? '../images/logo2.jpg' : 'images/logo2.jpg';
     ?>
@@ -250,9 +250,9 @@ $_SESSION['to']  = $_POST['to'];
                        while ($row = $result->fetch_assoc()) {
                      ?>
                     <li>
-                      <a target="_blank"  class="read dropdown-item" href="<?php echo WEB_ROOT ;  ?>guest/readmessage.php?code=<?php echo  $row['CONFIRMATIONCODE']; ?>" data-toggle="lightbox"   data-id="<?php echo  $row['CONFIRMATIONCODE']; ?> " >
+                      <a target="_blank"  class="read dropdown-item" href="guest/readmessage.php?code=<?php echo  $row['CONFIRMATIONCODE']; ?>" data-toggle="lightbox"   data-id="<?php echo  $row['CONFIRMATIONCODE']; ?> " >
                         <div class="pull-left">
-                          <img src="<?php echo WEB_ROOT; ?>images/1607134500_avatar.jpg" style="width: 30px; height: 30px; border-radius: 50%;" alt="">
+                          <img src="images/1607134500_avatar.jpg" style="width: 30px; height: 30px; border-radius: 50%;" alt="">
                         </div>
                         <h4>
                           Admin
@@ -286,10 +286,10 @@ $_SESSION['to']  = $_POST['to'];
 
                     <li>
                         <a class="dropdown-item" style="color:#000;text-align:left;border-bottom:1px solid #fff;"
-                    href="<?php echo WEB_ROOT ;  ?>guest/profile.php" data-toggle="lightbox" >Account</a>
+                    href="guest/profile.php" data-toggle="lightbox" >Account</a>
                     </li>
                     <li><a class="dropdown-item" style="color:#000;text-align:left;border-bottom:1px solid #fff;" 
-                href="<?php echo WEB_ROOT ;  ?>guest/bookinglist.php" data-toggle="lightbox">Bookings</a>
+                href="guest/bookinglist.php" data-toggle="lightbox">Bookings</a>
                     </li>
                     <li>
                         <a class="dropdown-item" style="color:#000;text-align:left;border-bottom:1px solid #fff;" href="<?php echo WEB_ROOT.'logout.php';  ?>">Logout </a>
@@ -301,7 +301,7 @@ $_SESSION['to']  = $_POST['to'];
           </li>
 
           <?php } ?>
-           <a class="text-light my-auto text-decoration-none ms-lg-2" href="<?php echo WEB_ROOT; ?>admin/login.php" style="color: whitesmoke;">
+           <a class="text-light my-auto text-decoration-none ms-lg-2" href="admin/login.php" style="color: whitesmoke;">
              <span class="d-lg-inline d-none">|</span> <span class="ms-lg-2"><i class="fa fa-sign-in"></i> Login-Admin</span></a> 
           </ul>
           <?php  
@@ -321,7 +321,7 @@ $_SESSION['to']  = $_POST['to'];
                         <h4 class="modal-title" id="myModalLabel">Choose Image.</h4>
                     </div>
 
-                    <form action="<?php echo WEB_ROOT; ?>guest/update.php" enctype="multipart/form-data" method="post">
+                    <form action="guest/update.php" enctype="multipart/form-data" method="post">
                         <div class="modal-body">
                             <div class="form-group">
                                 <div class="rows">
@@ -350,13 +350,13 @@ $_SESSION['to']  = $_POST['to'];
              <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
               <div class="carousel-inner">
                 <div class="carousel-item active">
-                  <img style="height: 400px"  src="<?php echo WEB_ROOT; ?>images/high.jpg" class="d-block w-100" alt="...">
+                  <img style="height: 400px"  src="images/high.jpg" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                  <img style="height: 400px"   src="<?php echo WEB_ROOT; ?>images/high.jpg" class="d-block w-100" alt="...">
+                  <img style="height: 400px"   src="images/high.jpg" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                  <img style="height: 400px"  src="<?php echo WEB_ROOT; ?>images/high.jpg" class="d-block w-100" alt="...">
+                  <img style="height: 400px"  src="images/high.jpg" class="d-block w-100" alt="...">
                 </div>
               </div>
               <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
@@ -381,27 +381,27 @@ $_SESSION['to']  = $_POST['to'];
   </div>
 
 </main>
-<script src="<?php echo WEB_ROOT; ?>theme/assets/dist/js/bootstrap.bundle.min.js"></script>
+<script src="theme/assets/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 
- <script src="<?php echo WEB_ROOT; ?>jquery/jquery.min.js"></script>
+ <script src="jquery/jquery.min.js"></script>
         <!-- Bootstrap Core JavaScript -->
-        <script src="<?php echo WEB_ROOT; ?>js/bootstrap.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
 
         <!-- DataTables JavaScript -->
-        <script src="<?php echo WEB_ROOT; ?>js/jquery.dataTables.min.js"></script>
-        <script src="<?php echo WEB_ROOT; ?>js/dataTables.bootstrap.min.js"></script>
+        <script src="js/jquery.dataTables.min.js"></script>
+        <script src="js/dataTables.bootstrap.min.js"></script>
 
-        <script type="text/javascript" src="<?php echo WEB_ROOT; ?>js/bootstrap-datepicker.js" charset="UTF-8"></script>
-        <script type="text/javascript" src="<?php echo WEB_ROOT; ?>js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-        <script type="text/javascript" src="<?php echo WEB_ROOT; ?>js/bootstrap-datetimepicker.uk.js" charset="UTF-8"></script>
+        <script type="text/javascript" src="js/bootstrap-datepicker.js" charset="UTF-8"></script>
+        <script type="text/javascript" src="js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+        <script type="text/javascript" src="js/bootstrap-datetimepicker.uk.js" charset="UTF-8"></script>
         <!-- Custom Theme JavaScript -->
 
-        <script src="<?php echo WEB_ROOT; ?>js/ekko-lightbox.js"></script>
-        <script type="text/javascript" language="javascript" src="<?php echo WEB_ROOT; ?>js/plugins.js"></script>
-        <script type="text/javascript" language="javascript" src="<?php echo WEB_ROOT; ?>js/html5.js"></script>
-        <script type="text/javascript" language="javascript" src="<?php echo WEB_ROOT; ?>js/retina.js"></script>
-        <script type="text/javascript" language="javascript" src="<?php echo WEB_ROOT; ?>js/global.js"></script>
+        <script src="js/ekko-lightbox.js"></script>
+        <script type="text/javascript" language="javascript" src="js/plugins.js"></script>
+        <script type="text/javascript" language="javascript" src="js/html5.js"></script>
+        <script type="text/javascript" language="javascript" src="js/retina.js"></script>
+        <script type="text/javascript" language="javascript" src="js/global.js"></script>
 
         <script>
             // tooltip demo
