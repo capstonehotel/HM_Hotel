@@ -196,7 +196,7 @@ $_SESSION['to']  = $_POST['to'];
            $cur = $accomodation->listOfaccomodation(); ?>
           <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
             <li class="nav-item">
-              <a class="nav-link <?php if(!isset($_GET['p'])){echo "active";} ?>" href="index.php">Home</a>
+              <a class="nav-link <?php if(!isset($_GET['p'])){echo "active";} ?>" href="<?php echo WEB_ROOT; ?>index.php">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link <?php if(isset($_GET['p']) && $_GET['p'] == "rooms"){echo "active";} ?>" href="<?php echo WEB_ROOT; ?>index.php?p=rooms">Room and Rates</a>
