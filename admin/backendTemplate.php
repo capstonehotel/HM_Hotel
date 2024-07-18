@@ -63,13 +63,13 @@
             </li>
 
             <li class="nav-item active">
-                <a class="nav-link" href="../mod_room/index.php">
+                <a class="nav-link" href="mod_room/index.php">
                     <i class="fas fa-fw fa-school"></i>
                     <span>Rooms</span></a>
             </li>
             
             <li class="nav-item active">
-                <a class="nav-link" href="../mod_accomodation/index.php">
+                <a class="nav-link" href="mod_accomodation/index.php">
                     <i class="fas fa-fw fa-home"></i>
                     <span>Accomodation </a>
             </li>
@@ -83,7 +83,7 @@
                 foreach ($cur as $result) { 
                 ?>
             <li class="nav-item active">
-                <a class="nav-link" href="../mod_reservation/index.php">
+                <a class="nav-link" href="mod_reservation/index.php">
                     <i class="fas fa-fw fa-arrow-alt-circle-down"></i>
                     <span>Reservations</span></a>
             </li>
@@ -93,21 +93,21 @@
 
 
             <li class="nav-item active">
-                <a class="nav-link" href="../mod_contact_us/index.php">
+                <a class="nav-link" href="mod_contact_us/index.php">
                     <i class="fas fa-fw fa-sms"></i>
                     <span>Messages</span></a>
             </li>
 
              
             <li class="nav-item active">
-                <a class="nav-link" href="../mod_reports/index.php">
+                <a class="nav-link" href="mod_reports/index.php">
                     <i class="fas fa-fw fa-receipt"></i>
                     <span>Report</span></a>
             </li>
         
                <?php if($_SESSION['ADMIN_UROLE']=="Administrator"){ ?>
             <li class="nav-item active">
-                <a class="nav-link" href="../mod_users/index.php">
+                <a class="nav-link" href="mod_users/index.php">
                     <i class="fas fa-fw fa-user"></i>
                     <span>Users</span></a>
             </li>
