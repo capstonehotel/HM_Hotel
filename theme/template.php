@@ -374,7 +374,7 @@ $_SESSION['to']  = $_POST['to'];
         
       <div class="col-sm-12 py-2 mx-auto" style="max-width: 1000px">
         <?php 
-            require_once $content;  
+            require_once (index.php);  
         ?>
     </div>
     </div>
