@@ -42,7 +42,7 @@ define( 'SEP', DIRECTORY_SEPARATOR );
 ECHO WEB_ROOT;
 //require_once (WEB_ROOT.'backendTemplate.php');*/
   include '../modal.php';
-require_once '../themes/backendTemplate.php';
+require_once '../backendTemplate.php';
 ?>
 
 
