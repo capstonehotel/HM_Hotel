@@ -6,32 +6,33 @@ $_SESSION['from'] = $_POST['from'];
 $_SESSION['to']  = $_POST['to'];
   redirect(WEB_ROOT. "index.php?page=5");
 }
+
 ?>
 
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
-  <head><script src="theme/assets/js/color-modes.js"></script>
+  <head><script src="<?php echo WEB_ROOT; ?>theme/assets/js/color-modes.js"></script>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.115.4">
-    <link rel="stylesheet" type="text/css" href="fonts/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo WEB_ROOT; ?>fonts/css/font-awesome.min.css" />
     <title><?php echo isset($title) ? $title . ' | HM Hotel' : 'HM mini Hotel' ; ?></title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/navbars-offcanvas/">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
-    <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen" />
-    <link href="css/datepicker.css" rel="stylesheet" media="screen" />
+    <link href="<?php echo WEB_ROOT; ?>css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen" />
+    <link href="<?php echo WEB_ROOT; ?>css/datepicker.css" rel="stylesheet" media="screen" />
 
      <link href="cccss/galery.css" rel="stylesheet" media="screen" />
-    <link href="css/ekko-lightbox.css" rel="stylesheet" />
+    <link href="<?php echo WEB_ROOT; ?>css/ekko-lightbox.css" rel="stylesheet" />
 
 
-    <link href="theme/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo WEB_ROOT; ?>/theme/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <?php
         if (isset($_SESSION['monbela_cart'])){
@@ -116,12 +117,204 @@ $_SESSION['to']  = $_POST['to'];
       .bd-mode-toggle {
         z-index: 1500;
       }
+      /* Chatbox button */
+#chat-button {
+    position: fixed;
+    bottom: 70px;
+    right: 20px;
+    z-index: 2100; /* Ensure it's above the chatbox */
+    width: 48px; /* Adjust width to match toggle theme button */
+    height: 48px; /* Adjust height to match toggle theme button */
+    font-size: 24px; /* Adjust icon size */
+    line-height: 1; /* Ensure proper vertical alignment */
+}
+
+/* Chatbox container */
+.chatbox {
+    position: fixed;
+    bottom: 70px; /* Adjusted to prevent overlap with button */
+    right: 80px;
+    width: 300px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: none;
+    z-index: 1000;
+    max-height: calc(100vh - 100px); /* Ensure it fits within viewport */
+    overflow-y: auto; /* Enable scrolling within the chatbox */
+}
+
+.chatbox.open {
+    display: block;
+}
+
+/* Chatbox header */
+.chatbox-header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chatbox-title {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+/* Chat messages container */
+.chat-messages {
+  flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Align messages to the bottom */
+    height: 250px;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+/* Message styling */
+.message {
+  display: inline-block;
+    padding: 8px;
+    margin: 5px 0;
+    border-radius: 6px;
+    max-width: 80%;
+}
+
+/* User message (sent) */
+.message.sent {
+    background-color: #007bff;
+    color: white;
+    align-self: flex-end;
+    text-align: right; /* Align user messages to the right */
+    margin-left: auto; /* Push user messages to the right side */
+}
+
+/* Admin message (received) */
+.message.received {
+    background-color: #f0f0f0;
+    color: #333;
+    align-self: flex-start;
+    text-align: left; /* Align admin messages to the left */
+    margin-right: auto; /* Push admin messages to the left side */
+}
+
+/* Chat input area */
+.chat-input {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+}
+
+#message-input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none;
+    margin-right: 10px;
+}
+
+#send-button {
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#send-button:hover {
+    background-color: #0056b3;
+    
+}
+
+
+
+#google_translate_element {
+  position: absolute;
+  z-index: 1000;
+}
+
+/* Translate button */
+#translate-button {
+  position: fixed;
+  bottom: 130px;
+  right: 20px;
+  z-index: 2300; /* Ensure it's above the translate container */
+  width: 48px; /* Adjust width to match toggle theme button */
+  height: 48px; /* Adjust height to match toggle theme button */
+  font-size: 24px; /* Adjust icon size */
+  line-height: 1; /* Ensure proper vertical alignment */
+}
+
+/* Translate container */
+#translate-container {
+  position: fixed;
+  bottom: 120px; /* Adjusted to prevent overlap with button */
+  right: 80px;
+  width: 300px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: none;
+  z-index: 1000;
+  max-height: calc(100vh - 100px); /* Ensure it fits within viewport */
+  overflow-y: auto; /* Enable scrolling within the translate container */
+}
+
+#translate-container.open {
+  display: block;
+}
+ /* Hide Google Translate widget */
+ #google_translate_element {
+      z-index: -1; /* Position the widget behind other elements */
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      opacity: 0;
+    }
+    iframe.goog-te-banner-frame {
+      display: none !important;
+    }
+    .goog-logo-link {
+      display: none !important;
+    }
+    .goog-te-gadget {
+      color: transparent !important;
+    }
+    .skiptranslate {
+      display: none !important;
+    }
     </style>
+  
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<div id="google_translate_element"></div>
+<script >
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({pageLanguage: 'en' }, 'google_translate_element');
+  }
+</script>
 
     
     <!-- Custom styles for this template -->
     <link href="styles.css" rel="stylesheet">
   </head>
+  
   <body >
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
       <symbol id="check2" viewBox="0 0 16 16">
@@ -174,9 +367,142 @@ $_SESSION['to']  = $_POST['to'];
         </li>
       </ul>
     </div>
+
+<!-- Translate button -->
+<button id="translate-button" class="btn btn-primary">
+    <i class="fa fa-language"></i>
+  </button>
+
+  <!-- Translate container -->
+  <div id="translate-container">
+    <select id="select-language" class="form-control">
+      <option value="">Select Language</option>
+      <option value="ar">Arabic</option>
+      <option value="zh-CN">Chinese (Simplified)</option>
+      <option value="zh-TW">Chinese (Traditional)</option>
+      <option value="en">English</option>
+      <option value="fr">French</option>
+      <option value="de">German</option>
+      <option value="it">Italian</option>
+      <option value="ja">Japanese</option>
+      <option value="ko">Korean</option>
+      <option value="pt">Portuguese</option>
+      <option value="ru">Russian</option>
+      <option value="es">Spanish</option>
+    </select>
+  </div>
+
+  <div id="google_translate_element" style="display: none;"></div>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script>
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'ar,zh-CN,zh-TW,en,fr,de,it,ja,ko,pt,ru,es',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+    }
+
+    document.getElementById('translate-button').addEventListener('click', function() {
+      document.getElementById('translate-container').classList.toggle('open');
+    });
+
+    document.getElementById('select-language').addEventListener('change', function() {
+      var languageCode = this.value;
+      if (languageCode) {
+        translateContent(languageCode);
+        document.getElementById('translate-container').classList.remove('open');
+      }
+    });
+    function translateContent(languageCode) {
+      var googleTranslateCombo = document.querySelector('#google_translate_element select');
+      if (googleTranslateCombo) {
+        googleTranslateCombo.value = languageCode;
+        // Trigger change event on the select element
+        googleTranslateCombo.dispatchEvent(new Event('change'));
+      }
+    }
+  </script>
+
+
+
+
+<!-- Chatbox button -->
+<button id="chat-button" class="btn btn-primary">
+    <i class="fa fa-comments"></i> <!-- Replace 'fa-comments' with the specific icon you want -->
+</button>
+
+<!-- Chatbox container -->
+
+
+<div id="chatbox" class="chatbox">
+    <div class="chatbox-header">
+        <span class="chatbox-title">Chat with Admin</span>
+        <button class="close-button" onclick="closeChatbox()">×</button>
+    </div>
+    <div id="chat-messages" class="chat-messages">
+        <!-- Initial admin greeting message -->
+        <div class="message received">
+            Hello, how can I help you?
+        </div>
+    </div>
+    <div class="chat-input">
+        <textarea id="message-input" placeholder="Type your message..."></textarea>
+        <button id="send-button" onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<!-- JavaScript to handle chat interactions -->
+<script>
+    document.getElementById('chat-button').addEventListener('click', function() {
+        document.getElementById('chatbox').classList.add('open');
+    });
+
+    function closeChatbox() {
+        document.getElementById('chatbox').classList.remove('open');
+    }
+
+    function sendMessage() {
+        let messageInput = document.getElementById('message-input');
+        let message = messageInput.value.trim();
+
+        if (message !== '') {
+            let userMessageElement = document.createElement('div');
+            userMessageElement.textContent = message;
+            userMessageElement.classList.add('message', 'sent');
+
+            if (message.length < 20) {
+                userMessageElement.style.backgroundColor = '#007bff'; // Short message background
+            } else {
+                userMessageElement.style.backgroundColor = '#5bc0de'; // Long message background
+            }
+
+            document.getElementById('chat-messages').appendChild(userMessageElement);
+            messageInput.value = '';
+            document.getElementById('chat-messages').scrollTop = document.getElementById('chat-messages').scrollHeight;
+
+            fetch('admin/themes/chatbox.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `message=${message}&user_type=guest`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log('Message sent');
+                }
+            });
+        }
+    }
+</script>
+
+
+
+
+
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
     <div class="container-fluid">
-      <a class="navbar-brand" href="index.php">
+      <a class="navbar-brand" href="<?php echo BASE_URL; ?>/index.php">
       <?php
     $imagePath = ($_SERVER['PHP_SELF'] == '/booking/booking.php') ? '../images/logo2.jpg' : 'images/logo2.jpg';
     ?>
@@ -196,30 +522,36 @@ $_SESSION['to']  = $_POST['to'];
            $cur = $accomodation->listOfaccomodation(); ?>
           <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
             <li class="nav-item">
-              <a class="nav-link <?php if(!isset($_GET['p'])){echo "active";} ?>" href="../index.php">Home</a>
+              <a class="nav-link <?php if(!isset($_GET['p'])){echo "active";} ?>" href="<?php echo WEB_ROOT; ?>index.php">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link <?php if(isset($_GET['p']) && $_GET['p'] == "rooms"){echo "active";} ?>" href="../index.php?p=rooms">Room and Rates</a>
+              <a class="nav-link <?php if(isset($_GET['p']) && $_GET['p'] == "rooms"){echo "active";} ?>" href="<?php echo WEB_ROOT; ?>index.php?p=rooms">Room and Rates</a>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown" >
               <a class="nav-link dropdown-toggle <?php if(isset($_GET['p']) && $_GET['p'] == "accomodation"){echo "active";} ?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Accomondation
               </a>
               <ul class="dropdown-menu">
                 <?php  foreach ($cur as $result) { ?>
                     <li>
-                        <a class="dropdown-item <?php if(isset($_GET['q']) && $_GET['q'] == $result->ACCOMODATION){echo "active";} ?>" href="../index.php?p=accomodation&q=<?php echo $result->ACCOMODATION; ?>"><?php echo $result->ACCOMODATION; ?></a>
+                        <a class="dropdown-item <?php if(isset($_GET['q']) && $_GET['q'] == $result->ACCOMODATION){echo "active";} ?>" href="<?php echo WEB_ROOT; ?>index.php?p=accomodation&q=<?php echo $result->ACCOMODATION; ?>"><?php echo $result->ACCOMODATION; ?></a>
                     </li>
                 <?php } ?>
               </ul>
             </li>
+           
             <li class="nav-item">
-              <a class="nav-link <?php if(isset($_GET['p']) && $_GET['p'] == "contact"){echo "active";} ?>" href="../index.php?p=contact">Contact Us</a>
+              <a class="nav-link <?php if(isset($_GET['p']) && $_GET['p'] == "contact"){echo "active";} ?>" href="<?php echo WEB_ROOT; ?>index.php?p=contact">Contact Us</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link <?php if(isset($_GET['p']) && $_GET['p'] == "about-us"){echo "active";} ?>" href="../index.php?p=about-us">About us</a>
+              <a class="nav-link <?php if(isset($_GET['p']) && $_GET['p'] == "about-us"){echo "active";} ?>" href="<?php echo WEB_ROOT; ?>index.php?p=about-us">About us</a>
             </li>
           </ul>
+          
+
+
+
+          
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item" >
               <a class="nav-link active" data-toggle="tooltip" title="Booking Cart"  href="<?php echo WEB_ROOT.'booking/index.php';  ?>"><i class="fa fa-shopping-cart" style="display: flex; font-size: 25px;"><?php echo  isset($cart) ? $cart : '' ; ?>  </i> 
@@ -250,9 +582,9 @@ $_SESSION['to']  = $_POST['to'];
                        while ($row = $result->fetch_assoc()) {
                      ?>
                     <li>
-                      <a target="_blank"  class="read dropdown-item" href="guest/readmessage.php?code=<?php echo  $row['CONFIRMATIONCODE']; ?>" data-toggle="lightbox"   data-id="<?php echo  $row['CONFIRMATIONCODE']; ?> " >
+                      <a target="_blank"  class="read dropdown-item" href="<?php echo WEB_ROOT ;  ?>guest/readmessage.php?code=<?php echo  $row['CONFIRMATIONCODE']; ?>" data-toggle="lightbox"   data-id="<?php echo  $row['CONFIRMATIONCODE']; ?> " >
                         <div class="pull-left">
-                          <img src="images/1607134500_avatar.jpg" style="width: 30px; height: 30px; border-radius: 50%;" alt="">
+                          <img src="<?php echo WEB_ROOT; ?>images/1607134500_avatar.jpg" style="width: 30px; height: 30px; border-radius: 50%;" alt="">
                         </div>
                         <h4>
                           Admin
@@ -286,10 +618,10 @@ $_SESSION['to']  = $_POST['to'];
 
                     <li>
                         <a class="dropdown-item" style="color:#000;text-align:left;border-bottom:1px solid #fff;"
-                    href="guest/profile.php" data-toggle="lightbox" >Account</a>
+                    href="<?php echo WEB_ROOT ;  ?>guest/profile.php" data-toggle="lightbox" >Account</a>
                     </li>
                     <li><a class="dropdown-item" style="color:#000;text-align:left;border-bottom:1px solid #fff;" 
-                href="guest/bookinglist.php" data-toggle="lightbox">Bookings</a>
+                href="<?php echo WEB_ROOT ;  ?>guest/bookinglist.php" data-toggle="lightbox">Bookings</a>
                     </li>
                     <li>
                         <a class="dropdown-item" style="color:#000;text-align:left;border-bottom:1px solid #fff;" href="<?php echo WEB_ROOT.'logout.php';  ?>">Logout </a>
@@ -301,7 +633,7 @@ $_SESSION['to']  = $_POST['to'];
           </li>
 
           <?php } ?>
-           <a class="text-light my-auto text-decoration-none ms-lg-2" href="admin/login.php" style="color: whitesmoke;">
+           <a class="text-light my-auto text-decoration-none ms-lg-2" href="<?php echo WEB_ROOT; ?>admin/login.php" style="color: whitesmoke;">
              <span class="d-lg-inline d-none">|</span> <span class="ms-lg-2"><i class="fa fa-sign-in"></i> Login-Admin</span></a> 
           </ul>
           <?php  
@@ -321,7 +653,7 @@ $_SESSION['to']  = $_POST['to'];
                         <h4 class="modal-title" id="myModalLabel">Choose Image.</h4>
                     </div>
 
-                    <form action="guest/update.php" enctype="multipart/form-data" method="post">
+                    <form action="<?php echo WEB_ROOT; ?>guest/update.php" enctype="multipart/form-data" method="post">
                         <div class="modal-body">
                             <div class="form-group">
                                 <div class="rows">
@@ -350,13 +682,13 @@ $_SESSION['to']  = $_POST['to'];
              <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
               <div class="carousel-inner">
                 <div class="carousel-item active">
-                  <img style="height: 400px"  src="images/high.jpg" class="d-block w-100" alt="...">
+                  <img style="height: 400px"  src="<?php echo WEB_ROOT; ?>images/high.jpg" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                  <img style="height: 400px"   src="images/high.jpg" class="d-block w-100" alt="...">
+                  <img style="height: 400px"   src="<?php echo WEB_ROOT; ?>images/high.jpg" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                  <img style="height: 400px"  src="images/high.jpg" class="d-block w-100" alt="...">
+                  <img style="height: 400px"  src="<?php echo WEB_ROOT; ?>images/high.jpg" class="d-block w-100" alt="...">
                 </div>
               </div>
               <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
@@ -381,27 +713,27 @@ $_SESSION['to']  = $_POST['to'];
   </div>
 
 </main>
-<script src="theme/assets/dist/js/bootstrap.bundle.min.js"></script>
+<script src="<?php echo WEB_ROOT; ?>theme/assets/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 
- <script src="jquery/jquery.min.js"></script>
+ <script src="<?php echo WEB_ROOT; ?>jquery/jquery.min.js"></script>
         <!-- Bootstrap Core JavaScript -->
-        <script src="js/bootstrap.min.js"></script>
+        <script src="<?php echo WEB_ROOT; ?>js/bootstrap.min.js"></script>
 
         <!-- DataTables JavaScript -->
-        <script src="js/jquery.dataTables.min.js"></script>
-        <script src="js/dataTables.bootstrap.min.js"></script>
+        <script src="<?php echo WEB_ROOT; ?>js/jquery.dataTables.min.js"></script>
+        <script src="<?php echo WEB_ROOT; ?>js/dataTables.bootstrap.min.js"></script>
 
-        <script type="text/javascript" src="js/bootstrap-datepicker.js" charset="UTF-8"></script>
-        <script type="text/javascript" src="js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-        <script type="text/javascript" src="js/bootstrap-datetimepicker.uk.js" charset="UTF-8"></script>
+        <script type="text/javascript" src="<?php echo WEB_ROOT; ?>js/bootstrap-datepicker.js" charset="UTF-8"></script>
+        <script type="text/javascript" src="<?php echo WEB_ROOT; ?>js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+        <script type="text/javascript" src="<?php echo WEB_ROOT; ?>js/bootstrap-datetimepicker.uk.js" charset="UTF-8"></script>
         <!-- Custom Theme JavaScript -->
 
-        <script src="js/ekko-lightbox.js"></script>
-        <script type="text/javascript" language="javascript" src="js/plugins.js"></script>
-        <script type="text/javascript" language="javascript" src="js/html5.js"></script>
-        <script type="text/javascript" language="javascript" src="js/retina.js"></script>
-        <script type="text/javascript" language="javascript" src="js/global.js"></script>
+        <script src="<?php echo WEB_ROOT; ?>js/ekko-lightbox.js"></script>
+        <script type="text/javascript" language="javascript" src="<?php echo WEB_ROOT; ?>js/plugins.js"></script>
+        <script type="text/javascript" language="javascript" src="<?php echo WEB_ROOT; ?>js/html5.js"></script>
+        <script type="text/javascript" language="javascript" src="<?php echo WEB_ROOT; ?>js/retina.js"></script>
+        <script type="text/javascript" language="javascript" src="<?php echo WEB_ROOT; ?>js/global.js"></script>
 
         <script>
             // tooltip demo
