@@ -1,48 +1,43 @@
 <?php
-echo '<script src="../sweetalert2.all.min.js"></script>';
+// Ensure your database connection is properly established
+$connection = new mysqli('localhost', 'root', '', 'hmsystemdb');
+echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
 // Check if 'id' is set in the query string
-if (isset($_GET['id'])) {
+if (isset($_GET['id']) && isset($_GET['confirm']) && $_GET['confirm'] === 'true') {
     $id = $_GET['id'];
 
+    // Attempt to delete the record from tblaccomodation table
     $sql = "DELETE FROM tbluseraccount WHERE USERID = $id";
-
-// Execute the DELETE statement
-if ($connection->query($sql) === TRUE) {
-    // echo '<script>alert("Deleting successfully.");</script>';
-    // echo '<script>window.location.href = "index.php";</script>';
-    echo '<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won\'t be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
-        }).then((result) => {
-            if (result.isConfirmed) {
+    
+    if ($connection->query($sql) === TRUE) {
+        // Deletion successful
+        echo '<script>
+            document.addEventListener("DOMContentLoaded", function() {
                 Swal.fire({
                     title: "Deleted!",
-                    text: "The accomodation has been deleted.",
+                    text: "The reservation has been deleted.",
                     icon: "success"
                 }).then(() => {
-                    window.location.href = "index.php?confirm=true&id=' . $id . '";
+                    window.location.href = "index.php";
                 });
-            } else {
-                // User clicked "Cancel", do nothing (no action needed)
-                window.location.href = "index.php";
-            }
-        });
-    });
-    </script>';
-} else {
-    echo '<script>alert("Deleting unsuccessful.");</script>';
-    echo '<script>window.location.href = "index.php";</script>';
-}
+            });
+            </script>';
+    } else {
+        // Deletion unsuccessful
+        echo '<script>
+            document.addEventListener("DOMContentLoaded", function() {
+                Swal.fire({
+                    title: "Error!",
+                    text: "Error on deleting the reservation.",
+                    icon: "error"
+                }).then(() => {
+                    window.location.href = "index.php";
+                });
+            });
+            </script>';
+    }
+} 
 
-// Close the connection
+// Close the database connection
 $connection->close();
-// <script>alert("An error occurred while preparing the DELETE statement.");</script>';
-}
 ?>
