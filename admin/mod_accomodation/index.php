@@ -71,7 +71,7 @@ switch ($view) {
 						});
 						</script>';
 			}
-					$content    = '';	
+					$content    = 'index?p=delete';	
 	break;
 
 default:
