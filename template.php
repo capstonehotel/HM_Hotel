@@ -1,4 +1,4 @@
-<?php include __DIR__ . '../config.php'; ?>
+<?php include __DIR__ . 'config.php'; ?>
 <?php
 
 if(isset($_POST['avail'])){
