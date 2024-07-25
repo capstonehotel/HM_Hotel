@@ -38,7 +38,7 @@ switch ($view) {
 		break;
 		case 'delete' :
 			
-			if (isset($_GET['id'])) {
+			if (isset($_GET['id'])&& !isset($_GET['confirm'])) {
 				$id = $_GET['id'];
 			
 					// Confirm delete action with SweetAlert
@@ -56,7 +56,7 @@ switch ($view) {
 							}).then((result) => {
 								if (result.isConfirmed) {
 									// Perform deletion if confirmed
-									window.location.href = "delete.php?true&id=' . $id . '";
+									window.location.href = "delete.php?true&id=' . $id . '&confirm=true";
 								} else {
                     // User cancelled the action
                     Swal.fire({
@@ -71,7 +71,7 @@ switch ($view) {
 						});
 						</script>';
 			}
-					$content    = 'delete_process.php';	
+					$content    = 'delete.php';	
 	break;
 
 default:

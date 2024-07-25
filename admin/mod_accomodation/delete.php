@@ -18,7 +18,7 @@ require_once("../../includes/database.php");
 // $connection = new mysqli('127.0.0.1', 'u510162695_hmsystemdb', '1Hmsystemdb', 'u510162695_hmsystemdb', '3306');
 echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
 // Check if 'id' is set in the query string
-if (isset($_GET['id'])) {
+if (isset($_GET['id']) && isset($_GET['confirm']) && $_GET['confirm'] === 'true') {
     $id = $_GET['id'];
 
     // Attempt to delete the record from tblaccomodation table
@@ -34,7 +34,7 @@ if (isset($_GET['id'])) {
                     text: "The reservation has been deleted.",
                     icon: "success"
                 }).then(() => {
-                    window.location.href = "index.php?true&id=' . $id . '";
+                    window.location.href = "index.php";
                 });
             });
             </script>';
