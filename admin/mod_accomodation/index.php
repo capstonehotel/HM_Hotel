@@ -17,7 +17,7 @@ require_once("../../includes/setting.php");
 require_once("../../includes/database.php");
 
  if (!isset($_SESSION['ADMIN_ID'])){
- 	redirect(WEB_ROOT ."admin/login.php");
+ 	redirect("login.php");
  }
 $view = (isset($_GET['view']) && $_GET['view'] != '') ? $_GET['view'] : '';
 $title ="Room Type";
@@ -36,7 +36,7 @@ switch ($view) {
     case 'view' :
 		$content    = 'view.php';		
 		break;
-		case 'delete' :
+	case 'delete' :
 			
 			if (isset($_GET['id'])&& !isset($_GET['confirm'])) {
 				$id = $_GET['id'];
