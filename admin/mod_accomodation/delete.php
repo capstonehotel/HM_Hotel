@@ -52,11 +52,7 @@ if (isset($_GET['id']) && isset($_GET['confirm']) && $_GET['confirm'] === 'true'
             });
             </script>';
     }
-} else {
-    // Redirect to index.php if 'id' is not set
-    header("Location: index.php");
-    exit;
-}
+} 
 
 // Close the database connection
 $connection->close();
