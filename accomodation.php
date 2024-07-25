@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 $msg = "";
 
 if(isset($_POST['booknow'])){
