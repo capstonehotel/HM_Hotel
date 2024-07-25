@@ -64,7 +64,7 @@ switch ($view) {
 						});
 						</script>';
 					// $content    = '';		
-		$content    = 'delete.php';		
+		$content    = '';		
 	}
 	break;
 
