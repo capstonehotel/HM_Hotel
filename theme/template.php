@@ -8,28 +8,28 @@ $_SESSION['to']  = $_POST['to'];
 
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
-  <head><script src="<?php echo WEB_ROOT; ?>theme/assets/js/color-modes.js"></script>
+  <head><script src="theme/assets/js/color-modes.js"></script>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.115.4">
-    <link rel="stylesheet" type="text/css" href="<?php echo WEB_ROOT; ?>fonts/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="fonts/css/font-awesome.min.css" />
     <title><?php echo isset($title) ? $title . ' | HM Hotel' : 'HM mini Hotel' ; ?></title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/navbars-offcanvas/">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
-    <link href="<?php echo WEB_ROOT; ?>css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen" />
-    <link href="<?php echo WEB_ROOT; ?>css/datepicker.css" rel="stylesheet" media="screen" />
+    <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen" />
+    <link href="css/datepicker.css" rel="stylesheet" media="screen" />
 
      <link href="cccss/galery.css" rel="stylesheet" media="screen" />
-    <link href="<?php echo WEB_ROOT; ?>css/ekko-lightbox.css" rel="stylesheet" />
+    <link href="css/ekko-lightbox.css" rel="stylesheet" />
 
 
-    <link href="<?php echo WEB_ROOT; ?>/theme/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/theme/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <?php
         if (isset($_SESSION['monbela_cart'])){
@@ -189,10 +189,10 @@ $_SESSION['to']  = $_POST['to'];
            $cur = $accomodation->listOfaccomodation(); ?>
           <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
             <li class="nav-item">
-              <a class="nav-link <?php if(!isset($_GET['p'])){echo "active";} ?>" href="<?php echo WEB_ROOT; ?>index.php">Home</a>
+              <a class="nav-link <?php if(!isset($_GET['p'])){echo "active";} ?>" href="index.php">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link <?php if(isset($_GET['p']) && $_GET['p'] == "rooms"){echo "active";} ?>" href="<?php echo WEB_ROOT; ?>index.php?p=rooms">Room and Rates</a>
+              <a class="nav-link <?php if(isset($_GET['p']) && $_GET['p'] == "rooms"){echo "active";} ?>" href="index.php?p=rooms">Room and Rates</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle <?php if(isset($_GET['p']) && $_GET['p'] == "accomodation"){echo "active";} ?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -201,16 +201,16 @@ $_SESSION['to']  = $_POST['to'];
               <ul class="dropdown-menu">
                 <?php  foreach ($cur as $result) { ?>
                     <li>
-                        <a class="dropdown-item <?php if(isset($_GET['q']) && $_GET['q'] == $result->ACCOMODATION){echo "active";} ?>" href="<?php echo WEB_ROOT; ?>index.php?p=accomodation&q=<?php echo $result->ACCOMODATION; ?>"><?php echo $result->ACCOMODATION; ?></a>
+                        <a class="dropdown-item <?php if(isset($_GET['q']) && $_GET['q'] == $result->ACCOMODATION){echo "active";} ?>" href="index.php?p=accomodation&q=<?php echo $result->ACCOMODATION; ?>"><?php echo $result->ACCOMODATION; ?></a>
                     </li>
                 <?php } ?>
               </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link <?php if(isset($_GET['p']) && $_GET['p'] == "contact"){echo "active";} ?>" href="<?php echo WEB_ROOT; ?>index.php?p=contact">Contact Us</a>
+              <a class="nav-link <?php if(isset($_GET['p']) && $_GET['p'] == "contact"){echo "active";} ?>" href="index.php?p=contact">Contact Us</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link <?php if(isset($_GET['p']) && $_GET['p'] == "about-us"){echo "active";} ?>" href="<?php echo WEB_ROOT; ?>index.php?p=about-us">About us</a>
+              <a class="nav-link <?php if(isset($_GET['p']) && $_GET['p'] == "about-us"){echo "active";} ?>" href="index.php?p=about-us">About us</a>
             </li>
           </ul>
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
@@ -243,7 +243,7 @@ $_SESSION['to']  = $_POST['to'];
                        while ($row = $result->fetch_assoc()) {
                      ?>
                     <li>
-                      <a target="_blank"  class="read dropdown-item" href="<?php echo WEB_ROOT ;  ?>guest/readmessage.php?code=<?php echo  $row['CONFIRMATIONCODE']; ?>" data-toggle="lightbox"   data-id="<?php echo  $row['CONFIRMATIONCODE']; ?> " >
+                      <a target="_blank"  class="read dropdown-item" href="guest/readmessage.php?code=<?php echo  $row['CONFIRMATIONCODE']; ?>" data-toggle="lightbox"   data-id="<?php echo  $row['CONFIRMATIONCODE']; ?> " >
                         <div class="pull-left">
                           <img src="<?php echo WEB_ROOT; ?>images/1607134500_avatar.jpg" style="width: 30px; height: 30px; border-radius: 50%;" alt="">
                         </div>
