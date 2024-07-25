@@ -1,5 +1,5 @@
 <?php include 'config.php'; ?>
-<?php include '../includes/accomodation.php'; ?>
+
 <?php
 
 if(isset($_POST['avail'])){
