@@ -1,5 +1,4 @@
 <?php include 'config.php'; ?>
-<?php include '../includes/database.php'; ?>
 <?php include '../includes/accomodation.php'; ?>
 <?php
 
