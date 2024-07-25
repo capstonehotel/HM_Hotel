@@ -1,6 +1,8 @@
 <?php
+// $connection = new mysqli('localhost', 'root', '', 'hmsystemdb');
 // require_once("../../includes/initialize.php");
 // require_once("../../includes/config.php");
+// require_once("../../includes/initialize.php");
 // load config file first 
 require_once("../../includes/config.php");
 //load basic functions next so that everything after can use them
@@ -16,59 +18,78 @@ require_once("../../includes/reserve.php");
 require_once("../../includes/setting.php");
 //Load Core objects
 require_once("../../includes/database.php");
+ if (!isset($_SESSION['ADMIN_ID'])){
+ 	redirect(WEB_ROOT ."admin/login.php");
+ }
 echo '<script src="../sweetalert2.all.min.js"></script>';
 $action = (isset($_GET['action']) && $_GET['action'] != '') ? $_GET['action'] : '';
 $code = $_GET['code'];
+
 switch ($action) {
-	// case 'modify' :
-	// dbMODIFY();
-	// break;
-	
-	case 'delete' :
- 
-	$sql = "DELETE FROM tblreservation WHERE CONFIRMATIONCODE = '$code'";
-    $sql2 = "DELETE FROM tblpayment WHERE CONFIRMATIONCODE = '$code'";
+    case 'delete':
+        // Confirm delete action with SweetAlert
+        echo '<script src="../sweetalert2.all.min.js"></script>';
+        echo '<script>
+            document.addEventListener("DOMContentLoaded", function() {
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won\'t be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Perform deletion if confirmed
+                        window.location.href = "delete_process.php?action=confirm_delete&code=' . $code . '";
+                    } else {
+                        // Redirect back if cancelled
+                        window.location.href = "index.php";
+                    }
+                });
+            });
+            </script>';
+        break;
+        
+    case 'confirm_delete':
+        // Actual deletion logic to be handled here
+        $code = $_GET['code'];
+        $sql = "DELETE FROM tblreservation WHERE CONFIRMATIONCODE = '$code'";
+        $sql2 = "DELETE FROM tblpayment WHERE CONFIRMATIONCODE = '$code'";
+
+        if (mysqli_query($connection, $sql) && mysqli_query($connection, $sql2)) {
+            echo '<script>
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "The reservation has been deleted.",
+                    icon: "success"
+                }).then(() => {
+                    window.location.href = "index.php?confirm=true&code=' . $code . '";
+                });
+                </script>';
+        } else {
+            echo '<script>
+                Swal.fire({
+                    title: "Error!",
+                    text: "Error on deleting the reservation.",
+                    icon: "error"
+                }).then(() => {
+                    window.location.href = "index.php";
+                });
+                </script>';
+        }
+        break;
 
 
-    echo '<script src="../sweetalert2.all.min.js"></script>';
-    if (mysqli_query($connection, $sql)=== TRUE && mysqli_query($connection, $sql2)=== TRUE ) {
-        echo "<script> alert('Delete Booking Successfully.'); </script>";
-        // echo '<script src="../sweetalert2.all.min.js"></script>';
-        // echo '<script>
-        //     document.addEventListener("DOMContentLoaded", function() {
-        //         Swal.fire({
-        //             title: "Are you sure?",
-        //             text: "You won\'t be able to revert this!",
-        //             icon: "warning",
-        //             showCancelButton: true,
-        //             confirmButtonColor: "#3085d6",
-        //             cancelButtonColor: "#d33",
-        //             confirmButtonText: "Yes, delete it!"
-        //         }).then((result) => {
-        //             if (result.isConfirmed) {
-        //                 Swal.fire({
-        //                     title: "Deleted!",
-        //                     text: "The accomodation has been deleted.",
-        //                     icon: "success"
-        //                 }).then(() => {
-        //                     window.location.href = "index.php?confirm=true&code=' . $code . '";
-        //                 });
-        //             } else {
-        //                 // User clicked "Cancel", do nothing (no action needed)
-        //                 window.location.href = "index.php";
-        //             }
-        //         });
-        //     });
-        //     </script>';
-    } else {
-      echo "<script> alert('Error on Deleting Booking.'); </script>" ;
-    }
-    redirect('index.php');
-	break;
+
 	
 	// case 'deleteOne' :
 	// dbDELETEONE();
 	// break;
+
+
+
 	case 'confirm' :
         
         
@@ -81,23 +102,43 @@ switch ($action) {
         $sql2 = "UPDATE tblpayment SET STATUS = 'Confirmed' WHERE CONFIRMATIONCODE ='$code'";
 
         if ($connection->query($sql) === TRUE && $connection->query($sql1) === TRUE && $connection->query($sql2) === TRUE) {
-            // echo "<script> alert('Confirm Booking Successfully.'); </script>";
-            echo '<script src="../sweetalert2.all.min.js"></script>';
+            echo 'Executed PHP Code';
+           
             echo "<script>
-                            swal({
-                                title: 'Confirm!',
-                                text: 'Confirm Booking Successfully!',
-                                icon: 'success'
-                            }).then(() => {
-                                window.location = 'index.php';
-                            });
-                          </script>";
-            
+                    Swal.fire({
+                      title: 'Success!',
+                      text: 'Confirm Booking Successfully.',
+                      icon: 'success'
+                    }).then(function() {
+                      window.location.href = 'index.php';
+                    });
+                  </script>";
         } else {
-            echo "<script> alert('Error on Confirming Booking.'); </script>" ;
+            echo "<script>
+                    Swal.fire({
+                      title: 'Error!',
+                      text: 'Error on Confirming Booking.',
+                      icon: 'error'
+                    }).then(function() {
+                      window.location.href = 'index.php';
+                    });
+                  </script>";
         }
-        redirect('index.php');
-	break;
+        break;
+        
+        
+            //     echo "<script> alert('Confirm Booking Successfully.'); </script>";
+            
+        // } else {
+        //     echo "<script> alert('Error on Confirming Booking.'); </script>" ;
+        // }
+        // redirect('index.php');
+
+
+
+
+
+    
 	case 'cancel' :
         $sql1 = "UPDATE tblreservation SET STATUS = 'Cancelled' WHERE CONFIRMATIONCODE ='$code'";
         $sql = "UPDATE tblreservation r, tblroom rm SET ROOMNUM = ROOMNUM + 1 WHERE r.ROOMID=rm.ROOMID AND  CONFIRMATIONCODE = '$code' ";
@@ -105,11 +146,32 @@ switch ($action) {
         $sql2 = "UPDATE tblpayment SET STATUS = 'Cancelled' WHERE CONFIRMATIONCODE ='$code'";
 
         if ($connection->query($sql1) === TRUE && $connection->query($sql2) === TRUE && $connection->query($sql) === TRUE) {
-            echo "<script> alert('Cancelled Booking Successfully.'); </script>";
-        } else {
-            echo "<script> alert('Error on Cancelling Booking.'); </script>" ;
-        }
-        redirect('index.php');
+        //     echo "<script> alert('Cancelled Booking Successfully.'); </script>";
+        // } else {
+        //     echo "<script> alert('Error on Cancelling Booking.'); </script>" ;
+        // }
+        // redirect('index.php');
+        echo 'Executed PHP Code';
+        echo "<script>
+                Swal.fire({
+                  title: 'Success!',
+                  text: 'Cancelled Booking Successfully.',
+                  icon: 'success'
+                }).then(function() {
+                  window.location.href = 'index.php';
+                });
+              </script>";
+    } else {
+        echo "<script>
+                Swal.fire({
+                  title: 'Error!',
+                  text: 'Error on Cancelled Booking.',
+                  icon: 'error'
+                }).then(function() {
+                  window.location.href = 'index.php';
+                });
+              </script>";
+    }
 	break;
 	case 'checkin' :
 	    $sql1 = "UPDATE tblreservation SET STATUS = 'Checkedin' WHERE CONFIRMATIONCODE ='$code'";
@@ -118,11 +180,34 @@ switch ($action) {
         $sql2 = "UPDATE tblpayment SET STATUS = 'Checkedin' WHERE CONFIRMATIONCODE ='$code'";
 
         if ($connection->query($sql1) === TRUE && $connection->query($sql2) === TRUE) {
-            echo "<script> alert('Checkedin Booking Successfully.'); </script>";
-        } else {
-            echo "<script> alert('Error on Checkedin Booking.'); </script>" ;
-        }
-        redirect('index.php');
+        //     echo "<script> alert('Checkedin Booking Successfully.'); </script>";
+        // } else {
+        //     echo "<script> alert('Error on Checkedin Booking.'); </script>" ;
+        // }
+        // redirect('index.php');
+        
+        echo 'Executed PHP Code';
+        echo "<script>
+                Swal.fire({
+                  title: 'Success!',
+                  text: 'Check-in Booking Successfully.',
+                  icon: 'success'
+                }).then(function() {
+                  window.location.href = 'index.php';
+                });
+              </script>";
+    } else {
+        echo 'PHP Code Execution Failed';
+        echo "<script>
+                Swal.fire({
+                  title: 'Error!',
+                  text: 'Error on Check-in Booking.',
+                  icon: 'error'
+                }).then(function() {
+                  window.location.href = 'index.php';
+                });
+              </script>";
+    }
 	break;
 	case 'checkout' :
 	    $sql1 = "UPDATE tblreservation SET STATUS = 'Checkedout' WHERE CONFIRMATIONCODE ='$code'";
@@ -131,11 +216,36 @@ switch ($action) {
         $sql2 = "UPDATE tblpayment SET STATUS = 'Checkedout' WHERE CONFIRMATIONCODE ='$code'";
 
         if ($connection->query($sql1) === TRUE && $connection->query($sql2) === TRUE && $connection->query($sql) === TRUE) {
-            echo "<script> alert('Checkedout Booking Successfully.'); </script>";
-        } else {
-            echo "<script> alert('Error on Checkedout Booking.'); </script>" ;
-        }
-        redirect('index.php');
+        //     echo "<script> alert('Checkedout Booking Successfully.'); </script>";
+        // } else {
+        //     echo "<script> alert('Error on Checkedout Booking.'); </script>" ;
+        // }
+        // redirect('index.php');
+
+
+
+        echo 'Executed PHP Code';
+        echo '<script src="../sweetalert2.all.min.js"></script>';
+        echo "<script>
+                Swal.fire({
+                  title: 'Success!',
+                  text: 'Check-out Booking Successfully.',
+                  icon: 'success'
+                }).then(function() {
+                  window.location.href = 'index.php';
+                });
+              </script>";
+    } else {
+        echo "<script>
+                Swal.fire({
+                  title: 'Error!',
+                  text: 'Error on Check-out Booking.',
+                  icon: 'error'
+                }).then(function() {
+                  window.location.href = 'index.php';
+                });
+              </script>";
+    }
 	break;
 	// case 'cancelroom' :
 	// 	doCancelRoom();
@@ -303,21 +413,3 @@ switch ($action) {
 //   header('Location:index_resv.php?view=list');
 //   }*/
 // ?>
-function doDelete(){
-    if (isset($_POST['selector']) && is_array($_POST['selector'])) {
-        $id = $_POST['selector'];
-        $key = count($id);
-
-        // multi delete using checkbox as a selector
-        for ($i = 0; $i < $key; $i++) {
-            $reservation = new Reservation();
-            $reservation->delete($id[$i]);
-        }
-
-        message("Reservation already Deleted!", "info");
-    } else {
-        message("No reservations selected for deletion.", "error");
-    }
-    redirect('index.php');
-}
-?>

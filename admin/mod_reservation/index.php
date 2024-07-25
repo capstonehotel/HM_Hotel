@@ -44,6 +44,19 @@ switch ($view) {
 require_once '../backendTemplate.php';
 
 
+if (isset($_SESSION['alert'])) {
+	$alert = $_SESSION['alert'];
+	unset($_SESSION['alert']);
+	echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+	echo "<script>
+			Swal.fire({
+			  title: '{$alert['title']}',
+			  text: '{$alert['message']}',
+			  icon: '{$alert['status']}'
+			});
+		  </script>";
+  }
+
 ?>
 
 
