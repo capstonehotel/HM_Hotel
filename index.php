@@ -3,8 +3,6 @@ require_once ("includes/config.php");
 require_once("includes/database.php");
 require_once("includes/accomodation.php");
 require_once("includes/functions.php");
-
-require_once("paginsubject.php");
 require_once("guest.php");
 require_once("reserve.php"); 
 
