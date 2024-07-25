@@ -1,5 +1,5 @@
  <?php 
-require_once("../includes/initialize.php");
+// require_once("../includes/initialize.php");
 //echo date_format(date_create($_POST['dbirth']), 'Y-m-d');
 
 if(isset($_POST['submit'])){
@@ -21,7 +21,7 @@ $guest->update($_SESSION['GUESTID']);
 
 ?>
 <script type="text/javascript">
-	window.location = '<?php echo WEB_ROOT; ?>index.php';
+	window.location = 'index.php';
 </script>
 
 <?php  } 
