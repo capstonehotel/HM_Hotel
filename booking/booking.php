@@ -136,7 +136,7 @@ if(isset($_GET['id'])){
              if (isset($_SESSION['monbela_cart'])){
               ?>
                 <a  href="../index.php?p=rooms" class="btn btn-primary" align="right"name="clear">Add Another Room</a>
-                <a  href="../index.php?p=bookAroom" type="submit" class="btn btn-primary" align="right"name="clear">Clear Cart</button>
+                <a  href="../index.php?p=bookAroom" type="submit" class="btn btn-primary" align="right"name="clear">Clear Cart</a>
              <?php
              
               if (isset($_SESSION['GUESTID'])){
