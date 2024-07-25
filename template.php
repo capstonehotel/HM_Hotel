@@ -4,7 +4,7 @@
 if(isset($_POST['avail'])){
 $_SESSION['from'] = $_POST['from'];
 $_SESSION['to']  = $_POST['to'];
-  redirect( "index.php?page=5");
+  redirect( "../index.php?page=5");
 }
 ?>
 
@@ -178,7 +178,7 @@ $_SESSION['to']  = $_POST['to'];
     <div class="container-fluid">
       <a class="navbar-brand" href="index.php">
       <?php
-    $imagePath = ($_SERVER['PHP_SELF'] == 'booking/booking.php') ? '../images/logo2.jpg' : 'images/logo2.jpg';
+    $imagePath = ($_SERVER['PHP_SELF'] == 'booking.php') ? '../images/logo2.jpg' : '../images/logo2.jpg';
     ?>
     <img src="<?php echo BASE_URL . '/' . $imagePath; ?>" 
         style="width: 40px; height: 40px; border-radius: 30px; margin-left: 2px;">  HM Hotel Reservation</a>
@@ -321,7 +321,7 @@ $_SESSION['to']  = $_POST['to'];
                         <h4 class="modal-title" id="myModalLabel">Choose Image.</h4>
                     </div>
 
-                    <form action="guest/update.php" enctype="multipart/form-data" method="post">
+                    <form action="../guest/update.php" enctype="multipart/form-data" method="post">
                         <div class="modal-body">
                             <div class="form-group">
                                 <div class="rows">
@@ -350,13 +350,13 @@ $_SESSION['to']  = $_POST['to'];
              <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
               <div class="carousel-inner">
                 <div class="carousel-item active">
-                  <img style="height: 400px"  src="images/high.jpg" class="d-block w-100" alt="...">
+                  <img style="height: 400px"  src="../images/high.jpg" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                  <img style="height: 400px"   src="images/high.jpg" class="d-block w-100" alt="...">
+                  <img style="height: 400px"   src="../images/high.jpg" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                  <img style="height: 400px"  src="images/high.jpg" class="d-block w-100" alt="...">
+                  <img style="height: 400px"  src="../images/high.jpg" class="d-block w-100" alt="...">
                 </div>
               </div>
               <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
@@ -381,27 +381,27 @@ $_SESSION['to']  = $_POST['to'];
   </div>
 
 </main>
-<script src="theme/assets/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../theme/assets/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 
- <script src="jquery/jquery.min.js"></script>
+ <script src="../jquery/jquery.min.js"></script>
         <!-- Bootstrap Core JavaScript -->
-        <script src="js/bootstrap.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
 
         <!-- DataTables JavaScript -->
-        <script src="js/jquery.dataTables.min.js"></script>
-        <script src="js/dataTables.bootstrap.min.js"></script>
+        <script src="../js/jquery.dataTables.min.js"></script>
+        <script src="../js/dataTables.bootstrap.min.js"></script>
 
-        <script type="text/javascript" src="js/bootstrap-datepicker.js" charset="UTF-8"></script>
-        <script type="text/javascript" src="js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-        <script type="text/javascript" src="js/bootstrap-datetimepicker.uk.js" charset="UTF-8"></script>
+        <script type="text/javascript" src="../js/bootstrap-datepicker.js" charset="UTF-8"></script>
+        <script type="text/javascript" src="../js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+        <script type="text/javascript" src="../js/bootstrap-datetimepicker.uk.js" charset="UTF-8"></script>
         <!-- Custom Theme JavaScript -->
 
         <script src="js/ekko-lightbox.js"></script>
-        <script type="text/javascript" language="javascript" src="js/plugins.js"></script>
-        <script type="text/javascript" language="javascript" src="js/html5.js"></script>
-        <script type="text/javascript" language="javascript" src="js/retina.js"></script>
-        <script type="text/javascript" language="javascript" src="js/global.js"></script>
+        <script type="text/javascript" language="javascript" src="../js/plugins.js"></script>
+        <script type="text/javascript" language="javascript" src="../js/html5.js"></script>
+        <script type="text/javascript" language="javascript" src="../js/retina.js"></script>
+        <script type="text/javascript" language="javascript" src="../js/global.js"></script>
 
         <script>
             // tooltip demo
