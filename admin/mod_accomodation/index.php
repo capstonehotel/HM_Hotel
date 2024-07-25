@@ -65,10 +65,11 @@ switch ($view) {
 						</script>';
 					// $content    = '';		
 		$content    = 'delete.php';		
-		break;
+	}
+	break;
 
-	default 'list' :
-		$content    = 'list.php';		
+default:
+	$content = 'list.php';        
 }
 
 /*$thisFile = str_replace('\\', '/', __FILE__);
