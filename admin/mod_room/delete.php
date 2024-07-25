@@ -64,7 +64,7 @@ if (isset($_GET['id']) && isset($_GET['confirm']) && $_GET['confirm'] === 'true'
     }
 } else {
     // Redirect to index.php if 'id' or 'confirm' is not set
-    header("Location: ../index.php");
+    // header("Location: ../index.php");
     exit;
 }
 
