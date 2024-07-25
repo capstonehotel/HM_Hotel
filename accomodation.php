@@ -7,7 +7,6 @@ require_once("includes/functions.php");
 require_once("includes/session.php");
 require_once("includes/user.php");
 require_once("includes/pagination.php");
-require_once("includes/paginsubject.php");
 require_once("includes/accomodation.php");
 
 require_once("includes/reserve.php"); 
