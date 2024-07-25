@@ -58,9 +58,15 @@ switch ($view) {
 									// Perform deletion if confirmed
 									window.location.href = "delete_process.php?true&id=' . $id . '";
 								} else {
-									// Redirect back if cancelled
-									window.location.href = "index.php";
-								}
+                    // User cancelled the action
+                    Swal.fire({
+                        title: "Cancelled",
+                        text: "The deletion has been cancelled.",
+                        icon: "info"
+                    }).then(() => {
+                        window.location.href = "index.php";
+                    });
+                }
 							});
 						});
 						</script>';
