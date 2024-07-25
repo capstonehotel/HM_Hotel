@@ -3,9 +3,6 @@ require_once ("includes/config.php");
 require_once("includes/database.php");
 require_once("includes/accomodation.php");
 require_once("includes/functions.php");
-
-//later here where we are going to put our class session
-require_once("session.php");
 require_once("user.php");
 require_once("pagination.php");
 require_once("paginsubject.php");
