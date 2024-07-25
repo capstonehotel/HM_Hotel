@@ -27,7 +27,7 @@ if (isset($_GET['id']) && isset($_GET['confirm']) && $_GET['confirm'] === 'true'
             $sql1 = "DELETE FROM tblroom WHERE ROOMID = $id";
             if ($connection->query($sql1) === TRUE) {
                 // Show success message
-                echo 'Executed PHP Code';
+                // echo 'Executed PHP Code';
            
                 echo '<script>
                     Swal.fire({
