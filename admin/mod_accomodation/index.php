@@ -37,6 +37,7 @@ switch ($view) {
 		$content    = 'view.php';		
 		break;
 		case 'delete' :
+			
 			if (isset($_GET['id'])) {
 				$id = $_GET['id'];
 			
@@ -63,8 +64,8 @@ switch ($view) {
 							});
 						});
 						</script>';
-					// $content    = '';		
-		$content    = '';		
+					// $content    = '';	
+			
 	}
 	break;
 
