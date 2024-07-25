@@ -9,10 +9,9 @@ require_once("includes/user.php");
 require_once("includes/pagination.php");
 require_once("includes/paginsubject.php");
 require_once("includes/accomodation.php");
-require_once("includes/guest.php");
+
 require_once("includes/reserve.php"); 
-require_once("includes/setting.php");
-//Load Core objects
+
 require_once("includes/database.php");
 $msg = "";
 
