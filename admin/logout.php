@@ -31,5 +31,5 @@ unset( $_SESSION['ADMIN_UROLE'] );
 
  	
 // 4. Destroy the session
-redirect("admin/index.php");
+redirect("index.php");
 ?>
