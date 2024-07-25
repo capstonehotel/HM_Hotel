@@ -1,5 +1,5 @@
 <?php 
-	$conn = mysqli_connect('127.0.0.1', 'u510162695_hmsystemdb', 'm1Hmsystemdb', 'u510162695_hmsystemdb', '3306');
+	$conn = mysqli_connect('127.0.0.1', 'u510162695_hmsystemdb', '1Hmsystemdb', 'u510162695_hmsystemdb', '3306');
 
     $id = $_GET['id'];
     // echo $id;
