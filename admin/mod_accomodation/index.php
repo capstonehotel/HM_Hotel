@@ -56,7 +56,7 @@ switch ($view) {
 							}).then((result) => {
 								if (result.isConfirmed) {
 									// Perform deletion if confirmed
-									window.location.href = "delete_process.php?true&id=' . $id . '";
+									window.location.href = "delete.php?true&id=' . $id . '";
 								} else {
                     // User cancelled the action
                     Swal.fire({
