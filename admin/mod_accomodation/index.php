@@ -17,7 +17,7 @@ require_once("../../includes/setting.php");
 require_once("../../includes/database.php");
 
  if (!isset($_SESSION['ADMIN_ID'])){
- 	redirect("login.php");
+ 	redirect("../login.php");
  }
 $view = (isset($_GET['view']) && $_GET['view'] != '') ? $_GET['view'] : '';
 $title ="Room Type";
