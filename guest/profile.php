@@ -30,7 +30,7 @@ $res = $guest->single_guest($_SESSION['GUESTID']);
 
 ?>
 <div class="container " style="max-width: 1000px; padding: 20px; margin-top: 20px;">
-  <form class="form-horizontal" action="<?php echo WEB_ROOT; ?>guest/update.php" method="post" onsubmit="return personalInfo()" name="personal" >
+  <form class="form-horizontal" action="guest/update.php" method="post" onsubmit="return personalInfo()" name="personal" >
     <div class="row card">
       <section class="content-header">
         <h1>
