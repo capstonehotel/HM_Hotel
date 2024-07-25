@@ -17,7 +17,7 @@ if(isset($_POST['booknow'])){
      
       addtocart($_POST['ROOMID'],$days, $totalprice,$_SESSION['arrival'],$_SESSION['departure']);
 
-      redirect(WEB_ROOT. 'booking/'); 
+      redirect('booking/'); 
 
 }
  
@@ -199,9 +199,9 @@ $_SESSION['departure'] =date_format(date_create($_POST['departure']),"Y-m-d");
                         <input type="hidden" name="ROOMID" value="<?php echo $result->ROOMID ;?>">
                         <div class="card">
                                 <figure class="gallery-item " style="text-align: center; margin-top: 10px;">
-                                    <?php if(is_file(WEB_ROOT .'admin/mod_room/'.$result->ROOMIMAGE)): ?>
+                                    <?php if(is_file('admin/mod_room/'.$result->ROOMIMAGE)): ?>
                                     <img class="img-responsive img-hover"  src="room.jpg">
-                                   <!--  //<?php echo WEB_ROOT .'admin/mod_room/'.$result->ROOMIMAGE; ?> -->
+                                   <!--  //<?php echo 'admin/mod_room/'.$result->ROOMIMAGE; ?> -->
                                     <?php else: ?>
                                     <img class="img-responsive img-hover"  src="admin/mod_room/<?php echo $result->ROOMIMAGE ?>" style="height: 250px; width: 90%">
                                     <?php endif; ?>
