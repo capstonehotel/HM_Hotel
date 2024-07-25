@@ -24,7 +24,7 @@ if(isset($_GET['id'])){
     </div>
     <nav aria-label="breadcrumb" >
       <ol class="breadcrumb" style="margin-top: 10px;">
-        <li class="breadcrumb-item"><a href="<?php echo WEB_ROOT ;?>index.php">Home</a></li>
+        <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
         <li class="breadcrumb-item active" aria-current="page">Booking Cart</li>
       </ol>
     </nav>
@@ -84,7 +84,7 @@ if(isset($_GET['id'])){
                                 <td><?php echo  "&#8369 $result->PRICE"; ?></td> 
                                 <td><?php echo $_SESSION['monbela_cart'][$i]['monbeladay']; ?></td>   
                                 <td><?php echo "&#8369 $amount "; ?></td>
-                                <td><a href="index.php?view=processcart&id=<?php echo $result->ROOMID ?>">Remove</a></td>
+                                <td><a href="../index.php?view=processcart&id=<?php echo $result->ROOMID ?>">Remove</a></td>
                             </tr>
 
 
@@ -122,16 +122,16 @@ if(isset($_GET['id'])){
              <?php
              if (isset($_SESSION['monbela_cart'])){
               ?>
-                <a  href="index.php?p=rooms" class="btn btn-primary" align="right"name="clear">Add Another Room</a>
+                <a  href="../index.php?p=rooms" class="btn btn-primary" align="right"name="clear">Add Another Room</a>
              <button type="submit" class="btn btn-primary" align="right"name="clear">Clear Cart</button>
              <?php
              
               if (isset($_SESSION['GUESTID'])){
                 ?>
-                <a href="booking/index.php?view=payment" class="btn btn-primary" align="right"name="continue">Continue Booking</a>
+                <a href="index.php?view=payment" class="btn btn-primary" align="right"name="continue">Continue Booking</a>
                <?php 
               }else{ ?>
-                 <a href="booking/index.php?view=logininfo" class="btn btn-primary"   align="right"name="continue">Continue Booking</a>
+                 <a href="index.php?view=logininfo" class="btn btn-primary"   align="right"name="continue">Continue Booking</a>
              <?php
               }
             }else{
