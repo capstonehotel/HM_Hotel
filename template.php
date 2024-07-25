@@ -178,7 +178,7 @@ $_SESSION['to']  = $_POST['to'];
     <div class="container-fluid">
       <a class="navbar-brand" href="index.php">
       <?php
-    $imagePath = ($_SERVER['PHP_SELF'] == 'booking.php') ? '../images/logo2.jpg' : '../images/logo2.jpg';
+    $imagePath = ($_SERVER['PHP_SELF'] == 'booking/booking.php') ? '../images/logo2.jpg' : '../images/logo2.jpg';
     ?>
     <img src="<?php echo BASE_URL . '/' . $imagePath; ?>" 
         style="width: 40px; height: 40px; border-radius: 30px; margin-left: 2px;">  HM Hotel Reservation</a>
@@ -301,7 +301,7 @@ $_SESSION['to']  = $_POST['to'];
           </li>
 
           <?php } ?>
-           <a class="text-light my-auto text-decoration-none ms-lg-2" href="admin/login.php" style="color: whitesmoke;">
+           <a class="text-light my-auto text-decoration-none ms-lg-2" href="../admin/login.php" style="color: whitesmoke;">
              <span class="d-lg-inline d-none">|</span> <span class="ms-lg-2"><i class="fa fa-sign-in"></i> Login-Admin</span></a> 
           </ul>
           <?php  
