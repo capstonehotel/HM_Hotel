@@ -10,7 +10,7 @@ if(isset($_GET['id'])){
    unset($_SESSION['pay']);
    unset($_SESSION['monbela_cart']);
    message("The cart is empty.","success");
-  redirect(WEB_ROOT."booking/");
+  redirect("booking/");
 
  }
 
@@ -122,16 +122,16 @@ if(isset($_GET['id'])){
              <?php
              if (isset($_SESSION['monbela_cart'])){
               ?>
-                <a  href="<?php echo WEB_ROOT; ?>index.php?p=rooms" class="btn btn-primary" align="right"name="clear">Add Another Room</a>
+                <a  href="index.php?p=rooms" class="btn btn-primary" align="right"name="clear">Add Another Room</a>
              <button type="submit" class="btn btn-primary" align="right"name="clear">Clear Cart</button>
              <?php
              
               if (isset($_SESSION['GUESTID'])){
                 ?>
-                <a href="<?php echo WEB_ROOT; ?>booking/index.php?view=payment" class="btn btn-primary" align="right"name="continue">Continue Booking</a>
+                <a href="booking/index.php?view=payment" class="btn btn-primary" align="right"name="continue">Continue Booking</a>
                <?php 
               }else{ ?>
-                 <a href="<?php echo WEB_ROOT; ?>booking/index.php?view=logininfo" class="btn btn-primary"   align="right"name="continue">Continue Booking</a>
+                 <a href="booking/index.php?view=logininfo" class="btn btn-primary"   align="right"name="continue">Continue Booking</a>
              <?php
               }
             }else{
