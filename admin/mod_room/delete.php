@@ -1,78 +1,67 @@
 <?php
-echo '<script src="../sweetalert2.all.min.js"></script>';
+// require_once("../../includes/initialize.php");
+// load config file first 
+require_once("../../includes/config.php");
+//load basic functions next so that everything after can use them
+require_once("../../includes/functions.php");
+//later here where we are going to put our class session
+require_once("../../includes/session.php");
+require_once("../../includes/user.php");
+require_once("../../includes/pagination.php");
+require_once("../../includes/paginsubject.php");
+require_once("../../includes/accomodation.php");
+require_once("../../includes/guest.php");
+require_once("../../includes/reserve.php"); 
+require_once("../../includes/setting.php");
+//Load Core objects
+require_once("../../includes/database.php");
+echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
+if (isset($_GET['id']) && isset($_GET['confirm']) && $_GET['confirm'] === 'true') {
+    $id = (int)$_GET['id']; // Ensure $id is an integer for safety
 
-if (isset($_GET['id']) && !isset($_GET['confirm'])) {
-    $id = $_GET['id'];
-    echo '<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won\'t be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: "delete.php",
-                    type: "POST",
-                    data: { id: ' . $id . ' },
-                    success: function(response) {
-                        if(response === "success") {
-                            Swal.fire({
-                                title: "Deleted!",
-                                text: "The room has been deleted.",
-                                icon: "success"
-                            }).then(() => {
-                                window.location.href = "index.php";
-                            });
-                        } else {
-                            Swal.fire({
-                                title: "Error!",
-                                text: "There was an error deleting the room.",
-                                icon: "error"
-                            });
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        Swal.fire({
-                            title: "Error!",
-                            text: "There was an error deleting the room.",
-                            icon: "error"
-                        });
-                    }
-                });
+    if ($id > 0) {
+        // Perform deletion from tblreservation
+        $sql = "DELETE FROM tblreservation WHERE ROOMID = $id";
+        if ($connection->query($sql) === TRUE) {
+            // Perform deletion from tblroom
+            $sql1 = "DELETE FROM tblroom WHERE ROOMID = $id";
+            if ($connection->query($sql1) === TRUE) {
+                // Show success message
+                echo 'Executed PHP Code';
+           
+                echo '<script>
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "The accommodation has been deleted.",
+                        icon: "success"
+                    }).then(() => {
+                        window.location.href = "index.php";
+                    });
+                </script>';
             } else {
-                window.location.href = "index.php";
+                // Handle SQL error
+                echo '<script>
+                    Swal.fire({
+                        title: "Error!",
+                        text: "There was an error deleting the room.",
+                        icon: "error"
+                    }).then(() => {
+                        window.location.href = "index.php";
+                    });
+                </script>';
             }
-        });
-    });
-    </script>';
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
-    $id = $_POST['id'];
-    
-    // Make sure to use parameterized queries to prevent SQL injection
-    $stmt = $connection->prepare("DELETE FROM tblreservation WHERE ROOMID = ?");
-    $stmt->bind_param("i", $id);
-    if ($stmt->execute()) {
-        $stmt->close();
-        $stmt1 = $connection->prepare("DELETE FROM tblroom WHERE ROOMID = ?");
-        $stmt1->bind_param("i", $id);
-        if ($stmt1->execute()) {
-            echo 'success';
         } else {
-            echo 'error';
+            // Handle SQL error
+            echo '<script>
+                Swal.fire({
+                    title: "Error!",
+                    text: "There was an error deleting the reservation.",
+                    icon: "error"
+                }).then(() => {
+                    window.location.href = "index.php";
+                });
+            </script>';
         }
-        $stmt1->close();
-    } else {
-        echo 'error';
     }
-
-
-    $connection->close();
 }
 ?>
