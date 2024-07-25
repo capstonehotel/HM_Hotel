@@ -1,13 +1,9 @@
 <?php
-// load config file first 
-require_once("includes/config.php");
 require_once("includes/functions.php");
 require_once("includes/session.php");
 require_once("includes/pagination.php");
-require_once("includes/accomodation.php");
 require_once("includes/reserve.php"); 
 
-require_once("includes/database.php");
 $msg = "";
 
 if(isset($_POST['booknow'])){
