@@ -71,7 +71,7 @@ switch ($view) {
 						});
 						</script>';
 			}
-					$content    = 'delete.php';	
+					$content    = '';	
 	break;
 
 default:
