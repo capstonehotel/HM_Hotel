@@ -21,7 +21,7 @@
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
  <link href="assets/css/bootstrap.min.css" rel="stylesheet"  crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href=".../assets/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../assets/bootstrap/css/bootstrap.min.css">
 
 <link href="css/dataTables.bootstrap.css" rel="stylesheet" media="screen">
 <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
@@ -47,7 +47,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" >
                 <div class="sidebar-brand-icon ">         
-                 <img src="../images/logo2.jpg" style="height:55px; width:55px; border-radius: 15px; margin-left: 2px;">
+                 <img src="../../images/logo2.jpg" style="height:55px; width:55px; border-radius: 15px; margin-left: 2px;">
                 </div>
                 <div class="sidebar-brand-text mx-3"> HM Hotel Reservation</div>
             </a>
