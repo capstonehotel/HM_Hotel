@@ -120,7 +120,7 @@ $_SESSION['to']  = $_POST['to'];
 
     
     <!-- Custom styles for this template -->
-    <link href="styles.css" rel="stylesheet">
+    <link href="../styles.css" rel="stylesheet">
   </head>
   <body >
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
@@ -178,7 +178,7 @@ $_SESSION['to']  = $_POST['to'];
     <div class="container-fluid">
       <a class="navbar-brand" href="index.php">
       <?php
-    $imagePath = ($_SERVER['PHP_SELF'] == '/booking/booking.php') ? '../images/logo2.jpg' : 'images/logo2.jpg';
+    $imagePath = ($_SERVER['PHP_SELF'] == 'booking/booking.php') ? '../images/logo2.jpg' : 'images/logo2.jpg';
     ?>
     <img src="<?php echo BASE_URL . '/' . $imagePath; ?>" 
         style="width: 40px; height: 40px; border-radius: 30px; margin-left: 2px;">  HM Hotel Reservation</a>
@@ -222,7 +222,7 @@ $_SESSION['to']  = $_POST['to'];
           </ul>
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item" >
-              <a class="nav-link active" data-toggle="tooltip" title="Booking Cart"  href="<?php echo WEB_ROOT.'booking/index.php';  ?>"><i class="fa fa-shopping-cart" style="display: flex; font-size: 25px;"><?php echo  isset($cart) ? $cart : '' ; ?>  </i> 
+              <a class="nav-link active" data-toggle="tooltip" title="Booking Cart"  href="'index.php';  ?>"><i class="fa fa-shopping-cart" style="display: flex; font-size: 25px;"><?php echo  isset($cart) ? $cart : '' ; ?>  </i> 
              </a>
 
             </li>
@@ -250,9 +250,9 @@ $_SESSION['to']  = $_POST['to'];
                        while ($row = $result->fetch_assoc()) {
                      ?>
                     <li>
-                      <a target="_blank"  class="read dropdown-item" href="guest/readmessage.php?code=<?php echo  $row['CONFIRMATIONCODE']; ?>" data-toggle="lightbox"   data-id="<?php echo  $row['CONFIRMATIONCODE']; ?> " >
+                      <a target="_blank"  class="read dropdown-item" href="../guest/readmessage.php?code=<?php echo  $row['CONFIRMATIONCODE']; ?>" data-toggle="lightbox"   data-id="<?php echo  $row['CONFIRMATIONCODE']; ?> " >
                         <div class="pull-left">
-                          <img src="images/1607134500_avatar.jpg" style="width: 30px; height: 30px; border-radius: 50%;" alt="">
+                          <img src="../images/1607134500_avatar.jpg" style="width: 30px; height: 30px; border-radius: 50%;" alt="">
                         </div>
                         <h4>
                           Admin
@@ -279,20 +279,20 @@ $_SESSION['to']  = $_POST['to'];
                           
                     <li class="widget-user-header bg-yellow">
                       <div class="widget-user-image" style="padding-top: 20px; text-align: center;">
-                        <img class="img-circle" style="cursor:pointer;width:80px;height:80px;padding:0; border-radius: 50%; text-align: center;"  data-target="#myModal" data-toggle="modal" src="<?php echo WEB_ROOT.'images/user_avatar/'.$result->G_AVATAR;  ?>" alt="User Avatar">
+                        <img class="img-circle" style="cursor:pointer;width:80px;height:80px;padding:0; border-radius: 50%; text-align: center;"  data-target="#myModal" data-toggle="modal" src="'../images/user_avatar/'.$result->G_AVATAR;  ?>" alt="User Avatar">
                       </div>
                       <h5 style="text-align: center;" class="widget-user-username"><?php echo $_SESSION['name']. ' ' . $_SESSION['last']; ?> </h5>
                     </li>
 
                     <li>
                         <a class="dropdown-item" style="color:#000;text-align:left;border-bottom:1px solid #fff;"
-                    href="guest/profile.php" data-toggle="lightbox" >Account</a>
+                    href="../guest/profile.php" data-toggle="lightbox" >Account</a>
                     </li>
                     <li><a class="dropdown-item" style="color:#000;text-align:left;border-bottom:1px solid #fff;" 
-                href="guest/bookinglist.php" data-toggle="lightbox">Bookings</a>
+                href="../guest/bookinglist.php" data-toggle="lightbox">Bookings</a>
                     </li>
                     <li>
-                        <a class="dropdown-item" style="color:#000;text-align:left;border-bottom:1px solid #fff;" href="<?php echo WEB_ROOT.'logout.php';  ?>">Logout </a>
+                        <a class="dropdown-item" style="color:#000;text-align:left;border-bottom:1px solid #fff;" href="../'logout.php';  ?>">Logout </a>
                     </li>
                        
                 </ul>
