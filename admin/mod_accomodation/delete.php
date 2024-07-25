@@ -25,7 +25,7 @@ if (isset($_GET['id']) && isset($_GET['confirm']) && $_GET['confirm'] === 'true'
     $sql = "DELETE FROM tblaccomodation WHERE ACCOMID = $id";
     
     if ($connection->query($sql) === TRUE) {
-        echo 'Executed PHP Code';
+        // echo 'Executed PHP Code';
         // Deletion successful
         echo '<script>
             document.addEventListener("DOMContentLoaded", function() {
