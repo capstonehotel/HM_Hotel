@@ -33,7 +33,7 @@ if ($connection->query($sql) === TRUE) {
                             text: "The accomodation has been deleted.",
                             icon: "success"
                         }).then(() => {
-                            window.location.href = "index.php?confirm=true&id=' . $id . '";
+                            window.location.href = "delete_process.php?confirm=true&id=' . $id . '";
                         });
                     } else {
                         // User clicked "Cancel", do nothing (no action needed)
@@ -53,8 +53,8 @@ $sql = "SELECT * FROM tblroom WHERE ACCOMID = $id";
 // Execute the SELECT query
 $result = $connection->query($sql);
 if ($result->num_rows > 0) {
-    echo '<script>alert("Accomodation is selected in rooms. Delete unsuccessful.");</script>';
-    echo '<script>window.location.href = "index.php";</script>';
+    // echo '<script>alert("Accomodation is selected in rooms. Delete unsuccessful.");</script>';
+    // echo '<script>window.location.href = "index.php";</script>';
 }
 else{
     $sql1 = "DELETE FROM tblaccomodation WHERE ACCOMID = $id";
@@ -82,8 +82,8 @@ else{
     });
     </script>';
     }else{
-      echo '<script>alert("Deleting unsuccessful.");</script>';
-      echo '<script>window.location.href = "index.php";</script>';
+    //   echo '<script>alert("Deleting unsuccessful.");</script>';
+    //   echo '<script>window.location.href = "index.php";</script>';
     }
 }
 
@@ -92,3 +92,6 @@ $connection->close();
 // <script>alert("An error occurred while preparing the DELETE statement.");</script>';
 }
 ?>
+
+
+

@@ -37,6 +37,33 @@ switch ($view) {
 		$content    = 'view.php';		
 		break;
 		case 'delete' :
+			if (isset($_GET['id'])) {
+				$id = $_GET['id'];
+			
+					// Confirm delete action with SweetAlert
+					echo '<script src="../sweetalert2.all.min.js"></script>';
+					echo '<script>
+						document.addEventListener("DOMContentLoaded", function() {
+							Swal.fire({
+								title: "Are you sure?",
+								text: "You won\'t be able to revert this!",
+								icon: "warning",
+								showCancelButton: true,
+								confirmButtonColor: "#3085d6",
+								cancelButtonColor: "#d33",
+								confirmButtonText: "Yes, delete it!"
+							}).then((result) => {
+								if (result.isConfirmed) {
+									// Perform deletion if confirmed
+									window.location.href = "delete_process.php?true&id=' . $id . '";
+								} else {
+									// Redirect back if cancelled
+									window.location.href = "index.php";
+								}
+							});
+						});
+						</script>';
+					// $content    = '';		
 		$content    = 'delete.php';		
 		break;
 
