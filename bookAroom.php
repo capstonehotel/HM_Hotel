@@ -187,7 +187,7 @@ $_SESSION['departure'] =date_format(date_create($_POST['departure']),"Y-m-d");
                                 <img class="img-responsive img-hover"  src="room.jpg" style="height: 250px; width: 90%;"> 
                                <?php echo WEB_ROOT. 'admin/mod_room/'.$result->ROOMIMAGE; ?>
                                 <?php else: ?>
-                                 <img class="img-responsive img-hover"  src="WEB_ROOT.admin/mod_room/<?php echo $result->ROOMIMAGE ?> " style="height: 250px; width: 90%;"> 
+                                 <img class="img-responsive img-hover"  src="admin/mod_room/<?php echo $result->ROOMIMAGE ?> " style="height: 250px; width: 90%;"> 
                                 <?php endif; ?>
                                  <!--  <?php echo $img_title; ?>  -->
                                 <figcaption class="img-title-active">
