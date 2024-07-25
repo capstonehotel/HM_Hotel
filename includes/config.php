@@ -21,6 +21,6 @@ $srvRoot  = str_replace('config/config.php','', $thisFile);
 $connection = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME, DB_PORT);
 
 
-define('WEB_ROOT', $webRoot);
-define('SRV_ROOT', $srvRoot);
+// define('WEB_ROOT', $webRoot);
+// define('SRV_ROOT', $srvRoot);
 ?>
