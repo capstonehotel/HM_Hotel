@@ -1,4 +1,4 @@
-<?php include '../includes/config.php'; ?>
+<!-- <?php include '../includes/config.php'; ?> -->
 <?php
 
 if(isset($_POST['avail'])){
