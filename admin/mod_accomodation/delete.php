@@ -1,6 +1,6 @@
 <?php
 // Ensure your database connection is properly established
-$connection = new mysqli('127.0.0.1', 'u510162695_hmsystemdb', '1Hmsystemdb', 'u510162695_hmsystemdb', '3306');
+// $connection = new mysqli('127.0.0.1', 'u510162695_hmsystemdb', '1Hmsystemdb', 'u510162695_hmsystemdb', '3306');
 echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
 // Check if 'id' is set in the query string
 if (isset($_GET['id'])) {
