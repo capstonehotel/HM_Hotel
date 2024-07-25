@@ -11,28 +11,28 @@ $_SESSION['to']  = $_POST['to'];
 
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
-  <head><script src="<?php echo WEB_ROOT; ?>theme/assets/js/color-modes.js"></script>
+  <head><script src=theme/assets/js/color-modes.js"></script>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.115.4">
-    <link rel="stylesheet" type="text/css" href="<?php echo WEB_ROOT; ?>fonts/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="fonts/css/font-awesome.min.css" />
     <title><?php echo isset($title) ? $title . ' | HM Hotel' : 'HM mini Hotel' ; ?></title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/navbars-offcanvas/">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
-    <link href="<?php echo WEB_ROOT; ?>css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen" />
-    <link href="<?php echo WEB_ROOT; ?>css/datepicker.css" rel="stylesheet" media="screen" />
+    <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen" />
+    <link href="css/datepicker.css" rel="stylesheet" media="screen" />
 
      <link href="cccss/galery.css" rel="stylesheet" media="screen" />
-    <link href="<?php echo WEB_ROOT; ?>css/ekko-lightbox.css" rel="stylesheet" />
+    <link href="css/ekko-lightbox.css" rel="stylesheet" />
 
 
-    <link href="<?php echo WEB_ROOT; ?>/theme/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/theme/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <?php
         if (isset($_SESSION['monbela_cart'])){
