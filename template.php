@@ -384,6 +384,7 @@ $_SESSION['to']  = $_POST['to'];
 </main>
 <script src="../theme/assets/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 
  <script src="../jquery/jquery.min.js"></script>
         <!-- Bootstrap Core JavaScript -->
@@ -512,10 +513,16 @@ $_SESSION['to']  = $_POST['to'];
                 // alert("email does not match");
                 //   return false;
                 // }
-                if (document.personal.condition.checked == false) {
-                    alert("pls. agree the term and condition of this hotel");
-                    return false;
-                }
+                if (!document.personal.condition.checked) {
+    Swal.fire({
+        icon: 'warning',
+        title: 'Terms and Conditions',
+        text: 'Please agree to the terms and conditions of this hotel.',
+        confirmButtonText: 'OK'
+    });
+    return false;
+}
+
                 if (
                     a == "Firstname" ||
                     a == "" ||
