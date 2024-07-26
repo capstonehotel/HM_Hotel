@@ -292,7 +292,12 @@ for ($i=0; $i < $count_cart  ; $i++) {
   <h3 align="right">Total: &#8369 <?php echo   $_SESSION['pay'] ;?></h3>
 </div>
     <div class="pull-right flex-end" align="right">
-       <button  type="button" onclick="confirmBooking()" class="btn btn-primary" align="right" >Submit Booking</button>
+    <form id="bookingForm" name="bookingForm" method="post" action="your_form_action_url"> <!-- Replace with your form details -->
+    <!-- Your form fields go here -->
+    <input type="hidden" name="btnsubmitbooking" id="btnsubmitbooking" value="">
+
+    <button type="button" class="btn btn-primary" onclick="confirmBooking()">Submit Booking</button>
+</form>
     </div>
 </form>
   </div>  
@@ -300,7 +305,7 @@ for ($i=0; $i < $count_cart  ; $i++) {
       </div>
 </div>
 <script>
-  function confirmBooking() {
+ function confirmBooking() {
     Swal.fire({
         title: 'Are you sure?',
         text: 'Do you want to submit the booking?',
@@ -310,7 +315,11 @@ for ($i=0; $i < $count_cart  ; $i++) {
         cancelButtonText: 'No'
     }).then((result) => {
         if (result.isConfirmed) {
-            document.forms["yourFormName"].submit(); // Replace "yourFormName" with the name of your form
+            // Set the value of the hidden input to indicate the form submission
+            document.getElementById('btnsubmitbooking').value = 'submit';
+            
+            // Submit the form
+            document.getElementById('bookingForm').submit();
         }
     });
 }
