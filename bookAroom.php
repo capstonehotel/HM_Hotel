@@ -175,6 +175,16 @@ $_SESSION['departure'] =date_format(date_create($_POST['departure']),"Y-m-d");
 
 ?>
 <style>
+   .img-hover {
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    object-fit: cover; /* Prevents the image from stretching */
+ 
+}
+
+.img-hover:hover {
+    transform: scale(1.1); /* Adjust the scale factor for zoom effect */
+}
 .modal.zoom .modal-dialog {
     
     transform: scale(1);
