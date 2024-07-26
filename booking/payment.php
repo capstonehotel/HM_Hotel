@@ -292,10 +292,28 @@ for ($i=0; $i < $count_cart  ; $i++) {
   <h3 align="right">Total: &#8369 <?php echo   $_SESSION['pay'] ;?></h3>
 </div>
     <div class="pull-right flex-end" align="right">
-       <button  type="button" onclick="showAlert()" class="btn btn-primary" align="right" data-toggle="modal" data-target="#confirmModal">Submit Booking</button>
+       <button  type="button" onclick="confirmBooking()" class="btn btn-primary" align="right" >Submit Booking</button>
     </div>
 </form>
   </div>  
         </div>
       </div>
 </div>
+<script>
+  function confirmBooking() {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'Do you want to submit the booking?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.forms["yourFormName"].submit(); // Replace "yourFormName" with the name of your form
+        }
+    });
+}
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
