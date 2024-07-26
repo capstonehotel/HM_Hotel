@@ -12,38 +12,18 @@
       <div class="col-md-4">
        <h3>Contact Info</h3>
        <div class="space"></div>
-        <p><i class="fa fa-building-o fa-fw pull-left fa-2x"></i>Madridejos Community College</p>
-        <div class="space"></div>
-        <p><i class="fa fa-map-marker fa-fw pull-left fa-2x"></i>Crossing Bunakan Madridejos Cebu </p>
-         
-        <div class="space"></div>
-        <p><i class="fa fa-envelope-o fa-fw pull-left fa-2x"></i>Hmhotel@gmail.com</p>
-        <div class="space"></div>
-        <p><i class="fa fa-phone fa-fw pull-left fa-2x"></i>09317622381</p>
+              <p><i class="fa fa-building-o fa-fw pull-left fa-2x"></i><span class="link-text" onclick="window.location.href='https://web.facebook.com/madridejoscollege';">Madridejos Community College</span></p>
+              <div class="space"></div>
+              <div class="space"></div>
+              <p><i class="fa fa-map-marker fa-fw pull-left fa-2x"></i><span class="link-text" onclick="window.location.href='https://www.google.com/maps/place/Madridejos+Community+College/@11.2636504,123.7209869,17z/data=!3m1!4b1!4m6!3m5!1s0x33a88140310a21a9:0xc5b9b94e9c2702db!8m2!3d11.2636451!4d123.7235618!16s%2Fg%2F1hc28c7s2?entry=ttu';">Crossing Bunakan Madridejos Cebu</span></p>
+              <div class="space"></div>
+              <p><i class="fa fa-envelope-o fa-fw pull-left fa-2x"></i><span class="link-text" onclick="window.location.href='mailto:Hmhotel@gmail.com';">Hmhotel@gmail.com</span></p>
+              <div class="space"></div>
+              <p><i class="fa fa-phone fa-fw pull-left fa-2x"></i><span class="link-text" onclick="window.location.href='tel:+1234567890';">09317622381</p>
+              <p><i class="fa fa-facebook fa-fw pull-left fa-2x"></i><span class="link-text" onclick="window.location.href='https://web.facebook.com/p/Madridejos-Community-College-Hospitality-Management-Department-100054453806197/?paipv=0&eav=AfYUS3bOnNWDmiBS86XIEqDgKwonPli4DFEY8cjKFQSxZq-ZEAJASAViws-aNONi-rM&_rdc=1&_rdr';">Hospitality Management Department</span></p>
+              <div class="space"></div>
       </div>
       <div class="container">
-    <div class="social">
-      <div style="display: flex; margin-left: 10px;">
-          <div>
-            <a href="#" style="margin: 5px;"><i class="fa fa-facebook"></i></a>
-          </div>
-          <div>
-            <a href="#" style="margin: 5px;"><i class="fa fa-twitter"></i></a>
-          </div>
-          <div>
-            <a href="#" style="margin: 5px;"><i class="fa fa-dribbble"></i></a>
-          </div>
-          <div>
-            <a href="#" style="margin: 5px;"><i class="fa fa-github"></i></a>
-          </div>
-          <div>
-            <a href="#" style="margin: 5px;"><i class="fa fa-instagram"></i></a>
-          </div>
-          <div>
-            <a href="#" style="margin: 5px;"><i class="fa fa-linkedin"></i></a>
-          </div>
-      </div>
-    </div>
   </div>
     </div>
   </div>
