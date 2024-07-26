@@ -271,11 +271,10 @@ align-items: center;
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                <h5 style="text-align: center;"> &#8369 <?php echo $result->PRICE ;?></h5> 
+                <div class="col-md-6"> 
                     
                     <ul>
-                    <h4><p><?php echo $result->ROOM ;?></p></h4>
+                    <h4><p> &#8369 <?php echo $result->PRICE ;?></p></h4>
                 <li><?php echo $result->ROOMDESC ;?></li>
                 <li>Number Person : <?php echo $result->NUMPERSON ;?></li>
                 <li>Remaining Rooms : <?php echo $resNum ;?></li> 
