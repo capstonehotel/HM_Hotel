@@ -97,7 +97,7 @@ if(isset($_GET['id'])){
                                 <td><?php echo  "&#8369 $result->PRICE"; ?></td> 
                                 <td><?php echo $_SESSION['monbela_cart'][$i]['monbeladay']; ?></td>   
                                 <td><?php echo "&#8369 $amount "; ?></td>
-                                <td><a href="../index.php?view=processcart&id=<?php echo htmlspecialchars($result['ROOMID']); ?>">Remove</a></td>
+                                <td><a href="../index.php?view=processcart&id=<?php echo $result->ROOMID ?>">Remove</a></td>
                             </tr>
 
 
