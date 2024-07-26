@@ -16,8 +16,8 @@ require_once("../includes/database.php");
 
 if(isset($_GET['id'])){
     removetocart($_GET['id']);
-    header("Location: booking.php"); // Redirect back to the booking page
-    exit();
+    // header("Location: booking.php"); // Redirect back to the booking page
+    // exit();
 
 }
 
@@ -100,7 +100,7 @@ if(isset($_GET['id'])){
                                 <td><?php echo  "&#8369 $result->PRICE"; ?></td> 
                                 <td><?php echo $_SESSION['monbela_cart'][$i]['monbeladay']; ?></td>   
                                 <td><?php echo "&#8369 $amount "; ?></td>
-                                <td><a href="../index.php?view=processcart&id=<?php echo $result->ROOMID ?>">Remove</a></td>
+                                <td><a href="../index.php?view=removecart&id=<?php echo $result->ROOMID ?>">Remove</a></td>
                             </tr>
 
 
