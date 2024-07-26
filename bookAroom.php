@@ -174,48 +174,187 @@ $_SESSION['departure'] =date_format(date_create($_POST['departure']),"Y-m-d");
 // ============================================================================================================================
 
 
- 
-                ?>
-                <div class="col-md-4 col-sm-12 py-2">
+<style>
+.modal.zoom .modal-dialog {
+    
+    transform: scale(1);
+    transition: transform 0.3s ease-out;
+}
+.modal.zoom.show .modal-dialog {
+    transform: scale(1);
+}
+.img-container {
+    overflow: hidden;
+width: 100%;
+height: 100%;
+position: relative;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.img-container img {
+    width: 100%;
+    transition: width 0.3s ease;
+}
+.zoom-buttons {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.zoom-buttons button {
+    margin: 2px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 3px;
+}
+.zoom-buttons button i {
+    pointer-events: none;
+}
+</style>
+
+<div class="col-md-4 col-sm-12 py-2">
+<form method="POST" action="index.php?p=accomodation">
+    <input type="hidden" name="ROOMPRICE" value="<?php echo $result->PRICE ;?>">
+    <input type="hidden" name="ROOMID" value="<?php echo $result->ROOMID ;?>">
+    <div class="card">
+        <figure class="gallery-item" style="text-align: center; margin-top: 10px;">
+            <a href="#" data-toggle="modal" data-target="#roomModal<?php echo $result->ROOMID; ?>">
+                <?php if(is_file(WEB_ROOT .'admin/mod_room/'.$result->ROOMIMAGE)): ?>
+                    <img class="img-responsive img-hover" src="room.jpg" style="height: 250px; width: 90%;"> 
+                <?php else: ?>
+                    <img class="img-responsive img-hover" src="admin/mod_room/<?php echo $result->ROOMIMAGE; ?>" style="height: 250px; width: 90%;"> 
+                <?php endif; ?>
+            </a>
+            <figcaption class="img-title-active">
+                <h5> &#8369 <?php echo $result->PRICE ;?></h5>    
+            </figcaption>
+        </figure> 
+        <div class="descRoom">
+            <ul>
+                <h4><p><?php echo $result->ROOM ;?></p></h4>
+                <li><?php echo $result->ROOMDESC ;?></li>
+                <li>Number Person : <?php echo $result->NUMPERSON ;?></li>
+                <li>Remaining Rooms : <?php echo $resNum ;?></li>   
+                <li style="list-style:none; text-align: center; margin: 20px 25px 0 0;"><?php echo $btn ;?></li>  
+            </ul>
+        </div>
+    </div>
+</form>
+</div>
+
+<!-- Modal -->
+<div class="modal fade zoom" id="roomModal<?php echo $result->ROOMID; ?>" tabindex="-1" role="dialog" aria-labelledby="roomModalLabel<?php echo $result->ROOMID; ?>" aria-hidden="true">
+<div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="roomModalLabel<?php echo $result->ROOMID; ?>"><?php echo $result->ROOM; ?></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="img-container">
+                        <?php if(is_file(WEB_ROOT .'admin/mod_room/'.$result->ROOMIMAGE)): ?>
+                            <img id="roomImage<?php echo $result->ROOMID; ?>" class="img-responsive img-hover" src="room.jpg"> 
+                        <?php else: ?>
+                            <img id="roomImage<?php echo $result->ROOMID; ?>" class="img-responsive img-hover" src="admin/mod_room/<?php echo $result->ROOMIMAGE; ?>"> 
+                        <?php endif; ?>
+                        <div class="zoom-buttons">
+                            <button id="zoomInBtn<?php echo $result->ROOMID; ?>" class="btn btn-secondary btn-sm" data-zoom="1.3"><i class="fas fa-search-plus"></i></button>
+                            <button id="zoomOutBtn<?php echo $result->ROOMID; ?>" class="btn btn-secondary btn-sm" data-zoom="0.7"><i class="fas fa-search-minus"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                <h5 style="text-align: center;"> &#8369 <?php echo $result->PRICE ;?></h5> 
+                    
+                    <ul>
+                    <h4><p><?php echo $result->ROOM ;?></p></h4>
+                <li><?php echo $result->ROOMDESC ;?></li>
+                <li>Number Person : <?php echo $result->NUMPERSON ;?></li>
+                <li>Remaining Rooms : <?php echo $resNum ;?></li> 
+                    </ul>
                     <form method="POST" action="index.php?p=accomodation">
                         <input type="hidden" name="ROOMPRICE" value="<?php echo $result->PRICE ;?>">
-                      <input type="hidden" name="ROOMID" value="<?php echo $result->ROOMID ;?>">
-                       <div class="card">
-                           
-                            <figure class="gallery-item " style="text-align: center; margin-top: 10px;">
-                            <?php if(is_file(WEB_ROOT. 'admin/mod_room/'.$result->ROOMIMAGE)): ?>
-                                <img class="img-responsive img-hover"  src="room.jpg" style="height: 250px; width: 90%;"> 
-                               <?php echo WEB_ROOT. 'admin/mod_room/'.$result->ROOMIMAGE; ?>
-                                <?php else: ?>
-                                 <img class="img-responsive img-hover"  src="admin/mod_room/<?php echo $result->ROOMIMAGE ?> " style="height: 250px; width: 90%;"> 
-                                <?php endif; ?>
-                                 <!--  <?php echo $img_title; ?>  -->
-                                <figcaption class="img-title-active">
-                                    <h5> &#8369 <?php echo $result->PRICE ;?></h5>    
-                                </figcaption>
-
-                 
-                            </figure> 
-                           
-                           <div class="descRoom" >
-                            <ul><h4><p><?php echo $result->ROOM ;?></p></h4>
-                            <li><?php echo $result->ROOMDESC ;?></li>
-                            <li>Number Person : <?php echo $result->NUMPERSON ;?></li>
-                             <li>Remaining Rooms :<?php echo  $resNum ;?></li>   
-                            <li style="list-style:none; text-align: center; margin: 20px 25px 0 0;" ><?php echo $btn ;?></li>  
-                            </ul>
-                        </div>
-                       </div>
-                      
-                      
-                    
-                  </form>
-              </div>
-                <?php  
- 
-                 }
-
-                ?>
+                        <input type="hidden" name="ROOMID" value="<?php echo $result->ROOMID ;?>">
+                        <?php echo $btn ;?>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
+<!-- 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> -->
+
+<script src="https://cdn.jsdelivr.net/npm/@panzoom/panzoom@4.5.1/dist/panzoom.min.js"></script>
+<script>
+$(document).ready(function () {
+$('[id^="roomModal"]').on('shown.bs.modal', function () {
+    const roomId = $(this).attr('id').replace('roomModal', '');
+    const img = document.getElementById('roomImage' + roomId);
+
+    if (!img) {
+        console.error('Image element not found');
+        return;
+    }
+
+    // Initialize Panzoom on the image
+    const panzoom = Panzoom(img, {
+        maxScale: 3, // Adjust max zoom level if needed
+        minScale: 1, // Minimum zoom level
+        contain: 'outside' // Prevent zooming out of view
+    });
+
+    // Zoom buttons
+    const zoomInBtn = document.getElementById('zoomInBtn' + roomId);
+    const zoomOutBtn = document.getElementById('zoomOutBtn' + roomId);
+
+    $(zoomInBtn).on('click', function () {
+        panzoom.zoomIn(); // Zoom in using Panzoom
+    });
+
+    $(zoomOutBtn).on('click', function () {
+        panzoom.zoomOut(); // Zoom out using Panzoom
+    });
+
+    // Reset Panzoom when modal is closed
+    $('[id^="roomModal"]').on('hidden.bs.modal', function () {
+        panzoom.reset(); // Reset the zoom and pan when the modal is closed
+    });
+});
+});
+
+</script>
+
+
+
+
+
+<?php  
+
+}
+
+?>
+</div>
+</div>
+</div>
+
+
+                    
