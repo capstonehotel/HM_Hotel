@@ -239,7 +239,7 @@ align-items: center;
                     <img class="img-responsive img-hover" src="admin/mod_room/<?php echo $result->ROOMIMAGE; ?>" style="height: 250px; width: 90%;"> 
                 <?php endif; ?>
             </a>
-            <figcaption class="img-title-active">
+            <figcaption class="img-title-active"><br>
                 <h5> &#8369 <?php echo $result->PRICE ;?></h5>    
             </figcaption>
         </figure> 
