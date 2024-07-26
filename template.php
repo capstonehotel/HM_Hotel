@@ -545,8 +545,13 @@ $_SESSION['to']  = $_POST['to'];
                     j == "password" ||
                     j == ""
                 ) {
-                    alert("all field are required!");
-                    return false;
+                  Swal.fire({
+        icon: 'warning',
+        title: 'Missing Information',
+        text: 'All fields are required!',
+        confirmButtonText: 'OK'
+    });
+    return false;
                 }
 
                 // else
