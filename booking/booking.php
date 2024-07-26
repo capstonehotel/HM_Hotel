@@ -16,6 +16,9 @@ require_once("../includes/database.php");
 
 if(isset($_GET['id'])){
     removetocart($_GET['id']);
+    header("Location: booking.php"); // Redirect back to the booking page
+    exit();
+
 }
 
  
