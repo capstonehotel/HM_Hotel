@@ -23,7 +23,7 @@ if(isset($_GET['id'])){
    unset($_SESSION['pay']);
    unset($_SESSION['monbela_cart']);
    message("The cart is empty.","success");
-  redirect("booking/");
+  redirect(WEB_ROOT. "booking/");
 
  }
 
