@@ -11,6 +11,7 @@ if (isset($_POST['clear'])) {
 }
 
 ?>
+<link rel="stylesheet" type="text/css" href="../../fonts/css/font-awesome.min.css" />
 <div class="card rounded" style="padding: 10px;">
     <div class="pagetitle">
         <h1>Booking Cart</h1>
