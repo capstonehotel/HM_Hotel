@@ -54,13 +54,13 @@ if (!isset($_SESSION['monbela_cart'])) {
 
     ?>  
   <div class="col-md-12">
-    <form action="<?php echo  WEB_ROOT."../login.php" ?>" method="post" >
+    <form action="<?php echo  WEB_ROOT."../login.php" ?>" method="post" onsubmit="return validateForm()" >
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" name="username" placeholder="Username">
+        <input type="text" id="username" class="form-control" name="username" placeholder="Username">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback" style="margin-top: 10px;">
-        <input type="password" class="form-control" name="pass" placeholder="Password">
+        <input type="password" id="password" class="form-control" name="pass" placeholder="Password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
@@ -73,7 +73,7 @@ if (!isset($_SESSION['monbela_cart'])) {
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" name="gsubmit" class="btn btn-primary btn-block btn-flat" onsubmit="return validateForm()">Sign In</button>
+          <button type="submit" name="gsubmit" class="btn btn-primary btn-block btn-flat" >Sign In</button>
         </div>
         <!-- /.col -->
       </div>
