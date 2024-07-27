@@ -50,6 +50,7 @@ if(isset($_POST['btnsubmitbooking'])){
     }
 
     $count_cart = count($_SESSION['monbela_cart']);
+    $tot = 0;
     for ($i = 0; $i < $count_cart; $i++) {
         $reservation = new Reservation();
         $reservation->CONFIRMATIONCODE = $_SESSION['confirmation'];
@@ -63,7 +64,7 @@ if(isset($_POST['btnsubmitbooking'])){
         $reservation->STATUS = 'Pending';
         $reservation->create();
 
-        @$tot += $_SESSION['monbela_cart'][$i]['monbelaroomprice'];
+        $tot += $_SESSION['monbela_cart'][$i]['monbelaroomprice'];
     }
 
     $item = count($_SESSION['monbela_cart']);
@@ -92,7 +93,7 @@ if(isset($_POST['btnsubmitbooking'])){
   <div class="pagetitle">   
     <h1>Billing Details</h1> 
   </div>
-  <nav aria-label="breadcrumb" >
+  <nav aria-label="breadcrumb">
     <ol class="breadcrumb" style="margin-top: 10px;">
       <li class="breadcrumb-item"><a href="<?php echo WEB_ROOT ;?>index.php">Home</a></li>
       <li class="breadcrumb-item"><a href="<?php echo WEB_ROOT ;?>booking/">Booking Cart</a></li> 
@@ -105,7 +106,7 @@ if(isset($_POST['btnsubmitbooking'])){
         <div class="col-md-8 col-sm-4">
           <div class="col-md-12">
             <label>Name:</label>
-            <?php echo $_SESSION['name'] . ' ' . $_SESSION['last']; echo $count_cart; ?>
+            <?php echo $_SESSION['name'] . ' ' . $_SESSION['last']; ?>
           </div>
           <div class="col-md-12">
             <label>Address:</label>
@@ -130,21 +131,20 @@ if(isset($_POST['btnsubmitbooking'])){
           <table class="table table-striped">
             <thead>
               <tr>
-                <td>Room</td>
-                <td>Checked in</td>
-                <td>Checked out</td>
-                <td>Price</td>
-                <td>Night(s)</td>
-                <td>Subtotal</td>
+                <th>Room</th>
+                <th>Checked in</th>
+                <th>Checked out</th>
+                <th>Price</th>
+                <th>Night(s)</th>
+                <th>Subtotal</th>
               </tr>
             </thead>
             <tbody>
               <?php
-              $payable = 0;
               if (isset($_SESSION['monbela_cart'])) {
                 $count_cart = count($_SESSION['monbela_cart']);
                 for ($i = 0; $i < $count_cart; $i++) {
-                  $query = "SELECT * FROM `tblroom` r ,`tblaccomodation` a WHERE r.`ACCOMID`=a.`ACCOMID` AND ROOMID=" . $_SESSION['monbela_cart'][$i]['monbelaroomid'];
+                  $query = "SELECT * FROM `tblroom` r, `tblaccomodation` a WHERE r.`ACCOMID`=a.`ACCOMID` AND ROOMID=" . $_SESSION['monbela_cart'][$i]['monbelaroomid'];
                   $mydb->setQuery($query);
                   $cur = $mydb->loadResultList();
                   foreach ($cur as $result) {
@@ -158,19 +158,22 @@ if(isset($_POST['btnsubmitbooking'])){
                   <td>₱ <output><?php echo $_SESSION['monbela_cart'][$i]['monbelaroomprice']; ?></output></td>
                 </tr>
               <?php
-                    $payable += $_SESSION['monbela_cart'][$i]['monbelaroomprice'];
                   }
                 }
               }
               ?>
             </tbody>
-            
-            <div class="row"> 
-          <h3 align="right">Total: &#8369; <?php echo $_SESSION['pay']; ?></h3>
+            <tfoot>
+              <tr>
+                <td colspan="5" align="right"><strong>Total:</strong></td>
+                <td><strong>₱<?php echo $_SESSION['pay']; ?></strong></td>
+              </tr>
+            </tfoot>
+          </table>
         </div>
         <div class="pull-right flex-end" align="right">
-          <button type="button" class="btn btn-primary" align="right" id="submitBookingBtn">Submit Booking</button>
-                    </div>
+          <button type="button" class="btn btn-primary" id="submitBookingBtn">Submit Booking</button>
+        </div>
       </form>
     </div>
   </div>
