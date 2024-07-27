@@ -167,7 +167,7 @@ if(isset($_POST['btnsubmitbooking'])){
         </div>
         <div class="row"> 
           <div class="col-md-12 text-right">
-            <h3>Total: &#8369; <?php echo $_SESSION['pay']; ?></h3>
+            <h3 align="right">Total: &#8369; <?php echo $_SESSION['pay']; ?></h3>
           </div>
         </div>
         <div class="pull-right flex-end" align="right">
