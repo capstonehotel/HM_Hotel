@@ -163,7 +163,8 @@ $_SESSION['GUESTID'] =   $lastguest;
 
             ?> 
 
-<script type="text/javascript"> Swal.fire({
+<script>
+ Swal.fire({
   title: 'Success!',
   text: 'Booking is successfully submitted!',
   icon: 'success',
