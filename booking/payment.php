@@ -296,6 +296,10 @@ for ($i=0; $i < $count_cart  ; $i++) {
             background-color: red;
             color: white;
         }
+        .swal2-cancel:hover {
+            background-color: red;
+            color: white;
+        }
     </style>
 <script>
 function showConfirmAlert() {
