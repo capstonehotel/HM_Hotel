@@ -79,7 +79,23 @@ if (!isset($_SESSION['monbela_cart'])) {
       </div>
     </form> 
 </div>
- 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  document.getElementById('signInButton').addEventListener('click', function() {
+    var username = document.getElementById('username').value;
+    var password = document.getElementById('pass').value;
+
+    if (!username || !password) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please fill in both username and password fields.'
+      });
+    } else {
+      document.getElementById('loginForm').submit();
+    }
+  });
+</script>
  
 
 <?php
