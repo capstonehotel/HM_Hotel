@@ -171,7 +171,7 @@ if(isset($_POST['btnsubmitbooking'])){
           </div>
         </div>
         <div class="pull-right flex-end" align="right">
-          <button type="button" class="btn btn-primary" id="submitBookingBtn">Submit Booking</button>
+          <button type="button" class="btn btn-primary" id="submitBtn">Submit Booking</button>
         </div>
       </form>
     </div>
@@ -179,7 +179,7 @@ if(isset($_POST['btnsubmitbooking'])){
 </div>
 
 <script>
-document.getElementById('submitBookingBtn').addEventListener('click', function () {
+document.getElementById('submitBtn').addEventListener('click', function() {
   Swal.fire({
     title: 'Are you sure?',
     text: "Do you want to submit the booking?",
@@ -187,10 +187,20 @@ document.getElementById('submitBookingBtn').addEventListener('click', function (
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, submit it!'
+    confirmButtonText: 'Yes, submit it!',
+    cancelButtonText: 'No, cancel'
   }).then((result) => {
     if (result.isConfirmed) {
-      document.getElementById('bookingForm').submit();
+      // Add hidden input to trigger the PHP handler
+      var form = document.getElementById('bookingForm');
+      var input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = 'btnsubmitbooking';
+      input.value = 'Yes';
+      form.appendChild(input);
+
+      // Submit the form
+      form.submit();
     }
   });
 });
