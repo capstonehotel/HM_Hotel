@@ -284,7 +284,7 @@ for ($i=0; $i < $count_cart  ; $i++) {
   <h3 align="right">Total: &#8369 <?php echo   $_SESSION['pay'] ;?></h3>
 </div>
     <div class="pull-right flex-end" align="right">
-       <button  type="button" class="btn btn-primary" align="right" data-toggle="modal" onclick="showConfirmModal()" >Submit Booking</button>
+       <button  type="button" class="btn btn-primary" align="right"   onclick="showConfirmAlert()" >Submit Booking</button>
     </div>
 </form>
   </div>  
@@ -292,44 +292,31 @@ for ($i=0; $i < $count_cart  ; $i++) {
       </div>
 </div>
 <script>
-    // Function to show SweetAlert confirmation dialog
-    function showConfirmModal() {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "Do you want to submit the booking?",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes',
-            cancelButtonText: 'No',
-            preConfirm: () => {
-                return new Promise((resolve) => {
-                    // Create a fake form element to submit
-                    let form = document.createElement('form');
-                    form.method = 'POST';
-                    form.action = '../index.php'; // Replace with your form action URL
-
-                    // Create the submit button with the required name
-                    let submitButton = document.createElement('button');
-                    submitButton.type = 'submit';
-                    submitButton.name = 'btnsubmitbooking';
-                    form.appendChild(submitButton);
-
-                    // Append the form to the body and submit it
-                    document.body.appendChild(form);
-                    form.submit();
-                    resolve(true);
-                });
-            }
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire(
-                    'Submitted!',
-                    'Your booking has been submitted.',
-                    'success'
-                );
-            }
-        });
-    }
+function showConfirmAlert() {
+    Swal.fire({
+        title: 'Are you sure you want to submit the booking?',
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No',
+        customClass: {
+            confirmButton: 'btn btn-primary',
+            cancelButton: 'btn btn-default'
+        },
+        buttonsStyling: false
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Create a form to submit the booking
+            var form = document.createElement('form');
+            form.method = 'POST';
+            form.action = ''; // Set the form action if needed
+            var input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'btnsubmitbooking';
+            input.value = '1'; // Set the value if needed
+            form.appendChild(input);
+            document.body.appendChild(form);
+            form.submit();
+        }
+    });
+}
 </script>
