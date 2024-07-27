@@ -287,10 +287,33 @@ for ($i=0; $i < $count_cart  ; $i++) {
   <h3 align="right">Total: &#8369 <?php echo   $_SESSION['pay'] ;?></h3>
 </div>
     <div class="pull-right flex-end" align="right">
-       <button  type="button" class="btn btn-primary" align="right" data-toggle="modal" data-target="#confirmModal">Submit Booking</button>
+       <button  type="button" class="btn btn-primary" align="right" data-toggle="modal" >Submit Booking</button>
     </div>
 </form>
   </div>  
         </div>
       </div>
 </div>
+<script>
+$(document).ready(function() {
+    $('button[data-toggle="modal"]').click(function(e) {
+        e.preventDefault(); // Prevent default button click behavior
+        
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'Do you want to submit the booking?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, submit it!',
+            cancelButtonText: 'No, cancel!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // If confirmed, submit the form
+                $('form[name="personal"]').submit();
+            }
+        });
+    });
+});
+</script>
