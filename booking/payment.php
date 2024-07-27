@@ -292,7 +292,7 @@ for ($i=0; $i < $count_cart  ; $i++) {
   <h3 align="right">Total: &#8369 <?php echo   $_SESSION['pay'] ;?></h3>
 </div>
     <div class="pull-right flex-end" align="right">
-    <form id="bookingForm" name="bookingForm" method="post" action="your_form_action_url"> <!-- Replace with your form details -->
+    <form id="bookingForm" name="bookingForm" method="post" action="index.php"> <!-- Replace with your form details -->
     <!-- Your form fields go here -->
     <input type="hidden" name="btnsubmitbooking" id="btnsubmitbooking" value="">
 
