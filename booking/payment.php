@@ -173,13 +173,11 @@ if(isset($_POST['btnsubmitbooking'])){
                   <h5><b>₱<span id="sum"><?php echo $payable; ?></span></b></h5>
                 </td>
               </tr>
-              <tr>
-                <td colspan="6">
+              
                   <div class="pull-right flex-end" align="right">
                     <button type="button" class="btn btn-primary" align="right" id="submitBookingBtn">Submit Booking</button>
                   </div>
-                </td>
-              </tr>
+                
             </tfoot>
           </table>
         </div>
