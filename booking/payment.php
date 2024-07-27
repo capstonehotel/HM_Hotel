@@ -284,7 +284,7 @@ for ($i=0; $i < $count_cart  ; $i++) {
   <h3 align="right">Total: &#8369 <?php echo   $_SESSION['pay'] ;?></h3>
 </div>
     <div class="pull-right flex-end" align="right">
-       <button  type="button" class="btn btn-primary" align="right" data-toggle="modal" >Submit Booking</button>
+       <button  type="button" class="btn btn-primary" align="right" data-toggle="modal" onclick="showConfirmModal()" >Submit Booking</button>
     </div>
 </form>
   </div>  
@@ -292,25 +292,44 @@ for ($i=0; $i < $count_cart  ; $i++) {
       </div>
 </div>
 <script>
-$(document).ready(function() {
-    $('button[data-toggle="modal"]').click(function(e) {
-        e.preventDefault(); // Prevent default button click behavior
-        
+    // Function to show SweetAlert confirmation dialog
+    function showConfirmModal() {
         Swal.fire({
             title: 'Are you sure?',
-            text: 'Do you want to submit the booking?',
+            text: "Do you want to submit the booking?",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, submit it!',
-            cancelButtonText: 'No, cancel!'
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No',
+            preConfirm: () => {
+                return new Promise((resolve) => {
+                    // Create a fake form element to submit
+                    let form = document.createElement('form');
+                    form.method = 'POST';
+                    form.action = 'your_form_action_url'; // Replace with your form action URL
+
+                    // Create the submit button with the required name
+                    let submitButton = document.createElement('button');
+                    submitButton.type = 'submit';
+                    submitButton.name = 'btnsubmitbooking';
+                    form.appendChild(submitButton);
+
+                    // Append the form to the body and submit it
+                    document.body.appendChild(form);
+                    form.submit();
+                    resolve(true);
+                });
+            }
         }).then((result) => {
             if (result.isConfirmed) {
-                // If confirmed, submit the form
-                $('form[name="personal"]').submit();
+                Swal.fire(
+                    'Submitted!',
+                    'Your booking has been submitted.',
+                    'success'
+                );
             }
         });
-    });
-});
+    }
 </script>
