@@ -54,7 +54,7 @@ if (!isset($_SESSION['monbela_cart'])) {
 
     ?>  
   <div class="col-md-12">
-    <form action="<?php echo  WEB_ROOT."login.php" ?>" method="post"  onsubmit="return validateForm()">
+    <form action="<?php echo  WEB_ROOT."login.php" ?>" method="post">
       <div class="form-group has-feedback">
         <input type="text" class="form-control" name="username" placeholder="Username">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -81,24 +81,6 @@ if (!isset($_SESSION['monbela_cart'])) {
 </div>
  
  
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-function validateForm() {
-  var username = document.getElementById("username").value;
-  var password = document.getElementById("password").value;
-
-  if (username === "" || password === "") {
-    Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: 'Please fill in both username and password fields!'
-    });
-    return false; // Prevent form submission
-  }
-
-  return true; // Allow form submission
-}
-</script>
 
 <?php
   }
