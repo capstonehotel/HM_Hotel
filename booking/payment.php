@@ -308,7 +308,7 @@ for ($i=0; $i < $count_cart  ; $i++) {
                     // Create a fake form element to submit
                     let form = document.createElement('form');
                     form.method = 'POST';
-                    form.action = 'your_form_action_url'; // Replace with your form action URL
+                    form.action = '../index.php'; // Replace with your form action URL
 
                     // Create the submit button with the required name
                     let submitButton = document.createElement('button');
