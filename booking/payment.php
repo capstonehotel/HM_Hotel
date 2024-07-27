@@ -295,7 +295,7 @@ for ($i=0; $i < $count_cart  ; $i++) {
         .swal2-cancel {
             background-color: red;
             color: white;
-            margin-right: 10px;
+            margin-left: 10px;
         }
         .swal2-cancel:hover {
           background-color: darkred;
