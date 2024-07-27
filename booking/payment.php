@@ -101,7 +101,7 @@ if(isset($_POST['btnsubmitbooking'])){
   </nav>
   <div class="container">
     <div class="row">
-      <form id="bookingForm" action="index.php?view=payment" method="post" name="personal">
+      <form id="bookingForm" action="../index.php" method="post" name="personal">
         <div class="col-md-8 col-sm-4">
           <div class="col-md-12">
             <label>Name:</label>
