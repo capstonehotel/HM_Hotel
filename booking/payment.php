@@ -162,14 +162,13 @@ if(isset($_POST['btnsubmitbooking'])){
                 }
               }
               ?>
-            </tbody>
-            <tfoot>
-              <tr>
-                <td colspan="5" align="right"><strong>Total:</strong></td>
-                <td><strong>₱<?php echo $_SESSION['pay']; ?></strong></td>
-              </tr>
-            </tfoot>
+             </tbody>
           </table>
+        </div>
+        <div class="row"> 
+          <div class="col-md-12 text-right">
+            <h3>Total: &#8369; <?php echo $_SESSION['pay']; ?></h3>
+          </div>
         </div>
         <div class="pull-right flex-end" align="right">
           <button type="button" class="btn btn-primary" id="submitBookingBtn">Submit Booking</button>
