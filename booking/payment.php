@@ -291,6 +291,12 @@ for ($i=0; $i < $count_cart  ; $i++) {
         </div>
       </div>
 </div>
+<style>
+        .swal2-cancel {
+            background-color: red;
+            color: white;
+        }
+    </style>
 <script>
 function showConfirmAlert() {
     Swal.fire({
