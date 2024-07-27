@@ -79,7 +79,11 @@ if (!isset($_SESSION['monbela_cart'])) {
       </div>
     </form> 
 </div>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<?php
+  }
+?> 
+ 
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
   document.getElementById('signInButton').addEventListener('click', function() {
     var username = document.getElementById('username').value;
@@ -96,10 +100,8 @@ if (!isset($_SESSION['monbela_cart'])) {
     }
   });
 </script>
- 
-
 <?php
-  }
+  
 
 function listofbooking(){
 
