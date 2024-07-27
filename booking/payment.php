@@ -161,21 +161,18 @@ $_SESSION['GUESTID'] =   $lastguest;
             unset($_SESSION['to']);
             $_SESSION['activity'] = 1;
 
-            ?> 
-
-<script>
- Swal.fire({
-  title: 'Success!',
-  text: 'Booking is successfully submitted!',
-  icon: 'success',
-  confirmButtonText: 'OK'
-});</script>
-
-            <?php
             
-    redirect( WEB_ROOT."index.php");
 
-
+echo "<script>
+        Swal.fire({
+            title: 'Success!',
+            text: 'Booking is successfully submitted!',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        }).then(() => {
+            window.location.href = '" . WEB_ROOT . "index.php';
+        });
+    </script>";
 }
 ?>
 <div class="card rounded" style="padding: 10px;">
