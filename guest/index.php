@@ -17,7 +17,7 @@ require_once("../includes/setting.php");
 require_once("../includes/database.php");
 $content='home.php';
 $view = (isset($_GET['p']) && $_GET['p'] != '') ? $_GET['p'] : '';
-$account = 'update.php';
+$account = 'guest/update.php';
 $small_nav = '../small-navbar.php';
 switch ($view) {
 
