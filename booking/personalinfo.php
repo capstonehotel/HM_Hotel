@@ -330,24 +330,39 @@ function validatePassword() {
     var hasNumber = /\d/.test(password);
     var hasCapital = /[A-Z]/.test(password);
     
+    // Clear previous error message
+    passwordError.textContent = "";
+    passwordInput.setCustomValidity("");
+
+    // Check password length
     if (password.length < 6) {
         passwordError.textContent = "Password must be at least 6 characters long.";
         passwordInput.setCustomValidity("Password must be at least 6 characters long.");
-    } else if (!hasSpecialChar) {
+        return;
+    }
+
+    // Check for special character, number, and capital letter
+    if (!hasSpecialChar) {
         passwordError.textContent = "Password must contain at least one special character.";
         passwordInput.setCustomValidity("Password must contain at least one special character.");
-    } else if (!hasNumber) {
+    }
+    if (!hasNumber) {
         passwordError.textContent = "Password must contain at least one number.";
         passwordInput.setCustomValidity("Password must contain at least one number.");
-    } else if (!hasCapital) {
+    }
+    if (!hasCapital) {
         passwordError.textContent = "Password must contain at least one capital letter.";
         passwordInput.setCustomValidity("Password must contain at least one capital letter.");
-    } else {
+    }
+
+    // If all conditions are met
+    if (hasSpecialChar && hasNumber && hasCapital) {
         passwordError.textContent = "";
         passwordInput.setCustomValidity("");
     }
 }
 </script>
+
 <script>
 	function togglePasswordVisibility() {
     var passwordInput = document.getElementById("password");
