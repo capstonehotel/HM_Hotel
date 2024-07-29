@@ -323,25 +323,32 @@ function validatePassword() {
     var hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password);
     var hasNumber = /\d/.test(password);
     var hasCapital = /[A-Z]/.test(password);
+    var hasSmall = /[a-z]/.test(password);
     
-    if (password.length < 8) {
-        passwordError.textContent = "Password must be at least 8 characters long.";
-        passwordInput.setCustomValidity("Password must be at least 8 characters long.");
-    } else if (!hasSpecialChar) {
-        passwordError.textContent = "Password must contain at least one special character.";
-        passwordInput.setCustomValidity("Password must contain at least one special character.");
-    } else if (!hasNumber) {
-        passwordError.textContent = "Password must contain at least one number.";
-        passwordInput.setCustomValidity("Password must contain at least one number.");
-    } else if (!hasCapital) {
-        passwordError.textContent = "Password must contain at least one capital letter.";
-        passwordInput.setCustomValidity("Password must contain at least one capital letter.");
+    var errors = [];
+
+    if (password.length < 6) {
+        errors.push("at least 6 characters long");
+    }
+    if (!hasSpecialChar) {
+        errors.push("at least one special character");
+    }
+    if (!hasNumber) {
+        errors.push("at least one number");
+    }
+    if (!hasCapital) {
+        errors.push("at least one capital letter");
+    }
+    if (!hasSmall) {
+        errors.push("at least one small letter");
+    }
+
+    if (errors.length > 0) {
+        passwordError.textContent = "Password must contain " + errors.join(", ") + ".";
+        passwordInput.setCustomValidity("Password must contain " + errors.join(", ") + ".");
     } else {
         passwordError.textContent = "";
         passwordInput.setCustomValidity("");
     }
 }
 </script>
-
-			
- 
