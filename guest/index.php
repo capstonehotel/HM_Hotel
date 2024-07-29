@@ -53,10 +53,17 @@ switch ($view) {
       // $title="View";  
     $content ='largeimg.php';
     break;
+
+    case 'profile' :
+      $title="account";  
+    $content ='profile.php';    
+    break;
+        
   default :
       $title="Profile";  
     $content ='inbox.php';   
 }
+
 
 require_once '../theme/template.php';
 
