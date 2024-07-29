@@ -276,26 +276,11 @@ $_SESSION['to']  = $_POST['to'];
                       </div>
                       <h5 style="text-align: center;" class="widget-user-username"><?php echo $_SESSION['name']. ' ' . $_SESSION['last']; ?> </h5>
                     </li>
-
                     <li>
-    <a class="dropdown-item" style="color:#000;text-align:left;border-bottom:1px solid #fff;" href="#" data-toggle="modal" data-target="#profileModal">Account</a>
+    <a class="dropdown-item" style="color:#000;text-align:left;border-bottom:1px solid #fff;"
+       href="#" data-bs-toggle="modal" data-bs-target="#accountModal">Account</a>
 </li>
 
-<!-- Profile Modal -->
-<div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="profileModalLabel">My Account</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!-- Profile form content will be loaded here via AJAX -->
-                <div id="profileContent"></div>
-            </div>
-        </div>
-    </div>
-</div>
 
                     <!-- <li>
                         <a class="dropdown-item" style="color:#000;text-align:left;border-bottom:1px solid #fff;"
@@ -324,7 +309,30 @@ $_SESSION['to']  = $_POST['to'];
       </div>
     </div>
   </nav>
-  
+  <!-- Modal -->
+<div class="modal fade" id="accountModal" tabindex="-1" aria-labelledby="accountModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="accountModalLabel">My Account</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Here you can include the content of guest/profile.php -->
+        <?php
+        // Include the profile content directly here
+        // This example assumes the file is accessible relative to this location
+        include('guest/profile.php');
+        ?>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
    <div class="modal fade" id="myModal" tabindex="-1">
             <div class="modal-dialog">
@@ -397,16 +405,9 @@ $_SESSION['to']  = $_POST['to'];
 </main>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-vO/PBZMPgLgQTH9TFnX1hBc2HEGx6y9Wx8QTXhXnT9h2k8phDqPC3IMnCHvDq5xB" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-vO/PBZMPgLgQTH9TFnX1hBc2HEGx6y9Wx8QTXhXnT9h2k8phDqPC3IMnCHvDq5xB" crossorigin="anonymous"></script>
-<script>
-    $(document).ready(function() {
-        // Load profile content when modal is opened
-        $('#profileModal').on('show.bs.modal', function () {
-            $('#profileContent').load('guest/profile.php');
-        });
-    });
-</script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+
  <script src="jquery/jquery.min.js"></script>
         <!-- Bootstrap Core JavaScript -->
         <script src="js/bootstrap.min.js"></script>

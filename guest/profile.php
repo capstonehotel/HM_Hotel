@@ -200,4 +200,21 @@ $('.dbirth').datetimepicker({
 
         }
 </script>
+<script>
+  $(document).ready(function() {
+    $('#accountModal').on('show.bs.modal', function() {
+      var modal = $(this);
+      $.ajax({
+        url: 'guest/profile.php',
+        method: 'GET',
+        success: function(data) {
+          modal.find('.modal-body').html(data);
+        },
+        error: function() {
+          modal.find('.modal-body').html('<p>An error occurred while loading the content.</p>');
+        }
+      });
+    });
+  });
+</script>
           
