@@ -14,7 +14,7 @@ require_once("includes/guest.php");
 require_once("includes/reserve.php"); 
 require_once("includes/setting.php");
 //Load Core objects
-require_once("../includes/database.php");
+require_once("includes/database.php");
 $content='home.php';
 $view = (isset($_GET['p']) && $_GET['p'] != '') ? $_GET['p'] : '';
 $account = 'guest/update.php';
