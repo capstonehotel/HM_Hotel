@@ -278,10 +278,10 @@ $_SESSION['to']  = $_POST['to'];
                     </li>
                    <li>
                         <a class="dropdown-item" style="color:#000;text-align:left;border-bottom:1px solid #fff;"
-                    href="guest/profile.php" data-toggle="lightbox" >Account</a>
+                    href="../guest/profile.php" data-toggle="lightbox" >Account</a>
                     </li>
                     <li><a class="dropdown-item" style="color:#000;text-align:left;border-bottom:1px solid #fff;" 
-                href="guest/bookinglist.php" data-toggle="lightbox">Bookings</a>
+                href="../guest/bookinglist.php" data-toggle="lightbox">Bookings</a>
                     </li>
                     <li>
                         <a class="dropdown-item" style="color:#000;text-align:left;border-bottom:1px solid #fff;" href="<?php echo WEB_ROOT.'logout.php';  ?>">Logout </a>
