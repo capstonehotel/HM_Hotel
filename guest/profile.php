@@ -49,12 +49,24 @@ $res = $guest->single_guest($_SESSION['GUESTID']);
         <label for="exampleFormControlInput1" class="form-label">Last Name:</label>
         <input name="last" type="text" value="<?php echo $res->G_LNAME; ?>" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
       </div>
-      <div class="col-md-4 col-sm-12">
+      <!-- <div class="col-md-4 col-sm-12">
        <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Gender:</label>
         <input name="gender" type="text" value="<?php echo $res->G_GENDER; ?>" class="form-control" id="exampleFormControlInput1" placeholder="GENDER">
       </div>
-     </div>
+     </div> -->
+     <div class="col-md-4 col-sm-12">
+  <div class="mb-3">
+    <label for="genderSelect" class="form-label">Gender:</label>
+    <select name="gender" class="form-control" id="genderSelect">
+      <option value="" disabled selected>Select Gender</option>
+      <option value="Male" <?php echo ($res->G_GENDER == 'Male') ? 'selected' : ''; ?>>Male</option>
+      <option value="Female" <?php echo ($res->G_GENDER == 'Female') ? 'selected' : ''; ?>>Female</option>
+      <option value="Other" <?php echo ($res->G_GENDER == 'Other') ? 'selected' : ''; ?>>Other</option>
+    </select>
+  </div>
+</div>
+
      <div class="col-md-4 col-sm-12">
        <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">City:</label>
