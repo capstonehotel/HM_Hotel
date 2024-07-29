@@ -329,33 +329,26 @@ function validatePassword() {
     var hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password);
     var hasNumber = /\d/.test(password);
     var hasCapital = /[A-Z]/.test(password);
-
+    
     // Clear previous error message
     passwordError.textContent = "";
     passwordInput.setCustomValidity("");
 
-    // Check password length first
+    // Check for specific criteria
     if (password.length < 6) {
         passwordError.textContent = "Password must be at least 6 characters long.";
         passwordInput.setCustomValidity("Password must be at least 6 characters long.");
-        return;
-    }
-
-    // Check for special character, number, and capital letter
-    if (!hasSpecialChar) {
-        passwordError.textContent += "Password must contain at least one special character. ";
-    }
-    if (!hasNumber) {
-        passwordError.textContent += "Password must contain at least one number. ";
-    }
-    if (!hasCapital) {
-        passwordError.textContent += "Password must contain at least one capital letter. ";
-    }
-
-    // Set custom validity if there are any errors
-    if (passwordError.textContent) {
-        passwordInput.setCustomValidity(passwordError.textContent);
+    } else if (!hasSpecialChar) {
+        passwordError.textContent = "Password must contain at least one special character.";
+        passwordInput.setCustomValidity("Password must contain at least one special character.");
+    } else if (!hasNumber) {
+        passwordError.textContent = "Password must contain at least one number.";
+        passwordInput.setCustomValidity("Password must contain at least one number.");
+    } else if (!hasCapital) {
+        passwordError.textContent = "Password must contain at least one capital letter.";
+        passwordInput.setCustomValidity("Password must contain at least one capital letter.");
     } else {
+        passwordError.textContent = "";
         passwordInput.setCustomValidity("");
     }
 }
