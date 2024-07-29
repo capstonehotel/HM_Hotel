@@ -13,14 +13,18 @@
       margin-bottom: 1rem;
     }
     .card {
-      height: 700px; /* Set your desired fixed height */
-      overflow: hidden; /* Hide any overflow content */
+      height: 250px; /* Set a smaller height */
+      overflow: hidden; /* Hide overflow content */
+      padding: 15px; /* Adjust padding */
     }
     .card-body {
       overflow-y: auto; /* Allow vertical scrolling inside the card-body if needed */
     }
     .form-section {
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .form-label {
+      font-weight: bold;
     }
   </style>
 </head>
