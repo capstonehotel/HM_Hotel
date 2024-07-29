@@ -74,16 +74,7 @@ redirect('index.php?view=payment');
 						}
 					?>
 					<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-   <style>
-	.field-icon {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: #aaa;
-}
-   </style>
+   
          		<form class="form-horizontal" action="index.php?view=logininfo" method="post"  name="personal" enctype="multipart/form-data">
 					 <h2>Personal Details</h2> 
 
@@ -278,7 +269,7 @@ function previewImage(event) {
 					        <div class="col-md-8">
 					            <input name="pass" type="password" class="form-control input-sm" id="password" onkeyup="validatePassword()" required / placeholder="Ex@mple123">
 					            <span id="password-error" style="color: red;"></span>
-								<span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password" onclick="togglePasswordVisibility()"></span>
+								<span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password" onclick="togglePasswordVisibility()" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #aaa; font-size: 1.2em; z-index: 2;"></span>
 					        </div>
 					    </div>
 					</div>
