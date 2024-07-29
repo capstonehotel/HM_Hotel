@@ -12,6 +12,13 @@
     .form-group {
       margin-bottom: 1rem;
     }
+    .card {
+      height: 700px; /* Set your desired fixed height */
+      overflow: hidden; /* Hide any overflow content */
+    }
+    .card-body {
+      overflow-y: auto; /* Allow vertical scrolling inside the card-body if needed */
+    }
     .form-section {
       margin-bottom: 1.5rem;
     }
