@@ -277,14 +277,12 @@ $_SESSION['to']  = $_POST['to'];
                       <h5 style="text-align: center;" class="widget-user-username"><?php echo $_SESSION['name']. ' ' . $_SESSION['last']; ?> </h5>
                     </li>
                     <li>
-  <a class="dropdown-item" style="color:#000;text-align:left;border-bottom:1px solid #fff;"
-     href="#" data-bs-toggle="modal" data-bs-target="#profileModal">Account</a>
-</li>
+ 
 
-                    <!-- <li>
+                    <li>
                         <a class="dropdown-item" style="color:#000;text-align:left;border-bottom:1px solid #fff;"
                     href="guest/profile.php" data-toggle="lightbox" >Account</a>
-                    </li> -->
+                    </li>
                     <li><a class="dropdown-item" style="color:#000;text-align:left;border-bottom:1px solid #fff;" 
                 href="guest/bookinglist.php" data-toggle="lightbox">Bookings</a>
                     </li>
@@ -381,25 +379,7 @@ $_SESSION['to']  = $_POST['to'];
 </main>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-vO/PBZMPgLgQTH9TFnX1hBc2HEGx6y9Wx8QTXhXnT9h2k8phDqPC3IMnCHvDq5xB" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-vO/PBZMPgLgQTH9TFnX1hBc2HEGx6y9Wx8QTXhXnT9h2k8phDqPC3IMnCHvDq5xB" crossorigin="anonymous"></script>
-<script>
-  $(document).ready(function() {
-    $('#accountModal').on('show.bs.modal', function() {
-      var modal = $(this);
-      $.ajax({
-        url: 'guest/profile.php',
-        method: 'GET',
-        success: function(data) {
-          modal.find('.modal-body').html(data);
-        },
-        error: function() {
-          modal.find('.modal-body').html('<p>An error occurred while loading the content.</p>');
-        }
-      });
-    });
-  });
-</script>
+
  <script src="jquery/jquery.min.js"></script>
         <!-- Bootstrap Core JavaScript -->
         <script src="js/bootstrap.min.js"></script>
