@@ -325,32 +325,29 @@ function validatePassword() {
     var passwordInput = document.getElementById("password");
     var password = passwordInput.value;
     var passwordError = document.getElementById("password-error");
-    
+
+    // Regular expressions for criteria
     var hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password);
     var hasNumber = /\d/.test(password);
     var hasCapital = /[A-Z]/.test(password);
-    
-    // Clear previous error message
-    passwordError.textContent = "";
-    passwordInput.setCustomValidity("");
 
-    // Check for specific criteria
+    // Initialize the error message
+    var errorMessage = "";
+
+    // Check password length
     if (password.length < 6) {
-        passwordError.textContent = "Password must be at least 6 characters long.";
-        passwordInput.setCustomValidity("Password must be at least 6 characters long.");
+        errorMessage = "Password must be at least 6 characters long.";
     } else if (!hasSpecialChar) {
-        passwordError.textContent = "Password must contain at least one special character.";
-        passwordInput.setCustomValidity("Password must contain at least one special character.");
+        errorMessage = "Password must contain at least one special character.";
     } else if (!hasNumber) {
-        passwordError.textContent = "Password must contain at least one number.";
-        passwordInput.setCustomValidity("Password must contain at least one number.");
+        errorMessage = "Password must contain at least one number.";
     } else if (!hasCapital) {
-        passwordError.textContent = "Password must contain at least one capital letter.";
-        passwordInput.setCustomValidity("Password must contain at least one capital letter.");
-    } else {
-        passwordError.textContent = "";
-        passwordInput.setCustomValidity("");
+        errorMessage = "Password must contain at least one capital letter.";
     }
+
+    // Display the error message if there is any, otherwise clear it
+    passwordError.textContent = errorMessage;
+    passwordInput.setCustomValidity(errorMessage ? errorMessage : "");
 }
 </script>
 
