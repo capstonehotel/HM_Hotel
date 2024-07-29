@@ -54,10 +54,10 @@ switch ($view) {
     $content ='largeimg.php';
     break;
 
-    // case 'profile' :
-    //   $title="account";  
-    // $content ='profile.php';    
-    // break;
+    case 'profile' :
+      $title="account";  
+    $content ='profile.php';    
+    break;
         
   default :
       $title="Profile";  
