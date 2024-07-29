@@ -17,8 +17,8 @@ require_once("../includes/setting.php");
 require_once("../includes/database.php");
 $content='home.php';
 $view = (isset($_GET['p']) && $_GET['p'] != '') ? $_GET['p'] : '';
-$account = 'guest/update.php';
-$small_nav = '../theme/small-navbar.php';
+$account = 'update.php';
+$small_nav = '../small-navbar.php';
 switch ($view) {
 
   case '1' :
@@ -65,7 +65,7 @@ switch ($view) {
 }
 
 
-require_once '../theme/template.php';
+require_once '../template.php';
 
 ?>
  
