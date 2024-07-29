@@ -278,9 +278,25 @@ $_SESSION['to']  = $_POST['to'];
                     </li>
 
                     <li>
-    <a class="dropdown-item" style="color:#000;text-align:left;border-bottom:1px solid #fff;" href="#" data-bs-toggle="modal" data-bs-target="#profileModal">Account</a>
+    <a class="dropdown-item" style="color:#000;text-align:left;border-bottom:1px solid #fff;" href="#" data-toggle="modal" data-target="#profileModal">Account</a>
 </li>
-<?php include 'guest/profile.php'; ?>
+
+<!-- Profile Modal -->
+<div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="profileModalLabel">My Account</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Profile form content will be loaded here via AJAX -->
+                <div id="profileContent"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
                     <!-- <li>
                         <a class="dropdown-item" style="color:#000;text-align:left;border-bottom:1px solid #fff;"
                     href="guest/profile.php" data-toggle="lightbox" >Account</a>
@@ -379,9 +395,18 @@ $_SESSION['to']  = $_POST['to'];
   </div>
 
 </main>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-vO/PBZMPgLgQTH9TFnX1hBc2HEGx6y9Wx8QTXhXnT9h2k8phDqPC3IMnCHvDq5xB" crossorigin="anonymous"></script>
 <script src="theme/assets/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-
+<script>
+    $(document).ready(function() {
+        // Load profile content when modal is opened
+        $('#profileModal').on('show.bs.modal', function () {
+            $('#profileContent').load('guest/profile.php');
+        });
+    });
+</script>
  <script src="jquery/jquery.min.js"></script>
         <!-- Bootstrap Core JavaScript -->
         <script src="js/bootstrap.min.js"></script>
