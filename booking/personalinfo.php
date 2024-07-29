@@ -325,29 +325,36 @@ function validatePassword() {
     var passwordInput = document.getElementById("password");
     var password = passwordInput.value;
     var passwordError = document.getElementById("password-error");
-
-    // Regular expressions for criteria
+    
     var hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password);
     var hasNumber = /\d/.test(password);
     var hasCapital = /[A-Z]/.test(password);
-
-    // Initialize the error message
-    var errorMessage = "";
-
-    // Check password length
+    
+    var errors = [];
+    
     if (password.length < 6) {
-        errorMessage = "Password must be at least 6 characters long.";
-    } else if (!hasSpecialChar) {
-        errorMessage = "Password must contain at least one special character.";
-    } else if (!hasNumber) {
-        errorMessage = "Password must contain at least one number.";
-    } else if (!hasCapital) {
-        errorMessage = "Password must contain at least one capital letter.";
+        errors.push("Password must be at least 6 characters long.");
     }
-
-    // Display the error message if there is any, otherwise clear it
-    passwordError.textContent = errorMessage;
-    passwordInput.setCustomValidity(errorMessage ? errorMessage : "");
+    
+    if (!hasSpecialChar) {
+        errors.push("Password must contain at least one special character.");
+    }
+    
+    if (!hasNumber) {
+        errors.push("Password must contain at least one number.");
+    }
+    
+    if (!hasCapital) {
+        errors.push("Password must contain at least one capital letter.");
+    }
+    
+    if (errors.length > 0) {
+        passwordError.textContent = errors[0];
+        passwordInput.setCustomValidity(errors[0]);
+    } else {
+        passwordError.textContent = "";
+        passwordInput.setCustomValidity("");
+    }
 }
 </script>
 
