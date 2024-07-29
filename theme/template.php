@@ -397,8 +397,8 @@ $_SESSION['to']  = $_POST['to'];
 </main>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-vO/PBZMPgLgQTH9TFnX1hBc2HEGx6y9Wx8QTXhXnT9h2k8phDqPC3IMnCHvDq5xB" crossorigin="anonymous"></script>
-<script src="theme/assets/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-vO/PBZMPgLgQTH9TFnX1hBc2HEGx6y9Wx8QTXhXnT9h2k8phDqPC3IMnCHvDq5xB" crossorigin="anonymous"></script>
 <script>
     $(document).ready(function() {
         // Load profile content when modal is opened
