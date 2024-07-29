@@ -280,7 +280,7 @@ $_SESSION['to']  = $_POST['to'];
                     <li>
     <a class="dropdown-item" style="color:#000;text-align:left;border-bottom:1px solid #fff;" href="#" data-bs-toggle="modal" data-bs-target="#profileModal">Account</a>
 </li>
-
+<?php include 'guest/profile.php'; ?>
                     <!-- <li>
                         <a class="dropdown-item" style="color:#000;text-align:left;border-bottom:1px solid #fff;"
                     href="guest/profile.php" data-toggle="lightbox" >Account</a>

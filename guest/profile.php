@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
@@ -6,7 +6,8 @@
   <title>Profile</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
-<body>
+<body> -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <?php 
 // require_once("../includes/initialize.php");
 // load config file first 
@@ -29,7 +30,7 @@ $guest = New Guest();
 $res = $guest->single_guest($_SESSION['GUESTID']);
 
 ?>
-<!-- Profile Modal -->
+
 <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -38,6 +39,79 @@ $res = $guest->single_guest($_SESSION['GUESTID']);
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+        <form method="post" action="guest/update.php">
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">First Name:</label>
+                <input name="name" type="text" value="<?php echo $res->G_FNAME; ?>" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Last Name:</label>
+                <input name="last" type="text" value="<?php echo $res->G_LNAME; ?>" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+  <div class="mb-3">
+    <label for="exampleFormControlSelect1" class="form-label">Gender:</label>
+    <select name="gender" class="form-control" id="exampleFormControlSelect1">
+      <option value="Male" <?php if ($res->G_GENDER == 'Male') echo 'selected'; ?>>Male</option>
+      <option value="Female" <?php if ($res->G_GENDER == 'Female') echo 'selected'; ?>>Female</option>
+    </select>
+  </div>
+</div>
+<div class="col-md-6 col-sm-12">
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">City:</label>
+                <input name="last" type="text" value="<?php echo $res->G_CITY; ?>" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Address:</label>
+                <input name="last" type="text" value="<?php echo $res->G_ADDRESS; ?>" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Date of Birth:</label>
+                <input name="last" type="text" value="<?php echo $res->G_DBIRTH; ?>" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Phone:</label>
+                <input name="last" type="text" value="<?php echo $res->G_PHONE; ?>" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Nationality:</label>
+                <input name="last" type="text" value="<?php echo $res->G_NATIONALITY; ?>" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Company:</label>
+                <input name="last" type="text" value="<?php echo $res->G_COMPANY; ?>" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Address:</label>
+                <input name="last" type="text" value="<?php echo $res->G_CADDRESS; ?>" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Zip Code:</label>
+                <input name="last" type="text" value="<?php echo $res->ZIP; ?>" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+              </div>
+            </div>
+
+
 <!-- <div class="container " style="max-width: 1000px; padding: 20px; margin-top: 20px;">
   <form class="form-horizontal" action="guest/update.php" method="post" onsubmit="return personalInfo()" name="personal" >
     <div class="row card">
@@ -46,8 +120,8 @@ $res = $guest->single_guest($_SESSION['GUESTID']);
           My Account 
          
         </h1>
-      </section> -->
-     <!-- <div class="col-md-4 col-sm-12">
+      </section>
+     <div class="col-md-4 col-sm-12">
        <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">First Name:</label>
         <input name="name" type="text"  value="<?php echo $res->G_FNAME; ?>" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
@@ -57,19 +131,7 @@ $res = $guest->single_guest($_SESSION['GUESTID']);
        <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Last Name:</label>
         <input name="last" type="text" value="<?php echo $res->G_LNAME; ?>" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-      </div> -->
-      <div class="col-md-6 col-sm-12">
-  <div class="mb-3">
-    <label for="exampleFormControlInput1" class="form-label">First Name:</label>
-    <input name="name" type="text" value="<?php echo $res->G_FNAME; ?>" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-  </div>
-</div>
-<div class="col-md-6 col-sm-12">
-  <div class="mb-3">
-    <label for="exampleFormControlInput1" class="form-label">Last Name:</label>
-    <input name="last" type="text" value="<?php echo $res->G_LNAME; ?>" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-  </div>
-</div>
+      </div>
       <div class="col-md-4 col-sm-12">
        <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Gender:</label>
@@ -123,7 +185,7 @@ $res = $guest->single_guest($_SESSION['GUESTID']);
         <label for="exampleFormControlInput1" class="form-label">Zip Code:</label>
         <input name="zip" type="text" value="<?php echo $res->ZIP; ?>"  class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
       </div>
-     </div>
+     <!-- </div> -->
 
      <div class="col-md-12 col-sm-12">
        
@@ -133,7 +195,7 @@ $res = $guest->single_guest($_SESSION['GUESTID']);
     </div>
   </form>
 </div>
-</body>
+</body> -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
 
@@ -244,17 +306,4 @@ $('.dbirth').datetimepicker({
 
         }
 </script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5/5hb7x5i1Y4RcGr8qAoE6e35sYbcf1FjJssF5yM" crossorigin="anonymous"></script>
-<script>
-$(document).ready(function() {
-  $('#profileModal').on('show.bs.modal', function (e) {
-    var modal = $(this);
-    modal.find('.modal-body').load('guest/profile.php', function() {
-      // Adjust form field sizes if necessary
-      $('.form-control').css('width', '100%');
-    });
-  });
-});
-</script>
-
-</html>
+<!-- </html> -->
