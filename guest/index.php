@@ -23,35 +23,35 @@ switch ($view) {
 
   case '1' :
         $title="Home";  
-        $content='home.php';    
+        $content='../home.php';    
     break;
   case '2' :
       $title="Gallery"; 
-    $content ='gallery.php';
+    $content ='../gallery.php';
     break;
   case '3' :
       $title="About Us";  
-    $content = 'about.php';   
+    $content = '../about_us.php';   
     break;
 
   case 'contact' :
       $title="Contacts";  
-    $content ='contact.php';    
+    $content ='../contact.php';    
     break;
 
  case 'booking' :
       $title="Book A Room";  
-    $content ='bookAroom.php';    
+    $content ='../bookAroom.php';    
     break;
         
      case 'accomodation' :
       $title="Accomodation";  
-      $content='accomodation.php';
+      $content='../accomodation.php';
     break;  
 
   case 'largeview' :
       // $title="View";  
-    $content ='largeimg.php';
+    $content ='../largeimg.php';
     break;
 
     // case 'profile' :
