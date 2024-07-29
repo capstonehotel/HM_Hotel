@@ -269,7 +269,7 @@ function previewImage(event) {
         <div class="col-md-8" style="position: relative;">
             <input name="pass" type="password" class="form-control input-sm" id="password" onkeyup="validatePassword()" required placeholder="Ex@mple123" style="padding-right: 30px;">
             <span id="password-error" style="color: red;"></span>
-            <span toggle="#password" class="fa fa-fw fa-eye" onclick="togglePasswordVisibility()" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #aaa; font-size: 1.2em; z-index: 2;"></span>
+            <span toggle="#password" class="fa fa-fw fa-eye" onclick="togglePasswordVisibility()" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #aaa; font-size: 1em; z-index: 2;"></span>
         </div>
     </div>
 </div>
