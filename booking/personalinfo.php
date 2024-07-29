@@ -73,7 +73,17 @@ redirect('index.php?view=payment');
 							unset($_SESSION['ERRMSG_ARR']);
 						}
 					?>
-   
+					<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+   <style>
+	.field-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #aaa;
+}
+   </style>
          		<form class="form-horizontal" action="index.php?view=logininfo" method="post"  name="personal" enctype="multipart/form-data">
 					 <h2>Personal Details</h2> 
 
@@ -268,6 +278,7 @@ function previewImage(event) {
 					        <div class="col-md-8">
 					            <input name="pass" type="password" class="form-control input-sm" id="password" onkeyup="validatePassword()" required / placeholder="Ex@mple123">
 					            <span id="password-error" style="color: red;"></span>
+								<span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password" onclick="togglePasswordVisibility()"></span>
 					        </div>
 					    </div>
 					</div>
@@ -323,32 +334,40 @@ function validatePassword() {
     var hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password);
     var hasNumber = /\d/.test(password);
     var hasCapital = /[A-Z]/.test(password);
-    var hasSmall = /[a-z]/.test(password);
     
-    var errors = [];
-
     if (password.length < 6) {
-        errors.push("at least 6 characters long");
-    }
-    if (!hasSpecialChar) {
-        errors.push("at least one special character");
-    }
-    if (!hasNumber) {
-        errors.push("at least one number");
-    }
-    if (!hasCapital) {
-        errors.push("at least one capital letter");
-    }
-    if (!hasSmall) {
-        errors.push("at least one small letter");
-    }
-
-    if (errors.length > 0) {
-        passwordError.textContent = "Password must contain " + errors.join(", ") + ".";
-        passwordInput.setCustomValidity("Password must contain " + errors.join(", ") + ".");
+        passwordError.textContent = "Password must be at least 6 characters long.";
+        passwordInput.setCustomValidity("Password must be at least 6 characters long.");
+    } else if (!hasSpecialChar) {
+        passwordError.textContent = "Password must contain at least one special character.";
+        passwordInput.setCustomValidity("Password must contain at least one special character.");
+    } else if (!hasNumber) {
+        passwordError.textContent = "Password must contain at least one number.";
+        passwordInput.setCustomValidity("Password must contain at least one number.");
+    } else if (!hasCapital) {
+        passwordError.textContent = "Password must contain at least one capital letter.";
+        passwordInput.setCustomValidity("Password must contain at least one capital letter.");
     } else {
         passwordError.textContent = "";
         passwordInput.setCustomValidity("");
     }
 }
 </script>
+<script>
+	function togglePasswordVisibility() {
+    var passwordInput = document.getElementById("password");
+    var toggleIcon = document.querySelector(".toggle-password");
+
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        toggleIcon.classList.remove("fa-eye");
+        toggleIcon.classList.add("fa-eye-slash");
+    } else {
+        passwordInput.type = "password";
+        toggleIcon.classList.remove("fa-eye-slash");
+        toggleIcon.classList.add("fa-eye");
+    }
+}
+</script>
+			
+ 
