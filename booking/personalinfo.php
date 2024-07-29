@@ -139,8 +139,10 @@ function previewImage(event) {
         <label class="col-md-4 control-label" for="gender">Gender:</label>
         <div class="col-md-8">
             <select name="gender" class="form-control input-sm" id="gender" required>
+                <option value="" disabled selected>Select Gender</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
+               
             </select>
         </div>
     </div>
