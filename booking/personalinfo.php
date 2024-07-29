@@ -82,10 +82,7 @@ redirect('index.php?view=payment');
     transform: translateY(-50%);
     cursor: pointer;
     color: #aaa;
-    font-size: 1.2em; /* Ensure the icon is large enough to be visible */
-    z-index: 2; /* Ensure it appears above the input field */
 }
-
    </style>
          		<form class="form-horizontal" action="index.php?view=logininfo" method="post"  name="personal" enctype="multipart/form-data">
 					 <h2>Personal Details</h2> 
