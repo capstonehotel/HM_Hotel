@@ -29,7 +29,16 @@ $guest = New Guest();
 $res = $guest->single_guest($_SESSION['GUESTID']);
 
 ?>
-<div class="container " style="max-width: 1000px; padding: 20px; margin-top: 20px;">
+<!-- Profile Modal -->
+<div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="profileModalLabel">My Account</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+<!-- <div class="container " style="max-width: 1000px; padding: 20px; margin-top: 20px;">
   <form class="form-horizontal" action="guest/update.php" method="post" onsubmit="return personalInfo()" name="personal" >
     <div class="row card">
       <section class="content-header">
@@ -37,8 +46,8 @@ $res = $guest->single_guest($_SESSION['GUESTID']);
           My Account 
          
         </h1>
-      </section>
-     <div class="col-md-4 col-sm-12">
+      </section> -->
+     <!-- <div class="col-md-4 col-sm-12">
        <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">First Name:</label>
         <input name="name" type="text"  value="<?php echo $res->G_FNAME; ?>" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
@@ -48,7 +57,19 @@ $res = $guest->single_guest($_SESSION['GUESTID']);
        <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Last Name:</label>
         <input name="last" type="text" value="<?php echo $res->G_LNAME; ?>" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-      </div>
+      </div> -->
+      <div class="col-md-6 col-sm-12">
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">First Name:</label>
+    <input name="name" type="text" value="<?php echo $res->G_FNAME; ?>" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+  </div>
+</div>
+<div class="col-md-6 col-sm-12">
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Last Name:</label>
+    <input name="last" type="text" value="<?php echo $res->G_LNAME; ?>" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+  </div>
+</div>
       <div class="col-md-4 col-sm-12">
        <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Gender:</label>
@@ -223,4 +244,17 @@ $('.dbirth').datetimepicker({
 
         }
 </script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5/5hb7x5i1Y4RcGr8qAoE6e35sYbcf1FjJssF5yM" crossorigin="anonymous"></script>
+<script>
+$(document).ready(function() {
+  $('#profileModal').on('show.bs.modal', function (e) {
+    var modal = $(this);
+    modal.find('.modal-body').load('guest/profile.php', function() {
+      // Adjust form field sizes if necessary
+      $('.form-control').css('width', '100%');
+    });
+  });
+});
+</script>
+
 </html>

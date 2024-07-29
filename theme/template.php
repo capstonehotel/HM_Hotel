@@ -277,28 +277,9 @@ $_SESSION['to']  = $_POST['to'];
                       <h5 style="text-align: center;" class="widget-user-username"><?php echo $_SESSION['name']. ' ' . $_SESSION['last']; ?> </h5>
                     </li>
 
-
                     <li>
     <a class="dropdown-item" style="color:#000;text-align:left;border-bottom:1px solid #fff;" href="#" data-bs-toggle="modal" data-bs-target="#profileModal">Account</a>
 </li>
-
-<!-- Modal -->
-<div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="profileModalLabel">My Account</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <!-- Profile content will be loaded here -->
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
 
                     <!-- <li>
                         <a class="dropdown-item" style="color:#000;text-align:left;border-bottom:1px solid #fff;"
@@ -327,19 +308,7 @@ $_SESSION['to']  = $_POST['to'];
       </div>
     </div>
   </nav>
-  <script>
-$(document).ready(function(){
-    $('#profileModal').on('show.bs.modal', function (e) {
-        var modal = $(this);
-        modal.find('.modal-body').load('guest/profile.php', function(response, status, xhr) {
-            if (status == "error") {
-                var msg = "Sorry but there was an error: ";
-                modal.find('.modal-body').html(msg + xhr.status + " " + xhr.statusText);
-            }
-        });
-    });
-});
-</script>
+  
 
    <div class="modal fade" id="myModal" tabindex="-1">
             <div class="modal-dialog">
