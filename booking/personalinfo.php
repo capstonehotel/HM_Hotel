@@ -189,16 +189,24 @@ function previewImage(event) {
 			            </div>
 			          </div>
 
-			           <div class="form-group">
-			            <div class="col-md-8">
-			              <label class="col-md-4 control-label" for=
-			              "phone ">Phone:</label>
+					  <div class="form-group">
+  <div class="col-md-8">
+    <label class="col-md-4 control-label" for="phone">Phone:</label>
+    <div class="col-md-8">
+      <input 
+        name="phone" 
+        required 
+        pattern="09\d{9}" 
+        type="tel" 
+        class="form-control input-sm" 
+        id="phone" 
+        value="09" 
+        oninput="this.value = this.value.replace(/\D/, ''); if(this.value.length > 11) this.value = this.value.slice(0, 11);" 
+      />
+    </div>
+  </div>
+</div>
 
-			              <div class="col-md-8">
-						  <input name="phone" required pattern="09\d{9}" type="number" class="form-control input-sm" id="phone" value="09" oninput="if(this.value.length > 11) this.value = this.value.slice(0, 11);" />
-			              </div>
-			            </div>
-			           </div>
 
 			           <div class="form-group">
 			            <div class="col-md-8">
