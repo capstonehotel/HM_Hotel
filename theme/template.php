@@ -276,7 +276,7 @@ $_SESSION['to']  = $_POST['to'];
                       </div>
                       <h5 style="text-align: center;" class="widget-user-username"><?php echo $_SESSION['name']. ' ' . $_SESSION['last']; ?> </h5>
                     </li>
-                    <li>
+                    
  
 
                     <li>
