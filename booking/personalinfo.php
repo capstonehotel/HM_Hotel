@@ -134,16 +134,20 @@ function previewImage(event) {
 			              </div>
 			            </div>
 			          </div>
-                     <div class="form-group">
-			            <div class="col-md-8">
-			              <label class="col-md-4 control-label" for=
-			              "gender">Gender:</label>
+					  <div class="form-group">
+    <div class="col-md-8">
+        <label class="col-md-4 control-label" for="gender">Gender:</label>
+        <div class="col-md-8">
+            <select name="gender" class="form-control input-sm" id="gender" required>
+                <option value="" disabled selected>Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+               
+            </select>
+        </div>
+    </div>
+</div>
 
-			              <div class="col-md-8">
-			                <input onkeyup="capitalizeInput(this)" name="gender" type="text" class="form-control input-sm" id="gender" / required="" minlength="6" maxlength="6">
-			              </div>
-			            </div>
-			          </div>
 			      
 
 			           <div class="form-group">
@@ -191,7 +195,7 @@ function previewImage(event) {
 			              "phone ">Phone:</label>
 
 			              <div class="col-md-8">
-			                <input name="phone" required pattern="09\d{9}" type="number" max-len="11" , class="form-control input-sm" id="phone" value="09"  />
+						  <input name="phone" required pattern="09\d{9}" type="number" class="form-control input-sm" id="phone" value="09" oninput="if(this.value.length > 11) this.value = this.value.slice(0, 11);" />
 			              </div>
 			            </div>
 			           </div>
