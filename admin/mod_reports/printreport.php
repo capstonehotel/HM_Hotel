@@ -56,6 +56,13 @@ $result1 = mysqli_query($connection, $query1);
     <link href="../../css/datepicker.css" rel="stylesheet" media="screen">
     <link href="../../css/galery.css" rel="stylesheet" media="screen">
     <link href="../../css/ekko-lightbox.css" rel="stylesheet">
+    <style>
+        @media print {
+            body {
+                margin: 1in;
+            }
+        }
+    </style>
 </head>
 <body onload="window.print();">
     <div class="wrapper">
