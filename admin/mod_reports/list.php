@@ -42,7 +42,7 @@
         <button class="btn btn-sm btn-primary"><i class="fa fa-print"></i> Print</button>
     </form>
     <?php if ($_SESSION['ADMIN_UROLE'] == "Administrator") { ?>
-        <a class="btn btn-danger btn-sm" href="controller.php?action=delete&code=<?php echo $row['CONFIRMATIONCODE']; ?>"><i class="icon-edit"></i> Delete</a>
+        <a style="margin-left:2px;" class="btn btn-danger btn-sm" href="controller.php?action=delete&code=<?php echo $row['CONFIRMATIONCODE']; ?>"><i class="icon-edit"></i> Delete</a>
     <?php } ?>
 </td>
                                 </tr>
