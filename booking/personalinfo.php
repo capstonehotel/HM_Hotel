@@ -263,21 +263,7 @@ function previewImage(event) {
 			              </div>
 			            </div>
 			          </div> -->
-					  <style>
-        .form-group {
-            margin: 20px 0;
-        }
-        .control-label {
-            margin-bottom: 5px;
-            display: block;
-        }
-        .input-sm {
-            padding: 5px 10px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-    </style>
-					  <div class="form-group">
+					  	 <div class="form-group">
     <div class="col-md-8">
         <label class="col-md-4 control-label" for="password">Password:</label>
         <div class="col-md-8" style="position: relative;">
@@ -371,12 +357,12 @@ function validatePassword() {
     }
 }
 </script>
-
-
 <script>
 function togglePasswordVisibility() {
     var passwordInput = document.getElementById("password");
     var toggleIcon = document.querySelector(".toggle-password");
+
+    console.log("Password type before toggle:", passwordInput.type); // Debugging line
 
     if (passwordInput.type === "password") {
         passwordInput.type = "text";
@@ -387,6 +373,8 @@ function togglePasswordVisibility() {
         toggleIcon.classList.remove("fa-eye-slash");
         toggleIcon.classList.add("fa-eye");
     }
+
+    console.log("Password type after toggle:", passwordInput.type); // Debugging line
 }
-</script>
- 
+
+ </script>
