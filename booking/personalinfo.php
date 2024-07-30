@@ -263,13 +263,13 @@ function previewImage(event) {
 			              </div>
 			            </div>
 			          </div> -->
-			          <div class="form-group">
+					  <div class="form-group">
     <div class="col-md-8">
         <label class="col-md-4 control-label" for="password">Password:</label>
         <div class="col-md-8" style="position: relative;">
             <div style="position: relative;">
-                <input name="pass" type="password" class="form-control input-sm" id="password" onkeyup="validatePassword()" required placeholder="Ex@mple123" style="padding-right: 30px;">
-                <span toggle="#password" class="fa fa-fw fa-eye" onclick="togglePasswordVisibility()" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #aaa; font-size: 1em; z-index: 10;"></span>
+                <input name="pass" type="password" class="form-control input-sm" id="password" onkeyup="validatePassword()" required placeholder="Ex@mple123" style="padding-right: 40px;">
+                <span class="fa fa-fw fa-eye toggle-password" onclick="togglePasswordVisibility()" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #aaa; font-size: 1em; z-index: 10;"></span>
             </div>
             <span id="password-error" style="color: red;"></span>
         </div>
@@ -360,7 +360,7 @@ function validatePassword() {
 
 
 <script>
-	function togglePasswordVisibility() {
+function togglePasswordVisibility() {
     var passwordInput = document.getElementById("password");
     var toggleIcon = document.querySelector(".toggle-password");
 
@@ -374,6 +374,5 @@ function validatePassword() {
         toggleIcon.classList.add("fa-eye");
     }
 }
-</script>
-			
+</script>	
  
