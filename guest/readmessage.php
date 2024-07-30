@@ -223,7 +223,7 @@ if ($result1) {
       <!-- this row will not appear when printing -->
       <div class="row no-print">
         <div class="col-xs-12">
-        <a href="javascript:history.back()" class="btn btn-primary" style="margin-left: 10px;">
+        <a href="guest/index.php" class="btn btn-primary" style="margin-left: 10px;">
             <i class="fa fa-arrow-left"></i> Back
           </a>
           <!-- <a href="<?php echo WEB_ROOT; ?>guest/readprint.php?>" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a> -->
