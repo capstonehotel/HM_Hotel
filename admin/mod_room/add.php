@@ -9,6 +9,8 @@ if (isset($_POST['save_room'])) {
     $NUMPERSON = $_POST['NUMPERSON'];
     $PRICE = $_POST['PRICE'];
     $ROOMNUM = $_POST['ROOMNUM'];
+    $imageError = false;
+    $imagePath = '';
 
     // Check for duplicate room name
     $query = "SELECT * FROM tblroom WHERE ROOM = ?";
@@ -29,73 +31,66 @@ if (isset($_POST['save_room'])) {
               </script>";
     } else {
         // Check if a file was uploaded
-        if (isset($_FILES['image'])) {
+        if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
             $file = $_FILES['image'];
+            $filename = basename($file['name']);
+            $uploadPath = $uploadDir . $filename;
 
-            // Check for errors during file upload
-            if ($file['error'] === 0) {
-                $filename = basename($file['name']);
-                $uploadPath = $uploadDir . $filename;
-
+            // Move the uploaded file to the desired directory
+            if (move_uploaded_file($file['tmp_name'], $uploadPath)) {
                 $ROOMIMAGE = "rooms/$filename";
-
-                // Move the uploaded file to the desired directory
-                if (move_uploaded_file($file['tmp_name'], $uploadPath)) {
-                    $sql = "INSERT INTO tblroom (ROOMIMAGE, ROOM, ACCOMID, ROOMDESC, NUMPERSON, PRICE, ROOMNUM)
-                    VALUES (?, ?, ?, ?, ?, ?, ?)";
-                    $stmt = $connection->prepare($sql);
-                    $stmt->bind_param("ssisidi", $ROOMIMAGE, $ROOM, $ACCOMID, $ROOMDESC, $NUMPERSON, $PRICE, $ROOMNUM);
-
-                    // Execute the statement
-                    if ($stmt->execute()) {
-                        echo "<script>
-                                swal({
-                                    title: 'Saved!',
-                                    text: 'New room saved successfully!',
-                                    icon: 'success'
-                                }).then(() => {
-                                    window.location = 'index.php';
-                                });
-                              </script>";
-                    } else {
-                        echo "<script>
-                                swal({
-                                    title: 'Error!',
-                                    text: 'Error adding new room: " . $stmt->error . "',
-                                    icon: 'error'
-                                });
-                              </script>";
-                    }
-
-                    // Close the statement and the database connection
-                    $stmt->close();
-                    $connection->close();
-                } else {
-                    echo "<script>
-                            swal({
-                                title: 'Error!',
-                                text: 'Error uploading file',
-                                icon: 'error'
-                            });
-                          </script>";
-                }
+                $imagePath = $ROOMIMAGE;
             } else {
                 echo "<script>
                         swal({
                             title: 'Error!',
-                            text: 'File upload error. Error code: " . $file['error'] . "',
+                            text: 'Error uploading file',
+                            icon: 'error'
+                        });
+                      </script>";
+                $imageError = true;
+            }
+        } elseif (isset($_FILES['image']) && $_FILES['image']['error'] !== 0) {
+            echo "<script>
+                    swal({
+                        title: 'Error!',
+                        text: 'File upload error. Error code: " . $_FILES['image']['error'] . "',
+                        icon: 'error'
+                    });
+                  </script>";
+            $imageError = true;
+        }
+
+        if (!$imageError) {
+            $sql = "INSERT INTO tblroom (ROOMIMAGE, ROOM, ACCOMID, ROOMDESC, NUMPERSON, PRICE, ROOMNUM)
+                    VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $connection->prepare($sql);
+            $stmt->bind_param("ssisidi", $ROOMIMAGE, $ROOM, $ACCOMID, $ROOMDESC, $NUMPERSON, $PRICE, $ROOMNUM);
+
+            // Execute the statement
+            if ($stmt->execute()) {
+                echo "<script>
+                        swal({
+                            title: 'Saved!',
+                            text: 'New room saved successfully!',
+                            icon: 'success'
+                        }).then(() => {
+                            window.location = 'index.php';
+                        });
+                      </script>";
+            } else {
+                echo "<script>
+                        swal({
+                            title: 'Error!',
+                            text: 'Error adding new room: " . $stmt->error . "',
                             icon: 'error'
                         });
                       </script>";
             }
-        } else {
-            echo "<script>
-                    swal({
-                        title: 'Warning!',
-                        text: 'No file was uploaded.',
-                        icon: 'warning'
-                    });
-                  </script>";
+
+            // Close the statement and the database connection
+            $stmt->close();
+            $connection->close();
         }
     }
 }
@@ -175,7 +170,7 @@ if (isset($_POST['save_room'])) {
                 <label class="col-md-4 control-label" for="image">Upload Image:</label>
                 <div class="col-md-12">
                   <input required type="file" name="image" id="image" accept="image/*">
-                  <img src="#" alt="Image Preview" id="image-preview" style="display: none; max-width: 100%; max-height: 200px;">
+                  <img src="<?php echo isset($imagePath) && !$imageError ? htmlspecialchars($imagePath) : '#'; ?>" alt="Image Preview" id="image-preview" style="display: <?php echo isset($imagePath) && !$imageError ? 'block' : 'none'; ?>; max-width: 100%; max-height: 200px;">
                   <script>
                     const fileInput = document.getElementById('image');
                     const imagePreview = document.getElementById('image-preview');
@@ -199,7 +194,7 @@ if (isset($_POST['save_room'])) {
             </div>
           </div>
         </div>
-      </div>
+      </div> 
     </div>
   </form>
 </div>
