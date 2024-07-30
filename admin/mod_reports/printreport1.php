@@ -17,7 +17,7 @@ require_once("../../includes/setting.php");
 require_once("../../includes/database.php");
 
 
-$query = "SELECT g.`G_FNAME`, g.`G_LNAME`, g.`G_UNAME`, r.`ROOMID`, r.`ARRIVAL`, r.`DEPARTURE`, r.`PRORPOSE`, p.`PAYMENT_STATUS`, p.`PQTY`, p.`SPRICE`, p.`STATUS`
+$query = "SELECT g.`G_FNAME`, g.`G_LNAME`, g.`G_UNAME`, r.`ROOMID`, r.`ARRIVAL`, r.`DEPARTURE`, r.`PRORPOSE`, p.`PQTY`, p.`SPRICE`, p.`STATUS`
           FROM `tblpayment` p
           JOIN `tblguest` g ON p.`GUESTID` = g.`GUESTID`
           JOIN `tblreservation` r ON r.`RESERVEID` = p.`SUMMARYID`
