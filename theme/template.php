@@ -114,8 +114,73 @@ $_SESSION['to']  = $_POST['to'];
       .bd-mode-toggle {
         z-index: 1500;
       }
+      #google_translate_element {
+  position: absolute;
+  z-index: 1000;
+}
+
+/* Translate button */
+#translate-button {
+  position: fixed;
+  bottom: 130px;
+  right: 20px;
+  z-index: 2300; /* Ensure it's above the translate container */
+  width: 48px; /* Adjust width to match toggle theme button */
+  height: 48px; /* Adjust height to match toggle theme button */
+  font-size: 24px; /* Adjust icon size */
+  line-height: 1; /* Ensure proper vertical alignment */
+}
+
+/* Translate container */
+#translate-container {
+  position: fixed;
+  bottom: 120px; /* Adjusted to prevent overlap with button */
+  right: 80px;
+  width: 300px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: none;
+  z-index: 1000;
+  max-height: calc(100vh - 100px); /* Ensure it fits within viewport */
+  overflow-y: auto; /* Enable scrolling within the translate container */
+}
+
+#translate-container.open {
+  display: block;
+}
+ /* Hide Google Translate widget */
+ #google_translate_element {
+      z-index: -1; /* Position the widget behind other elements */
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      opacity: 0;
+    }
+    iframe.goog-te-banner-frame {
+      display: none !important;
+    }
+    .goog-logo-link {
+      display: none !important;
+    }
+    .goog-te-gadget {
+      color: transparent !important;
+    }
+    .skiptranslate {
+      display: none !important;
+    }
     </style>
 
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<div id="google_translate_element"></div>
+<script >
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({pageLanguage: 'en' }, 'google_translate_element');
+  }
+</script>
     
     <!-- Custom styles for this template -->
     <link href="styles.css" rel="stylesheet">
@@ -172,6 +237,67 @@ $_SESSION['to']  = $_POST['to'];
         </li>
       </ul>
     </div>
+<!-- Translate button -->
+<button id="translate-button" class="btn btn-primary">
+    <i class="fa fa-language"></i>
+  </button>
+
+  <!-- Translate container -->
+  <div id="translate-container">
+    <select id="select-language" class="form-control">
+      <option value="">Select Language</option>
+      <option value="ar">Arabic</option>
+      <option value="zh-CN">Chinese (Simplified)</option>
+      <option value="zh-TW">Chinese (Traditional)</option>
+      <option value="en">English</option>
+      <option value="fr">French</option>
+      <option value="de">German</option>
+      <option value="it">Italian</option>
+      <option value="ja">Japanese</option>
+      <option value="ko">Korean</option>
+      <option value="pt">Portuguese</option>
+      <option value="ru">Russian</option>
+      <option value="es">Spanish</option>
+    </select>
+  </div>
+
+  <div id="google_translate_element" style="display: none;"></div>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script>
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'ar,zh-CN,zh-TW,en,fr,de,it,ja,ko,pt,ru,es',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+    }
+
+    document.getElementById('translate-button').addEventListener('click', function() {
+      document.getElementById('translate-container').classList.toggle('open');
+    });
+
+    document.getElementById('select-language').addEventListener('change', function() {
+      var languageCode = this.value;
+      if (languageCode) {
+        translateContent(languageCode);
+        document.getElementById('translate-container').classList.remove('open');
+      }
+    });
+    function translateContent(languageCode) {
+      var googleTranslateCombo = document.querySelector('#google_translate_element select');
+      if (googleTranslateCombo) {
+        googleTranslateCombo.value = languageCode;
+        // Trigger change event on the select element
+        googleTranslateCombo.dispatchEvent(new Event('change'));
+      }
+    }
+  </script>
+
+
+
+
+
+
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
     <div class="container-fluid">
       <a class="navbar-brand"><img src="./images/logo2.jpg" style="width: 40px; height: 40px; border-radius: 30px; margin-left: 2px;">  HM Hotel Reservation</a>
