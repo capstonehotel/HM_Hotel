@@ -323,9 +323,9 @@ function validatePassword() {
     var hasNumber = /\d/.test(password);
     var hasCapital = /[A-Z]/.test(password);
     
-    if (password.length < 8) {
-        passwordError.textContent = "Password must be at least 8 characters long.";
-        passwordInput.setCustomValidity("Password must be at least 8 characters long.");
+    if (password.length < 6) {
+        passwordError.textContent = "Password must be at least 6 characters long.";
+        passwordInput.setCustomValidity("Password must be at least 6 characters long.");
     } else if (!hasSpecialChar) {
         passwordError.textContent = "Password must contain at least one special character.";
         passwordInput.setCustomValidity("Password must contain at least one special character.");
