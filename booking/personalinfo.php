@@ -263,7 +263,7 @@ function previewImage(event) {
 			              </div>
 			            </div>
 			          </div> -->
-					  	 <div class="form-group">
+					  	 <!-- <div class="form-group">
     <div class="col-md-8">
         <label class="col-md-4 control-label" for="password">Password:</label>
         <div class="col-md-8" style="position: relative;">
@@ -274,10 +274,27 @@ function previewImage(event) {
             <span id="password-error" style="color: red;"></span>
         </div>
     </div>
-</div>
-
-<div style="position: relative; width: 300px; margin: 20px;">
-        <input name="pass" type="password" class="form-control" id="password" placeholder="Enter password" style="padding-right: 40px;">
+</div> -->
+<style>
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            z-index: 10;
+        }
+        .container {
+            position: relative;
+            width: 300px;
+            margin: 20px;
+        }
+        input {
+            padding-right: 40px;
+        }
+    </style>
+<div class="container">
+        <input type="password" id="password" placeholder="Enter password">
         <span class="fa fa-eye toggle-password" onclick="togglePasswordVisibility()"></span>
     </div>
 
@@ -377,7 +394,7 @@ function validatePassword() {
     }
 }
 </script>
-<script>
+<!-- <script>
 function togglePasswordVisibility() {
     var passwordInput = document.getElementById("password");
     var toggleIcon = document.querySelector(".toggle-password");
@@ -397,4 +414,4 @@ function togglePasswordVisibility() {
     console.log("Password type after toggle:", passwordInput.type); // Debugging line
 }
 
- </script>
+ </script> -->
