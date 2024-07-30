@@ -20,7 +20,7 @@ if (isset($_GET['id']) && isset($_GET['confirm']) && $_GET['confirm'] === 'true'
                 echo '<script>
                     Swal.fire({
                         title: "Deleted!",
-                        text: "The accommodation has been deleted.",
+                        text: "The room has been deleted.",
                         icon: "success"
                     }).then(() => {
                         window.location.href = "index.php";
