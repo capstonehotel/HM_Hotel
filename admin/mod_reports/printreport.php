@@ -30,14 +30,13 @@ if ($result && mysqli_num_rows($result) > 0) {
     die('No records found for the provided confirmation code.');
 }
 
-$query1 = "SELECT A.`ACCOMODATION`, RM.`ROOM`, RM.`ROOMDESC`, RM.`PRICE`, RS.`ARRIVAL`, RS.`DEPARTURE`, RS.`RPRICE`
-           FROM `tblaccomodation` A
-           JOIN `tblroom` RM ON A.`ACCOMID` = RM.`ACCOMID`
-           JOIN `tblreservation` RS ON RM.`ROOMID` = RS.`ROOMID`
-           WHERE `CONFIRMATIONCODE` = '$code'";
+$query1 = "SELECT A.ACCOMID, A.ACCOMODATION, RM.ROOM, RM.ROOMDESC, RM.NUMPERSON, RM.PRICE, RM.RPRICE, RM.ROOMID, RS.ARRIVAL, RS.DEPARTURE 
+           FROM tblaccomodation A
+           JOIN tblroom RM ON A.ACCOMID = RM.ACCOMID
+           JOIN tblreservation RS ON RM.ROOMID = RS.ROOMID 
+           WHERE RS.CONFIRMATIONCODE = '$code'";
 
 $result1 = mysqli_query($connection, $query1);
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -81,17 +80,17 @@ $result1 = mysqli_query($connection, $query1);
                 <div class="col-sm-4 invoice-col">
                     To
                     <address>
-                        <strong><?php echo $row['G_FNAME'] . ' ' . $row['G_LNAME']; ?></strong><br>
-                        <?php echo $row['G_ADDRESS']; ?><br>
-                        <?php echo $row['G_CITY']; ?><br>
-                        <?php echo $row['G_NATIONALITY']; ?><br>
-                        <?php echo $row['ZIP']; ?>
+                        <strong><?php echo htmlspecialchars($row['G_FNAME'] . ' ' . $row['G_LNAME']); ?></strong><br>
+                        <?php echo htmlspecialchars($row['G_ADDRESS']); ?><br>
+                        <?php echo htmlspecialchars($row['G_CITY']); ?><br>
+                        <?php echo htmlspecialchars($row['G_NATIONALITY']); ?><br>
+                        <?php echo htmlspecialchars($row['ZIP']); ?>
                     </address>
                 </div>
                 <div class="col-sm-4 invoice-col">
-                    <b>Invoice No.</b> 00<?php echo $row['GUESTID']; ?><br>
-                    <b>Confirmation ID:</b> <?php echo $row['CONFIRMATIONCODE']; ?><br>
-                    <b>Transaction Date:</b> <?php echo $row['TRANSDATE']; ?>
+                    <b>Invoice No.</b> 00<?php echo htmlspecialchars($row['GUESTID']); ?><br>
+                    <b>Confirmation ID:</b> <?php echo htmlspecialchars($row['CONFIRMATIONCODE']); ?><br>
+                    <b>Transaction Date:</b> <?php echo htmlspecialchars($row['TRANSDATE']); ?>
                 </div>
             </div>
             <div class="row">
@@ -115,15 +114,16 @@ $result1 = mysqli_query($connection, $query1);
                                 $days = dateDiff(date($row1['ARRIVAL']), date($row1['DEPARTURE']));
                                 $subtotal = $row1['RPRICE'];
                                 $tot += $subtotal;
+                                $number_of_persons = isset($row1['NUMPERSON']) ? htmlspecialchars($row1['NUMPERSON']) : 'N/A';
                                 ?>
                                 <tr> 
-                                    <td><?php echo $row1['ACCOMODATION'] . ' ' . $row1['ROOM']; ?></td>
-                                    <td><?php echo $row1['ROOMDESC']; ?><br><?php echo $row1['NUMPERSON']; ?></td>
-                                    <td>&#8369; <?php echo $row1['PRICE']; ?></td>
+                                    <td><?php echo htmlspecialchars($row1['ACCOMODATION'] . ' ' . $row1['ROOM']); ?></td>
+                                    <td><?php echo htmlspecialchars($row1['ROOMDESC']); ?><br><?php echo $number_of_persons; ?></td>
+                                    <td>&#8369; <?php echo htmlspecialchars($row1['PRICE']); ?></td>
                                     <td><?php echo date_format(date_create($row1['ARRIVAL']), 'm/d/Y'); ?></td>
                                     <td><?php echo date_format(date_create($row1['DEPARTURE']), 'm/d/Y'); ?></td>
                                     <td><?php echo ($days == 0) ? '1' : $days; ?></td>
-                                    <td>&#8369; <?php echo $subtotal; ?></td>
+                                    <td>&#8369; <?php echo htmlspecialchars($subtotal); ?></td>
                                 </tr>
                             <?php } ?>
                         </tbody>
@@ -137,7 +137,7 @@ $result1 = mysqli_query($connection, $query1);
                         <table class="table">
                             <tr>
                                 <th style="width:50%">Total:</th>
-                                <td>&#8369; <?php echo $tot; ?></td>
+                                <td>&#8369; <?php echo htmlspecialchars($tot); ?></td>
                             </tr>
                         </table>
                     </div>
