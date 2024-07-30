@@ -60,8 +60,8 @@ switch ($view) {
     // break;
         
   default :
-      $title="Profile";  
-    $content ='inbox.php';   
+  $title="Home";  
+  $content='../home.php';   
 }
 
 
