@@ -32,8 +32,21 @@
 <script type="text/javascript" language="javascript" src="js/bootstrap-modal.js"></script>
 <script type="text/javascript" src="js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
 <script type="text/javascript" src="js/locales/bootstrap-datetimepicker.uk.js" charset="UTF-8"></script>
-
+<style>
+.notification-dot {
+    position: relative;
+    display: inline-block;
+    background-color: red;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 50%;
+    font-size: 12px;
+    top: -8px; /* Adjust as needed */
+    left: 8px; /* Adjust as needed */
+}
+</style>
 </head>
+
 
 <body id="page-top">
  
@@ -145,9 +158,101 @@
                 $cury = $mydb->loadResultList();  
                 foreach ($cury as $resulta) { 
    ?>
-   <li class="nav-item my-auto">
-                 <a href="mod_contact_us/index.php" class="text-dark"><i class="fa fa-envelope"></i> <?php  echo  isset($resulta->Total) ? $resulta->Total  : 0;?></a><span style="margin-left: 10px;">|</span></a>
-  </li>
+  <li class="nav-item my-auto">
+    <a href="mod_contact_us/index.php?viewed=messages" class="text-dark" id="messageNotification">
+        <i class="fa fa-envelope"></i>
+        <?php if ($cnt_message[0] > 0): ?>
+            <span class="notification-dot"><?php echo $cnt_message[0]; ?></span>
+        <?php endif; ?>
+    </a>
+    <span style="margin-left: 10px;"></span>
+</li>
+  <li class="nav-item my-auto">
+    <a href="mod_reservation/index.php?viewed=bookings" class="text-dark" id="bookingNotification">
+        <i class="fa fa-bell"></i>
+        <?php if ($todayBookings > 0): ?>
+            <span class="notification-dot"><?php echo $todayBookings; ?></span>
+        <?php endif; ?>
+    </a>
+    <span style="margin-left: 10px;">|</span>
+</li>
+<?php
+/// Update session variables based on the URL parameters
+if (isset($_GET['viewed'])) {
+    if ($_GET['viewed'] == 'messages') {
+        $_SESSION['message_notification_viewed'] = true;
+    }
+
+    if ($_GET['viewed'] == 'bookings') {
+        $_SESSION['booking_notification_viewed'] = true;
+    }
+}
+?>
+<?php
+// $conn = new mysqli('localhost', 'root', '', 'hmsystemdb');
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Mark the booking notification as new
+    $_SESSION['booking_notification_viewed'] = false;
+    $response = array('success' => true);
+    echo json_encode($response);
+}
+?>
+
+
+<script>
+   document.addEventListener('DOMContentLoaded', function() {
+    var messageNotification = document.getElementById('messageNotification');
+    var bookingNotification = document.getElementById('bookingNotification');
+
+    // Function to handle notification dot removal
+    function removeNotificationDot(element) {
+        var dot = element.querySelector('.notification-dot');
+        if (dot) {
+            dot.style.display = 'none';
+        }
+    }
+
+    // Event listeners for notification links
+    messageNotification.addEventListener('click', function() {
+        removeNotificationDot(this);
+    });
+
+    bookingNotification.addEventListener('click', function() {
+        removeNotificationDot(this);
+    });
+});
+
+
+   // Polling function to check for new notifications
+   function checkForNewNotifications() {
+        fetch('check_notifications.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.newBooking) {
+                    bookingDot.style.display = 'inline-block';
+                } else {
+                    bookingDot.style.display = 'none';
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    // Poll every 5 seconds
+    setInterval(checkForNewNotifications, 5000);
+
+    // Event listeners for notification links
+    bookingNotification.addEventListener('click', function() {
+        fetch('clear_notifications.php?viewed=bookings')
+            .then(response => {
+                bookingDot.style.display = 'none';
+            })
+            .catch(error => console.error('Error:', error));
+    });
+
+</script>
+
+
                   <?php } ?>
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
