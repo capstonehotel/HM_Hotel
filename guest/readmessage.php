@@ -44,7 +44,7 @@ require_once("../includes/database.php");
  <link href="../css/galery.css" rel="stylesheet" media="screen">
  <link href="../css/ekko-lightbox.css" rel="stylesheet">
 </head>
-<body onload="window.print();">
+<body >
 <div class="wrapper">
   
   <?php 
