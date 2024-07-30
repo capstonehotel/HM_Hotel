@@ -224,6 +224,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    document.addEventListener('DOMContentLoaded', function() {
     var messageNotification = document.getElementById('messageNotification');
     var bookingNotification = document.getElementById('bookingNotification');
+    var bookingDot = bookingNotification.querySelector('.notification-dot');
 
     // Function to handle notification dot removal
     function removeNotificationDot(element) {
@@ -235,17 +236,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Event listeners for notification links
     messageNotification.addEventListener('click', function() {
-        removeNotificationDot(this);
+        fetch('clear_notifications.php?viewed=messages')
+            .then(response => {
+                removeNotificationDot(this);
+            })
+            .catch(error => console.error('Error:', error));
     });
 
     bookingNotification.addEventListener('click', function() {
-        removeNotificationDot(this);
+        fetch('clear_notifications.php?viewed=bookings')
+            .then(response => {
+                removeNotificationDot(this);
+            })
+            .catch(error => console.error('Error:', error));
     });
-});
 
-
-   // Polling function to check for new notifications
-   function checkForNewNotifications() {
+    // Polling function to check for new notifications
+    function checkForNewNotifications() {
         fetch('check_notifications.php')
             .then(response => response.json())
             .then(data => {
@@ -260,15 +267,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Poll every 5 seconds
     setInterval(checkForNewNotifications, 5000);
-
-    // Event listeners for notification links
-    bookingNotification.addEventListener('click', function() {
-        fetch('clear_notifications.php?viewed=bookings')
-            .then(response => {
-                bookingDot.style.display = 'none';
-            })
-            .catch(error => console.error('Error:', error));
-    });
+});
 
 </script>
 
