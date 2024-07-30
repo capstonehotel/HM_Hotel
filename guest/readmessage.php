@@ -39,7 +39,7 @@ require_once("../includes/database.php");
 <!-- <link href="<?php echo WEB_ROOT; ?>css/dataTables.bootstrap.css" rel="stylesheet"> -->
  
  <link href="../css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
- <link href="..css/datepicker.css" rel="stylesheet" media="screen">
+ <link href="../css/datepicker.css" rel="stylesheet" media="screen">
 
  <link href="../css/galery.css" rel="stylesheet" media="screen">
  <link href="../css/ekko-lightbox.css" rel="stylesheet">
