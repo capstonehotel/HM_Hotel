@@ -1,177 +1,149 @@
 <?php
-// load config file first 
-require_once("../../includes/config.php");
-// load basic functions next so that everything after can use them
-require_once("../../includes/functions.php");
-// later here where we are going to put our class session
-require_once("../../includes/session.php");
-require_once("../../includes/user.php");
-require_once("../../includes/pagination.php");
-require_once("../../includes/paginsubject.php");
-require_once("../../includes/accomodation.php");
-require_once("../../includes/guest.php");
-require_once("../../includes/reserve.php"); 
-require_once("../../includes/setting.php");
-// Load Core objects
-require_once("../../includes/database.php");
+require_once("../includes/config.php");
+require_once("../includes/functions.php");
+require_once("../includes/session.php");
+require_once("../includes/user.php");
+require_once("../includes/pagination.php");
+require_once("../includes/paginsubject.php");
+require_once("../includes/accomodation.php");
+require_once("../includes/guest.php");
+require_once("../includes/reserve.php"); 
+require_once("../includes/setting.php");
+require_once("../includes/database.php");
 
-$query = "SELECT g.`G_FNAME`, g.`G_LNAME`, g.`G_UNAME`, r.`ROOMID`, r.`ARRIVAL`, r.`DEPARTURE`, r.`PRORPOSE`, p.`PQTY`, p.`SPRICE`, p.`STATUS`
-          FROM `tblpayment` p
-          JOIN `tblguest` g ON p.`GUESTID` = g.`GUESTID`
-          JOIN `tblreservation` r ON r.`RESERVEID` = p.`SUMMARYID`
-          WHERE p.`STATUS` = 'Checkedout'
-          ORDER BY p.`TRANSDATE` DESC";
-
-$result = mysqli_query($connection, $query);   
-$number = 0;
-$rooms = [];
-$total_amount = 0;
-
-while ($row = mysqli_fetch_assoc($result)) {
-    $number++;
-    $checkin_date = $row['ARRIVAL']; // Fetch from database
-    $checkout_date = $row['DEPARTURE']; // Fetch from database
-    $guest_name = $row['G_FNAME'] . ' ' . $row['G_LNAME'];
-    $total_rooms = $row['PQTY'];
-    
-    // Sample room details (fetch dynamically)
-    $rooms[] = ['name' => 'Room ' . $row['ROOMID'], 'nights' => 5, 'total' => $row['SPRICE']];
-    
-    // Calculate total amount based on room details
-    $total_amount += $row['SPRICE'];
+// Ensure the 'code' parameter is provided
+if (!isset($_GET['code']) || empty($_GET['code'])) {
+    die('Confirmation code not provided.');
 }
-?>
 
-<?php
-// Data for the header
-$logo = '../../logo2.jpg';
-$logo2 = '../../MCClogo.png';
-$hotel_name = 'HM Hotel Reservation';
-$contact_details = 'Contact Details Here';
-date_default_timezone_set('Asia/Manila'); // Set the time zone to Manila, Philippines
-$receipt_date = date('Y-m-d'); // Generate the receipt date and time
-$admin_name = 'Admin Name';
-?>
+$code = mysqli_real_escape_string($connection, $_GET['code']);
 
+$query = "SELECT g.`GUESTID`, `G_FNAME`, `G_LNAME`, `G_ADDRESS`, `G_CITY`, `ZIP`, `G_NATIONALITY`, `CONFIRMATIONCODE`, `TRANSDATE`, `ARRIVAL`, `DEPARTURE`, `RPRICE`
+          FROM `tblguest` g
+          JOIN `tblreservation` r ON g.`GUESTID` = r.`GUESTID`
+          WHERE `CONFIRMATIONCODE` = '$code'";
+
+$result = mysqli_query($connection, $query);
+if ($result && mysqli_num_rows($result) > 0) {
+    $row = mysqli_fetch_assoc($result);
+} else {
+    die('No records found for the provided confirmation code.');
+}
+
+$query1 = "SELECT A.`ACCOMODATION`, RM.`ROOM`, RM.`ROOMDESC`, RM.`PRICE`, RS.`ARRIVAL`, RS.`DEPARTURE`, RS.`RPRICE`
+           FROM `tblaccomodation` A
+           JOIN `tblroom` RM ON A.`ACCOMID` = RM.`ACCOMID`
+           JOIN `tblreservation` RS ON RM.`ROOMID` = RS.`ROOMID`
+           WHERE `CONFIRMATIONCODE` = '$code'";
+
+$result1 = mysqli_query($connection, $query1);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Receipt</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .receipt-container {
-            width: 80%;
-            margin: 0 auto;
-            padding: 10px;
-            border: 1px solid #000;
-        }
-        .receipt-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        .receipt-header .logo,
-        .receipt-header .logo2 {
-            height: 80px;
-        }
-        .receipt-header h1 {
-            margin-left: 60px;
-            text-align: center;
-        }
-        .contact-details {
-            margin-top: 10px;
-            margin-bottom: 20px;
-        }
-        .booking-details {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-        .booking-details .left, .booking-details .right {
-            width: 45%;
-        }
-        .room-details table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-        .room-details table, .room-details th, .room-details td {
-            border: 1px solid #000;
-            text-align: left;
-            padding: 8px;
-        }
-        .total-amount {
-            text-align: right;
-            font-size: 1.2em;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-        .receipt-footer {
-            text-align: right;
-            font-size: 1em;
-            font-weight: bold;
-        }
-    </style>
-    <script>
-        window.onload = function() {
-            window.print();
-        };
-    </script>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>HM Hotel Reservation</title>
+    <link rel="stylesheet" type="text/css" href="../style.css">  
+    <link rel="stylesheet" type="text/css" href="../css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../fonts/css/font-awesome.min.css"> 
+    <link rel="stylesheet" type="text/css" href="../css/custom-navbar.min.css"> 
+    <link href="../css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+    <link href="../css/datepicker.css" rel="stylesheet" media="screen">
+    <link href="../css/galery.css" rel="stylesheet" media="screen">
+    <link href="../css/ekko-lightbox.css" rel="stylesheet">
 </head>
-<body>
-    <div class="receipt-container">
-        <header class="receipt-header">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <img src="<?php echo $logo; ?>" alt="Hotel Logo" class="logo">
-                <div style="text-align: center;">
-                    <h1><?php echo $hotel_name; ?></h1>
-                    <p><?php echo $contact_details; ?></p>
+<body onload="window.print();">
+    <div class="wrapper">
+        <section class="invoice">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2 class="page-header">
+                        <i class="fa fa-building"></i> HM Hotel Reservation
+                    </h2>
                 </div>
-                <img src="<?php echo $logo2; ?>" alt="Hotel Logo 2" class="logo2">
             </div>
-        </header>
-        <section class="booking-details">
-            <div class="left">
-                <p>Paid By</p>
-                <p>Guest Name: <?php echo $guest_name; ?></p>
-                <p>Check-in Date: <?php echo $checkin_date; ?></p>
-                <p>Check-out Date: <?php echo $checkout_date; ?></p>
+            <div class="row invoice-info">
+                <div class="col-sm-4 invoice-col">
+                    From
+                    <address>
+                        <strong>HM Hotel Reservation</strong><br>
+                        Crossing Bunakan<br>
+                        Bunakan, Madridejos, Cebu<br>
+                        Phone: 09317622381<br>
+                        Email: Hmhotelreservation@gmail.com
+                    </address>
+                </div>
+                <div class="col-sm-4 invoice-col">
+                    To
+                    <address>
+                        <strong><?php echo $row['G_FNAME'] . ' ' . $row['G_LNAME']; ?></strong><br>
+                        <?php echo $row['G_ADDRESS']; ?><br>
+                        <?php echo $row['G_CITY']; ?><br>
+                        <?php echo $row['G_NATIONALITY']; ?><br>
+                        <?php echo $row['ZIP']; ?>
+                    </address>
+                </div>
+                <div class="col-sm-4 invoice-col">
+                    <b>Invoice No.</b> 00<?php echo $row['GUESTID']; ?><br>
+                    <b>Confirmation ID:</b> <?php echo $row['CONFIRMATIONCODE']; ?><br>
+                    <b>Transaction Date:</b> <?php echo $row['TRANSDATE']; ?>
+                </div>
             </div>
-            <div class="right">
-                <p>Receipt Date: <?php echo $receipt_date; ?></p>
+            <div class="row">
+                <div class="col-xs-12 table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Room</th>
+                                <th>Description</th>
+                                <th>Price</th>
+                                <th>Checked in</th>
+                                <th>Checked out</th>
+                                <th>Night(s)</th>
+                                <th>Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php 
+                            $tot = 0;
+                            while ($row1 = mysqli_fetch_assoc($result1)) {
+                                $days = dateDiff(date($row1['ARRIVAL']), date($row1['DEPARTURE']));
+                                $subtotal = $row1['RPRICE'];
+                                $tot += $subtotal;
+                                ?>
+                                <tr> 
+                                    <td><?php echo $row1['ACCOMODATION'] . ' ' . $row1['ROOM']; ?></td>
+                                    <td><?php echo $row1['ROOMDESC']; ?><br><?php echo $row1['NUMPERSON']; ?></td>
+                                    <td>&#8369; <?php echo $row1['PRICE']; ?></td>
+                                    <td><?php echo date_format(date_create($row1['ARRIVAL']), 'm/d/Y'); ?></td>
+                                    <td><?php echo date_format(date_create($row1['DEPARTURE']), 'm/d/Y'); ?></td>
+                                    <td><?php echo ($days == 0) ? '1' : $days; ?></td>
+                                    <td>&#8369; <?php echo $subtotal; ?></td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <p class="lead">Total Amount</p>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tr>
+                                <th style="width:50%">Total:</th>
+                                <td>&#8369; <?php echo $tot; ?></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
         </section>
-        <section class="room-details">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Room</th>
-                        <th>Number of Nights</th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($rooms as $room) { ?>
-                    <tr>
-                        <td><?php echo $room['name']; ?></td>
-                        <td><?php echo $room['nights']; ?></td>
-                        <td><?php echo $room['total']; ?></td>
-                    </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
-        </section>
-        <section class="total-amount">
-            <p>Total Amount: ₱<?php echo $total_amount; ?></p>
-        </section>
-        <footer class="receipt-footer">
-            <p>Admin Name: <?php echo $admin_name; ?></p>
-        </footer>
     </div>
 </body>
 </html>

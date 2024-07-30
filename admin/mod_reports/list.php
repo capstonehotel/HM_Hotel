@@ -37,14 +37,14 @@
                                     <!-- <td align="center"><?php echo $row['SPRICE']; ?></td> -->
                                     <td align="center"><?php echo $row['STATUS']; ?></td>
                                     <td align="center">
-                                        <form action="printreport.php" method="POST" target="_blank">
-                                             <input type="hidden" name="guest_name" value="<?php echo $row['G_FNAME'].' '. $row['G_LNAME'];?>">
-                                            <button class="btn btn-sm btn-primary"><i class="fa fa-print"></i> Print</button>
-                                        </form>
-                                        <?php if($_SESSION['ADMIN_UROLE']=="Administrator"){ ?>
-                                        <a  class="btn btn-danger btn-sm"><i class="icon-edit"></i> Delete</a>
-                                        <?php } ?>
-                                    </td>
+    <form action="printreport.php" method="GET" target="_blank">
+        <input type="hidden" name="code" value="<?php echo $row['CONFIRMATIONCODE']; ?>">
+        <button class="btn btn-sm btn-primary"><i class="fa fa-print"></i> Print</button>
+    </form>
+    <?php if ($_SESSION['ADMIN_UROLE'] == "Administrator") { ?>
+        <a class="btn btn-danger btn-sm" href="controller.php?action=delete&code=<?php echo $row['CONFIRMATIONCODE']; ?>"><i class="icon-edit"></i> Delete</a>
+    <?php } ?>
+</td>
                                 </tr>
                             <?php } ?>  
                         </tbody>
