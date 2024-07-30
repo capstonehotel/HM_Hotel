@@ -265,7 +265,7 @@ function previewImage(event) {
 			          </div> -->
 					  <div class="form-group">
 					    <div class="col-md-8">
-					        <label class="col-md-4 control-label" for="password">PASSWORD:</label>
+					        <label class="col-md-4 control-label" for="password">Password:</label>
 					        <div class="col-md-8">
 					            <input name="pass" type="password" class="form-control input-sm" id="password" onkeyup="validatePassword()" required / placeholder="Ex@mple123">
 					            <span id="password-error" style="color: red;"></span>
