@@ -265,7 +265,7 @@ function previewImage(event) {
 			          </div> -->
 					  <div class="form-group">
 					    <div class="col-md-8">
-					        <label class="col-md-4 control-label" for="password">Password:</label>
+					        <label class="col-md-4 control-label" for="password">PASSWORD:</label>
 					        <div class="col-md-8">
 					            <input name="pass" type="password" class="form-control input-sm" id="password" onkeyup="validatePassword()" required / placeholder="Ex@mple123">
 					            <span id="password-error" style="color: red;"></span>
@@ -323,30 +323,24 @@ function validatePassword() {
     var hasNumber = /\d/.test(password);
     var hasCapital = /[A-Z]/.test(password);
     
-    var errors = [];
-    
-    if (password.length < 6) {
-        errors.push("Password must be at least 6 characters long.");
-    }
-    
-    if (!hasSpecialChar) {
-        errors.push("Password must contain at least one special character.");
-    }
-    
-    if (!hasNumber) {
-        errors.push("Password must contain at least one number.");
-    }
-    
-    if (!hasCapital) {
-        errors.push("Password must contain at least one capital letter.");
-    }
-    
-    if (errors.length > 0) {
-        passwordError.textContent = errors[0];
-        passwordInput.setCustomValidity(errors[0]);
+    if (password.length < 8) {
+        passwordError.textContent = "Password must be at least 8 characters long.";
+        passwordInput.setCustomValidity("Password must be at least 8 characters long.");
+    } else if (!hasSpecialChar) {
+        passwordError.textContent = "Password must contain at least one special character.";
+        passwordInput.setCustomValidity("Password must contain at least one special character.");
+    } else if (!hasNumber) {
+        passwordError.textContent = "Password must contain at least one number.";
+        passwordInput.setCustomValidity("Password must contain at least one number.");
+    } else if (!hasCapital) {
+        passwordError.textContent = "Password must contain at least one capital letter.";
+        passwordInput.setCustomValidity("Password must contain at least one capital letter.");
     } else {
         passwordError.textContent = "";
         passwordInput.setCustomValidity("");
     }
 }
 </script>
+
+			
+ 
