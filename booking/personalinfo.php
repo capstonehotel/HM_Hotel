@@ -374,5 +374,5 @@ function togglePasswordVisibility() {
         toggleIcon.classList.add("fa-eye");
     }
 }
-</script>	
+</script>
  
