@@ -61,6 +61,20 @@ $result1 = mysqli_query($connection, $query1);
             body {
                 margin: 0.5in;
             }
+            .table-striped>tbody>tr:nth-of-type(odd) {
+                background-color: #f9f9f9;
+            }
+            .table-striped>tbody>tr:nth-of-type(even) {
+                background-color: #ffffff;
+            }
+            .table>thead>tr>th {
+                background-color: #f2f2f2;
+                color: #333;
+                border-bottom: 2px solid #ddd;
+            }
+            .table>tbody>tr>td {
+                border-top: 1px solid #ddd;
+            }
         }
     </style>
 </head>
