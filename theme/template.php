@@ -122,7 +122,7 @@ $_SESSION['to']  = $_POST['to'];
 /* Translate button */
 #translate-button {
   position: fixed;
-  bottom: 110px;
+  bottom: 90px;
   right: 20px;
   z-index: 2300; /* Ensure it's above the translate container */
   width: 48px; /* Adjust width to match toggle theme button */
