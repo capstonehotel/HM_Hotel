@@ -263,6 +263,20 @@ function previewImage(event) {
 			              </div>
 			            </div>
 			          </div> -->
+					  <style>
+        .form-group {
+            margin: 20px 0;
+        }
+        .control-label {
+            margin-bottom: 5px;
+            display: block;
+        }
+        .input-sm {
+            padding: 5px 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
 					  <div class="form-group">
     <div class="col-md-8">
         <label class="col-md-4 control-label" for="password">Password:</label>
