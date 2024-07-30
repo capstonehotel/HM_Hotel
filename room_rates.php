@@ -262,7 +262,7 @@ align-items: center;
                                 <?php endif; ?>
                                 </a>
                                 <!--  <?php echo $img_title; ?>  -->
-                                <figcaption class="img-title-active">
+                                <figcaption class="img-title-active"><br>
                                     <h5> &#8369 <?php echo $result->PRICE ;?></h5>    
                                 </figcaption>
                                 </figure>
