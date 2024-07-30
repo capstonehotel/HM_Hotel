@@ -59,7 +59,7 @@ $result1 = mysqli_query($connection, $query1);
     <style>
         @media print {
             body {
-                margin: 1in;
+                margin: 0.5in;
             }
         }
     </style>
