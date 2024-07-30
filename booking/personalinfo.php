@@ -263,62 +263,15 @@ function previewImage(event) {
 			              </div>
 			            </div>
 			          </div> -->
-					  <style>
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .toggle-password {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            color: #aaa;
-            font-size: 1em;
-            z-index: 10;
-        }
-        .input-container {
-            position: relative;
-        }
-        .form-control {
-            padding-right: 40px;
-        }
-    </style>
 					  <div class="form-group">
-        <div class="col-md-8">
-            <label class="col-md-4 control-label" for="password">Password:</label>
-            <div class="col-md-8">
-                <div class="input-container">
-                    <input name="pass" type="password" class="form-control input-sm" id="password" onkeyup="validatePassword()" required placeholder="Ex@mple123">
-                    <span class="fa fa-fw fa-eye toggle-password" onclick="togglePasswordVisibility('password')"></span>
-                </div>
-                <span id="password-error" style="color: red;"></span>
-            </div>
-        </div>
-    </div>
-	<script>
-        function togglePasswordVisibility(passwordId) {
-            var passwordInput = document.getElementById(passwordId);
-            var toggleIcon = document.querySelector(`#${passwordId} + .toggle-password`);
-
-            if (passwordInput.type === "password") {
-                passwordInput.type = "text";
-                toggleIcon.classList.remove("fa-eye");
-                toggleIcon.classList.add("fa-eye-slash");
-            } else {
-                passwordInput.type = "password";
-                toggleIcon.classList.remove("fa-eye-slash");
-                toggleIcon.classList.add("fa-eye");
-            }
-        }
-
-        function validatePassword() {
-            // Your password validation logic here
-        }
-    </script>
-
-
-
+					    <div class="col-md-8">
+					        <label class="col-md-4 control-label" for="password">Password:</label>
+					        <div class="col-md-8">
+					            <input name="pass" type="password" class="form-control input-sm" id="password" onkeyup="validatePassword()" required / placeholder="Ex@mple123">
+					            <span id="password-error" style="color: red;"></span>
+					        </div>
+					    </div>
+					</div>
 			          <div class="form-group">
 			            <div class="col-md-8">
 			              <label class="col-md-4 control-label" for=
@@ -397,24 +350,3 @@ function validatePassword() {
     }
 }
 </script>
-<script>
-function togglePasswordVisibility() {
-    var passwordInput = document.getElementById("password");
-    var toggleIcon = document.querySelector(".toggle-password");
-
-    console.log("Password type before toggle:", passwordInput.type); // Debugging line
-
-    if (passwordInput.type === "password") {
-        passwordInput.type = "text";
-        toggleIcon.classList.remove("fa-eye");
-        toggleIcon.classList.add("fa-eye-slash");
-    } else {
-        passwordInput.type = "password";
-        toggleIcon.classList.remove("fa-eye-slash");
-        toggleIcon.classList.add("fa-eye");
-    }
-
-    console.log("Password type after toggle:", passwordInput.type); // Debugging line
-}
-
- </script>
