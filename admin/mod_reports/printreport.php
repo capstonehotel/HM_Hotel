@@ -1,15 +1,15 @@
 <?php
-require_once("../includes/config.php");
-require_once("../includes/functions.php");
-require_once("../includes/session.php");
-require_once("../includes/user.php");
-require_once("../includes/pagination.php");
-require_once("../includes/paginsubject.php");
-require_once("../includes/accomodation.php");
-require_once("../includes/guest.php");
-require_once("../includes/reserve.php"); 
-require_once("../includes/setting.php");
-require_once("../includes/database.php");
+require_once("../../includes/config.php");
+require_once("../../includes/functions.php");
+require_once("../../includes/session.php");
+require_once("../../includes/user.php");
+require_once("../../includes/pagination.php");
+require_once("../../includes/paginsubject.php");
+require_once("../../includes/accomodation.php");
+require_once("../../includes/guest.php");
+require_once("../../includes/reserve.php"); 
+require_once("../../includes/setting.php");
+require_once("../../includes/database.php");
 
 // Ensure the 'code' parameter is provided
 if (!isset($_GET['code']) || empty($_GET['code'])) {
@@ -47,15 +47,15 @@ $result1 = mysqli_query($connection, $query1);
     <meta name="description" content="">
     <meta name="author" content="">
     <title>HM Hotel Reservation</title>
-    <link rel="stylesheet" type="text/css" href="../style.css">  
-    <link rel="stylesheet" type="text/css" href="../css/responsive.css">
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="../fonts/css/font-awesome.min.css"> 
-    <link rel="stylesheet" type="text/css" href="../css/custom-navbar.min.css"> 
-    <link href="../css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
-    <link href="../css/datepicker.css" rel="stylesheet" media="screen">
-    <link href="../css/galery.css" rel="stylesheet" media="screen">
-    <link href="../css/ekko-lightbox.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../../style.css">  
+    <link rel="stylesheet" type="text/css" href="../../css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../fonts/css/font-awesome.min.css"> 
+    <link rel="stylesheet" type="text/css" href="../../css/custom-navbar.min.css"> 
+    <link href="../../css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+    <link href="../../css/datepicker.css" rel="stylesheet" media="screen">
+    <link href="../../css/galery.css" rel="stylesheet" media="screen">
+    <link href="../../css/ekko-lightbox.css" rel="stylesheet">
 </head>
 <body onload="window.print();">
     <div class="wrapper">
