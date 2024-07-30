@@ -280,7 +280,8 @@ $_SESSION['to']  = $_POST['to'];
                           
                     <li class="widget-user-header bg-yellow">
                       <div class="widget-user-image" style="padding-top: 20px; text-align: center;">
-                        <img class="img-circle" style="cursor:pointer;width:80px;height:80px;padding:0; border-radius: 50%; text-align: center;"  data-target="#myModal" data-toggle="modal" src="'../images/user_avatar/'.$result->G_AVATAR;  ?>" alt="User Avatar">
+                        <img class="img-circle" style="cursor:pointer;width:80px;height:80px;padding:0; border-radius: 50%; text-align: center;"  data-target="#myModal" data-toggle="modal" src="<?php echo WEB_ROOT.'images/user_avatar/'.$result->G_AVATAR;  ?>" alt="User Avatar">
+                        </div>
                       </div>
                       <h5 style="text-align: center;" class="widget-user-username"><?php echo $_SESSION['name']. ' ' . $_SESSION['last']; ?> </h5>
                     </li>
