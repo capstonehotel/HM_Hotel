@@ -143,21 +143,41 @@
 
 
                   
-            <?php
-            ///   $conn = mysqli_connect('localhost', 'root', '', 'southgatedb');
+                  <?php
+            //   $conn = mysqli_connect('localhost', 'root', '', 'hmsystemdb');
               $id = $_SESSION['ADMIN_ID'];
               $sql = "SELECT * FROM `tbluseraccount` WHERE `USERID` = '$id'";
-              $result = mysqli_query($connection, $sql);
-             
-              
+              $result = mysqli_query($conn, $sql);
+
+              $count_mess = $conn->query("SELECT COUNT(*) FROM tblcontact");
+              $cnt_message = $count_mess->fetch_array();
             ?>
-        
-                <?php 
-    $querys = "SELECT count(*) as 'Total' FROM `tblcontact` WHERE CONTID != '' ";
-                $mydb->setQuery($querys);
-                $cury = $mydb->loadResultList();  
-                foreach ($cury as $resulta) { 
-   ?>
+            <?php 
+    $querysi = "SELECT count(*) as 'Total' FROM tblreservation WHERE DATE(TRANSDATE) = CURDATE()";
+    $mydb->setQuery($querysi);
+    $curya = $mydb->loadResultList();  
+    $todayBookings = isset($curya[0]->Total) ? $curya[0]->Total : 0;
+?>
+<?php
+// Start the session if not already started
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Check if the message notification has been viewed
+if (isset($_SESSION['message_notification_viewed'])) {
+    $cnt_message[0] = 0; // Reset the message count or use appropriate logic
+}
+
+// Check if the booking notification has been viewed
+if (isset($_SESSION['booking_notification_viewed'])) {
+    $todayBookings = 0; // Reset the booking count or use appropriate logic
+}
+
+
+
+
+?>
   <li class="nav-item my-auto">
     <a href="mod_contact_us/index.php?viewed=messages" class="text-dark" id="messageNotification">
         <i class="fa fa-envelope"></i>
