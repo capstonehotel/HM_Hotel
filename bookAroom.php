@@ -17,7 +17,7 @@ if(isset($_POST['booknow'])){
      
       addtocart($_POST['ROOMID'],$days, $totalprice,$_SESSION['arrival'],$_SESSION['departure']);
 
-      redirect(WEB_ROOT. 'booking/'); 
+      redirect(WEB_ROOT. '../booking/'); 
 
 }
  
