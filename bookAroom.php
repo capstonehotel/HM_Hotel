@@ -273,7 +273,7 @@ align-items: center;
                         <?php if(is_file(WEB_ROOT .'admin/mod_room/'.$result->ROOMIMAGE)): ?>
                             <img id="roomImage<?php echo $result->ROOMID; ?>" class="img-responsive img-hover" src="room.jpg"> 
                         <?php else: ?>
-                            <img id="roomImage<?php echo $result->ROOMID; ?>" class="img-responsive img-hover" src="admin/mod_room/<?php echo $result->ROOMIMAGE; ?>"> 
+                            <img id="roomImage<?php echo $result->ROOMID; ?>" class="img-responsive img-hover" src="../admin/mod_room/<?php echo $result->ROOMIMAGE; ?>"> 
                         <?php endif; ?>
                         <div class="zoom-buttons">
                             <button id="zoomInBtn<?php echo $result->ROOMID; ?>" class="btn btn-secondary btn-sm" data-zoom="1.3"><i class="fas fa-search-plus"></i></button>
