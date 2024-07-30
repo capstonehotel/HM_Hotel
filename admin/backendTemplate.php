@@ -257,7 +257,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
    // Polling function to check for new notifications
    function checkForNewNotifications() {
-        fetch('check_notifications.php')
+        fetch('../check_notifications.php')
             .then(response => response.json())
             .then(data => {
                 if (data.newBooking) {
@@ -274,7 +274,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Event listeners for notification links
     bookingNotification.addEventListener('click', function() {
-        fetch('clear_notifications.php?viewed=bookings')
+        fetch('../clear_notifications.php?viewed=bookings')
             .then(response => {
                 bookingDot.style.display = 'none';
             })
