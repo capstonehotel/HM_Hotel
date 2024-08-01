@@ -32,19 +32,7 @@
 <script type="text/javascript" language="javascript" src="js/bootstrap-modal.js"></script>
 <script type="text/javascript" src="js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
 <script type="text/javascript" src="js/locales/bootstrap-datetimepicker.uk.js" charset="UTF-8"></script>
-<style>
-.notification-dot {
-    position: relative;
-    display: inline-block;
-    background-color: red;
-    color: white;
-    padding: 2px 6px;
-    border-radius: 50%;
-    font-size: 12px;
-    top: -8px; /* Adjust as needed */
-    left: 8px; /* Adjust as needed */
-}
-</style>
+
 </head>
 
 

@@ -132,7 +132,8 @@
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-            <?php
+                   
+                    <?php
               $conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME, DB_PORT);
               $id = $_SESSION['ADMIN_ID'];
               $sql = "SELECT * FROM `tbluseraccount` WHERE `USERID` = '$id'";
@@ -172,6 +173,7 @@ if (isset($_SESSION['booking_notification_viewed'])) {
 ?>
 
 <!-- HTML Code -->
+
 <li class="nav-item my-auto">
     <a href="mod_contact_us/index.php?viewed=messages" class="text-dark" id="messageNotification">
         <i class="fa fa-envelope"></i>
@@ -257,7 +259,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
    // Polling function to check for new notifications
    function checkForNewNotifications() {
-        fetch('../check_notifications.php')
+        fetch('check_notifications.php')
             .then(response => response.json())
             .then(data => {
                 if (data.newBooking) {
@@ -274,7 +276,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Event listeners for notification links
     bookingNotification.addEventListener('click', function() {
-        fetch('../clear_notifications.php?viewed=bookings')
+        fetch('clear_notifications.php?viewed=bookings')
             .then(response => {
                 bookingDot.style.display = 'none';
             })
@@ -282,7 +284,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     });
 
 </script>
-
 
 
                         <!-- Nav Item - User Information -->
