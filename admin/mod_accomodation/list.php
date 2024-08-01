@@ -1,24 +1,4 @@
-<style>
-    /* Ensure borders for table rows and cells */
-    table.table-bordered {
-        border-collapse: collapse;
-    }
 
-    table.table-bordered th, table.table-bordered td {
-        border: 1px solid #dee2e6;
-    }
-    
-    /* Optional: Adjust padding and border styles */
-    table.table-bordered th, table.table-bordered td {
-        padding: 0.75rem;
-        vertical-align: top;
-        border-top: 1px solid #dee2e6;
-    }
-
-    table.table-bordered thead th {
-        background-color: #f8f9fa;
-    }
-</style>
 <div class="container-fluid">
     <div class="card shadow mb-4">
         <div class="card-header py-3" style="display: flex; align-items: center;">
