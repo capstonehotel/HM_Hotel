@@ -41,13 +41,14 @@
             <div class="tab-content" id="reservationTabsContent">
                 <?php 
                 $queries = [
-                    "list" => "SELECT `G_FNAME`, `G_LNAME`, `TRANSDATE`, `CONFIRMATIONCODE`, `PQTY`, `SPRICE`, `STATUS` FROM `tblpayment` p, `tblguest` g WHERE p.`GUESTID` = g.`GUESTID` ORDER BY p.`STATUS`='pending' DESC, p.`TRANSDATE` DESC",
-                    "pending" => "SELECT `G_FNAME`, `G_LNAME`, `TRANSDATE`, `CONFIRMATIONCODE`, `PQTY`, `SPRICE`, `STATUS` FROM `tblpayment` p, `tblguest` g WHERE p.`GUESTID` = g.`GUESTID` AND p.`STATUS` = 'pending' ORDER BY p.`TRANSDATE` DESC",
-                    "confirmed" => "SELECT `G_FNAME`, `G_LNAME`, `TRANSDATE`, `CONFIRMATIONCODE`, `PQTY`, `SPRICE`, `STATUS` FROM `tblpayment` p, `tblguest` g WHERE p.`GUESTID` = g.`GUESTID` AND p.`STATUS` = 'confirmed' ORDER BY p.`TRANSDATE` DESC",
-                    "check-in" => "SELECT `G_FNAME`, `G_LNAME`, `TRANSDATE`, `CONFIRMATIONCODE`, `PQTY`, `SPRICE`, `STATUS` FROM `tblpayment` p, `tblguest` g WHERE p.`GUESTID` = g.`GUESTID` AND p.`STATUS` = 'checkedin' ORDER BY p.`TRANSDATE` DESC",
-                    "check-out" => "SELECT `G_FNAME`, `G_LNAME`, `TRANSDATE`, `CONFIRMATIONCODE`, `PQTY`, `SPRICE`, `STATUS` FROM `tblpayment` p, `tblguest` g WHERE p.`GUESTID` = g.`GUESTID` AND p.`STATUS` = 'checkedout' ORDER BY p.`TRANSDATE` DESC",
-                    "cancelled" => "SELECT `G_FNAME`, `G_LNAME`, `TRANSDATE`, `CONFIRMATIONCODE`, `PQTY`, `SPRICE`, `STATUS` FROM `tblpayment` p, `tblguest` g WHERE p.`GUESTID` = g.`GUESTID` AND p.`STATUS` = 'cancelled' ORDER BY p.`TRANSDATE` DESC"
+                    "list" => "SELECT `G_FNAME`, `G_LNAME`, `TRANSDATE`, `CONFIRMATIONCODE`, `PQTY`, `SPRICE`, `STATUS` FROM `tblreservation` r JOIN `tblguest` g ON r.`GUESTID` = g.`GUESTID` ORDER BY r.`STATUS`='pending' DESC, r.`TRANSDATE` DESC",
+                    "pending" => "SELECT `G_FNAME`, `G_LNAME`, `TRANSDATE`, `CONFIRMATIONCODE`, `PQTY`, `SPRICE`, `STATUS` FROM `tblreservation` r JOIN `tblguest` g ON r.`GUESTID` = g.`GUESTID` AND r.`STATUS` = 'pending' ORDER BY r.`TRANSDATE` DESC",
+                    "confirmed" => "SELECT `G_FNAME`, `G_LNAME`, `TRANSDATE`, `CONFIRMATIONCODE`, `PQTY`, `SPRICE`, `STATUS` FROM `tblreservation` r JOIN `tblguest` g ON r.`GUESTID` = g.`GUESTID` AND r.`STATUS` = 'confirmed' ORDER BY r.`TRANSDATE` DESC",
+                    "check-in" => "SELECT `G_FNAME`, `G_LNAME`, `TRANSDATE`, `CONFIRMATIONCODE`, `PQTY`, `SPRICE`, `STATUS` FROM `tblreservation` r JOIN `tblguest` g ON r.`GUESTID` = g.`GUESTID` AND r.`STATUS` = 'checkedin' ORDER BY r.`TRANSDATE` DESC",
+                    "check-out" => "SELECT `G_FNAME`, `G_LNAME`, `TRANSDATE`, `CONFIRMATIONCODE`, `PQTY`, `SPRICE`, `STATUS` FROM `tblreservation` r JOIN `tblguest` g ON r.`GUESTID` = g.`GUESTID` AND r.`STATUS` = 'checkedout' ORDER BY r.`TRANSDATE` DESC",
+                    "cancelled" => "SELECT `G_FNAME`, `G_LNAME`, `TRANSDATE`, `CONFIRMATIONCODE`, `PQTY`, `SPRICE`, `STATUS` FROM `tblreservation` r JOIN `tblguest` g ON r.`GUESTID` = g.`GUESTID` AND r.`STATUS` = 'cancelled' ORDER BY r.`TRANSDATE` DESC"
                 ];
+                
 
                 foreach ($tabs as $tab) { 
                     ?>
