@@ -1,3 +1,14 @@
+
+    <meta charset="UTF-8">
+    <title>List of Reservations</title>
+    <!-- DataTables CSS -->
+    <link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet">
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <!-- jQuery (necessary for DataTables) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
 <div class="container-fluid">
     <form action="controller.php?action=delete" method="POST">
         <div class="card shadow mb-4">
@@ -81,3 +92,18 @@
         </div>
     </form>
 </div>
+
+<!-- Initialize DataTables -->
+<script>
+    $(document).ready(function() {
+        <?php foreach ($tabs as $tab) { ?>
+            $('#dataTable<?php echo ucfirst($tab); ?>').DataTable({
+                "paging": true,
+                "searching": true,
+                "lengthChange": true,
+                "pageLength": 10
+            });
+        <?php } ?>
+    });
+</script>
+
