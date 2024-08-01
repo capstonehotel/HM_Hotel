@@ -53,3 +53,67 @@ $cur = $room->single_room($_POST['ROOMID']);
 	 </div><!--  modal body -->
 </div> <!-- modal content -->
 </div> <!-- modal dialog -->	
+<script>
+	$(document).ready(function(){
+    $('.roomImg').click(function(){
+        var id = $(this).data('id');
+
+        $.ajax({
+            type: "POST",
+            url: "editpic.php",
+            dataType: "text",
+            data: {ROOMID: id},
+            success: function(data){
+                $('#myModal').modal('toggle').html(data);
+            }
+        });
+    });
+
+    $('#myModal').on('submit', 'form', function(e) {
+        e.preventDefault();
+        var formData = new FormData(this);
+
+        $.ajax({
+            type: "POST",
+            url: "controller.php?action=editimage",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                try {
+                    var jsonResponse = JSON.parse(response);
+                    if (jsonResponse.success) {
+                        Swal.fire({
+                            title: 'Success',
+                            text: 'Room image updated successfully!',
+                            icon: 'success'
+                        }).then(() => {
+                            window.location.href = "index.php";
+                        });
+                    } else {
+                        Swal.fire({
+                            title: 'Error',
+                            text: 'There was a problem updating the room image.',
+                            icon: 'error'
+                        });
+                    }
+                } catch (e) {
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'Unexpected error occurred.',
+                        icon: 'error'
+                    });
+                }
+            },
+            error: function() {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'An error occurred while processing your request.',
+                    icon: 'error'
+                });
+            }
+        });
+    });
+});
+
+	</script>

@@ -131,7 +131,7 @@ function doInsert(){
 				
 				$room->update($_POST['ROOMID']); 
 				
-			 	message($_POST['ROOM'] ." Upadated successfully!", "success");
+			 	message($_POST['ROOM'] ." Updated successfully!", "success");
 			 	unset($_SESSION['id']);
 			 	redirect('index.php');
 				 
