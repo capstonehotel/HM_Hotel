@@ -20,7 +20,7 @@
         margin: 10px; /* Ensures small padding for action buttons */
     } */
     .btn btn-sm btn-danger{
-        margin-left: 10px;
+        margin-left: 5px;
     }
 
     /* Ensure that the table fits within the container */
