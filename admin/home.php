@@ -22,34 +22,15 @@ require_once("../includes/database.php");
     redirect('login.php');
     return true;
  }
-// Initialize the connection (assuming $connection is available)
-$connection = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME, DB_PORT);
-if (!$connection) {
-    die("Connection failed: " . mysqli_connect_error());
-}
 
-// Queries for dashboard statistics
-$queries = [
-    'totalRooms' => "SELECT count(*) as 'Total' FROM `tblroom` WHERE ROOM != ''",
-    'totalReservations' => "SELECT count(*) as 'Total' FROM `tblreservation` WHERE STATUS != ''",
-    'cancelledReservations' => "SELECT count(*) as 'Total' FROM `tblreservation` WHERE STATUS = 'Cancelled'",
-    'bookingsToday' => "SELECT count(*) as 'Total' FROM `tblreservation` WHERE DATE(TRANSDATE) = DATE(NOW())",
-    'confirmedReservations' => "SELECT count(*) as 'Total' FROM `tblreservation` WHERE STATUS = 'Confirmed'",
-    'checkedInGuests' => "SELECT count(*) as 'Total' FROM `tblreservation` WHERE STATUS = 'Checkedin'",
-    'checkedOutGuests' => "SELECT count(*) as 'Total' FROM `tblreservation` WHERE STATUS = 'Checkedout'"
-];
 
-$stats = [];
-foreach ($queries as $key => $query) {
-    $result = mysqli_query($connection, $query);
-    if ($result) {
-        $row = mysqli_fetch_assoc($result);
-        $stats[$key] = $row['Total'];
-    } else {
-        $stats[$key] = 'Error';
-    }
-}
-?>
+$query = "SELECT count(*) as 'Total' FROM `tblroom` WHERE ROOM != '' ";
+                $mydb->setQuery($query);
+                $cur = $mydb->loadResultList();  
+                foreach ($cur as $result) { 
+
+
+ ?>
 <div class="col-xl-4 col-md-6 mb-4" >
     <div class="card border-left-primary shadow h-100 py-2">
         <div class="card-body">
@@ -66,10 +47,15 @@ foreach ($queries as $key => $query) {
         </div>
     </div>
 </div>
+   <?php } ?>
 
 
-
-
+<?php 
+    $querys = "SELECT count(*) as 'Total' FROM `tblreservation` WHERE STATUS != '' ";
+                $mydb->setQuery($querys);
+                $cury = $mydb->loadResultList();  
+                foreach ($cury as $resulta) { 
+   ?>
 <div class="col-xl-4 col-md-6 mb-4">
     <div class="card border-left-primary shadow h-100 py-2">
         <div class="card-body">
@@ -86,10 +72,15 @@ foreach ($queries as $key => $query) {
         </div>
     </div>
 </div>
+<?php } ?>
 
 
-
-
+<?php 
+    $querysi = "SELECT count(*) as 'Total' FROM `tblreservation` WHERE STATUS= 'Cancelled'  ";
+                $mydb->setQuery($querysi);
+                $curya = $mydb->loadResultList();  
+                foreach ($curya as $resultas) { 
+   ?>
 
 
 <div class="col-xl-4 col-md-6 mb-4">
@@ -108,7 +99,15 @@ foreach ($queries as $key => $query) {
         </div>
     </div>
 </div>
+<?php } ?>
 
+
+<?php 
+    $querysi = "SELECT count(*) as 'Total' FROM `tblreservation` WHERE TRANSDATE=DATE(NOW())!=  '' ";
+                $mydb->setQuery($querysi);
+                $curya = $mydb->loadResultList();  
+                foreach ($curya as $resultas) { 
+   ?>
 <div class="col-xl-4 col-md-6 mb-4">
     <div class="card border-left-primary shadow h-100 py-2">
         <div class="card-body">
@@ -125,7 +124,15 @@ foreach ($queries as $key => $query) {
         </div>
     </div>
 </div>
+<?php } ?>
 
+
+<?php 
+    $querysi = "SELECT count(*) as 'Total' FROM `tblreservation` WHERE STATUS= 'Confirmed'  ";
+                $mydb->setQuery($querysi);
+                $curya = $mydb->loadResultList();  
+                foreach ($curya as $resultas) { 
+   ?>
 <div class="col-xl-4 col-md-6 mb-4">
     <div class="card border-left-primary shadow h-100 py-2">
         <div class="card-body">
@@ -142,7 +149,15 @@ foreach ($queries as $key => $query) {
         </div>
     </div>
 </div>
+<?php } ?>
 
+
+<?php 
+    $querysi = "SELECT count(*) as 'Total' FROM `tblreservation` WHERE STATUS = 'Checkedin' ";
+                $mydb->setQuery($querysi);
+                $curya = $mydb->loadResultList();  
+                foreach ($curya as $resultas) { 
+   ?>
 <div class="col-xl-4 col-md-6 mb-4">
     <div class="card border-left-primary shadow h-100 py-2">
         <div class="card-body">
@@ -159,7 +174,7 @@ foreach ($queries as $key => $query) {
         </div>
     </div>
 </div>
-
+<?php } ?>
 
 
 
