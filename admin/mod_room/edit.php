@@ -12,74 +12,94 @@ $result = $stmt->get_result();
 $row = $result->fetch_assoc();
 
 if (isset($_POST['save_room'])) {
-    $uploadDir = 'rooms/'; // Set the directory where you want to save uploaded files
+    $ROOM = $_POST['ROOM'];
 
-    // Check if a file was uploaded
-    if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
-        $file = $_FILES['image'];
-        $filename = basename($file['name']);
-        $uploadPath = $uploadDir . $filename;
+    // Check for duplicate room names
+    $checkDuplicateSql = "SELECT ROOMID FROM tblroom WHERE ROOM = ? AND ROOMID != ?";
+    $stmt = $connection->prepare($checkDuplicateSql);
+    $stmt->bind_param("si", $ROOM, $id);
+    $stmt->execute();
+    $duplicateResult = $stmt->get_result();
 
-        // Move the uploaded file to the desired directory
-        if (move_uploaded_file($file['tmp_name'], $uploadPath)) {
-            $ROOMIMAGE = $uploadDir . $filename;
+    if ($duplicateResult->num_rows > 0) {
+        // Duplicate room name found
+        echo "<script>
+            swal({
+                title: 'Error!',
+                text: 'A room with this name already exists.',
+                icon: 'error'
+            });
+          </script>";
+    } else {
+        $uploadDir = 'rooms/'; // Set the directory where you want to save uploaded files
+
+        // Handle file upload
+        if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
+            $file = $_FILES['image'];
+            $filename = basename($file['name']);
+            $uploadPath = $uploadDir . $filename;
+
+            // Move the uploaded file to the desired directory
+            if (move_uploaded_file($file['tmp_name'], $uploadPath)) {
+                $ROOMIMAGE = $uploadDir . $filename;
+            } else {
+                // Handle file upload error
+                $ROOMIMAGE = $row["ROOMIMAGE"];
+                echo "<script>
+                    swal({
+                        title: 'Error!',
+                        text: 'Error uploading file',
+                        icon: 'error'
+                    });
+                  </script>";
+                exit(); // Stop further execution
+            }
         } else {
-            // Handle file upload error
+            // No new file uploaded
             $ROOMIMAGE = $row["ROOMIMAGE"];
+        }
+
+        $ACCOMID = $_POST['ACCOMID'];
+        $ROOMDESC = $_POST['ROOMDESC'];
+        $NUMPERSON = $_POST['NUMPERSON'];
+        $PRICE = $_POST['PRICE'];
+        $ROOMNUM = $_POST['ROOMNUM'];
+
+        $sql = "UPDATE tblroom SET 
+            ROOMIMAGE = ?,
+            ROOM = ?,
+            ACCOMID = ?,
+            ROOMDESC = ?,
+            NUMPERSON = ?,
+            PRICE = ?,
+            ROOMNUM = ?
+            WHERE ROOMID = ?";
+        $stmt = $connection->prepare($sql);
+        $stmt->bind_param("ssisidii", $ROOMIMAGE, $ROOM, $ACCOMID, $ROOMDESC, $NUMPERSON, $PRICE, $ROOMNUM, $id);
+
+        if ($stmt->execute()) {
+            echo "<script>
+                swal({
+                    title: 'Saved!',
+                    text: 'Room updated successfully!',
+                    icon: 'success'
+                }).then(() => {
+                    window.location = 'index.php';
+                });
+              </script>";
+        } else {
             echo "<script>
                 swal({
                     title: 'Error!',
-                    text: 'Error uploading file',
+                    text: 'Error updating room: ". $stmt->error . "',
                     icon: 'error'
                 });
               </script>";
         }
-    } else {
-        // No new file uploaded
-        $ROOMIMAGE = $row["ROOMIMAGE"];
+
+        $stmt->close();
+        $connection->close();
     }
-
-    $ROOM = $_POST['ROOM'];
-    $ACCOMID = $_POST['ACCOMID'];
-    $ROOMDESC = $_POST['ROOMDESC'];
-    $NUMPERSON = $_POST['NUMPERSON'];
-    $PRICE = $_POST['PRICE'];
-    $ROOMNUM = $_POST['ROOMNUM'];
-
-    $sql = "UPDATE tblroom SET 
-        ROOMIMAGE = ?,
-        ROOM = ?,
-        ACCOMID = ?,
-        ROOMDESC = ?,
-        NUMPERSON = ?,
-        PRICE = ?,
-        ROOMNUM = ?
-        WHERE ROOMID = ?";
-    $stmt = $connection->prepare($sql);
-    $stmt->bind_param("ssisidii", $ROOMIMAGE, $ROOM, $ACCOMID, $ROOMDESC, $NUMPERSON, $PRICE, $ROOMNUM, $id);
-
-    if ($stmt->execute()) {
-        echo "<script>
-            swal({
-                title: 'Saved!',
-                text: 'Room updated successfully!',
-                icon: 'success'
-            }).then(() => {
-                window.location = 'index.php';
-            });
-          </script>";
-    } else {
-        echo "<script>
-            swal({
-                title: 'Error!',
-                text: 'Error updating room: ". $stmt->error . "',
-                icon: 'error'
-            });
-          </script>";
-    }
-
-    $stmt->close();
-    $connection->close();
 }
 ?>
 
@@ -130,7 +150,7 @@ if (isset($_POST['save_room'])) {
               <input required class="form-control input-sm" id="ROOMNUM" name="ROOMNUM" placeholder="Room #" type="text" value="<?php echo htmlspecialchars($row["ROOMNUM"], ENT_QUOTES); ?>">
             </div>
             <div class="form-group">
-              <label class="col-md-4 control-label" for="image">Upload Image:</label><br>
+              <label class="col-md-4 control-label" for="image">Upload Image:</label>
               <input type="file" name="image" id="image" accept="image/*">
               <?php if ($row["ROOMIMAGE"]) { ?>
                 <img src="<?php echo htmlspecialchars($row["ROOMIMAGE"], ENT_QUOTES); ?>" alt="Image Preview" id="image-preview" style="display: flex; max-width: 100%; max-height: 200px;">
