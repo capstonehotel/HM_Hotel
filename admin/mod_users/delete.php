@@ -1,6 +1,6 @@
 <?php
 // Ensure your database connection is properly established
-$connection = new mysqli('localhost', 'root', '', 'hmsystemdb');
+$connection = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME, DB_PORT);
 echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
 // Check if 'id' is set in the query string
 if (isset($_GET['id']) && isset($_GET['confirm']) && $_GET['confirm'] === 'true') {
