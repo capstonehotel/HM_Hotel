@@ -20,20 +20,9 @@
         padding: 0.25rem 0.5rem; /* Ensures small padding for action buttons */
     }
 
+    /* Ensure that the table fits within the container */
     .table-responsive {
         overflow-x: auto; /* Allows horizontal scrolling if needed */
-    }
-
-    .btn-group {
-        display: flex; /* Ensures buttons are displayed in a row */
-    }
-
-    .btn-group .btn {
-        margin-right: 5px; /* Adds space between buttons */
-    }
-
-    .btn-group .btn:last-child {
-        margin-right: 0; /* Removes margin from the last button */
     }
 </style>
 
