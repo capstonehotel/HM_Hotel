@@ -16,12 +16,12 @@
         text-align: center; /* Centers the header text */
     }
 
-    /* .btn-sm {
+    .btn-sm {
         margin: 10px; /* Ensures small padding for action buttons */
-    } */
-    .btn btn-sm btn-danger{
-        margin-left: 5px;
     }
+    /* .btn btn-sm btn-danger{
+        ma
+    } */
 
     /* Ensure that the table fits within the container */
     .table-responsive {
