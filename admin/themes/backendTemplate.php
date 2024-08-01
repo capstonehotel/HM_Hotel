@@ -143,8 +143,8 @@
 
 
                   
-                  <?php
-              $conn = mysqli_connect('127.0.0.1', 'u510162695_hmsystemdb', '1Hmsystemdb', 'u510162695_hmsystemdb', '3306');
+            <?php
+              $conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME, DB_PORT);
               $id = $_SESSION['ADMIN_ID'];
               $sql = "SELECT * FROM `tbluseraccount` WHERE `USERID` = '$id'";
               $result = mysqli_query($conn, $sql);
@@ -152,6 +152,9 @@
               $count_mess = $conn->query("SELECT COUNT(*) FROM tblcontact");
               $cnt_message = $count_mess->fetch_array();
             ?>
+            <!-- <li class="nav-item my-auto">
+                <a href="/HM_HotelReservation/admin/mod_contact_us/index.php" class="text-dark"><i class="fa fa-envelope"></i> <?php echo $cnt_message[0] ?></a> <span style="margin-left: 10px;">|</span>
+            </li> -->
             <?php 
     $querysi = "SELECT count(*) as 'Total' FROM tblreservation WHERE DATE(TRANSDATE) = CURDATE()";
     $mydb->setQuery($querysi);
@@ -178,7 +181,15 @@ if (isset($_SESSION['booking_notification_viewed'])) {
 
 
 ?>
-  <li class="nav-item my-auto">
+
+<!-- HTML Code -->
+<li class="nav-item my-auto">
+    <a href="#" class="text-dark" id="chat-button">
+        <i class="fa fa-comments"></i>
+    </a>
+    <span style="margin-left: 10px;"></span>
+</li>
+<li class="nav-item my-auto">
     <a href="mod_contact_us/index.php?viewed=messages" class="text-dark" id="messageNotification">
         <i class="fa fa-envelope"></i>
         <?php if ($cnt_message[0] > 0): ?>
@@ -187,7 +198,7 @@ if (isset($_SESSION['booking_notification_viewed'])) {
     </a>
     <span style="margin-left: 10px;"></span>
 </li>
-  <li class="nav-item my-auto">
+<li class="nav-item my-auto">
     <a href="mod_reservation/index.php?viewed=bookings" class="text-dark" id="bookingNotification">
         <i class="fa fa-bell"></i>
         <?php if ($todayBookings > 0): ?>
@@ -196,6 +207,23 @@ if (isset($_SESSION['booking_notification_viewed'])) {
     </a>
     <span style="margin-left: 10px;">|</span>
 </li>
+
+
+<style>
+.notification-dot {
+    position: relative;
+    display: inline-block;
+    background-color: red;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 50%;
+    font-size: 12px;
+    top: -8px; /* Adjust as needed */
+    left: 8px; /* Adjust as needed */
+}
+
+</style>
+
 <?php
 /// Update session variables based on the URL parameters
 if (isset($_GET['viewed'])) {
@@ -209,7 +237,7 @@ if (isset($_GET['viewed'])) {
 }
 ?>
 <?php
-$conn = mysqli_connect('127.0.0.1', 'u510162695_hmsystemdb', '1Hmsystemdb', 'u510162695_hmsystemdb', '3306');
+$conn = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME, DB_PORT);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Mark the booking notification as new
@@ -224,7 +252,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    document.addEventListener('DOMContentLoaded', function() {
     var messageNotification = document.getElementById('messageNotification');
     var bookingNotification = document.getElementById('bookingNotification');
-    var bookingDot = bookingNotification.querySelector('.notification-dot');
 
     // Function to handle notification dot removal
     function removeNotificationDot(element) {
@@ -236,23 +263,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Event listeners for notification links
     messageNotification.addEventListener('click', function() {
-        fetch('clear_notifications.php?viewed=messages')
-            .then(response => {
-                removeNotificationDot(this);
-            })
-            .catch(error => console.error('Error:', error));
+        removeNotificationDot(this);
     });
 
     bookingNotification.addEventListener('click', function() {
-        fetch('clear_notifications.php?viewed=bookings')
-            .then(response => {
-                removeNotificationDot(this);
-            })
-            .catch(error => console.error('Error:', error));
+        removeNotificationDot(this);
     });
+});
 
-    // Polling function to check for new notifications
-    function checkForNewNotifications() {
+
+   // Polling function to check for new notifications
+   function checkForNewNotifications() {
         fetch('check_notifications.php')
             .then(response => response.json())
             .then(data => {
@@ -267,10 +288,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Poll every 5 seconds
     setInterval(checkForNewNotifications, 5000);
-});
+
+    // Event listeners for notification links
+    bookingNotification.addEventListener('click', function() {
+        fetch('clear_notifications.php?viewed=bookings')
+            .then(response => {
+                bookingDot.style.display = 'none';
+            })
+            .catch(error => console.error('Error:', error));
+    });
 
 </script>
-
 
                  
                         <!-- Nav Item - User Information -->
