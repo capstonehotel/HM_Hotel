@@ -17,7 +17,7 @@
     }
 
     .btn-sm {
-        padding: 5px; /* Ensures small padding for action buttons */
+        padding: 10px; /* Ensures small padding for action buttons */
     }
 
     /* Ensure that the table fits within the container */
