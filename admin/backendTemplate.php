@@ -186,7 +186,7 @@ if (isset($_SESSION['booking_notification_viewed'])) {
 <li class="nav-item my-auto">
     <a href="mod_reservation/index.php?viewed=bookings" class="text-dark" id="bookingNotification">
         <i class="fa fa-bell"></i>
-        <?php if ($todayBookings > 0): ?>
+        <?php if (isset($_SESSION['booking_notification_viewed']) && $_SESSION['booking_notification_viewed'] == false && $todayBookings > 0): ?>
             <span class="notification-dot"><?php echo $todayBookings; ?></span>
         <?php endif; ?>
     </a>
@@ -239,7 +239,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SERVER['HTTP_X_REQUESTED_WIT
     var messageNotification = document.getElementById('messageNotification');
     var bookingNotification = document.getElementById('bookingNotification');
 
-    // Function to handle notification dot removal
     function removeNotificationDot(element) {
         var dot = element.querySelector('.notification-dot');
         if (dot) {
@@ -247,26 +246,41 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SERVER['HTTP_X_REQUESTED_WIT
         }
     }
 
-    // Event listeners for notification links
     messageNotification.addEventListener('click', function() {
-        removeNotificationDot(this);
+        fetch('clear_notifications.php?viewed=messages')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    removeNotificationDot(this);
+                }
+            })
+            .catch(error => console.error('Error:', error));
     });
 
     bookingNotification.addEventListener('click', function() {
-        removeNotificationDot(this);
+        fetch('clear_notifications.php?viewed=bookings')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    removeNotificationDot(this);
+                }
+            })
+            .catch(error => console.error('Error:', error));
     });
-});
 
-
-   // Polling function to check for new notifications
-   function checkForNewNotifications() {
+    function checkForNewNotifications() {
         fetch('check_notifications.php')
             .then(response => response.json())
             .then(data => {
                 if (data.newBooking) {
-                    bookingDot.style.display = 'inline-block';
+                    document.querySelector('#bookingNotification .notification-dot').style.display = 'inline-block';
                 } else {
-                    bookingDot.style.display = 'none';
+                    document.querySelector('#bookingNotification .notification-dot').style.display = 'none';
+                }
+                if (data.newMessage) {
+                    document.querySelector('#messageNotification .notification-dot').style.display = 'inline-block';
+                } else {
+                    document.querySelector('#messageNotification .notification-dot').style.display = 'none';
                 }
             })
             .catch(error => console.error('Error:', error));
@@ -274,15 +288,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SERVER['HTTP_X_REQUESTED_WIT
 
     // Poll every 5 seconds
     setInterval(checkForNewNotifications, 5000);
+});
 
-    // Event listeners for notification links
-    bookingNotification.addEventListener('click', function() {
-        fetch('clear_notifications.php?viewed=bookings')
-            .then(response => {
-                bookingDot.style.display = 'none';
-            })
-            .catch(error => console.error('Error:', error));
-    });
 
 </script>
 
