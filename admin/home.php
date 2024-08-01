@@ -23,7 +23,7 @@ require_once("../includes/database.php");
     return true;
  }
 // Initialize the connection (assuming $connection is available)
-$connection = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+$connection = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME, DB_PORT);
 if (!$connection) {
     die("Connection failed: " . mysqli_connect_error());
 }
