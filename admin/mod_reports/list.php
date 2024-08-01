@@ -17,8 +17,11 @@
     }
 
     .btn-sm {
-        padding: 0.25rem 0.5rem; /* Ensures small padding for action buttons */
+        margin: 10px; /* Ensures small padding for action buttons */
     }
+    /* .btn btn-sm btn-danger{
+        ma
+    } */
 
     /* Ensure that the table fits within the container */
     .table-responsive {
