@@ -29,7 +29,7 @@ if (isset($_GET['id']) && isset($_GET['confirm']) && $_GET['confirm'] === 'true'
             document.addEventListener("DOMContentLoaded", function() {
                 Swal.fire({
                     title: "Deleted!",
-                    text: "The reservation has been deleted.",
+                    text: "The user has been deleted.",
                     icon: "success"
                 }).then(() => {
                     window.location.href = "index.php";
