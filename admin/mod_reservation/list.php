@@ -47,26 +47,30 @@
                                     <tbody>
                                         <?php 
                                         $result = mysqli_query($connection, $queries[$tab]);
-                                        $number = 0;
-                                        while ($row = mysqli_fetch_assoc($result)) {
-                                            $number++;
-                                            ?>
-                                            <tr>
-                                                <td align="center"><?php echo $number; ?></td>
-                                                <td align="center"><?php echo $row['G_FNAME']; ?> <?php echo $row['G_LNAME']; ?></td>
-                                                <td align="center"><?php echo $row['TRANSDATE']; ?></td>
-                                                <td align="center"><?php echo $row['CONFIRMATIONCODE']; ?></td>
-                                                <td align="center"><?php echo $row['PQTY']; ?></td>
-                                                <td align="center"><?php echo $row['SPRICE']; ?></td>
-                                                <td align="center"><?php echo $row['STATUS']; ?></td>
-                                                <td align="center">
-                                                    <a href="index.php?view=view&code=<?php echo $row['CONFIRMATIONCODE']; ?>" class="btn btn-sm btn-primary"><i class="icon-edit"></i> View</a>
-                                                    <?php if($_SESSION['ADMIN_UROLE']=="Administrator"){ ?>
-                                                    <a href="controller.php?action=delete&code=<?php echo $row['CONFIRMATIONCODE']; ?>" class="btn btn-danger btn-sm"><i class="icon-edit"></i> Delete</a>
-                                                    <?php } ?>
-                                                </td>
-                                            </tr>
-                                        <?php } ?>
+                                        if (!$result) {
+                                            echo "<tr><td colspan='8'>Query failed: " . mysqli_error($connection) . "</td></tr>";
+                                        } else {
+                                            $number = 0;
+                                            while ($row = mysqli_fetch_assoc($result)) {
+                                                $number++;
+                                                ?>
+                                                <tr>
+                                                    <td align="center"><?php echo $number; ?></td>
+                                                    <td align="center"><?php echo $row['G_FNAME']; ?> <?php echo $row['G_LNAME']; ?></td>
+                                                    <td align="center"><?php echo $row['TRANSDATE']; ?></td>
+                                                    <td align="center"><?php echo $row['CONFIRMATIONCODE']; ?></td>
+                                                    <td align="center"><?php echo $row['PQTY']; ?></td>
+                                                    <td align="center"><?php echo $row['SPRICE']; ?></td>
+                                                    <td align="center"><?php echo $row['STATUS']; ?></td>
+                                                    <td align="center">
+                                                        <a href="index.php?view=view&code=<?php echo $row['CONFIRMATIONCODE']; ?>" class="btn btn-sm btn-primary"><i class="icon-edit"></i> View</a>
+                                                        <?php if($_SESSION['ADMIN_UROLE']=="Administrator"){ ?>
+                                                        <a href="controller.php?action=delete&code=<?php echo $row['CONFIRMATIONCODE']; ?>" class="btn btn-danger btn-sm"><i class="icon-edit"></i> Delete</a>
+                                                        <?php } ?>
+                                                    </td>
+                                                </tr>
+                                            <?php } 
+                                        } ?>
                                     </tbody>
                                 </table>
                             </div>
