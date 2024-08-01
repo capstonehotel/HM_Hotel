@@ -130,7 +130,7 @@ if (isset($_POST['save_room'])) {
               <input required class="form-control input-sm" id="ROOMNUM" name="ROOMNUM" placeholder="Room #" type="text" value="<?php echo htmlspecialchars($row["ROOMNUM"], ENT_QUOTES); ?>">
             </div>
             <div class="form-group">
-              <label class="col-md-4 control-label" for="image">Upload Image:</label>
+              <label class="col-md-4 control-label" for="image">Upload Image:</label><br>
               <input type="file" name="image" id="image" accept="image/*">
               <?php if ($row["ROOMIMAGE"]) { ?>
                 <img src="<?php echo htmlspecialchars($row["ROOMIMAGE"], ENT_QUOTES); ?>" alt="Image Preview" id="image-preview" style="display: flex; max-width: 100%; max-height: 200px;">
