@@ -183,12 +183,7 @@ if (isset($_SESSION['booking_notification_viewed'])) {
 ?>
 
 <!-- HTML Code -->
-<li class="nav-item my-auto">
-    <a href="#" class="text-dark" id="chat-button">
-        <i class="fa fa-comments"></i>
-    </a>
-    <span style="margin-left: 10px;"></span>
-</li>
+
 <li class="nav-item my-auto">
     <a href="mod_contact_us/index.php?viewed=messages" class="text-dark" id="messageNotification">
         <i class="fa fa-envelope"></i>
