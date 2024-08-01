@@ -224,11 +224,12 @@ if (isset($_GET['viewed'])) {
 <?php
 $conn = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME, DB_PORT);
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
     // Mark the booking notification as new
     $_SESSION['booking_notification_viewed'] = false;
     $response = array('success' => true);
     echo json_encode($response);
+    exit;
 }
 ?>
 
