@@ -180,9 +180,9 @@ function editImg (){
 					$rm->ROOMIMAGE = $location;
 					$rm->update($rm_id); 
 					
-					$response = array('success' => true, 'message' => 'Room Image Updated successfully!');
-					echo json_encode($response);
-					exit;
+				 	message("Room Image Upadated successfully!", "success");
+				 	unset($_SESSION['id']);
+				 	 redirect("index.php");
  			}
  		}
  }			 
