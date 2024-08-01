@@ -16,18 +16,16 @@
         text-align: center; /* Centers the header text */
     }
 
+    .btn-sm {
+        margin: 10px; /* Ensures small padding for action buttons */
+    }
+    /* .btn btn-sm btn-danger{
+        ma
+    } */
+
+    /* Ensure that the table fits within the container */
     .table-responsive {
         overflow-x: auto; /* Allows horizontal scrolling if needed */
-        margin: 0 auto; /* Center aligns the table container */
-    }
-
-    .btn-group {
-        display: flex; /* Ensures buttons are displayed in a row */
-        gap: 5px; /* Adds space between buttons */
-    }
-
-    .btn-sm {
-        padding: 0.25rem 0.5rem; /* Ensures small padding for action buttons */
     }
 </style>
 
