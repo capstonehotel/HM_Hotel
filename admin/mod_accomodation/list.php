@@ -1,23 +1,4 @@
-<style>
-    .table-responsive {
-    overflow-x: auto; /* Allows horizontal scrolling if the table is too wide */
-}
 
-.table th, .table td {
-    white-space: nowrap; /* Prevents text from wrapping to the next line */
-    text-overflow: ellipsis; /* Adds ellipsis (...) for overflowed text */
-    overflow: hidden; /* Hides overflowed text */
-}
-
-.table td {
-    padding: 0.5rem; /* Adjust padding to reduce table size */
-}
-
-.card-body {
-    padding: 0; /* Reduces padding in card body */
-}
-
-</style>
 <div class="container-fluid">
     <div class="card shadow mb-4">
         <div class="card-header py-3" style="display: flex; align-items: center;">
