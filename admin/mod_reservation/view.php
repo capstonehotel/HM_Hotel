@@ -4,7 +4,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3" style="display: flex; align-items: center;">
             <div style="display: flex; justify-content: flex-end;">
-                <a href="../index.php" class="btn btn-primary btn-sm" style="margin-right: 10px;" >Back</a>
+                <a href="index.php" class="btn btn-primary btn-sm" style="margin-right: 10px;" >Back</a>
                 <h6 class="m-0 font-weight-bold text-primary ml-10">View Booking</h6>
             </div>
             <div style="display: flex; width: 90%; justify-content: flex-end;">
