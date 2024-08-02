@@ -56,7 +56,7 @@ switch ($view) {
 						});
 						</script>';
 			}
-					$content    = '';		
+					$content    = 'delete.php';		
 					break;
 
     case 'view' :
