@@ -8,6 +8,7 @@ if (isset($_GET['id']) && isset($_GET['confirm']) && $_GET['confirm'] === 'true'
     $sql = "DELETE FROM tblcontact WHERE CONTID = $id";
     
     if ($connection->query($sql) === TRUE) {
+        // echo 'Executed PHP Code';
         // Deletion successful
         echo '<script>
             document.addEventListener("DOMContentLoaded", function() {
@@ -34,8 +35,7 @@ if (isset($_GET['id']) && isset($_GET['confirm']) && $_GET['confirm'] === 'true'
             });
             </script>';
     }
-
-}
+} 
 
 // Close the database connection
 $connection->close();
