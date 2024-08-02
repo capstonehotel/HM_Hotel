@@ -224,14 +224,22 @@ if (isset($_GET['viewed'])) {
 <?php
 $conn = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME, DB_PORT);
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Mark the booking notification as new
     $_SESSION['booking_notification_viewed'] = false;
-    $response = array('success' => true);
-    echo json_encode($response);
+    
+    // If it's an AJAX request, send a JSON response
+    if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+        $response = array('success' => true);
+        echo json_encode($response);
+    } else {
+        // For non-AJAX requests, you can handle the response differently if needed
+        // For example, redirect or show a message
+    }
     exit;
 }
 ?>
+
 
 
 <script>
