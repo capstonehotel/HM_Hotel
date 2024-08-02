@@ -1,9 +1,9 @@
 <?php
-echo '<script src="../sweetalert.js"></script>';
+echo '<script src="../sweetalert2.min.js"></script>'; // Updated the script src to match the correct path
 
 if (isset($_POST['save_room'])) {
     $uploadDir = 'rooms/'; // Set the directory where you want to save uploaded files
-    $ROOM = 'RM' . $_POST['ROOM'];
+    $ROOM = 'RM' . $_POST['ROOM']; // Prefix the room name with "RM"
     $ACCOMID = $_POST['ACCOMID'];
     $ROOMDESC = $_POST['ROOMDESC'];
     $NUMPERSON = $_POST['NUMPERSON'];
