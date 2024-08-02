@@ -186,7 +186,7 @@ if (isset($_SESSION['booking_notification_viewed'])) {
 <li class="nav-item my-auto">
     <a href="mod_reservation/index.php?viewed=bookings" class="text-dark" id="bookingNotification">
         <i class="fa fa-bell"></i>
-        <?php if (isset($_SESSION['booking_notification_viewed']) && $_SESSION['booking_notification_viewed'] == false && $todayBookings > 0): ?>
+        <?php if ($todayBookings > 0): ?>
             <span class="notification-dot"><?php echo $todayBookings; ?></span>
         <?php endif; ?>
     </a>
