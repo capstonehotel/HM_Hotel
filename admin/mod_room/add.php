@@ -3,7 +3,7 @@ echo '<script src="../sweetalert.js"></script>';
 
 if (isset($_POST['save_room'])) {
     $uploadDir = 'rooms/'; // Set the directory where you want to save uploaded files
-    $ROOM = $_POST['ROOM'];
+    $ROOM = 'RM' . $_POST['ROOM'];
     $ACCOMID = $_POST['ACCOMID'];
     $ROOMDESC = $_POST['ROOMDESC'];
     $NUMPERSON = $_POST['NUMPERSON'];
