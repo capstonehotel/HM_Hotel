@@ -174,7 +174,7 @@ if (isset($_POST['save_room'])) {
               <div class="col-md-12 col-sm-12">
                 <label class="col-md-4 control-label" for="image">Upload Image:</label>
                 <div class="col-md-12">
-                  <input required type="file" name="image" id="image" accept="image/*" align:"left;">
+                  <input required type="file" name="image" id="image" accept="image/*">
                   <img src="#" alt="Image Preview" id="image-preview" style="display: none; max-width: 100%; max-height: 200px;">
                   <script>
                     const fileInput = document.getElementById('image');
