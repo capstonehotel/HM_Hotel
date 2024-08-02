@@ -1,3 +1,31 @@
+<style>
+    .table-responsive {
+        max-width: 100%;
+        overflow-x: auto;
+    }
+
+    table.table {
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    table.table th, table.table td {
+        white-space: nowrap;
+    }
+
+    table.table th:nth-child(1),
+    table.table td:nth-child(1) { width: 150px; }
+
+    table.table th:nth-child(2),
+    table.table td:nth-child(2) { width: 200px; }
+
+    table.table th:nth-child(3),
+    table.table td:nth-child(3) { width: 200px; }
+
+    table.table th:nth-child(4),
+    table.table td:nth-child(4) { width: 400px; }
+</style>
+
 <div class="container-fluid">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
