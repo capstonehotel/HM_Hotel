@@ -2,9 +2,8 @@
 
 echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
 // Check if 'id' is set in the query string
-if (isset($_GET['id'])) {
+if (isset($_GET['id']) && isset($_GET['confirm']) && $_GET['confirm'] === 'true') {
     $id = $_GET['id'];
-
     // Attempt to delete the record from tblaccomodation table
     $sql = "DELETE FROM tblcontact WHERE CONTID = $id";
     
