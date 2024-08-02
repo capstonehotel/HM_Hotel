@@ -172,7 +172,7 @@ if (isset($_POST['save_room'])) {
             </div>
             <div class="form-group">
               <div class="col-md-12 col-sm-12">
-                <label class="col-md-4 control-label" for="image">Upload Image:</label>
+                <label class="col-md-4 control-label" for="image">Upload Image:</label><br>
                 <div class="col-md-12">
                   <input required type="file" name="image" id="image" accept="image/*">
                   <img src="#" alt="Image Preview" id="image-preview" style="display: none; max-width: 100%; max-height: 200px;">
