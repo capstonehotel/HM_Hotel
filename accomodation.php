@@ -11,6 +11,7 @@
 // require_once("includes/paginsubject.php");
 // require_once("includes/guest.php");
 // require_once("includes/reserve.php"); 
+require_once("includes/initialize.php"); 
 
 $msg = "";
 
