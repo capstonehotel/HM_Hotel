@@ -11,28 +11,28 @@ $_SESSION['to']  = $_POST['to'];
 
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
-  <head><script src="../theme/assets/js/color-modes.js"></script>
+  <head><script src="https://mcchmhotelreservation.com/theme/assets/js/color-modes.js"></script>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.115.4">
-    <link rel="stylesheet" type="text/css" href="../../fonts/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://mcchmhotelreservation.com/fonts/css/font-awesome.min.css" />
     <title><?php echo isset($title) ? $title . ' | HM Hotel' : 'HM mini Hotel' ; ?></title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/navbars-offcanvas/">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
-    <link href="../css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen" />
-    <link href="../css/datepicker.css" rel="stylesheet" media="screen" />
+    <link href="https://mcchmhotelreservation.com/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen" />
+    <link href="https://mcchmhotelreservation.com/css/datepicker.css" rel="stylesheet" media="screen" />
 
-     <link href="../cccss/galery.css" rel="stylesheet" media="screen" />
-    <link href="../css/ekko-lightbox.css" rel="stylesheet" />
+     <link href="https://mcchmhotelreservation.com/css/galery.css" rel="stylesheet" media="screen" />
+    <link href="https://mcchmhotelreservation.com/css/ekko-lightbox.css" rel="stylesheet" />
 
 
-    <link href="../theme/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://mcchmhotelreservation.com/theme/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <?php
         if (isset($_SESSION['monbela_cart'])){
@@ -189,7 +189,7 @@ $_SESSION['to']  = $_POST['to'];
 
     
     <!-- Custom styles for this template -->
-    <link href="../styles.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
   </head>
   <body >
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
@@ -322,10 +322,10 @@ $_SESSION['to']  = $_POST['to'];
            $cur = $accomodation->listOfaccomodation(); ?>
           <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
             <li class="nav-item">
-              <a class="nav-link <?php if(!isset($_GET['p'])){echo "active";} ?>" href="../index.php">Home</a>
+              <a class="nav-link <?php if(!isset($_GET['p'])){echo "active";} ?>" href="https://mcchmhotelreservation.com/index.php">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link <?php if(isset($_GET['p']) && $_GET['p'] == "rooms"){echo "active";} ?>" href="../index.php?p=rooms">Room and Rates</a>
+              <a class="nav-link <?php if(isset($_GET['p']) && $_GET['p'] == "rooms"){echo "active";} ?>" href="https://mcchmhotelreservation.com/index.php?p=rooms">Room and Rates</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle <?php if(isset($_GET['p']) && $_GET['p'] == "accomodation"){echo "active";} ?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -334,16 +334,16 @@ $_SESSION['to']  = $_POST['to'];
               <ul class="dropdown-menu">
                 <?php  foreach ($cur as $result) { ?>
                     <li>
-                        <a class="dropdown-item <?php if(isset($_GET['q']) && $_GET['q'] == $result->ACCOMODATION){echo "active";} ?>" href="../index.php?p=accomodation&q=<?php echo $result->ACCOMODATION; ?>"><?php echo $result->ACCOMODATION; ?></a>
+                        <a class="dropdown-item <?php if(isset($_GET['q']) && $_GET['q'] == $result->ACCOMODATION){echo "active";} ?>" href="..https://mcchmhotelreservation.com/index.php?p=accomodation&q=<?php echo $result->ACCOMODATION; ?>"><?php echo $result->ACCOMODATION; ?></a>
                     </li>
                 <?php } ?>
               </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link <?php if(isset($_GET['p']) && $_GET['p'] == "contact"){echo "active";} ?>" href="../index.php?p=contact">Contact Us</a>
+              <a class="nav-link <?php if(isset($_GET['p']) && $_GET['p'] == "contact"){echo "active";} ?>" href="https://mcchmhotelreservation.com/index.php?p=contact">Contact Us</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link <?php if(isset($_GET['p']) && $_GET['p'] == "about-us"){echo "active";} ?>" href="../index.php?p=about-us">About us</a>
+              <a class="nav-link <?php if(isset($_GET['p']) && $_GET['p'] == "about-us"){echo "active";} ?>" href="https://mcchmhotelreservation.com/index.php?p=about-us">About us</a>
             </li>
           </ul>
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
@@ -376,9 +376,9 @@ $_SESSION['to']  = $_POST['to'];
                        while ($row = $result->fetch_assoc()) {
                      ?>
                     <li>
-                      <a target="_blank"  class="read dropdown-item" href="../guest/readmessage.php?code=<?php echo  $row['CONFIRMATIONCODE']; ?>" data-toggle="lightbox"   data-id="<?php echo  $row['CONFIRMATIONCODE']; ?> " >
+                      <a target="_blank"  class="read dropdown-item" href="https://mcchmhotelreservation.com/guest/readmessage.php?code=<?php echo  $row['CONFIRMATIONCODE']; ?>" data-toggle="lightbox"   data-id="<?php echo  $row['CONFIRMATIONCODE']; ?> " >
                         <div class="pull-left">
-                          <img src="../images/1607134500_avatar.jpg" style="width: 30px; height: 30px; border-radius: 50%;" alt="">
+                          <img src="https://mcchmhotelreservation.com/images/1607134500_avatar.jpg" style="width: 30px; height: 30px; border-radius: 50%;" alt="">
                         </div>
                         <h4>
                           Admin
@@ -412,13 +412,13 @@ $_SESSION['to']  = $_POST['to'];
 
                     <li>
                         <a class="dropdown-item" style="color:#000;text-align:left;border-bottom:1px solid #fff;"
-                    href="../guest/profile.php" data-toggle="lightbox" >Account</a>
+                    href="https://mcchmhotelreservation.com/guest/profile.php" data-toggle="lightbox" >Account</a>
                     </li>
                     <li><a class="dropdown-item" style="color:#000;text-align:left;border-bottom:1px solid #fff;" 
-                href="../guest/bookinglist.php" data-toggle="lightbox">Bookings</a>
+                href="https://mcchmhotelreservation.com/guest/bookinglist.php" data-toggle="lightbox">Bookings</a>
                     </li>
                     <li>
-                        <a class="dropdown-item" style="color:#000;text-align:left;border-bottom:1px solid #fff;" href="../'logout.php';  ?>">Logout </a>
+                        <a class="dropdown-item" style="color:#000;text-align:left;border-bottom:1px solid #fff;" href="https://mcchmhotelreservation.com/'logout.php';  ?>">Logout </a>
                     </li>
                        
                 </ul>
@@ -427,7 +427,7 @@ $_SESSION['to']  = $_POST['to'];
           </li>
 
           <?php } ?>
-           <a class="text-light my-auto text-decoration-none ms-lg-2" href="../admin/login.php" style="color: whitesmoke;">
+           <a class="text-light my-auto text-decoration-none ms-lg-2" href="https://mcchmhotelreservation.com/admin/login.php" style="color: whitesmoke;">
              <span class="d-lg-inline d-none">|</span> <span class="ms-lg-2"><i class="fa fa-sign-in"></i> Login-Admin</span></a> 
           </ul>
           <?php  
@@ -447,7 +447,7 @@ $_SESSION['to']  = $_POST['to'];
                         <h4 class="modal-title" id="myModalLabel">Choose Image.</h4>
                     </div>
 
-                    <form action="../guest/update.php" enctype="multipart/form-data" method="post">
+                    <form action="https://mcchmhotelreservation.com/guest/update.php" enctype="multipart/form-data" method="post">
                         <div class="modal-body">
                             <div class="form-group">
                                 <div class="rows">
@@ -476,13 +476,13 @@ $_SESSION['to']  = $_POST['to'];
              <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
               <div class="carousel-inner">
                 <div class="carousel-item active">
-                  <img style="height: 400px"  src="../images/high.jpg" class="d-block w-100" alt="...">
+                  <img style="height: 400px"  src="https://mcchmhotelreservation.com/images/high.jpg" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                  <img style="height: 400px"   src="../images/high.jpg" class="d-block w-100" alt="...">
+                  <img style="height: 400px"   src="https://mcchmhotelreservation.com/images/high.jpg" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                  <img style="height: 400px"  src="../images/high.jpg" class="d-block w-100" alt="...">
+                  <img style="height: 400px"  src="https://mcchmhotelreservation.com/images/high.jpg" class="d-block w-100" alt="...">
                 </div>
               </div>
               <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
@@ -507,28 +507,28 @@ $_SESSION['to']  = $_POST['to'];
   </div>
 
 </main>
-<script src="../theme/assets/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://mcchmhotelreservation.com/theme/assets/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 
- <script src="../jquery/jquery.min.js"></script>
+ <script src="https://mcchmhotelreservation.com/jquery/jquery.min.js"></script>
         <!-- Bootstrap Core JavaScript -->
-        <script src="../js/bootstrap.min.js"></script>
+        <script src="https://mcchmhotelreservation.com/js/bootstrap.min.js"></script>
 
         <!-- DataTables JavaScript -->
-        <script src="../js/jquery.dataTables.min.js"></script>
-        <script src="../js/dataTables.bootstrap.min.js"></script>
+        <script src="https://mcchmhotelreservation.com/js/jquery.dataTables.min.js"></script>
+        <script src="https://mcchmhotelreservation.com/js/dataTables.bootstrap.min.js"></script>
 
-        <script type="text/javascript" src="../js/bootstrap-datepicker.js" charset="UTF-8"></script>
-        <script type="text/javascript" src="../js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-        <script type="text/javascript" src="../js/bootstrap-datetimepicker.uk.js" charset="UTF-8"></script>
+        <script type="text/javascript" src="https://mcchmhotelreservation.com/js/bootstrap-datepicker.js" charset="UTF-8"></script>
+        <script type="text/javascript" src="https://mcchmhotelreservation.com/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+        <script type="text/javascript" src="https://mcchmhotelreservation.com/js/bootstrap-datetimepicker.uk.js" charset="UTF-8"></script>
         <!-- Custom Theme JavaScript -->
 
         <script src="js/ekko-lightbox.js"></script>
-        <script type="text/javascript" language="javascript" src="../js/plugins.js"></script>
-        <script type="text/javascript" language="javascript" src="../js/html5.js"></script>
-        <script type="text/javascript" language="javascript" src="../js/retina.js"></script>
-        <script type="text/javascript" language="javascript" src="../js/global.js"></script>
+        <script type="text/javascript" language="javascript" src="https://mcchmhotelreservation.com/js/plugins.js"></script>
+        <script type="text/javascript" language="javascript" src="https://mcchmhotelreservation.com/js/html5.js"></script>
+        <script type="text/javascript" language="javascript" src="https://mcchmhotelreservation.com/js/retina.js"></script>
+        <script type="text/javascript" language="javascript" src="https://mcchmhotelreservation.com/js/global.js"></script>
 
         <script>
             // tooltip demo
