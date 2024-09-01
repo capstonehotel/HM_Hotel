@@ -178,24 +178,6 @@ if (isset($_SESSION['booking_notification_viewed'])) {
 
 <!-- HTML Code -->
 
-<li class="nav-item my-auto">
-    <a href="https://mcchmhotelreservation.com/admin/mod_contact_us/index.php?viewed=messages" class="text-dark" id="messageNotification">
-        <i class="fa fa-envelope"></i>
-        <?php if ($cnt_message[0] > 0): ?>
-            <span class="notification-dot"><?php echo $cnt_message[0]; ?></span>
-        <?php endif; ?>
-    </a>
-    <span style="margin-left: 10px;"></span>
-</li>
-<li class="nav-item my-auto">
-    <a href="https://mcchmhotelreservation.com/admin/mod_reservation/index.php?viewed=bookings" class="text-dark" id="bookingNotification">
-        <i class="fa fa-bell"></i>
-        <?php if ($todayBookings > 0): ?>
-            <span class="notification-dot"><?php echo $todayBookings; ?></span>
-        <?php endif; ?>
-    </a>
-    <span style="margin-left: 10px;">|</span>
-</li>
 
 
 <style>
