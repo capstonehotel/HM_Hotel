@@ -188,7 +188,7 @@ if (isset($_SESSION['booking_notification_viewed'])) {
     <span style="margin-left: 10px;"></span>
 </li>
 <li class="nav-item my-auto">
-    <a href="/mod_reservation/index.php?viewed=bookings" class="text-dark" id="bookingNotification">
+    <a href="/mcchmhotelreservation.com/mod_reservation/index.php?viewed=bookings" class="text-dark" id="bookingNotification">
         <i class="fa fa-bell"></i>
         <?php if ($todayBookings > 0): ?>
             <span class="notification-dot"><?php echo $todayBookings; ?></span>
