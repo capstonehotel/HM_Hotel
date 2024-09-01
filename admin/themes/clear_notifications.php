@@ -1,19 +1,6 @@
 <?php
 session_start();
-require_once("../includes/config.php");
-//load basic functions next so that everything after can use them
-require_once("../includes/functions.php");
-//later here where we are going to put our class session
-require_once("../includes/session.php");
-require_once("../includes/user.php");
-require_once("../includes/pagination.php");
-require_once("../includes/paginsubject.php");
-require_once("../includes/accomodation.php");
-require_once("../includes/guest.php");
-require_once("../includes/reserve.php"); 
-require_once("../includes/setting.php");
-//Load Core objects
-require_once("../includes/database.php");// Ensure this file contains your DB credentials and connection logic
+require_once("../includes/initialize.php");
 
 if (isset($_GET['viewed'])) {
     if ($_GET['viewed'] == 'bookings') {
