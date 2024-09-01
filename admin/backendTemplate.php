@@ -175,7 +175,7 @@ if (isset($_SESSION['booking_notification_viewed'])) {
 <!-- HTML Code -->
 
 <li class="nav-item my-auto">
-    <a href="mod_contact_us/index.php?viewed=messages" class="text-dark" id="messageNotification">
+    <a href="https://mcchmhotelreservation.com/admin/mod_contact_us/index.php?viewed=messages" class="text-dark" id="messageNotification">
         <i class="fa fa-envelope"></i>
         <?php if ($cnt_message[0] > 0): ?>
             <span class="notification-dot"><?php echo $cnt_message[0]; ?></span>
@@ -184,7 +184,7 @@ if (isset($_SESSION['booking_notification_viewed'])) {
     <span style="margin-left: 10px;"></span>
 </li>
 <li class="nav-item my-auto">
-    <a href="mod_reservation/index.php?viewed=bookings" class="text-dark" id="bookingNotification">
+    <a href="https://mcchmhotelreservation.com/admin/mod_reservation/index.php?viewed=bookings" class="text-dark" id="bookingNotification">
         <i class="fa fa-bell"></i>
         <?php if ($todayBookings > 0): ?>
             <span class="notification-dot"><?php echo $todayBookings; ?></span>
@@ -377,7 +377,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SERVER['HTTP_X_REQUESTED_WIT
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="../logout.php">Logout</a>
+                    <a class="btn btn-primary" href="https://mcchmhotelreservation.com/admin/logout.php">Logout</a>
                 </div>
             </div>
         </div>
