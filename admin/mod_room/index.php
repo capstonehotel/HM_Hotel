@@ -82,7 +82,7 @@ if (isset($_GET['id']) && !isset($_GET['confirm'])) {
 		$content    = 'list.php';		
 }
   
-require_once '../themes/backendTemplate.php';
+require_once '../backendTemplate.php';
 ?>
 
 
