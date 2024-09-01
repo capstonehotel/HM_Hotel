@@ -18,7 +18,7 @@ if (isset($_POST['clear'])) {
     </div>
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb" style="margin-top: 10px;">
-            <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
+            <li class="breadcrumb-item"><a href="https://mcchmhotelreservation.com/index.php">Home</a></li>
             <li class="breadcrumb-item active" aria-current="page">Booking Cart</li>
         </ol>
     </nav>
@@ -82,17 +82,17 @@ if (isset($_POST['clear'])) {
                     <?php
                     if (isset($_SESSION['monbela_cart'])) {
                         ?>
-                        <a href="../index.php?p=rooms" class="btn btn-primary" align="right" name="clear">Add Another Room</a>
+                        <a href="https://mcchmhotelreservation.com/index.php?p=rooms" class="btn btn-primary" align="right" name="clear">Add Another Room</a>
                         <button type="submit" class="btn btn-primary" align="right" name="clear">Clear Cart</button>
                         <?php
                         if (isset($_SESSION['GUESTID'])) {
                             ?>
-                            <a href="index.php?view=payment" class="btn btn-primary" align="right" name="continue">Continue Booking</a>
+                            <a href="https://mcchmhotelreservation.com/index.php?view=payment" class="btn btn-primary" align="right" name="continue">Continue Booking</a>
                             <?php
                             
                         } else {
                             ?>
-                            <a href="index.php?view=logininfo" class="btn btn-primary" align="right" name="continue">Continue Booking</a>
+                            <a href="https://mcchmhotelreservation.com/index.php?view=logininfo" class="btn btn-primary" align="right" name="continue">Continue Booking</a>
                             <?php
                         }
                     } else {
