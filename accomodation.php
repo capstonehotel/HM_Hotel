@@ -12,7 +12,7 @@ require_once ("includes/config.php");
 // require_once("includes/guest.php");
 // require_once("includes/reserve.php"); 
 require_once("includes/initialize.php"); 
-
+include 'config.php';
 $msg = "";
 
 if(isset($_POST['booknow'])){
