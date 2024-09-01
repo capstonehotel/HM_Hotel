@@ -57,19 +57,19 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.php">
+                <a class="nav-link" href="https://mcchmhotelreservation.com/admin/index.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
 
             <li class="nav-item active">
-                <a class="nav-link" href="mod_room/index.php">
+                <a class="nav-link" href="https://mcchmhotelreservation.com/admin/mod_room/index.php">
                     <i class="fas fa-fw fa-school"></i>
                     <span>Rooms</span></a>
             </li>
             
             <li class="nav-item active">
-                <a class="nav-link" href="mod_accomodation/index.php">
+                <a class="nav-link" href="https://mcchmhotelreservation.com/admin/mod_accomodation/index.php">
                     <i class="fas fa-fw fa-home"></i>
                     <span>Accomodation </a>
             </li>
@@ -92,19 +92,19 @@
                 ?>
 
             <li class="nav-item active">
-                <a class="nav-link" href="mod_contact_us/index.php">
+                <a class="nav-link" href="https://mcchmhotelreservation.com/admin/mod_contact_us/index.php">
                     <i class="fas fa-fw fa-sms"></i>
                     <span>Messages</span></a>
             </li>
 
             <li class="nav-item active">
-                <a class="nav-link" href="mod_reports/index.php">
+                <a class="nav-link" href="https://mcchmhotelreservation.com/admin/mod_reports/index.php">
                     <i class="fas fa-fw fa-receipt"></i>
                     <span>Report</span></a>
             </li>
  <?php if($_SESSION['ADMIN_UROLE']=="Administrator"){ ?>
             <li class="nav-item active">
-                <a class="nav-link" href="mod_users/index.php">
+                <a class="nav-link" href="https://mcchmhotelreservation.com/admin/mod_users/index.php">
                     <i class="fas fa-fw fa-user"></i>
                     <span>Users</span></a>
             </li>
