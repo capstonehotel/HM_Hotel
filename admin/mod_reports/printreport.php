@@ -1,15 +1,5 @@
 <?php
-require_once("../../includes/config.php");
-require_once("../../includes/functions.php");
-require_once("../../includes/session.php");
-require_once("../../includes/user.php");
-require_once("../../includes/pagination.php");
-require_once("../../includes/paginsubject.php");
-require_once("../../includes/accomodation.php");
-require_once("../../includes/guest.php");
-require_once("../../includes/reserve.php"); 
-require_once("../../includes/setting.php");
-require_once("../../includes/database.php");
+require_once("../../includes/initialize.php");
 
 // Ensure the 'code' parameter is provided
 if (!isset($_GET['code']) || empty($_GET['code'])) {

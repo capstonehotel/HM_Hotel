@@ -2,6 +2,7 @@
 // $connection = new mysqli('localhost', 'root', '', 'hmsystemdb');
 require_once("../../includes/initialize.php");
 require_once("../../includes/config.php");
+
 echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
 $action = (isset($_GET['action']) && $_GET['action'] != '') ? $_GET['action'] : '';
 $code = $_GET['code'];

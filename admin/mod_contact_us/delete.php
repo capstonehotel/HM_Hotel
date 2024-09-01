@@ -1,19 +1,5 @@
 <?php
-require_once("../../includes/config.php");
-//load basic functions next so that everything after can use them
-require_once("../../includes/functions.php");
-//later here where we are going to put our class session
-require_once("../../includes/session.php");
-require_once("../../includes/user.php");
-require_once("../../includes/pagination.php");
-require_once("../../includes/paginsubject.php");
-require_once("../../includes/accomodation.php");
-require_once("../../includes/guest.php");
-require_once("../../includes/reserve.php"); 
-require_once("../../includes/setting.php");
-//Load Core objects
-require_once("../../includes/database.php");
-
+require_once("../../includes/initialize.php");
 echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
 // Check if 'id' is set in the query string
 if (isset($_GET['id']) && isset($_GET['confirm']) && $_GET['confirm'] === 'true') {

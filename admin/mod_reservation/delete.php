@@ -1,6 +1,6 @@
 <?php
 require_once("../../includes/initialize.php");
-require_once("../../includes/config.php"); // Ensure this file includes your database connection
+
 
 // $connection = new mysqli('localhost', 'root', '', 'hmsystemdb');
 
