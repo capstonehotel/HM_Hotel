@@ -51,7 +51,7 @@ $_SESSION['departure'] =date_format(date_create($_POST['departure']),"Y-m-d");
     </div>
     <nav aria-label="breadcrumb" >
       <ol class="breadcrumb" style="margin-top: 10px;">
-        <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+        <li class="breadcrumb-item"><a href="https://mcchmhotelreservation.com/index.php">Home</a></li>
         <li class="breadcrumb-item active" aria-current="page"><?php print $title  ; ?></li>
         <li class="breadcrumb-item " style="color: #02aace; float:right"> <?php print  $msg; ?></li>
       </ol>
@@ -236,7 +236,7 @@ align-items: center;
                 <?php if(is_file(WEB_ROOT .'admin/mod_room/'.$result->ROOMIMAGE)): ?>
                     <img class="img-responsive img-hover" src="room.jpg" style="height: 250px; width: 90%;"> 
                 <?php else: ?>
-                    <img class="img-responsive img-hover" src="../admin/mod_room/<?php echo $result->ROOMIMAGE; ?>" style="height: 250px; width: 90%;"> 
+                    <img class="img-responsive img-hover" src="admin/mod_room/<?php echo $result->ROOMIMAGE; ?>" style="height: 250px; width: 90%;"> 
                 <?php endif; ?>
             </a>
             <figcaption class="img-title-active"><br>
