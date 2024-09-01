@@ -83,7 +83,7 @@
                 foreach ($cur as $result) { 
                 ?>
             <li class="nav-item active">
-                <a class="nav-link" href="mod_reservation/index.php">
+                <a class="nav-link" href="https://mcchmhotelreservation.com/admin/mod_reservation/index.php">
                     <i class="fas fa-fw fa-arrow-alt-circle-down"></i>
                     <span>Reservations</span></a>
             </li>
@@ -299,13 +299,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                       echo $row['ROLE'];
                        ?></span>
                                 <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                    src="https://mcchmhotelreservation.com/admin/img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
                                 <?php if($_SESSION['ADMIN_UROLE']=="Administrator"){ ?>
-                                <a class="dropdown-item" href="mod_users/index.php?view=edit&id=<?php echo $row['USERID']; ?>">
+                                <a class="dropdown-item" href="https://mcchmhotelreservation.com/admin/mod_users/index.php?view=edit&id=<?php echo $row['USERID']; ?>">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -381,26 +381,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://mcchmhotelreservation.com/admin/vendor/jquery/jquery.min.js"></script>
+    <script src="https://mcchmhotelreservation.com/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="https://mcchmhotelreservation.com/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="admin/js/sb-admin-2.min.js"></script>
+    <script src="https://mcchmhotelreservation.com/admin/js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
+    <script src="https://mcchmhotelreservation.com/admin/vendor/chart.js/Chart.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
-    <script src="js/demo/datatables-demo.js"></script>
+    <script src="https://mcchmhotelreservation.com/admin/js/demo/chart-area-demo.js"></script>
+    <script src="https://mcchmhotelreservation.com/admin/js/demo/chart-pie-demo.js"></script>
+    <script src="https://mcchmhotelreservation.com/admin/js/demo/datatables-demo.js"></script>
 
     <!-- Page level plugins -->
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="https://mcchmhotelreservation.com/admin/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="https://mcchmhotelreservation.com/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
     
