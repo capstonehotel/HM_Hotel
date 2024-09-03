@@ -97,7 +97,7 @@ if (isset($_POST['btnlogin'])) {
 
 /* Adjust the font size */
 .swal2-title {
-    font-size: 1.5rem !important; /* Ensure the font size is applied */
+    font-size: 2.5rem !important; /* Ensure the font size is applied */
 }
 
 /* Adjust the button size */
