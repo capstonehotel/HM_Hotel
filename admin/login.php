@@ -89,8 +89,8 @@ if (isset($_POST['btnlogin'])) {
             $_SESSION['ADMIN_UPASS']		=  $row['UPASS'] ;
             $_SESSION['ADMIN_UROLE']    	=  $row['ROLE'];
       ?>   
-      <script src="sweetalert2.all.min.js.js"></script>
-     
+      
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 <script type="text/javascript">
     Swal.fire({
         title: `Hello, <?php echo $row['UNAME']; ?>! Welcome back!`,
