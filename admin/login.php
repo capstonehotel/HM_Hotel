@@ -89,16 +89,20 @@ if (isset($_POST['btnlogin'])) {
             $_SESSION['ADMIN_UPASS']		=  $row['UPASS'] ;
             $_SESSION['ADMIN_UROLE']    	=  $row['ROLE'];
       ?>   
-      <script src="sweetalert.js"></script>
-    <script type="text/javascript">
-        // alert(`Hello, <?php echo $row['UNAME']; ?>! Welcome back!`);
-         swal({
-          title:  `Hello, <?php echo $row['UNAME']; ?>! Welcome back!`,
-            button: "OK",
-        }).then((value) => {
+      <script src="sweetalert2.all.min.js.js"></script>
+     
+<script type="text/javascript">
+    Swal.fire({
+        title: `Hello, <?php echo $row['UNAME']; ?>! Welcome back!`,
+        icon: 'info',
+        confirmButtonText: 'OK'
+    }).then((result) => {
+        if (result.isConfirmed) {
             window.location = "index.php";
+        }
     });
-    </script>
+</script>
+
       <?php
     
     
