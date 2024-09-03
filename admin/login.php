@@ -94,7 +94,6 @@ if (isset($_POST['btnlogin'])) {
 <script type="text/javascript">
     Swal.fire({
         title: `Hello, <?php echo $row['UNAME']; ?>! Welcome back!`,
-        icon: 'info',
         confirmButtonText: 'OK'
     }).then((result) => {
         if (result.isConfirmed) {
@@ -102,6 +101,7 @@ if (isset($_POST['btnlogin'])) {
         }
     });
 </script>
+
 
       <?php
     
