@@ -88,21 +88,21 @@ if (isset($_POST['btnlogin'])) {
             $_SESSION['ADMIN_USERNAME']		=  $row['USER_NAME'] ;
             $_SESSION['ADMIN_UPASS']		=  $row['UPASS'] ;
             $_SESSION['ADMIN_UROLE']    	=  $row['ROLE'];
-      ?>   
-      <style>
-/* Adjust the width of the alert */
-.my-swal-container {
-    width: 800px; /* or any other width */
+      ?>  
+      <style> 
+      /* Adjust the width of the alert */
+.swal2-popup {
+    width: 400px !important; /* Ensure the width is applied */
 }
 
 /* Adjust the font size */
-.my-swal-title {
-    font-size: 1.5rem; /* or any other size */
+.swal2-title {
+    font-size: 1.5rem !important; /* Ensure the font size is applied */
 }
 
 /* Adjust the button size */
-.my-swal-confirm {
-    padding: 10px 20px; /* or any other padding */
+.swal2-confirm {
+    padding: 10px 20px !important; /* Ensure the padding is applied */
 }
 </style>
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
