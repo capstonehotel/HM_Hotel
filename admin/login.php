@@ -92,7 +92,7 @@ if (isset($_POST['btnlogin'])) {
       <style>
 /* Adjust the width of the alert */
 .my-swal-container {
-    width: 400px; /* or any other width */
+    width: 800px; /* or any other width */
 }
 
 /* Adjust the font size */
