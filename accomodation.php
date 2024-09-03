@@ -1,18 +1,17 @@
 <?php
 require_once ("includes/config.php");
-// require_once("includes/database.php");
-// require_once("includes/accomodation.php");
-// require_once("includes/functions.php");
+require_once("includes/database.php");
+require_once("includes/accomodation.php");
+require_once("includes/functions.php");
 
-// //later here where we are going to put our class session
-// require_once("includes/session.php");
-// require_once("includes/user.php");
-// require_once("includes/pagination.php");
-// require_once("includes/paginsubject.php");
-// require_once("includes/guest.php");
-// require_once("includes/reserve.php"); 
-require_once("includes/initialize.php"); 
-include 'config.php';
+//later here where we are going to put our class session
+require_once("includes/session.php");
+require_once("includes/user.php");
+require_once("includes/pagination.php");
+require_once("includes/paginsubject.php");
+require_once("includes/guest.php");
+require_once("includes/reserve.php"); 
+
 $msg = "";
 
 if(isset($_POST['booknow'])){
@@ -81,7 +80,7 @@ $_SESSION['departure'] =date_format(date_create($_POST['departure']),"Y-m-d");
     </div>
     <nav aria-label="breadcrumb" >
       <ol class="breadcrumb" style="margin-top: 10px;">
-        <li class="breadcrumb-item"><a href="https://mcchmhotelreservation.com/index.php">Home</a></li>
+        <li class="breadcrumb-item"><a href="index.php">Home</a></li>
         <li class="breadcrumb-item active" aria-current="page"><?php  $title  ; ?></li>
         <li class="breadcrumb-item " style="color: #02aace; float:right"> <?php print  $msg; ?></li>
       </ol>
