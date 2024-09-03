@@ -15,8 +15,8 @@ if (!isset($_SESSION['monbela_cart'])) {
     </div>
     <nav aria-label="breadcrumb" >
       <ol class="breadcrumb" style="margin-top: 10px;">
-        <li class="breadcrumb-item"><a href="<?php echo WEB_ROOT ;?>index.php">Home</a></li>
-        <li class="breadcrumb-item "><a href="<?php echo WEB_ROOT ;?>booking/">Booking Cart</a></li>
+        <li class="breadcrumb-item"><a href="https://mcchmhotelreservation.com/index.php">Home</a></li>
+        <li class="breadcrumb-item "><a href="https://mcchmhotelreservation.com/booking/">Booking Cart</a></li>
         <li class="breadcrumb-item active">Verify Accounts</li>
       </ol>
     </nav>
@@ -54,7 +54,7 @@ if (!isset($_SESSION['monbela_cart'])) {
 
     ?>  
   <div class="col-md-12">
-    <form action="<?php echo  WEB_ROOT."../login.php" ?>" method="post" onsubmit="return validateForm()" >
+    <form action="<?php echo  WEB_ROOT."login.php" ?>" method="post" onsubmit="return validateForm()" >
       <div class="form-group has-feedback">
         <input type="text" id="username" class="form-control" name="username" placeholder="Username">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
