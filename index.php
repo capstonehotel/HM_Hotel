@@ -15,9 +15,9 @@ require_once("includes/setting.php");
 require_once("includes/database.php");
 
 
-include ("config.php"); 
+// include ("config.php"); 
 
-require_once("includes/initialize.php");
+// require_once("includes/initialize.php");
 $content='home.php';
 $view = (isset($_GET['p']) && $_GET['p'] != '') ? $_GET['p'] : '';
 $account = 'guest/update.php';
