@@ -54,7 +54,7 @@ if (!isset($_SESSION['monbela_cart'])) {
 
     ?>  
   <div class="col-md-12">
-    <form action="<?php echo  WEB_ROOT."login.php" ?>" method="post" onsubmit="return validateForm()" >
+    <form action="<?php echo  WEB_ROOT."../login.php" ?>" method="post" onsubmit="return validateForm()" >
       <div class="form-group has-feedback">
         <input type="text" id="username" class="form-control" name="username" placeholder="Username">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
