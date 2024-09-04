@@ -23,43 +23,20 @@ switch ($view) {
     case 'view' :
 		$content    = 'view.php';		
 		break;
-	case 'delete' :
-			
-			if (isset($_GET['id'])&& !isset($_GET['confirm'])) {
-				$id = $_GET['id'];
-			
-					// Confirm delete action with SweetAlert
-					echo '<script src="../sweetalert2.all.min.js"></script>';
-					echo '<script>
-						document.addEventListener("DOMContentLoaded", function() {
-							Swal.fire({
-								title: "Are you sure?",
-								text: "You won\'t be able to revert this!",
-								icon: "warning",
-								showCancelButton: true,
-								confirmButtonColor: "#3085d6",
-								cancelButtonColor: "#d33",
-								confirmButtonText: "Yes, delete it!"
-							}).then((result) => {
-								if (result.isConfirmed) {
-									// Perform deletion if confirmed
-									window.location.href = "delete.php?true&id=' . $id . '&confirm=true";
-								} else {
-                    // User cancelled the action
-                    Swal.fire({
-                        title: "Cancelled",
-                        text: "The deletion has been cancelled.",
-                        icon: "info"
-                    }).then(() => {
-                        window.location.href = "index.php";
-                    });
-                }
-							});
-						});
-						</script>';
+		case 'delete' :
+			// Handle deletion via AJAX
+			if (isset($_POST['id'])) {
+				$id = $_POST['id'];
+				$sql = "DELETE FROM tblaccomodation WHERE ACCOMID = $id";
+				if ($connection->query($sql) === TRUE) {
+					echo json_encode(['status' => 'success']);
+				} else {
+					echo json_encode(['status' => 'error']);
+				}
+				exit;
 			}
-					$content    = 'delete.php';	
-	break;
+			break;
+	
 
 default:
 	$content = 'list.php';        
