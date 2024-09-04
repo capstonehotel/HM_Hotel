@@ -1,41 +1,22 @@
 <?php
 require_once("../../includes/initialize.php");
-echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
+
+header('Content-Type: application/json');
+
 // Check if 'id' is set in the query string
 if (isset($_GET['id']) && isset($_GET['confirm']) && $_GET['confirm'] === 'true') {
     $id = $_GET['id'];
-    // Attempt to delete the record from tblaccomodation table
+    // Attempt to delete the record from tblcontact table
     $sql = "DELETE FROM tblcontact WHERE CONTID = $id";
-    
+
     if ($connection->query($sql) === TRUE) {
-        // echo 'Executed PHP Code';
         // Deletion successful
-        echo '<script>
-            document.addEventListener("DOMContentLoaded", function() {
-                Swal.fire({
-                    title: "Deleted!",
-                    text: "The message has been deleted.",
-                    icon: "success"
-                }).then(() => {
-                    window.location.href = "index.php";
-                });
-            });
-            </script>';
+        echo json_encode(['status' => 'success']);
     } else {
         // Deletion unsuccessful
-        echo '<script>
-            document.addEventListener("DOMContentLoaded", function() {
-                Swal.fire({
-                    title: "Error!",
-                    text: "Error on deleting the reservation.",
-                    icon: "error"
-                }).then(() => {
-                    window.location.href = "index.php";
-                });
-            });
-            </script>';
+        echo json_encode(['status' => 'error']);
     }
-} 
+}
 
 // Close the database connection
 $connection->close();
