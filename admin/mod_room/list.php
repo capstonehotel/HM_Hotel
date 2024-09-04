@@ -1,4 +1,3 @@
-    
 <div class="container-fluid">
     <div class="card shadow mb-4">
         <div class="card-header py-3" style="display: flex; align-items: center;">
@@ -15,7 +14,7 @@
                             <th>#</th>
                             <th>Image</th>
                             <th>Room</th>
-                            <th>Accomodation</th>
+                            <th>Accommodation</th>
                             <th>Person</th>
                             <th>Price</th>
                             <th># of Rooms</th>
@@ -31,17 +30,17 @@
                             while ($row = mysqli_fetch_assoc($result)) {
                                 $number ++;
                     ?>
-                        <tr>
+                        <tr id="row-<?php echo $row['ROOMID']; ?>">
                             <td align="center"><?php echo $number; ?> </td>
-                            <td align="center"><img  width="80" height="80" src="<?php echo $row['ROOMIMAGE'];?>" /></td>
+                            <td align="center"><img width="80" height="80" src="<?php echo $row['ROOMIMAGE'];?>" /></td>
                             <td align="center"><?php echo $row['ROOM'];?> <?php echo $row['ROOMDESC'];?></td>
                             <td align="center"><?php echo $row['ACCOMODATION'];?></td>
                             <td align="center"><?php echo $row['NUMPERSON'];?></td>
                             <td align="center"> &#8369 <?php echo $row['PRICE'];?></td>
                             <td align="center"><?php echo $row['ROOMNUM'];?></td>
                             <td style="display: flex;">
-				            	<a class="btn-sm btn btn-primary mr-2" href="index.php?view=edit&id=<?php echo $row['ROOMID']; ?>">View/Edit</a>
-				            	<a class="btn-sm btn btn-danger mr-2" href="index.php?view=delete&id=<?php echo $row['ROOMID']; ?>">Delete</a>
+                                <a class="btn-sm btn btn-primary mr-2" href="index.php?view=edit&id=<?php echo $row['ROOMID']; ?>">View/Edit</a>
+                                <button class="btn-sm btn btn-danger" onclick="confirmDelete(<?php echo $row['ROOMID']; ?>)">Delete</button>
                             </td>
                         </tr>
                     <?php } }?>
@@ -51,3 +50,44 @@
         </div>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function confirmDelete(id) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Perform AJAX request to delete.php
+                $.ajax({
+                    url: 'delete.php',
+                    type: 'POST',
+                    data: { id: id },
+                    success: function(response) {
+                        Swal.fire(
+                            'Deleted!',
+                            'The room has been deleted.',
+                            'success'
+                        ).then(() => {
+                            // Remove the row from the table
+                            $('#row-' + id).remove();
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        Swal.fire(
+                            'Error!',
+                            'There was an error deleting the room.',
+                            'error'
+                        );
+                    }
+                });
+            }
+        });
+    }
+</script>
