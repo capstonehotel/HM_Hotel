@@ -1,4 +1,4 @@
-<?php include_once '/../config.php'; ?>
+<!-- <?php include_once '/../config.php'; ?> -->
 <?php
 if(isset($_POST['avail'])){
 $_SESSION['from'] = $_POST['from'];
