@@ -37,7 +37,7 @@
                             ?>
                             
                       <?php  foreach ($cur as $result) { ?>
-                        <a class="list-group-item list-group-item-action" href="https://mcchmhotelreservation.com/index.php?p=rooms&q=<?php echo $result->ROOM; ?>" ><?php echo $result->ROOM; ?></a>
+                        <a class="list-group-item list-group-item-action" href="index.php?p=rooms&q=<?php echo $result->ROOM; ?>" ><?php echo $result->ROOM; ?></a>
                       <?php  } ?>
                       </div>
             </div>
@@ -50,7 +50,7 @@
                   </div>
                   <div class="carousel-inner">
                     <div class="carousel-item active">
-                      <img src="https://mcchmhotelreservation.com/images/room.jpg" class="d-block w-100" alt="...">
+                      <img src="images/room.jpg" class="d-block w-100" alt="...">
                       <div class="carousel-caption d-none d-md-block">
                         <h5>Standard Room</h5>
                         <p>&#8369 800</p>
