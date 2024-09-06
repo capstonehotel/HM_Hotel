@@ -1,3 +1,4 @@
+<?php require_once ("includes/initialize.php"); ?>
 <?php
 if(isset($_POST['avail'])){
 $_SESSION['from'] = $_POST['from'];
