@@ -98,21 +98,27 @@
 
 <!-- Initialize DataTables -->
 <script>
-  $(document).ready(function() {
+   $(document).ready(function() {
     // Load the active tab from localStorage if it exists
     var activeTab = localStorage.getItem('activeTab');
     if (activeTab) {
         $('#reservationTabs a[href="' + activeTab + '"]').tab('show');
     }
 
-    <?php foreach ($tabs as $tab) { ?>
-        $('#dataTable<?php echo ucfirst($tab); ?>').DataTable({
-            "paging": true,
-            "searching": true,
-            "lengthChange": true,
-            "pageLength": 10
-        });
-    <?php } ?>
+    // Initialize DataTables for all tabs
+    function initializeDataTables() {
+        <?php foreach ($tabs as $tab) { ?>
+            $('#dataTable<?php echo ucfirst($tab); ?>').DataTable({
+                "paging": true,
+                "searching": true,
+                "lengthChange": true,
+                "pageLength": 10
+            });
+        <?php } ?>
+    }
+
+    // Call the DataTables initialization
+    initializeDataTables();
 
     // Save the active tab to localStorage when it's changed
     $('#reservationTabs a').on('shown.bs.tab', function (e) {
@@ -146,7 +152,10 @@
                             // Reload only the current tab content after deletion
                             var currentTab = localStorage.getItem('activeTab'); // Get the active tab
                             if (currentTab) {
-                                $(currentTab + ' .table-responsive').load(location.href + ' ' + currentTab + ' .table-responsive > *'); // Reload only the table content
+                                // Reload the table content and reinitialize DataTable
+                                $(currentTab + ' .table-responsive').load(location.href + ' ' + currentTab + ' .table-responsive > *', function() {
+                                    initializeDataTables(); // Reinitialize the DataTables
+                                });
                             }
                         });
                     },
@@ -162,6 +171,5 @@
         });
     });
 });
-
 
 </script>
