@@ -57,14 +57,7 @@
 
 <!-- Initialize DataTables -->
 <script>
-    $(document).ready(function() {
-        $('#dataTable').DataTable({
-            "paging": true,
-            "searching": true,
-            "lengthChange": true,
-            "pageLength": 10
-        });
-
+   
         // Delete button click
         $('.delete-btn').on('click', function() {
             const code = $(this).data('code');
