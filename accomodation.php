@@ -72,7 +72,7 @@ $_SESSION['departure'] =date_format(date_create($_POST['departure']),"Y-m-d");
   
   }
 
-   $accomodation = ' | ' . $_GET['q'];
+   #$accomodation = ' | ' . $_GET['q'];
   ?>
 <div class="card rounded" style="padding: 10px;">
     <div  class="pagetitle">   
