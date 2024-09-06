@@ -1,11 +1,5 @@
-<?php if (file_exists(__DIR__ . '/includes/initialize.php')) {
-    require_once(__DIR__ . '/includes/initialize.php');
-} else {
-    echo 'initialize.php file not found!';
-}
-
-
-
+<?php 
+require_once('/home/u510162695/domains/mcchmhotelreservation.com/public_html/includes/initialize.php');
 
 // ini_set('display_errors', 1);
 // ini_set('display_startup_errors', 1);
