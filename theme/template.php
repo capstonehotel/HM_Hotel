@@ -369,7 +369,7 @@ $_SESSION['to']  = $_POST['to'];
                        while ($row = $result->fetch_assoc()) {
                      ?>
                     <li>
-                      <a target="_blank"  class="read dropdown-item" href="guest/readmessage.php?code=<?php echo  $row['CONFIRMATIONCODE']; ?>" data-toggle="lightbox"   data-id="<?php echo  $row['CONFIRMATIONCODE']; ?> " >
+                      <a target="_blank"  class="read dropdown-item" href="https://mcchmhotelreservation.com/guest/readmessage.php?code=<?php echo  $row['CONFIRMATIONCODE']; ?>" data-toggle="lightbox"   data-id="<?php echo  $row['CONFIRMATIONCODE']; ?> " >
                         <div class="pull-left">
                           <img src="images/1607134500_avatar.jpg" style="width: 30px; height: 30px; border-radius: 50%;" alt="">
                         </div>
@@ -405,10 +405,10 @@ $_SESSION['to']  = $_POST['to'];
 
                     <li>
                         <a class="dropdown-item" style="color:#000;text-align:left;border-bottom:1px solid #fff;"
-                    href="guest/profile.php" data-toggle="lightbox" >Account</a>
+                    href="https://mcchmhotelreservation.com/guest/profile.php" data-toggle="lightbox" >Account</a>
                     </li>
                     <li><a class="dropdown-item" style="color:#000;text-align:left;border-bottom:1px solid #fff;" 
-                href="guest/bookinglist.php" data-toggle="lightbox">Bookings</a>
+                href="https://mcchmhotelreservation.com/guest/bookinglist.php" data-toggle="lightbox">Bookings</a>
                     </li>
                     <li>
                         <a class="dropdown-item" style="color:#000;text-align:left;border-bottom:1px solid #fff;" href="<?php echo WEB_ROOT.'logout.php';  ?>">Logout </a>
