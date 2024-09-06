@@ -2,7 +2,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <!-- Additional styling and scripts -->
-<!-- <style>
+<style>
     .table td, .table th {
         white-space: nowrap;
         vertical-align: middle;
@@ -13,7 +13,7 @@
     .btn-sm {
         padding: 0.25rem 0.5rem;
     }
-</style> -->
+</style>
 
 <div class="container-fluid">
     <div class="card shadow mb-4">
@@ -98,17 +98,50 @@
 
 <!-- Initialize DataTables -->
 <script>
-//    $(document).ready(function() {
-//     <?php foreach ($tabs as $tab) { ?>
-//         $('#dataTable<?php echo ucfirst($tab); ?>').DataTable({
-//             "paging": true,
-//             "searching": true,
-//             "lengthChange": true,
-//             "pageLength": 10
-//         });
-//     <?php } ?>
+  $(document).ready(function() {
+    // Initialize DataTables for all tabs
+    function initializeDataTables() {
+        <?php foreach ($tabs as $tab) { ?>
+            $('#dataTable<?php echo ucfirst($tab); ?>').DataTable({
+                "paging": true,
+                "searching": true,
+                "lengthChange": true,
+                "pageLength": 10
+            });
+        <?php } ?>
+    }
 
-    // Use event delegation for dynamically generated rows
+    // Call DataTables initialization on page load
+    initializeDataTables();
+
+    // Load the active tab from localStorage if it exists
+    var activeTab = localStorage.getItem('activeTab');
+    if (activeTab) {
+        $('#reservationTabs a[href="' + activeTab + '"]').tab('show');
+    }
+
+    // Save the active tab and current page state to localStorage before page reload
+    function saveState() {
+        var currentTab = $('#reservationTabs .nav-link.active').attr('href');
+        localStorage.setItem('activeTab', currentTab);
+
+        // Save the current page number for the active table
+        var table = $(currentTab + ' table').DataTable();
+        localStorage.setItem('currentPage', table.page.info().page);
+    }
+
+    // Restore the page state after reload
+    function restoreState() {
+        var currentTab = localStorage.getItem('activeTab');
+        var currentPage = localStorage.getItem('currentPage');
+
+        if (currentTab && currentPage !== null) {
+            var table = $(currentTab + ' table').DataTable();
+            table.page(parseInt(currentPage)).draw(false);
+        }
+    }
+
+    // Event listener for deleting a reservation
     $(document).on('click', '.delete-btn', function() {
         var confirmationCode = $(this).data('id');
         Swal.fire({
@@ -131,7 +164,8 @@
                             'The reservation has been deleted.',
                             'success'
                         ).then(() => {
-                            location.reload(); // Reload the table
+                            saveState(); // Save the tab and page state before reloading
+                            location.reload(); // Reload the page
                         });
                     },
                     error: function() {
@@ -144,6 +178,11 @@
                 });
             }
         });
+    });
+
+    // Restore the page state after the table is reloaded
+    $(window).on('load', function() {
+        restoreState(); // Restore tab and page state
     });
 });
 
