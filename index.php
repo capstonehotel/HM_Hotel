@@ -15,7 +15,7 @@
 // require_once("includes/database.php");
 
 
-<?php
+
 include 'config.php'; 
 
 require_once("includes/initialize.php");
