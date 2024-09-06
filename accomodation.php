@@ -1,7 +1,7 @@
 <?php
-require_once ("includes/initialize.php");
+// require_once ("includes/initialize.php");
 // require_once ("includes/config.php");
-require_once("includes/database.php");
+//require_once("includes/database.php");
 // require_once("includes/accomodation.php");
 // require_once("includes/functions.php");
 
@@ -72,7 +72,7 @@ $_SESSION['departure'] =date_format(date_create($_POST['departure']),"Y-m-d");
   
   }
 
-   #$accomodation = ' | ' . $_GET['q'];
+   $accomodation = ' | ' . $_GET['q'];
   ?>
 <div class="card rounded" style="padding: 10px;">
     <div  class="pagetitle">   
