@@ -30,6 +30,8 @@ class Database {
 		if(!$this->conn){
 			echo "Problem in database connection! Contact administrator!";
 			exit();
+		} else {
+			echo "connection ok";
 		}
 	}
 	

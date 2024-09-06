@@ -59,7 +59,7 @@ switch ($view) {
     $content ='bookAroom.php';    
     break;
         
-     case 'accomodation' :
+  case 'accomodation' :
       $title="Accomodation";  
       $content='accomodation.php';
     break;  
