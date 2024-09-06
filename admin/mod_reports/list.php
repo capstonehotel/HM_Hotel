@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <form id="deleteForm" method="POST"> 
+    <form id="deleteForm">
         <div class="card shadow mb-4">
             <div class="card-header py-3" style="display: flex; align-items: center;">
                 <h6 class="m-0 font-weight-bold text-primary">List of Checked-out Reservations</h6>
@@ -41,7 +41,7 @@
                                                     <button class="btn btn-sm btn-primary"><i class="fa fa-print"></i> Print</button>
                                                 </form>
                                                 <?php if ($_SESSION['ADMIN_UROLE'] == "Administrator") { ?>
-                                                    <button type="button" class="btn btn-sm btn-danger delete-btn" data-code="<?php echo $row['CONFIRMATIONCODE']; ?>"><i class="icon-edit"></i> Delete</button>
+                                                    <button type="button" class="btn btn-sm btn-danger deleteBtn" data-id="<?php echo $row['CONFIRMATIONCODE']; ?>"><i class="icon-edit"></i> Delete</button>
                                                 <?php } ?>
                                             </div>
                                         </td>
@@ -55,13 +55,15 @@
     </form>
 </div>
 
-<!-- Initialize DataTables -->
+<!-- SweetAlert and AJAX script for deletion -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-   
-        // Delete button click
-        $('.delete-btn').on('click', function() {
-            const code = $(this).data('code');
+    $(document).ready(function() {
+       
 
+        // Handle delete button click
+        $('.deleteBtn').on('click', function() {
+            var confirmationCode = $(this).data('id');
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -72,20 +74,34 @@
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Perform the AJAX deletion
                     $.ajax({
                         url: 'delete.php',
                         type: 'GET',
-                        data: { confirm: true, id: code },
+                        data: { confirm: 'true', id: confirmationCode },
                         success: function(response) {
-                            const data = JSON.parse(response);
-                            if (data.status === 'success') {
-                                Swal.fire('Deleted!', 'Reservation has been deleted.', 'success');
-                                // Optionally, refresh the page or remove the row from the table
+                            var data = JSON.parse(response);
+                            if (data.status == 'success') {
+                                Swal.fire(
+                                    'Deleted!',
+                                    'The reservation has been deleted.',
+                                    'success'
+                                );
+                                // Reload the table or remove the row
                                 location.reload();
                             } else {
-                                Swal.fire('Error!', data.message, 'error');
+                                Swal.fire(
+                                    'Error!',
+                                    data.message,
+                                    'error'
+                                );
                             }
+                        },
+                        error: function() {
+                            Swal.fire(
+                                'Error!',
+                                'Failed to delete the reservation.',
+                                'error'
+                            );
                         }
                     });
                 }
