@@ -1,5 +1,4 @@
-
-  <?php
+<?php
 $msg = "";
 
 if(isset($_POST['booknow'])){
