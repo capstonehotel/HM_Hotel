@@ -1,5 +1,5 @@
-<!-- <?php include __DIR__ . '/../config.php'; ?> -->
- <?php include '../config.php';?>
+<?php include __DIR__ . '/../config.php'; ?>
+ <!-- <?php include '../config.php';?> -->
 <?php
 if(isset($_POST['avail'])){
 $_SESSION['from'] = $_POST['from'];
