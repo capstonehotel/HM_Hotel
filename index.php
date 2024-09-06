@@ -1,10 +1,5 @@
 <?php 
-require_once('/home/u510162695/domains/mcchmhotelreservation.com/public_html/includes/initialize.php');
-
-// ini_set('display_errors', 1);
-// ini_set('display_startup_errors', 1);
-// error_reporting(E_ALL);
-// require_once("includes/initialize.php");
+require_once("https://mcchmhotelreservation.com/includes/initialize.php");
 // include 'config.php'; 
 // require_once("includes/config.php");
 // //load basic functions next so that everything after can use them
