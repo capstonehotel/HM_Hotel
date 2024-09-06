@@ -13,6 +13,9 @@
     .btn-sm {
         padding: 0.25rem 0.5rem;
     }
+    .table-responsive {
+    display: none; /* Hide tables initially */
+}
 </style>
 
 <div class="container-fluid">
@@ -98,7 +101,7 @@
 
 <!-- Initialize DataTables -->
 <script>
-  $(document).ready(function() {
+$(document).ready(function() {
     // Initialize DataTables for all tabs
     function initializeDataTables() {
         <?php foreach ($tabs as $tab) { ?>
@@ -113,6 +116,9 @@
 
     // Call DataTables initialization on page load
     initializeDataTables();
+
+    // Show tables after initialization
+    $('.table-responsive').show();
 
     // Load the active tab from localStorage if it exists
     var activeTab = localStorage.getItem('activeTab');
