@@ -2,7 +2,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <!-- Additional styling and scripts -->
-<style>
+<!-- <style>
     .table td, .table th {
         white-space: nowrap;
         vertical-align: middle;
@@ -13,7 +13,7 @@
     .btn-sm {
         padding: 0.25rem 0.5rem;
     }
-</style>
+</style> -->
 
 <div class="container-fluid">
     <div class="card shadow mb-4">
@@ -98,15 +98,15 @@
 
 <!-- Initialize DataTables -->
 <script>
-   $(document).ready(function() {
-    <?php foreach ($tabs as $tab) { ?>
-        $('#dataTable<?php echo ucfirst($tab); ?>').DataTable({
-            "paging": true,
-            "searching": true,
-            "lengthChange": true,
-            "pageLength": 10
-        });
-    <?php } ?>
+//    $(document).ready(function() {
+//     <?php foreach ($tabs as $tab) { ?>
+//         $('#dataTable<?php echo ucfirst($tab); ?>').DataTable({
+//             "paging": true,
+//             "searching": true,
+//             "lengthChange": true,
+//             "pageLength": 10
+//         });
+//     <?php } ?>
 
     // Use event delegation for dynamically generated rows
     $(document).on('click', '.delete-btn', function() {
