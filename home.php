@@ -37,7 +37,7 @@
                             ?>
                             
                       <?php  foreach ($cur as $result) { ?>
-                        <a class="list-group-item list-group-item-action" href="index.php?p=rooms&q=<?php echo $result->ROOM; ?>" ><?php echo $result->ROOM; ?></a>
+                        <a class="list-group-item list-group-item-action" href="<?php echo WEB_ROOT; ?>index.php?p=rooms&q=<?php echo $result->ROOM; ?>" ><?php echo $result->ROOM; ?></a>
                       <?php  } ?>
                       </div>
             </div>
