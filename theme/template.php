@@ -25,7 +25,7 @@ $_SESSION['to']  = $_POST['to'];
     <link href="https://mcchmhotelreservation.com/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen" />
     <link href="https://mcchmhotelreservation.com/css/datepicker.css" rel="stylesheet" media="screen" />
 
-     <link href="https://mcchmhotelreservation.com/cccss/galery.css" rel="stylesheet" media="screen" />
+     <link href="cccss/galery.css" rel="stylesheet" media="screen" />
     <link href="https://mcchmhotelreservation.com/css/ekko-lightbox.css" rel="stylesheet" />
 
 
@@ -315,10 +315,10 @@ $_SESSION['to']  = $_POST['to'];
            $cur = $accomodation->listOfaccomodation(); ?>
           <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
             <li class="nav-item">
-              <a class="nav-link <?php if(!isset($_GET['p'])){echo "active";} ?>" href="index.php">Home</a>
+              <a class="nav-link <?php if(!isset($_GET['p'])){echo "active";} ?>" href="https://mcchmhotelreservation.com/index.php">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link <?php if(isset($_GET['p']) && $_GET['p'] == "rooms"){echo "active";} ?>" href="index.php?p=rooms">Room and Rates</a>
+              <a class="nav-link <?php if(isset($_GET['p']) && $_GET['p'] == "rooms"){echo "active";} ?>" href="https://mcchmhotelreservation.com/index.php?p=rooms">Room and Rates</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle <?php if(isset($_GET['p']) && $_GET['p'] == "accomodation"){echo "active";} ?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -327,16 +327,16 @@ $_SESSION['to']  = $_POST['to'];
               <ul class="dropdown-menu">
                 <?php  foreach ($cur as $result) { ?>
                     <li>
-                        <a class="dropdown-item <?php if(isset($_GET['q']) && $_GET['q'] == $result->ACCOMODATION){echo "active";} ?>" href="index.php?p=accomodation&q=<?php echo $result->ACCOMODATION; ?>"><?php echo $result->ACCOMODATION; ?></a>
+                        <a class="dropdown-item <?php if(isset($_GET['q']) && $_GET['q'] == $result->ACCOMODATION){echo "active";} ?>" href="https://mcchmhotelreservation.com/index.php?p=accomodation&q=<?php echo $result->ACCOMODATION; ?>"><?php echo $result->ACCOMODATION; ?></a>
                     </li>
                 <?php } ?>
               </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link <?php if(isset($_GET['p']) && $_GET['p'] == "contact"){echo "active";} ?>" href="index.php?p=contact">Contact Us</a>
+              <a class="nav-link <?php if(isset($_GET['p']) && $_GET['p'] == "contact"){echo "active";} ?>" href="https://mcchmhotelreservation.com/index.php?p=contact">Contact Us</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link <?php if(isset($_GET['p']) && $_GET['p'] == "about-us"){echo "active";} ?>" href="index.php?p=about-us">About us</a>
+              <a class="nav-link <?php if(isset($_GET['p']) && $_GET['p'] == "about-us"){echo "active";} ?>" href="https://mcchmhotelreservation.com/index.php?p=about-us">About us</a>
             </li>
           </ul>
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
