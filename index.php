@@ -1,11 +1,15 @@
-<?php
-require_once("includes/initialize.php");
-echo "Initialize included successfully!";
-?>
-<?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+<?php if (file_exists(__DIR__ . '/includes/initialize.php')) {
+    require_once(__DIR__ . '/includes/initialize.php');
+} else {
+    echo 'initialize.php file not found!';
+}
+
+
+require_once(__DIR__ . '/includes/initialize.php');
+
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
 // require_once("includes/initialize.php");
 // include 'config.php'; 
 // require_once("includes/config.php");
