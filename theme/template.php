@@ -1,3 +1,4 @@
+<?php include_once '/../config.php'; ?>
 <?php
 if(isset($_POST['avail'])){
 $_SESSION['from'] = $_POST['from'];
@@ -8,28 +9,28 @@ $_SESSION['to']  = $_POST['to'];
 
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
-  <head><script src="theme/assets/js/color-modes.js"></script>
+  <head><script src="assets/js/color-modes.js"></script>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.115.4">
-    <link rel="stylesheet" type="text/css" href="fonts/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://mcchmhotelreservation.com/fonts/css/font-awesome.min.css" />
     <title><?php echo isset($title) ? $title . ' | HM Hotel' : 'HM mini Hotel' ; ?></title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/navbars-offcanvas/">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
-    <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen" />
-    <link href="css/datepicker.css" rel="stylesheet" media="screen" />
+    <link href="https://mcchmhotelreservation.com/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen" />
+    <link href="https://mcchmhotelreservation.com/css/datepicker.css" rel="stylesheet" media="screen" />
 
      <link href="cccss/galery.css" rel="stylesheet" media="screen" />
-    <link href="css/ekko-lightbox.css" rel="stylesheet" />
+    <link href="https://mcchmhotelreservation.com/css/ekko-lightbox.css" rel="stylesheet" />
 
 
-    <link href="theme/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <?php
         if (isset($_SESSION['monbela_cart'])){
@@ -500,27 +501,27 @@ $_SESSION['to']  = $_POST['to'];
   </div>
 
 </main>
-<script src="theme/assets/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 
- <script src="jquery/jquery.min.js"></script>
+ <script src="https://mcchmhotelreservation.com/jquery/jquery.min.js"></script>
         <!-- Bootstrap Core JavaScript -->
-        <script src="js/bootstrap.min.js"></script>
+        <script src="https://mcchmhotelreservation.com/js/bootstrap.min.js"></script>
 
         <!-- DataTables JavaScript -->
-        <script src="js/jquery.dataTables.min.js"></script>
+        <script src="https://mcchmhotelreservation.com/js/jquery.dataTables.min.js"></script>
         <script src="js/dataTables.bootstrap.min.js"></script>
 
-        <script type="text/javascript" src="js/bootstrap-datepicker.js" charset="UTF-8"></script>
-        <script type="text/javascript" src="js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-        <script type="text/javascript" src="js/bootstrap-datetimepicker.uk.js" charset="UTF-8"></script>
+        <script type="text/javascript" src="https://mcchmhotelreservation.com/js/bootstrap-datepicker.js" charset="UTF-8"></script>
+        <script type="text/javascript" src="https://mcchmhotelreservation.com/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+        <script type="text/javascript" src="https://mcchmhotelreservation.com/js/bootstrap-datetimepicker.uk.js" charset="UTF-8"></script>
         <!-- Custom Theme JavaScript -->
 
-        <script src="js/ekko-lightbox.js"></script>
-        <script type="text/javascript" language="javascript" src="js/plugins.js"></script>
-        <script type="text/javascript" language="javascript" src="js/html5.js"></script>
-        <script type="text/javascript" language="javascript" src="js/retina.js"></script>
-        <script type="text/javascript" language="javascript" src="js/global.js"></script>
+        <script src="https://mcchmhotelreservation.com/js/ekko-lightbox.js"></script>
+        <script type="text/javascript" language="javascript" src="https://mcchmhotelreservation.com/js/plugins.js"></script>
+        <script type="text/javascript" language="javascript" src="https://mcchmhotelreservation.com/js/html5.js"></script>
+        <script type="text/javascript" language="javascript" src="https://mcchmhotelreservation.com/js/retina.js"></script>
+        <script type="text/javascript" language="javascript" src="https://mcchmhotelreservation.com/js/global.js"></script>
 
         <script>
             // tooltip demo
