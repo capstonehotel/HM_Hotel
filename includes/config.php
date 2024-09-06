@@ -14,7 +14,7 @@ defined('DB_NAME') ? null : define('DB_NAME','u510162695_hmsystemdb'); //define 
 defined('DB_PORT') ? null : define('DB_PORT', '3306'); // define our database port
 
 $thisFile = str_replace('\\', '/', __FILE__);
-$docRoot =$_SERVER['DOCUMENT_ROOT'];
+$docRoot =$_SERVER['HTTP_HOST'];
 
 $webRoot  = str_replace(array($docRoot, 'includes/config.php'), '', $thisFile);
 $srvRoot  = str_replace('config/config.php','', $thisFile);
