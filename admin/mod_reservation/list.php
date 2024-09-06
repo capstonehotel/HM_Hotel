@@ -98,52 +98,53 @@
 
 <!-- Initialize DataTables -->
 <script>
-    $(document).ready(function() {
-        <?php foreach ($tabs as $tab) { ?>
-            $('#dataTable<?php echo ucfirst($tab); ?>').DataTable({
-                "paging": true,
-                "searching": true,
-                "lengthChange": true,
-                "pageLength": 10
-            });
-        <?php } ?>
-        
-        // Handle delete button click
-        $('.delete-btn').on('click', function() {
-            var confirmationCode = $(this).data('id');
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: 'delete.php',
-                        type: 'GET',
-                        data: { id: confirmationCode, confirm: 'true' },
-                        success: function(response) {
-                            Swal.fire(
-                                'Deleted!',
-                                'The reservation has been deleted.',
-                                'success'
-                            ).then(() => {
-                                location.reload(); // Reload the table
-                            });
-                        },
-                        error: function() {
-                            Swal.fire(
-                                'Error!',
-                                'There was an error deleting the reservation.',
-                                'error'
-                            );
-                        }
-                    });
-                }
-            });
+   $(document).ready(function() {
+    <?php foreach ($tabs as $tab) { ?>
+        $('#dataTable<?php echo ucfirst($tab); ?>').DataTable({
+            "paging": true,
+            "searching": true,
+            "lengthChange": true,
+            "pageLength": 10
+        });
+    <?php } ?>
+
+    // Use event delegation for dynamically generated rows
+    $(document).on('click', '.delete-btn', function() {
+        var confirmationCode = $(this).data('id');
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: 'delete.php',
+                    type: 'GET',
+                    data: { id: confirmationCode, confirm: 'true' },
+                    success: function(response) {
+                        Swal.fire(
+                            'Deleted!',
+                            'The reservation has been deleted.',
+                            'success'
+                        ).then(() => {
+                            location.reload(); // Reload the table
+                        });
+                    },
+                    error: function() {
+                        Swal.fire(
+                            'Error!',
+                            'There was an error deleting the reservation.',
+                            'error'
+                        );
+                    }
+                });
+            }
         });
     });
+});
+
 </script>
