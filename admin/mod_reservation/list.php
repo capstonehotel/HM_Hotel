@@ -98,7 +98,13 @@
 
 <!-- Initialize DataTables -->
 <script>
-   $(document).ready(function() {
+  $(document).ready(function() {
+    // Load the active tab from localStorage if it exists
+    var activeTab = localStorage.getItem('activeTab');
+    if (activeTab) {
+        $('#reservationTabs a[href="' + activeTab + '"]').tab('show');
+    }
+
     <?php foreach ($tabs as $tab) { ?>
         $('#dataTable<?php echo ucfirst($tab); ?>').DataTable({
             "paging": true,
@@ -107,6 +113,12 @@
             "pageLength": 10
         });
     <?php } ?>
+
+    // Save the active tab to localStorage when it's changed
+    $('#reservationTabs a').on('shown.bs.tab', function (e) {
+        var currentTab = $(e.target).attr('href'); // Get the href attribute of the tab
+        localStorage.setItem('activeTab', currentTab); // Store the current tab in localStorage
+    });
 
     // Use event delegation for dynamically generated rows
     $(document).on('click', '.delete-btn', function() {
@@ -131,7 +143,11 @@
                             'The reservation has been deleted.',
                             'success'
                         ).then(() => {
-                            location.reload(); // Reload the table
+                            // Reload only the current tab content after deletion
+                            var currentTab = localStorage.getItem('activeTab'); // Get the active tab
+                            if (currentTab) {
+                                $(currentTab + ' .table-responsive').load(location.href + ' ' + currentTab + ' .table-responsive > *'); // Reload only the table content
+                            }
                         });
                     },
                     error: function() {
@@ -146,5 +162,6 @@
         });
     });
 });
+
 
 </script>
