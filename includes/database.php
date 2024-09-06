@@ -1,4 +1,7 @@
 <?php
+if (!defined('DB_SERVER')) {
+    die('Config file not loaded.');
+}
 date_default_timezone_set('America/New_York');
 ?>
 <?php
