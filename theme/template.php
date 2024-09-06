@@ -341,7 +341,7 @@ $_SESSION['to']  = $_POST['to'];
           </ul>
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item" >
-              <a class="nav-link active" data-toggle="tooltip" title="Booking Cart"  href="<?php echo WEB_ROOT.'booking/index.php';  ?>"><i class="fa fa-shopping-cart" style="display: flex; font-size: 25px;"><?php echo  isset($cart) ? $cart : '' ; ?>  </i> 
+              <a class="nav-link active" data-toggle="tooltip" title="Booking Cart"  href="<?php echo 'https://mcchmhotelreservation.com/booking/index.php';  ?>"><i class="fa fa-shopping-cart" style="display: flex; font-size: 25px;"><?php echo  isset($cart) ? $cart : '' ; ?>  </i> 
              </a>
 
             </li>
