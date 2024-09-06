@@ -1,7 +1,11 @@
 <?php
-// ini_set('display_errors', 1);
-// ini_set('display_startup_errors', 1);
-// error_reporting(E_ALL);
+require_once("includes/initialize.php");
+echo "Initialize included successfully!";
+?>
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 // require_once("includes/initialize.php");
 // include 'config.php'; 
 // require_once("includes/config.php");
@@ -22,7 +26,7 @@
 
 
 
-require_once("includes/initialize.php");
+// require_once("includes/initialize.php");
 $content='home.php';
 $view = (isset($_GET['p']) && $_GET['p'] != '') ? $_GET['p'] : '';
 $account = 'guest/update.php';
