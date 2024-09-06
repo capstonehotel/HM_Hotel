@@ -25,7 +25,7 @@ $_SESSION['to']  = $_POST['to'];
     <link href="https://mcchmhotelreservation.com/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen" />
     <link href="https://mcchmhotelreservation.com/css/datepicker.css" rel="stylesheet" media="screen" />
 
-     <link href="cccss/galery.css" rel="stylesheet" media="screen" />
+     <link href="https://mcchmhotelreservation.com/cccss/galery.css" rel="stylesheet" media="screen" />
     <link href="https://mcchmhotelreservation.com/css/ekko-lightbox.css" rel="stylesheet" />
 
 
