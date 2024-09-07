@@ -1,5 +1,5 @@
 <?php
-require_once("initialize.php");
+
 $msg = "";
 
 if(isset($_POST['booknow'])){
@@ -190,7 +190,7 @@ $_SESSION['departure'] =date_format(date_create($_POST['departure']),"Y-m-d");
               }      
 // ============================================================================================================================
 
-
+require_once("initialize.php");
  
                 ?>
                 <div class="col-md-4 col-sm-12 py-2">
