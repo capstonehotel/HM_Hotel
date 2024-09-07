@@ -1,5 +1,5 @@
 <?php
-require_once("includes/initialize.php");
+require_once("initialize.php");
 // load config file first 
 // require_once("includes/config.php");
 // //load basic functions next so that everything after can use them
