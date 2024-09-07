@@ -69,11 +69,7 @@
   .bd-mode-toggle {
     z-index: 1500;
   }
-/* Light Mode Icon Color */
-[data-bs-theme="light"] .btn-bd-primary .bi {
-    color: var(--bs-white); /* Keeps icon color white in light mode */
-}
-
+  
   #google_translate_element {
 position: absolute;
 z-index: 1000;
