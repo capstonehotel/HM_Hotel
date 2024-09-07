@@ -23,7 +23,7 @@ require_once("initialize.php");
 $content='home.php';
 $view = (isset($_GET['p']) && $_GET['p'] != '') ? $_GET['p'] : '';
 $account = 'guest/update.php';
-$small_nav = 'theme/small-navbar.php';
+//$small_nav = 'theme/small-navbar.php';
 switch ($view) {
 
   case '1' :
