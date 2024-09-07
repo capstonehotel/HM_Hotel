@@ -65,7 +65,17 @@
     --bs-btn-active-color: var(--bs-btn-hover-color);
     --bs-btn-active-bg: #5a23c8;
     --bs-btn-active-border-color: #5a23c8;
-  }
+
+    background-color: var(--bs-btn-bg); /* Ensures the background stays violet */
+    border-color: var(--bs-btn-border-color); /* Ensures the border stays violet */
+}
+
+/* Hover state */
+.btn-bd-primary:hover {
+    background-color: var(--bs-btn-hover-bg);
+    border-color: var(--bs-btn-hover-border-color);
+}
+
   .bd-mode-toggle {
     z-index: 1500;
   }
