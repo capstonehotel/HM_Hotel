@@ -1,4 +1,5 @@
 <?php
+
 if (isset($_GET['id'])) {
     removetocart($_GET['id']);
 }
