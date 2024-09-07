@@ -500,7 +500,7 @@ $_SESSION['to']  = $_POST['to'];
   </div>
 
 </main>
-<script src="assets/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://mcchmhotelreservation.com/theme/assets/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 
  <script src="https://mcchmhotelreservation.com/jquery/jquery.min.js"></script>
@@ -509,7 +509,7 @@ $_SESSION['to']  = $_POST['to'];
 
         <!-- DataTables JavaScript -->
         <script src="https://mcchmhotelreservation.com/js/jquery.dataTables.min.js"></script>
-        <script src="js/dataTables.bootstrap.min.js"></script>
+        <script src="https://mcchmhotelreservation.com/js/dataTables.bootstrap.min.js"></script>
 
         <script type="text/javascript" src="https://mcchmhotelreservation.com/js/bootstrap-datepicker.js" charset="UTF-8"></script>
         <script type="text/javascript" src="https://mcchmhotelreservation.com/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
