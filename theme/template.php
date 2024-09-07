@@ -86,7 +86,7 @@ $_SESSION['to']  = $_POST['to'];
       </button>
       <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
         <li>
-          <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+          <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false" style="fill: #ffffff;">
             <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em"><use href="#sun-fill"></use></svg>
             Light
             <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
