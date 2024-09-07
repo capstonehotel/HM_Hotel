@@ -52,7 +52,7 @@
                     <div class="carousel-item active">
                       <img src="images/room.jpg" class="d-block w-100" alt="...">
                       <div class="carousel-caption d-none d-md-block">
-                        <h5>Standard Room</h5>
+                        <h5>S</h5>
                         <p>&#8369 800</p>
                       </div>
                     </div>

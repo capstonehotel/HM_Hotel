@@ -8,7 +8,7 @@ if (isset($_POST['clear'])) {
     unset($_SESSION['pay']);
     unset($_SESSION['monbela_cart']);
     message("The cart is empty.", "success");
-    redirect(WEB_ROOT . "booking/");
+    redirect("https://mcchmhotelreservation.com/booking/");
 }
 
 ?>
