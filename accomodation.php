@@ -190,9 +190,11 @@ $_SESSION['departure'] =date_format(date_create($_POST['departure']),"Y-m-d");
               }      
 // ============================================================================================================================
 
-require_once("initialize.php");
+
  
                 ?>
+                
+<?php require_once("initialize.php");?>
                 <div class="col-md-4 col-sm-12 py-2">
                     <form method="POST" action="index.php?p=accomodation">
                         <input type="hidden" name="ROOMPRICE" value="<?php echo $result->PRICE ;?>">
