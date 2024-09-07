@@ -2,7 +2,7 @@
 require_once("../../includes/initialize.php");
 
  if (!isset($_SESSION['ADMIN_ID'])){
- 	redirect(WEB_ROOT ."admin/login.php");
+ 	redirect("https://mcchmhotelreservation.com/admin/login.php");
  }
 $view = (isset($_GET['view']) && $_GET['view'] != '') ? $_GET['view'] : '';
 $title ="Ammeties";
