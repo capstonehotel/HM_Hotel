@@ -39,6 +39,6 @@ unset($_SESSION['monbela_cart']);
  	
 // 4. Destroy the session
 //session_destroy();
-redirect(WEB_ROOT ."index.php?logout=1");
+redirect("https://mcchmhotelreservation.com/index.php?logout=1");
 ?>
 
