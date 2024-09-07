@@ -28,7 +28,7 @@ $_SESSION['to']  = $_POST['to'];
      <link href="cccss/galery.css" rel="stylesheet" media="screen" />
     <link href="https://mcchmhotelreservation.com/css/ekko-lightbox.css" rel="stylesheet" />
 
-
+    <link href="https://mcchmhotelreservation.com/theme/translate.css" rel="stylesheet">
     <link href="https://mcchmhotelreservation.com/theme/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <?php
@@ -54,7 +54,6 @@ $_SESSION['to']  = $_POST['to'];
     
     <!-- Custom styles for this template -->
     <link href="styles.css" rel="stylesheet">
-    <link href="translate.css" rel="stylesheet">
   </head>
   <body >
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
