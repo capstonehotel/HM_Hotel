@@ -68,7 +68,7 @@ if ($result) {
                 $result = mysqli_query($connection, $query);
                 if ($result) {
                     while ($row = mysqli_fetch_assoc($result)) {
-                        $image = '../mod_room/' . $row['ROOMIMAGE'];
+                        $image = WEB_ROOT . 'admin/mod_room/' . $row['ROOMIMAGE'];
                         $day = dateDiff(date($row['ARRIVAL']), date($row['DEPARTURE']));
                 ?>
                 <div class="col-md-6 col-sm-12" style="margin-top: 10px; text-align: center;">
