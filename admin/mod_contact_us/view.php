@@ -14,15 +14,15 @@ $code=$_GET['code'];
 		$res = $mydb->loadSingleResult();
 
 		if($res->STATUS=='Confirmed'){
-			$stats = '<li class="next"><a href="'.WEB_ROOT .'admin/mod_reservation/controller.php?action=checkin&code='.$res->CONFIRMATIONCODE.
+			$stats = '<li class="next"><a href="''https://mcchmhotelreservation.com/admin/mod_reservation/controller.php?action=checkin&code='.$res->CONFIRMATIONCODE.
 		'">Confirmed &rarr;</a></li>';
 		}elseif($res->STATUS=='Checkedin'){
-		$stats = '<li class="next"><a href="'.WEB_ROOT .'admin/mod_reservation/controller.php?action=checkout&code='.$res->CONFIRMATIONCODE.
+		$stats = '<li class="next"><a href="''https://mcchmhotelreservation.com/admin/mod_reservation/controller.php?action=checkout&code='.$res->CONFIRMATIONCODE.
 		'">Checkin &rarr;</a></li>';
 		}elseif($res->STATUS=='Checkedout'){
 		$stats= "";
 		}else{
-			$stats = '<li class="next"><a href="'.WEB_ROOT .'admin/mod_reservation/controller.php?action=confirm&code='.$res->CONFIRMATIONCODE.
+			$stats = '<li class="next"><a href="''https://mcchmhotelreservation.com/admin/mod_reservation/controller.php?action=confirm&code='.$res->CONFIRMATIONCODE.
 		'">Confirm &rarr;</a></li>';
 		} 
 
@@ -82,7 +82,7 @@ $mydb->setQuery($query);
 $res = $mydb->loadResultList();
 
 foreach ($res as $cur) {
-$image = WEB_ROOT . 'admin/mod_room/'.$cur->ROOMIMAGE;	
+$image = 'https://mcchmhotelreservation.com/admin/mod_room/'.$cur->ROOMIMAGE;	
 $day=dateDiff(date($cur->ARRIVAL),date($cur->DEPARTURE));
 
 
@@ -122,7 +122,7 @@ $day=dateDiff(date($cur->ARRIVAL),date($cur->DEPARTURE));
                 <p><strong>Check-out: </strong><?php echo date_format(date_create($cur->DEPARTURE),'m/d/Y'); ?></p>
                 <p><strong>Night(s): </strong><?php echo ($day==0) ? '1' : $day; ?></p>
                 <p><strong>PRICE: </strong><?php echo $cur->RPRICE; ?></p>
-                <a class="btn btn-danger" href="<?php echo WEB_ROOT .'admin/mod_reservation/controller.php?id='.$cur->RESERVEID.'&action=cancelroom'; ?>">Cancel<i class="fa fa-angle-right"></i></a>
+                <a class="btn btn-danger" href="<?php echo 'https://mcchmhotelreservation.com/admin/mod_reservation/controller.php?id='.$cur->RESERVEID.'&action=cancelroom'; ?>">Cancel<i class="fa fa-angle-right"></i></a>
             </div>
         </div>
         </div>
@@ -138,7 +138,7 @@ $day=dateDiff(date($cur->ARRIVAL),date($cur->DEPARTURE));
         <!-- Pager -->
         <div class="row">
             <ul class="pager">
-                <li class="previous"><a href="<?php echo WEB_ROOT .'admin/mod_reservation/index.php'; ?>">&larr; Back</a>
+                <li class="previous"><a href="<?php echo 'https://mcchmhotelreservation.com/admin/mod_reservation/index.php'; ?>">&larr; Back</a>
                 </li>
 
 
