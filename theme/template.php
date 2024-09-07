@@ -2,7 +2,7 @@
 if(isset($_POST['avail'])){
 $_SESSION['from'] = $_POST['from'];
 $_SESSION['to']  = $_POST['to'];
-  redirect(WEB_ROOT. "index.php?page=5");
+  redirect( "https://mcchmhotelreservation.com/index.php?page=5");
 }
 ?>
 
@@ -411,7 +411,7 @@ $_SESSION['to']  = $_POST['to'];
                 href="https://mcchmhotelreservation.com/guest/bookinglist.php" data-toggle="lightbox">Bookings</a>
                     </li>
                     <li>
-                        <a class="dropdown-item" style="color:#000;text-align:left;border-bottom:1px solid #fff;" href="<?php echo WEB_ROOT.'logout.php';  ?>">Logout </a>
+                        <a class="dropdown-item" style="color:#000;text-align:left;border-bottom:1px solid #fff;" href="<?php echo 'https://mcchmhotelreservation.com/logout.php';  ?>">Logout </a>
                     </li>
                        
                 </ul>
