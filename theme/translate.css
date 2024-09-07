@@ -66,8 +66,20 @@
     --bs-btn-active-bg: #5a23c8;
     --bs-btn-active-border-color: #5a23c8;
 
-    background-color: var(--bs-btn-bg); /* Ensures the background stays violet */
-    border-color: var(--bs-btn-border-color); /* Ensures the border stays violet */
+    background-color: var(--bs-btn-bg); /* Keeps violet color */
+    border-color: var(--bs-btn-border-color);
+}
+
+/* Light Mode Fix */
+[data-bs-theme="light"] .btn-bd-primary {
+    background-color: var(--bs-btn-bg); /* Ensures the button stays violet in light mode */
+    border-color: var(--bs-btn-border-color); 
+}
+
+/* Dark Mode Fix */
+[data-bs-theme="dark"] .btn-bd-primary {
+    background-color: var(--bs-btn-bg); /* Ensures the button stays violet in dark mode */
+    border-color: var(--bs-btn-border-color);
 }
 
 /* Hover state */
