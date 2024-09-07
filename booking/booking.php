@@ -83,7 +83,7 @@ if (isset($_POST['clear'])) {
                     <?php
                     if (isset($_SESSION['monbela_cart'])) {
                         ?>
-                        <a href=https://mcchmhotelreservation.com/booking/index.php?p=rooms" class="btn btn-primary" align="right" name="clear">Add Another Room</a>
+                        <a href=https://mcchmhotelreservation.com//index.php?p=rooms" class="btn btn-primary" align="right" name="clear">Add Another Room</a>
                         <button type="submit" class="btn btn-primary" align="right" name="clear" id="clearCartBtn">Clear Cart</button>
                         <?php
                         if (isset($_SESSION['GUESTID'])) {
