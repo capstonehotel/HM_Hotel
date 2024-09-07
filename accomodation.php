@@ -193,29 +193,14 @@ $_SESSION['departure'] =date_format(date_create($_POST['departure']),"Y-m-d");
 
  
                 ?>
-<?php 
-require_once("config.php");
-//load basic functions next so that everything after can use them
-require_once("functions.php");
-//later here where we are going to put our class session
-require_once("session.php");
-require_once("user.php");
-require_once("pagination.php");
-require_once("paginsubject.php");
-require_once("accomodation.php");
-require_once("guest.php");
-require_once("reserve.php"); 
-require_once("setting.php");
-//Load Core objects
-require_once("database.php");
-?>
+
                 <div class="col-md-4 col-sm-12 py-2">
                     <form method="POST" action="index.php?p=accomodation">
                         <input type="hidden" name="ROOMPRICE" value="<?php echo $result->PRICE ;?>">
                         <input type="hidden" name="ROOMID" value="<?php echo $result->ROOMID ;?>">
                         <div class="card">
                                 <figure class="gallery-item " style="text-align: center; margin-top: 10px;">
-                                    <?php if(is_file('https://mcchmhotelreservation.com/admin/mod_room/'.$result->ROOMIMAGE)): ?>
+                                    <?php if(is_file("https://mcchmhotelreservation.com/admin/mod_room/".$result->ROOMIMAGE)): ?>
                                     <img class="img-responsive img-hover"  src="room.jpg">
                                    <!--  //<?php echo 'https://mcchmhotelreservation.com/admin/mod_room/'.$result->ROOMIMAGE; ?> -->
                                     <?php else: ?>
