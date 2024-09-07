@@ -79,7 +79,8 @@ $_SESSION['to']  = $_POST['to'];
               type="button"
               aria-expanded="false"
               data-bs-toggle="dropdown"
-              aria-label="Toggle theme (auto)">
+              aria-label="Toggle theme (auto)"
+              style="background-color: #712cf9; border-color: #712cf9;">
         <svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#circle-half"></use></svg>
         <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
       </button>
