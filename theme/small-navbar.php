@@ -21,7 +21,7 @@
       <div class="sm-ul navbar-custom-menu ">
           <ul class="nav navbar-nav  tooltip-demo">
             <li>
-              <a  data-toggle="tooltip" data-placement="bottom"   title="Booking Cart"  href="<?php echo WEB_ROOT.'booking/index.php';  ?>"> 
+              <a  data-toggle="tooltip" data-placement="bottom"   title="Booking Cart"  href="<?php echo 'https://mcchmhotelreservation.com/booking/index.php';  ?>"> 
                <i class="fa fa-shopping-cart fa-fw"><?php echo  isset($cart) ? $cart : '' ; ?>  </i> 
              </a>
             </li>
@@ -103,11 +103,11 @@ $result = $g->single_guest($_SESSION['GUESTID']);
             </li>
             <!-- <li class="box-footer no-padding">  -->
                 <li><a style="color:#000;text-align:left;border-bottom:1px solid #fff;"
-                    href="<?php echo WEB_ROOT ;  ?>guest/profile.php" data-toggle="lightbox" >Account<!--  <span class="pull-right badge bg-blue">31</span> --></a></li>
+                    href="https://mcchmhotelreservation.com/guest/profile.php" data-toggle="lightbox" >Account<!--  <span class="pull-right badge bg-blue">31</span> --></a></li>
                 <!-- <li><a style="color:#000;text-align:left;border-bottom:1px solid #fff;" href="#">Tasks <span class="pull-right badge bg-aqua">5</span></a></li> -->
                 <li><a style="color:#000;text-align:left;border-bottom:1px solid #fff;" 
-                href="<?php echo WEB_ROOT ;  ?>guest/bookinglist.php" data-toggle="lightbox">Bookings <!-- <span class="pull-right badge bg-green">12</span> --></a></li>
-                <li><a style="color:#000;text-align:left;border-bottom:1px solid #fff;" href="<?php echo WEB_ROOT.'logout.php';  ?>">Logout </a></li>
+                href="https://mcchmhotelreservation.com/guest/bookinglist.php" data-toggle="lightbox">Bookings <!-- <span class="pull-right badge bg-green">12</span> --></a></li>
+                <li><a style="color:#000;text-align:left;border-bottom:1px solid #fff;" href="<?php echo 'https://mcchmhotelreservation.com/logout.php';  ?>">Logout </a></li>
             
             <!-- </li>  -->
             </ul>
