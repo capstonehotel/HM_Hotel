@@ -69,7 +69,17 @@
   .bd-mode-toggle {
     z-index: 1500;
   }
+  /* Default state */
+.theme-icon {
+    color: white; /* Icons will be white by default */
+    transition: color 0.3s; /* Smooth transition for color change */
+  }
   
+  /* Hover state */
+  .dropdown-item:hover .theme-icon,
+  .dropdown-item:focus .theme-icon {
+    color: #712cf9; /* Change to the desired color on hover or focus */
+  }
   #google_translate_element {
 position: absolute;
 z-index: 1000;
