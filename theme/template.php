@@ -81,20 +81,20 @@ $_SESSION['to']  = $_POST['to'];
               data-bs-toggle="dropdown"
               aria-label="Toggle theme (auto)"
               style="background-color: #712cf9; border-color: #712cf9;">
-        <svg id="icon-circle-half" class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#circle-half"></use></svg>
+        <svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#circle-half"></use></svg>
         <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
       </button>
       <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
         <li>
           <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false" >
-            <svg id="icon-sun-fill" class="bi me-2 opacity-50 theme-icon" width="1em" height="1em" ><use href="#sun-fill"></use></svg>
+            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em" ><use href="#sun-fill"></use></svg>
             Light
             <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
           </button>
         </li>
         <li>
           <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
-            <svg id="icon-moon-stars-fill" class="bi me-2 opacity-50 theme-icon" width="1em" height="1em"><use href="#moon-stars-fill"></use></svg>
+            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em"><use href="#moon-stars-fill"></use></svg>
             Dark
             <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
           </button>
@@ -108,40 +108,6 @@ $_SESSION['to']  = $_POST['to'];
         </li>
       </ul>
     </div>
-    <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const toggleButton = document.getElementById('bd-theme');
-    const icons = {
-      light: {
-        'icon-sun-fill': '#000', // Black for light mode
-        'icon-circle-half': '#000',
-        'icon-moon-stars-fill': '#000'
-      },
-      dark: {
-        'icon-sun-fill': '#fff', // White for dark mode
-        'icon-circle-half': '#fff',
-        'icon-moon-stars-fill': '#fff'
-      }
-    };
-
-    // Function to update icon colors based on the theme
-    function updateIcons(theme) {
-      Object.keys(icons[theme]).forEach(id => {
-        document.getElementById(id).style.fill = icons[theme][id];
-      });
-    }
-
-    // Event listener for theme changes
-    toggleButton.addEventListener('click', () => {
-      const currentTheme = toggleButton.getAttribute('data-bs-theme-value');
-      updateIcons(currentTheme);
-    });
-
-    // Initial theme update
-    updateIcons(toggleButton.getAttribute('data-bs-theme-value'));
-  });
-</script>
-
 <!-- Translate button -->
 <button id="translate-button" class="btn btn-primary">
     <i class="fa fa-language"></i>
