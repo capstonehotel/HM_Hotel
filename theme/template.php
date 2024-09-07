@@ -420,7 +420,7 @@ $_SESSION['to']  = $_POST['to'];
           </li>
 
           <?php } ?>
-           <a class="text-light my-auto text-decoration-none ms-lg-2" href="admin/login.php" style="color: whitesmoke;">
+           <a class="text-light my-auto text-decoration-none ms-lg-2" href="https://mcchmhotelreservation.com/admin/login.php" style="color: whitesmoke;">
              <span class="d-lg-inline d-none">|</span> <span class="ms-lg-2"><i class="fa fa-sign-in"></i> Login-Admin</span></a> 
           </ul>
           <?php  
@@ -440,7 +440,7 @@ $_SESSION['to']  = $_POST['to'];
                         <h4 class="modal-title" id="myModalLabel">Choose Image.</h4>
                     </div>
 
-                    <form action="guest/update.php" enctype="multipart/form-data" method="post">
+                    <form action="https://mcchmhotelreservation.com/guest/update.php" enctype="multipart/form-data" method="post">
                         <div class="modal-body">
                             <div class="form-group">
                                 <div class="rows">
