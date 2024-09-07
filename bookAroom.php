@@ -16,7 +16,7 @@ if(isset($_POST['booknow'])){
      
       addtocart($_POST['ROOMID'],$days, $totalprice,$_SESSION['arrival'],$_SESSION['departure']);
 
-      redirect(WEB_ROOT. 'booking/'); 
+      redirect( 'https://mcchmhotelreservation.com/booking/'); 
 
 }
  
@@ -232,7 +232,7 @@ align-items: center;
     <div class="card">
         <figure class="gallery-item" style="text-align: center; margin-top: 10px;">
             <a href="#" data-toggle="modal" data-target="#roomModal<?php echo $result->ROOMID; ?>">
-                <?php if(is_file(WEB_ROOT .'admin/mod_room/'.$result->ROOMIMAGE)): ?>
+                <?php if(is_file('https://mcchmhotelreservation.com/admin/mod_room/'.$result->ROOMIMAGE)): ?>
                     <img class="img-responsive img-hover" src="room.jpg" style="height: 250px; width: 90%;"> 
                 <?php else: ?>
                     <img class="img-responsive img-hover" src="../admin/mod_room/<?php echo $result->ROOMIMAGE; ?>" style="height: 250px; width: 90%;"> 
@@ -269,7 +269,7 @@ align-items: center;
             <div class="row">
                 <div class="col-md-6">
                     <div class="img-container">
-                        <?php if(is_file(WEB_ROOT .'admin/mod_room/'.$result->ROOMIMAGE)): ?>
+                        <?php if(is_file('https://mcchmhotelreservation.com/admin/mod_room/'.$result->ROOMIMAGE)): ?>
                             <img id="roomImage<?php echo $result->ROOMID; ?>" class="img-responsive img-hover" src="room.jpg"> 
                         <?php else: ?>
                             <img id="roomImage<?php echo $result->ROOMID; ?>" class="img-responsive img-hover" src="../admin/mod_room/<?php echo $result->ROOMIMAGE; ?>"> 
