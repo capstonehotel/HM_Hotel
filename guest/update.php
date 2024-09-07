@@ -1,21 +1,21 @@
  <?php 
-// require_once("../includes/initialize.php");
+require_once("../includes/initialize.php");
 //echo date_format(date_create($_POST['dbirth']), 'Y-m-d');
-// load config file first 
-require_once("../includes/config.php");
-//load basic functions next so that everything after can use them
-require_once("../includes/functions.php");
-//later here where we are going to put our class session
-require_once("../includes/session.php");
-require_once("../includes/user.php");
-require_once("../includes/pagination.php");
-require_once("../includes/paginsubject.php");
-require_once("../includes/accomodation.php");
-require_once("../includes/guest.php");
-require_once("../includes/reserve.php"); 
-require_once("../includes/setting.php");
-//Load Core objects
-require_once("../includes/database.php");
+// // load config file first 
+// require_once("../includes/config.php");
+// //load basic functions next so that everything after can use them
+// require_once("../includes/functions.php");
+// //later here where we are going to put our class session
+// require_once("../includes/session.php");
+// require_once("../includes/user.php");
+// require_once("../includes/pagination.php");
+// require_once("../includes/paginsubject.php");
+// require_once("../includes/accomodation.php");
+// require_once("../includes/guest.php");
+// require_once("../includes/reserve.php"); 
+// require_once("../includes/setting.php");
+// //Load Core objects
+// require_once("../includes/database.php");
 if(isset($_POST['submit'])){
 $guest = New Guest();
 $guest->G_FNAME          = $_POST['name'];    
@@ -35,7 +35,7 @@ $guest->update($_SESSION['GUESTID']);
 
 ?>
 <script type="text/javascript">
-	window.location = 'index.php';
+	window.location = 'https://mcchmhotelreservation.com/index.php';
 </script>
 
 <?php  } 
@@ -43,7 +43,7 @@ $guest->update($_SESSION['GUESTID']);
 if(isset($_POST['savephoto'])){
 	if (!isset($_FILES['image']['tmp_name'])) {
 			message("No Image Selected!", "error");
-			 redirect(WEB_ROOT."index.php");
+			 redirect("https://mcchmhotelreservation.com/index.php");
 		}else{
 			$file=$_FILES['image']['tmp_name'];
 			$image= addslashes(file_get_contents($_FILES['image']['tmp_name']));
@@ -52,7 +52,7 @@ if(isset($_POST['savephoto'])){
 			
 			if ($image_size==FALSE) {
 				message("That's not an image!");
-				redirect(WEB_ROOT."index.php");
+				redirect("https://mcchmhotelreservation.com/index.php");
 		   }else{
 			
 		
@@ -67,7 +67,7 @@ if(isset($_POST['savephoto'])){
 					
 				 	// message("Room Image Upadated successfully!", "success");
 				 	// unset($_SESSION['id']);
-				 	 redirect(WEB_ROOT."index.php");
+				 	 redirect("https://mcchmhotelreservation.com/index.php");
  			}
  		}
 
