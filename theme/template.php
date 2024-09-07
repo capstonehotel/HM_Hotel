@@ -300,7 +300,7 @@ $_SESSION['to']  = $_POST['to'];
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
     <div class="container-fluid">
-      <a class="navbar-brand"><img src="./images/logo2.jpg" style="width: 40px; height: 40px; border-radius: 30px; margin-left: 2px;">  HM Hotel Reservation</a>
+      <a class="navbar-brand"><img src="https://mcchmhotelreservation.com/images/logo2.jpg" style="width: 40px; height: 40px; border-radius: 30px; margin-left: 2px;">  HM Hotel Reservation</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -469,13 +469,13 @@ $_SESSION['to']  = $_POST['to'];
              <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
               <div class="carousel-inner">
                 <div class="carousel-item active">
-                  <img style="height: 400px"  src="images/high.jpg" class="d-block w-100" alt="...">
+                  <img style="height: 400px"  src="https://mcchmhotelreservation.com/images/high.jpg" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                  <img style="height: 400px"   src="images/high.jpg" class="d-block w-100" alt="...">
+                  <img style="height: 400px"   src="https://mcchmhotelreservation.com/images/high.jpg" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                  <img style="height: 400px"  src="images/high.jpg" class="d-block w-100" alt="...">
+                  <img style="height: 400px"  src="https://mcchmhotelreservation.com/images/high.jpg" class="d-block w-100" alt="...">
                 </div>
               </div>
               <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
