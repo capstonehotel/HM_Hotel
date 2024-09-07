@@ -6,7 +6,7 @@
 
 if (!isset($_SESSION['monbela_cart'])) {
   # code...
-  redirect(WEB_ROOT.'index.php');
+  redirect('https://mcchmhotelreservation.com/index.php');
 }
 
 function createRandomPassword() {
@@ -267,7 +267,7 @@ for ($i=0; $i < $count_cart  ; $i++) {
       </tbody>
                  </table>
             </div>
-                <div id="confirmModal" class="modal fade" role="dialog" >
+                <!-- <div id="confirmModal" class="modal fade" role="dialog" >
     <div class="modal-dialog modal-sm" >
         <div class="modal-content" >
             <div class="modal-body">
@@ -278,7 +278,7 @@ for ($i=0; $i < $count_cart  ; $i++) {
                 <button type="submit" class="btn btn-primary" align="right" name="btnsubmitbooking">Yes</button>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
 <div class="row"> 
   <h3 align="right">Total: &#8369 <?php echo   $_SESSION['pay'] ;?></h3>
