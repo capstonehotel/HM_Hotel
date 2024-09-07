@@ -52,6 +52,6 @@ switch ($view) {
 	    $title="Booking";
 		$content    = 'booking.php';		
 }
-include '../template.php';
+include '../theme/template.php';
 // include  '../guest/update.php';
 ?> 
