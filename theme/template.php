@@ -327,7 +327,7 @@ $_SESSION['to']  = $_POST['to'];
               <ul class="dropdown-menu">
                 <?php  foreach ($cur as $result) { ?>
                     <li>
-                        <a class="dropdown-item <?php if(isset($_GET['q']) && $_GET['q'] == $result->ACCOMODATION){echo "active";} ?>" href="<?php echo WEB_ROOT; ?>index.php?p=accomodation&q=<?php echo $result->ACCOMODATION; ?>"><?php echo $result->ACCOMODATION; ?></a>
+                        <a class="dropdown-item <?php if(isset($_GET['q']) && $_GET['q'] == $result->ACCOMODATION){echo "active";} ?>" href="https://mcchmhotelreservation.com/ index.php?p=accomodation&q=<?php echo $result->ACCOMODATION; ?>"><?php echo $result->ACCOMODATION; ?></a>
                     </li>
                 <?php } ?>
               </ul>
