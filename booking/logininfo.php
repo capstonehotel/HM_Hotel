@@ -2,7 +2,7 @@
 
 if (!isset($_SESSION['monbela_cart'])) {
   # code...
-  redirect(WEB_ROOT.'index.php');
+  redirect('https://mcchmhotelreservation.com/index.php');
 }
 
 
