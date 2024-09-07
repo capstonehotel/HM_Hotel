@@ -50,21 +50,21 @@
                   </div>
                   <div class="carousel-inner">
                     <div class="carousel-item active">
-                      <img src="images/room.jpg" class="d-block w-100" alt="...">
+                      <img src="https://mcchmhotelreservation.com/images/room.jpg" class="d-block w-100" alt="...">
                       <div class="carousel-caption d-none d-md-block">
                         <h5>Standard Room</h5>
                         <p>&#8369 800</p>
                       </div>
                     </div>
                     <div class="carousel-item">
-                      <img src="images/room1.jpg" class="d-block w-100" alt="...">
+                      <img src="https://mcchmhotelreservation.com/images/room1.jpg" class="d-block w-100" alt="...">
                       <div class="carousel-caption d-none d-md-block">
                         <h5>Travellers Time</h5>
                         <p>&#8369 1000</p>
                       </div>
                     </div>
                     <div class="carousel-item">
-                      <img src="images/header-bg1.jpg" class="d-block w-100" alt="...">
+                      <img src="https://mcchmhotelreservation.com/images/header-bg1.jpg" class="d-block w-100" alt="...">
                       <div class="carousel-caption d-none d-md-block">
                         <h5>Bayanihan Rooms</h5>
                         <p>&#8369 1000</p>
