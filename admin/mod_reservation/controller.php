@@ -1,88 +1,81 @@
 <?php
-// $connection = new mysqli('localhost', 'root', '', 'hmsystemdb');
 require_once("../../includes/initialize.php");
 require_once("../../includes/config.php");
 
-$action = $_GET['action'] ?? '';
-$code = $_GET['code'] ?? '';
-
-if (!empty($action) && !empty($code)) {
-    switch ($action) {
-        case 'confirm':
-            confirmBooking($code);
-            break;
-        case 'cancel':
-            cancelBooking($code);
-            break;
-        case 'checkin':
-            checkInBooking($code);
-            break;
-        case 'checkout':
-            checkOutBooking($code);
-            break;
-        case 'delete':
-            deleteBooking($code);
-            break;
-        default:
-            echo 'Invalid action!';
-            break;
-    }
+if (!isset($_SESSION['ADMIN_ID'])) {
+    exit(json_encode(['status' => 'error', 'message' => 'Unauthorized']));
 }
 
-function confirmBooking($code) {
-    global $connection;
+$action = isset($_GET['action']) ? $_GET['action'] : '';
+$code = isset($_GET['code']) ? $_GET['code'] : '';
 
-    $query = "UPDATE `tblreservation` SET `STATUS` = 'Confirmed' WHERE `CONFIRMATIONCODE` = '$code'";
-    if (mysqli_query($connection, $query)) {
-        echo 'Booking confirmed successfully!';
-    } else {
-        echo 'Error confirming booking: ' . mysqli_error($connection);
-    }
+$response = ['status' => 'error', 'message' => 'Action not recognized'];
+
+switch ($action) {
+    case 'delete':
+        // Actual deletion logic
+        $sql = "DELETE FROM tblreservation WHERE CONFIRMATIONCODE = '$code'";
+        $sql2 = "DELETE FROM tblpayment WHERE CONFIRMATIONCODE = '$code'";
+
+        if (mysqli_query($connection, $sql) && mysqli_query($connection, $sql2)) {
+            $response = ['status' => 'success', 'message' => 'The reservation has been deleted.'];
+        } else {
+            $response = ['status' => 'error', 'message' => 'Error deleting the reservation.'];
+        }
+        break;
+
+    case 'confirm':
+        // Update confirmation logic
+        $sql = "UPDATE tblreservation r, tblroom rm SET ROOMNUM = ROOMNUM - 1 WHERE r.ROOMID=rm.ROOMID AND CONFIRMATIONCODE = '$code'";
+        $sql1 = "UPDATE tblreservation SET STATUS = 'Confirmed' WHERE CONFIRMATIONCODE ='$code'";
+        $sql2 = "UPDATE tblpayment SET STATUS = 'Confirmed' WHERE CONFIRMATIONCODE ='$code'";
+
+        if ($connection->query($sql) === TRUE && $connection->query($sql1) === TRUE && $connection->query($sql2) === TRUE) {
+            $response = ['status' => 'success', 'message' => 'Booking confirmed successfully.'];
+        } else {
+            $response = ['status' => 'error', 'message' => 'Error confirming the booking.'];
+        }
+        break;
+
+    case 'checkin':
+        // Update check-in logic
+        $sql1 = "UPDATE tblreservation SET STATUS = 'Checkedin' WHERE CONFIRMATIONCODE ='$code'";
+        $sql2 = "UPDATE tblpayment SET STATUS = 'Checkedin' WHERE CONFIRMATIONCODE ='$code'";
+
+        if ($connection->query($sql1) === TRUE && $connection->query($sql2) === TRUE) {
+            $response = ['status' => 'success', 'message' => 'Booking checked in successfully.'];
+        } else {
+            $response = ['status' => 'error', 'message' => 'Error checking in the booking.'];
+        }
+        break;
+
+    case 'checkout':
+        // Update check-out logic
+        $sql1 = "UPDATE tblreservation SET STATUS = 'Checkedout' WHERE CONFIRMATIONCODE ='$code'";
+        $sql = "UPDATE tblreservation r, tblroom rm SET ROOMNUM = ROOMNUM + 1 WHERE r.ROOMID=rm.ROOMID AND CONFIRMATIONCODE = '$code'";
+        $sql2 = "UPDATE tblpayment SET STATUS = 'Checkedout' WHERE CONFIRMATIONCODE ='$code'";
+
+        if ($connection->query($sql1) === TRUE && $connection->query($sql2) === TRUE && $connection->query($sql) === TRUE) {
+            $response = ['status' => 'success', 'message' => 'Booking checked out successfully.'];
+        } else {
+            $response = ['status' => 'error', 'message' => 'Error checking out the booking.'];
+        }
+        break;
+
+    case 'cancel':
+        // Update cancel logic
+        $sql1 = "UPDATE tblreservation SET STATUS = 'Cancelled' WHERE CONFIRMATIONCODE ='$code'";
+        $sql = "UPDATE tblreservation r, tblroom rm SET ROOMNUM = ROOMNUM + 1 WHERE r.ROOMID=rm.ROOMID AND CONFIRMATIONCODE = '$code'";
+        $sql2 = "UPDATE tblpayment SET STATUS = 'Cancelled' WHERE CONFIRMATIONCODE ='$code'";
+
+        if ($connection->query($sql1) === TRUE && $connection->query($sql2) === TRUE && $connection->query($sql) === TRUE) {
+            $response = ['status' => 'success', 'message' => 'Booking cancelled successfully.'];
+        } else {
+            $response = ['status' => 'error', 'message' => 'Error cancelling the booking.'];
+        }
+        break;
 }
 
-function cancelBooking($code) {
-    global $connection;
-
-    $query = "UPDATE `tblreservation` SET `STATUS` = 'Cancelled' WHERE `CONFIRMATIONCODE` = '$code'";
-    if (mysqli_query($connection, $query)) {
-        echo 'Booking cancelled successfully!';
-    } else {
-        echo 'Error cancelling booking: ' . mysqli_error($connection);
-    }
-}
-
-function checkInBooking($code) {
-    global $connection;
-
-    $query = "UPDATE `tblreservation` SET `STATUS` = 'Checkedin' WHERE `CONFIRMATIONCODE` = '$code'";
-    if (mysqli_query($connection, $query)) {
-        echo 'Checked in successfully!';
-    } else {
-        echo 'Error checking in: ' . mysqli_error($connection);
-    }
-}
-
-function checkOutBooking($code) {
-    global $connection;
-
-    $query = "UPDATE `tblreservation` SET `STATUS` = 'Checkedout' WHERE `CONFIRMATIONCODE` = '$code'";
-    if (mysqli_query($connection, $query)) {
-        echo 'Checked out successfully!';
-    } else {
-        echo 'Error checking out: ' . mysqli_error($connection);
-    }
-}
-
-function deleteBooking($code) {
-    global $connection;
-
-    $query = "DELETE FROM `tblreservation` WHERE `CONFIRMATIONCODE` = '$code'";
-    if (mysqli_query($connection, $query)) {
-        echo 'Booking deleted successfully!';
-    } else {
-        echo 'Error deleting booking: ' . mysqli_error($connection);
-    }
-}
-
-mysqli_close($connection);
+header('Content-Type: application/json');
+echo json_encode($response);
 ?>
