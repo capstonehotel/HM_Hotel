@@ -42,7 +42,27 @@ $_SESSION['to']  = $_POST['to'];
         }
     ?>
 
-  
+  <style>
+    .btn-bd-primary {
+    --bd-violet-bg: #712cf9;
+    --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+    --bs-btn-font-weight: 600;
+    --bs-btn-color: var(--bs-white);
+    --bs-btn-bg: var(--bd-violet-bg);
+    --bs-btn-border-color: var(--bd-violet-bg);
+    --bs-btn-hover-color: var(--bs-white);
+    --bs-btn-hover-bg: #6528e0;
+    --bs-btn-hover-border-color: #6528e0;
+    --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+    --bs-btn-active-color: var(--bs-btn-hover-color);
+    --bs-btn-active-bg: #5a23c8;
+    --bs-btn-active-border-color: #5a23c8;
+  }
+  .bd-mode-toggle {
+    z-index: 1500;
+  }
+  </style>
 
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <div id="google_translate_element"></div>
@@ -87,9 +107,9 @@ $_SESSION['to']  = $_POST['to'];
       <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
         <li>
           <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false" >
-            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em" style="color: white;" ><use href="#sun-fill"></use></svg>
+            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em" style="  ><use href="#sun-fill"></use></svg>
             Light
-            <svg class="bi ms-auto d-none" width="1em" height="1em"style="color: white;"><use href="#check2"></use></svg>
+            <svg class="bi ms-auto d-none" width="1em" height="1em" ><use href="#check2"></use></svg>
           </button>
         </li>
         <li>

@@ -69,9 +69,7 @@
   .bd-mode-toggle {
     z-index: 1500;
   }
-  .theme-icon {
-    color: white !important; /* Make sure it stays white, overriding other styles */
-  }
+  
   #google_translate_element {
 position: absolute;
 z-index: 1000;
