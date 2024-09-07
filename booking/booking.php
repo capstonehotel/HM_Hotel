@@ -104,24 +104,3 @@ if (isset($_POST['clear'])) {
         </div>
     </div>
 </div>
-<script>
-    document.getElementById('clearCartBtn').addEventListener('click', function(e) {
-        e.preventDefault(); // Prevents default form submission
-
-        // Make an AJAX request to clear the cart
-        fetch('clear_cart.php', {
-            method: 'POST'
-        })
-        .then(response => {
-            if (response.ok) {
-                // Reload the page after the cart is cleared
-                window.location.reload();
-            } else {
-                alert('There was an issue clearing the cart. Please try again.');
-            }
-        })
-        .catch(error => {
-            console.error('Error clearing the cart:', error);
-        });
-    });
-</script>
