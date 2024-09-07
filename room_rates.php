@@ -108,7 +108,7 @@ $_SESSION['departure'] =date_format(date_create($_POST['departure']),"Y-m-d");
 
                      $curs = $mydb->loadResultList(); 
                      
-                     $resNum = $result->ROOMNUM  ;
+                     $resNum = $result->ROOMNUM - count($curs) ;
                          
 
 
