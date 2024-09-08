@@ -137,14 +137,22 @@ $code=$_GET['code'];
                                             code: code
                                         },
                                         success: function(response) {
-                                            Swal.fire({
-                                                title: 'Success!',
-                                                text: 'Action completed successfully.',
-                                                icon: 'success'
-                                            }).then(() => {
-                                                location.reload(); // Reload the page to reflect changes
-                                            });
-                                        },
+    Swal.fire({
+        title: 'Success!',
+        text: 'Action completed successfully.',
+        icon: 'success'
+    }).then(() => {
+        // Get the current active tab
+        var activeTab = localStorage.getItem('activeTab');
+        // Redirect to index.php with the active tab
+        if (activeTab) {
+            window.location.href = 'index.php?view=' + activeTab;
+        } else {
+            window.location.href = 'index.php';
+        }
+    });
+}
+
                                         error: function() {
                                             Swal.fire({
                                                 title: 'Error!',
