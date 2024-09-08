@@ -2,7 +2,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3" style="display: flex; align-items: center;">
             <div style="display: flex; justify-content: flex-start; width: 100%;">
-                <a href="index.php" class="btn btn-primary btn-sm" style="margin-right: 10px;">Back</a>
+                <a href="./index.php" class="btn btn-primary btn-sm" style="margin-right: 10px;">Back</a>
                 <h6 class="m-0 font-weight-bold text-primary">View Booking</h6>
             </div>
             <div style="display: flex; justify-content: flex-end; width: 100%;">
@@ -66,7 +66,7 @@
 
             if ($result) {
                 while ($row = mysqli_fetch_assoc($result)) {
-                    $image = '../mod_room/' . $row['ROOMIMAGE'];
+                    $image =  WEB_ROOT. 'admin/mod_room/' . $row['ROOMIMAGE'];
                     $day = dateDiff(date($row['ARRIVAL']), date($row['DEPARTURE']));
             ?>
 
