@@ -22,34 +22,34 @@ switch ($action) {
         echo json_encode(['status' => 'error', 'message' => 'Error on deleting the reservation.']);
     }
     break;
-    // case 'confirm_delete':
-    //     // Actual deletion logic to be handled here
-    //     $code = $_GET['code'];
-    //     $sql = "DELETE FROM tblreservation WHERE CONFIRMATIONCODE = '$code'";
-    //     $sql2 = "DELETE FROM tblpayment WHERE CONFIRMATIONCODE = '$code'";
+    case 'confirm_delete':
+        // Actual deletion logic to be handled here
+        $code = $_GET['code'];
+        $sql = "DELETE FROM tblreservation WHERE CONFIRMATIONCODE = '$code'";
+        $sql2 = "DELETE FROM tblpayment WHERE CONFIRMATIONCODE = '$code'";
 
-    //     if (mysqli_query($connection, $sql) && mysqli_query($connection, $sql2)) {
-    //         echo '<script>
-    //             Swal.fire({
-    //                 title: "Deleted!",
-    //                 text: "The reservation has been deleted.",
-    //                 icon: "success"
-    //             }).then(() => {
-    //                 window.location.href = "index.php?confirm=true&code=' . $code . '";
-    //             });
-    //             </script>';
-    //     } else {
-    //         echo '<script>
-    //             Swal.fire({
-    //                 title: "Error!",
-    //                 text: "Error on deleting the reservation.",
-    //                 icon: "error"
-    //             }).then(() => {
-    //                 window.location.href = "index.php";
-    //             });
-    //             </script>';
-    //     }
-    //     break;
+        if (mysqli_query($connection, $sql) && mysqli_query($connection, $sql2)) {
+            echo '<script>
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "The reservation has been deleted.",
+                    icon: "success"
+                }).then(() => {
+                    window.location.href = "index.php?confirm=true&code=' . $code . '";
+                });
+                </script>';
+        } else {
+            echo '<script>
+                Swal.fire({
+                    title: "Error!",
+                    text: "Error on deleting the reservation.",
+                    icon: "error"
+                }).then(() => {
+                    window.location.href = "index.php";
+                });
+                </script>';
+        }
+        break;
 
 
 
