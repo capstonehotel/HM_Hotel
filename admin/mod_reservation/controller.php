@@ -1,7 +1,7 @@
 <?php
 // $connection = new mysqli('localhost', 'root', '', 'hmsystemdb');
 require_once("../../includes/initialize.php");
-require_once("../../includes/config.php");
+// require_once("../../includes/config.php");
  if (!isset($_SESSION['ADMIN_ID'])){
  	redirect(WEB_ROOT ."admin/login.php");
  }
@@ -82,7 +82,7 @@ switch ($action) {
         echo json_encode(['status' => 'error']);
     }
     break;
-}
+
             //     echo "<script> alert('Confirm Booking Successfully.'); </script>";
             
         // } else {
