@@ -1,7 +1,7 @@
 <?php
 // $connection = new mysqli('localhost', 'root', '', 'hmsystemdb');
 require_once("../../includes/initialize.php");
-// require_once("../../includes/config.php");
+require_once("../../includes/config.php");
  if (!isset($_SESSION['ADMIN_ID'])){
  	redirect(WEB_ROOT ."admin/login.php");
  }
@@ -74,16 +74,27 @@ switch ($action) {
 
 
 
-	case 'confirm':
-    $sql = "UPDATE tblreservation SET STATUS = 'Confirmed' WHERE CONFIRMATIONCODE = '$code'";
-    if (mysqli_query($connection, $sql)) {
-        echo json_encode(['status' => 'success']);
+	case 'confirm' :
+
+    // SQL queries
+    $sql = "UPDATE tblreservation r, tblroom rm SET ROOMNUM = ROOMNUM - 1 WHERE r.ROOMID=rm.ROOMID AND CONFIRMATIONCODE = '$code'";
+    $sql1 = "UPDATE tblreservation SET STATUS = 'Confirmed' WHERE CONFIRMATIONCODE ='$code'";
+    $sql2 = "UPDATE tblpayment SET STATUS = 'Confirmed' WHERE CONFIRMATIONCODE ='$code'";
+
+    // Execute the queries and check if successful
+    if ($connection->query($sql) === TRUE && $connection->query($sql1) === TRUE && $connection->query($sql2) === TRUE) {
+        // Redirect to index.php with success message
+        header('Location: index.php?status=success&message=Confirm Booking Successfully');
+        exit;
     } else {
-        error_log("SQL Error: " . mysqli_error($connection)); // Log the SQL error if the query fails.
-        echo json_encode(['status' => 'error', 'message' => 'Failed to confirm booking.']);
+        // Redirect to index.php with error message
+        header('Location: index.php?status=error&message=Error on Confirming Booking');
+        exit;
     }
     break;
 
+        
+        
             //     echo "<script> alert('Confirm Booking Successfully.'); </script>";
             
         // } else {
