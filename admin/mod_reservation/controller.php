@@ -107,40 +107,25 @@ switch ($action) {
 
 
     
-	case 'cancel' :
-        $sql1 = "UPDATE tblreservation SET STATUS = 'Cancelled' WHERE CONFIRMATIONCODE ='$code'";
-        $sql = "UPDATE tblreservation r, tblroom rm SET ROOMNUM = ROOMNUM + 1 WHERE r.ROOMID=rm.ROOMID AND  CONFIRMATIONCODE = '$code' ";
+        case 'cancel' :
 
-        $sql2 = "UPDATE tblpayment SET STATUS = 'Cancelled' WHERE CONFIRMATIONCODE ='$code'";
-
-        if ($connection->query($sql1) === TRUE && $connection->query($sql2) === TRUE && $connection->query($sql) === TRUE) {
-        //     echo "<script> alert('Cancelled Booking Successfully.'); </script>";
-        // } else {
-        //     echo "<script> alert('Error on Cancelling Booking.'); </script>" ;
-        // }
-        // redirect('index.php');
-        echo 'Executed PHP Code';
-        echo "<script>
-                Swal.fire({
-                  title: 'Success!',
-                  text: 'Cancelled Booking Successfully.',
-                  icon: 'success'
-                }).then(function() {
-                  window.location.href = 'index.php';
-                });
-              </script>";
-    } else {
-        echo "<script>
-                Swal.fire({
-                  title: 'Error!',
-                  text: 'Error on Cancelled Booking.',
-                  icon: 'error'
-                }).then(function() {
-                  window.location.href = 'index.php';
-                });
-              </script>";
-    }
-	break;
+          // SQL queries
+          $sql1 = "UPDATE tblreservation SET STATUS = 'Cancelled' WHERE CONFIRMATIONCODE ='$code'";
+          $sql = "UPDATE tblreservation r, tblroom rm SET ROOMNUM = ROOMNUM + 1 WHERE r.ROOMID=rm.ROOMID AND CONFIRMATIONCODE = '$code'";
+          $sql2 = "UPDATE tblpayment SET STATUS = 'Cancelled' WHERE CONFIRMATIONCODE ='$code'";
+      
+          // Execute the queries and check if successful
+          if ($connection->query($sql1) === TRUE && $connection->query($sql2) === TRUE && $connection->query($sql) === TRUE) {
+              // Redirect to index.php with success message
+              header('Location: index.php?status=success&message=Cancelled Booking Successfully');
+              exit;
+          } else {
+              // Redirect to index.php with error message
+              header('Location: index.php?status=error&message=Error on Cancelling Booking');
+              exit;
+          }
+          break;
+      
 	case 'checkin' :
 	    $sql1 = "UPDATE tblreservation SET STATUS = 'Checkedin' WHERE CONFIRMATIONCODE ='$code'";
 
