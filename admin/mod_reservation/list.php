@@ -100,7 +100,6 @@
 </div>
 
 <!-- Initialize DataTables -->
-
 <script>
 $(document).ready(function() {
     // Initialize DataTables for all tabs
@@ -121,10 +120,11 @@ $(document).ready(function() {
     // Show tables after initialization
     $('.table-responsive').show();
 
-    // Load the active tab from URL parameter
-    var urlParams = new URLSearchParams(window.location.search);
-    var activeTab = urlParams.get('view') || 'list';
-    $('#reservationTabs a[href="#' + activeTab + '"]').tab('show');
+    // Load the active tab from localStorage if it exists
+    var activeTab = localStorage.getItem('activeTab');
+    if (activeTab) {
+        $('#reservationTabs a[href="' + activeTab + '"]').tab('show');
+    }
 
     // Save the active tab and current page state to localStorage before page reload
     function saveState() {
@@ -171,7 +171,7 @@ $(document).ready(function() {
                             'success'
                         ).then(() => {
                             saveState(); // Save the tab and page state before reloading
-                            window.location.href = 'index.php?view=' + activeTab; // Redirect to index.php with the active tab
+                            location.reload(); // Reload the page
                         });
                     },
                     error: function() {
@@ -191,5 +191,5 @@ $(document).ready(function() {
         restoreState(); // Restore tab and page state
     });
 });
-</script>
 
+</script>

@@ -114,58 +114,53 @@ $code=$_GET['code'];
     </div>
 </div>
 <script>
-                    $(document).ready(function() {
-                        $('.action-btn').on('click', function(e) {
-                            e.preventDefault();
-                            var action = $(this).data('action');
-                            var code = $(this).data('code');
+    $(document).ready(function() {
+        $('.action-btn').on('click', function(e) {
+            e.preventDefault();
+            var action = $(this).data('action');
+            var code = $(this).data('code');
 
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, proceed!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: 'controller.php',
+                        type: 'GET',
+                        data: {
+                            action: action,
+                            code: code
+                        },
+                        success: function(response) {
                             Swal.fire({
-                                title: 'Are you sure?',
-                                text: "You won't be able to revert this!",
-                                icon: 'warning',
-                                showCancelButton: true,
-                                confirmButtonColor: '#3085d6',
-                                cancelButtonColor: '#d33',
-                                confirmButtonText: 'Yes, proceed!'
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    $.ajax({
-                                        url: 'controller.php',
-                                        type: 'GET',
-                                        data: {
-                                            action: action,
-                                            code: code
-                                        },
-                                        success: function(response) {
-                                            Swal.fire({
-                                                title: 'Success!',
-                                                text: 'Action completed successfully.',
-                                                icon: 'success'
-                                            }).then(() => {
-                                                // Get the current active tab
-        var activeTab = localStorage.getItem('activeTab');
-        // Redirect to index.php with the active tab
-        if (activeTab) {
-            window.location.href = 'index.php?view=' + activeTab;
-        } else {
-            window.location.href = 'index.php';
-        }
-                                            });
-                                        },
-                                        error: function() {
-                                            Swal.fire({
-                                                title: 'Error!',
-                                                text: 'An error occurred.',
-                                                icon: 'error'
-                                            });
-                                        }
-                                    });
-                                }
+                                title: 'Success!',
+                                text: 'Action completed successfully.',
+                                icon: 'success'
+                            }).then(() => {
+                                // Redirect to index.php directly
+                                window.location.href = 'index.php';
                             });
-                        });
+                        },
+                        error: function() {
+                            Swal.fire({
+                                title: 'Error!',
+                                text: 'An error occurred.',
+                                icon: 'error'
+                            });
+                        }
                     });
-                </script>
+                }
+            });
+        });
+    });
+</script>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 
