@@ -1,4 +1,5 @@
-<?php require_once("../../includes/initialize.php");?>
+<?php require_once("../../includes/initialize.php");
+require_once("../../includes/config.php");?>
 <div class="container-fluid">
     <div class="card shadow mb-4">
         <div class="card-header py-3" style="display: flex; align-items: center;">
