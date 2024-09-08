@@ -10,18 +10,32 @@ $action = (isset($_GET['action']) && $_GET['action'] != '') ? $_GET['action'] : 
 $code = $_GET['code'];
 
 switch ($action) {
-  case 'delete':
-    // Deletion logic
-    $code = $_GET['code'];
-    $sql = "DELETE FROM tblreservation WHERE CONFIRMATIONCODE = '$code'";
-    $sql2 = "DELETE FROM tblpayment WHERE CONFIRMATIONCODE = '$code'";
-
-    if (mysqli_query($connection, $sql) && mysqli_query($connection, $sql2)) {
-        echo json_encode(['status' => 'success', 'message' => 'The reservation has been deleted.']);
-    } else {
-        echo json_encode(['status' => 'error', 'message' => 'Error on deleting the reservation.']);
-    }
-    break;
+    case 'delete':
+        // Confirm delete action with SweetAlert
+        echo '<script src="../sweetalert2.all.min.js"></script>';
+        echo '<script>
+            document.addEventListener("DOMContentLoaded", function() {
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won\'t be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Perform deletion if confirmed
+                        window.location.href = "delete_process.php?action=confirm_delete&code=' . $code . '";
+                    } else {
+                        // Redirect back if cancelled
+                        window.location.href = "index.php";
+                    }
+                });
+            });
+            </script>';
+        break;
+        
     case 'confirm_delete':
         // Actual deletion logic to be handled here
         $code = $_GET['code'];
@@ -60,43 +74,15 @@ switch ($action) {
 
 
 
-	case 'confirm' :
-        
-        
-        $sql = "UPDATE tblreservation r, tblroom rm SET ROOMNUM = ROOMNUM - 1 WHERE r.ROOMID=rm.ROOMID AND  CONFIRMATIONCODE = '$code' ";
-
-
-        $sql1 = "UPDATE tblreservation SET STATUS = 'Confirmed' WHERE CONFIRMATIONCODE ='$code'";
-
-
-        $sql2 = "UPDATE tblpayment SET STATUS = 'Confirmed' WHERE CONFIRMATIONCODE ='$code'";
-
-        if ($connection->query($sql) === TRUE && $connection->query($sql1) === TRUE && $connection->query($sql2) === TRUE) {
-            echo 'Executed PHP Code';
-           
-            echo "<script>
-                    Swal.fire({
-                      title: 'Success!',
-                      text: 'Confirm Booking Successfully.',
-                      icon: 'success'
-                    }).then(function() {
-                      window.location.href = 'index.php';
-                    });
-                  </script>";
-        } else {
-            echo "<script>
-                    Swal.fire({
-                      title: 'Error!',
-                      text: 'Error on Confirming Booking.',
-                      icon: 'error'
-                    }).then(function() {
-                      window.location.href = 'index.php';
-                    });
-                  </script>";
-        }
-        break;
-        
-        
+	case 'confirm':
+    $sql = "UPDATE tblreservation SET STATUS = 'Confirmed' WHERE CONFIRMATIONCODE = '$code'";
+    if (mysqli_query($connection, $sql)) {
+        echo json_encode(['status' => 'success']);
+    } else {
+        echo json_encode(['status' => 'error']);
+    }
+    break;
+}
             //     echo "<script> alert('Confirm Booking Successfully.'); </script>";
             
         // } else {

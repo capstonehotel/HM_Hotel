@@ -32,7 +32,8 @@ $code=$_GET['code'];
                                     <?php } elseif($row['STATUS'] == 'Checkedout') {?>
                                 <a href="controller.php?action=delete&code=<?php echo $row['CONFIRMATIONCODE']; ?>" class="btn btn-danger btn-sm ml-2    " ><i class="icon-edit">Delete</a>
                                     <?php } else {?>
-                                        <a href="controller.php?action=confirm&code=<?php echo $row['CONFIRMATIONCODE']; ?>" class="btn btn-success btn-sm ml-2"  ><i class="icon-edit">Confirm</a>
+                                        <!-- <a href="controller.php?action=confirm&code=<?php echo $row['CONFIRMATIONCODE']; ?>" class="btn btn-success btn-sm ml-2"  ><i class="icon-edit">Confirm</a> -->
+                                        <button class="btn btn-success btn-sm ml-2 action-btn" data-action="confirm" data-code="<?php echo $row['CONFIRMATIONCODE']; ?>"><i class="icon-edit">Confirm</i></button>
 
 
                                             <?php } ?>
@@ -112,49 +113,51 @@ $code=$_GET['code'];
     </div>
 </div>
 <script>
-    $(document).ready(function() {
-        $('.delete-btn').on('click', function(e) {
-            e.preventDefault();
-            var code = $(this).data('code');
-            
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: 'controller.php',
-                        type: 'GET',
-                        data: {
-                            action: 'delete',
-                            code: code
-                        },
-                        success: function(response) {
+                    $(document).ready(function() {
+                        $('.action-btn').on('click', function(e) {
+                            e.preventDefault();
+                            var action = $(this).data('action');
+                            var code = $(this).data('code');
+
                             Swal.fire({
-                                title: 'Deleted!',
-                                text: 'The reservation has been deleted.',
-                                icon: 'success'
-                            }).then(() => {
-                                location.reload(); // Reload the page to reflect changes
+                                title: 'Are you sure?',
+                                text: "You won't be able to revert this!",
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Yes, proceed!'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    $.ajax({
+                                        url: 'controller.php',
+                                        type: 'GET',
+                                        data: {
+                                            action: action,
+                                            code: code
+                                        },
+                                        success: function(response) {
+                                            Swal.fire({
+                                                title: 'Success!',
+                                                text: 'Action completed successfully.',
+                                                icon: 'success'
+                                            }).then(() => {
+                                                location.reload(); // Reload the page to reflect changes
+                                            });
+                                        },
+                                        error: function() {
+                                            Swal.fire({
+                                                title: 'Error!',
+                                                text: 'An error occurred.',
+                                                icon: 'error'
+                                            });
+                                        }
+                                    });
+                                }
                             });
-                        },
-                        error: function() {
-                            Swal.fire({
-                                title: 'Error!',
-                                text: 'Error on deleting the reservation.',
-                                icon: 'error'
-                            });
-                        }
+                        });
                     });
-                }
-            });
-        });
-    });
-</script>
+                </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="../sweetalert2.all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+
