@@ -141,44 +141,22 @@ switch ($action) {
             }
             break;
         
-	case 'checkout' :
-	    $sql1 = "UPDATE tblreservation SET STATUS = 'Checkedout' WHERE CONFIRMATIONCODE ='$code'";
-        $sql = "UPDATE tblreservation r, tblroom rm SET ROOMNUM = ROOMNUM + 1 WHERE r.ROOMID=rm.ROOMID AND  CONFIRMATIONCODE = '$code' ";
-
-        $sql2 = "UPDATE tblpayment SET STATUS = 'Checkedout' WHERE CONFIRMATIONCODE ='$code'";
-
-        if ($connection->query($sql1) === TRUE && $connection->query($sql2) === TRUE && $connection->query($sql) === TRUE) {
-        //     echo "<script> alert('Checkedout Booking Successfully.'); </script>";
-        // } else {
-        //     echo "<script> alert('Error on Checkedout Booking.'); </script>" ;
-        // }
-        // redirect('index.php');
-
-
-
-        echo 'Executed PHP Code';
-        echo '<script src="../sweetalert2.all.min.js"></script>';
-        echo "<script>
-                Swal.fire({
-                  title: 'Success!',
-                  text: 'Check-out Booking Successfully.',
-                  icon: 'success'
-                }).then(function() {
-                  window.location.href = 'index.php';
-                });
-              </script>";
-    } else {
-        echo "<script>
-                Swal.fire({
-                  title: 'Error!',
-                  text: 'Error on Check-out Booking.',
-                  icon: 'error'
-                }).then(function() {
-                  window.location.href = 'index.php';
-                });
-              </script>";
-    }
-	break;
+            case 'checkout' :
+              $sql1 = "UPDATE tblreservation SET STATUS = 'Checkedout' WHERE CONFIRMATIONCODE ='$code'";
+              $sql = "UPDATE tblreservation r, tblroom rm SET ROOMNUM = ROOMNUM + 1 WHERE r.ROOMID=rm.ROOMID AND  CONFIRMATIONCODE = '$code'";
+              $sql2 = "UPDATE tblpayment SET STATUS = 'Checkedout' WHERE CONFIRMATIONCODE ='$code'";
+          
+              if ($connection->query($sql1) === TRUE && $connection->query($sql) === TRUE && $connection->query($sql2) === TRUE) {
+                  // Redirect to index.php directly after successful update
+                  header("Location: index.php");
+                  exit();
+              } else {
+                  // Redirect to index.php directly after failure
+                  header("Location: index.php");
+                  exit();
+              }
+              break;
+          
 	// case 'cancelroom' :
 	// 	doCancelRoom();
 	// break;
