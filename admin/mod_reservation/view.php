@@ -1,48 +1,98 @@
-<div class="container-fluid">
-    <div class="card shadow mb-4">
-        <div class="card-header py-3" style="display: flex; align-items: center;">
-            <a href="index.php" class="btn btn-primary btn-sm" style="margin-right: 10px;">Back</a>
-            <h6 class="m-0 font-weight-bold text-primary ml-10">View Booking</h6>
-            <div style="display: flex; width: 90%; justify-content: flex-end;">
-                <?php
-                $code = $_GET['code'];
-                $query = "SELECT ... FROM tblreservation WHERE CONFIRMATIONCODE = '".$code."'";
-                // Fetch data and display buttons based on status (Confirm, Cancel, Check-in, Check-out)
-                ?>
-                <button id="deleteBtn" class="btn btn-danger btn-sm ml-2">Delete</button>
-                <!-- Other buttons for actions like Confirm, Check-in, Check-out -->
-            </div>
-        </div>
-    </div>
-</div>
+<?php
+require_once("../../includes/initialize.php");
+require_once("../../includes/config.php");
 
-<script src="../sweetalert2.all.min.js"></script>
-<script>
-    document.getElementById('deleteBtn').addEventListener('click', function() {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Send AJAX request
-                fetch('controller.php?action=delete&code=<?php echo $code; ?>')
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.status === 'success') {
-                            Swal.fire('Deleted!', data.message, 'success');
-                        } else {
-                            Swal.fire('Error!', data.message, 'error');
+if (!isset($_SESSION['ADMIN_ID'])){
+    redirect(WEB_ROOT . "admin/login.php");
+}
+
+// Fetch reservation data from the database
+$reservations = getReservations(); // Replace with your actual function to get reservations
+?>
+
+
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+</head>
+<body>
+    <table id="reservationsTable">
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($reservations as $reservation): ?>
+            <tr>
+                <td><?php echo $reservation['CONFIRMATIONCODE']; ?></td>
+                <td><?php echo $reservation['NAME']; ?></td>
+                <td><?php echo $reservation['STATUS']; ?></td>
+                <td>
+                    <button class="btn-action" data-action="confirm" data-code="<?php echo $reservation['CONFIRMATIONCODE']; ?>">Confirm</button>
+                    <button class="btn-action" data-action="cancel" data-code="<?php echo $reservation['CONFIRMATIONCODE']; ?>">Cancel</button>
+                    <button class="btn-action" data-action="checkin" data-code="<?php echo $reservation['CONFIRMATIONCODE']; ?>">Check In</button>
+                    <button class="btn-action" data-action="checkout" data-code="<?php echo $reservation['CONFIRMATIONCODE']; ?>">Check Out</button>
+                    <button class="btn-action" data-action="delete" data-code="<?php echo $reservation['CONFIRMATIONCODE']; ?>">Delete</button>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+
+    <script>
+        $(document).on('click', '.btn-action', function() {
+            var action = $(this).data('action');
+            var code = $(this).data('code');
+            var url = 'controller.php?action=' + action + '&code=' + code;
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You want to " + action + " this reservation.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, proceed!',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: url,
+                        method: 'GET',
+                        dataType: 'json',
+                        success: function(response) {
+                            if (response.status === 'success') {
+                                Swal.fire(
+                                    'Success!',
+                                    response.message,
+                                    'success'
+                                ).then(() => {
+                                    location.reload(); // Reload the page to reflect changes
+                                });
+                            } else {
+                                Swal.fire(
+                                    'Error!',
+                                    response.message,
+                                    'error'
+                                );
+                            }
+                        },
+                        error: function() {
+                            Swal.fire(
+                                'Error!',
+                                'An error occurred while processing your request.',
+                                'error'
+                            );
                         }
-                    })
-                    .catch(error => Swal.fire('Error!', 'An error occurred while deleting.', 'error'));
-            }
+                    });
+                }
+            });
         });
-    });
-
-    // You can similarly bind other buttons (e.g. Confirm, Check-in, Check-out) with SweetAlert for inline actions.
-</script>
+    </script>
