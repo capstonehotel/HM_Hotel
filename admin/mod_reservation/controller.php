@@ -126,42 +126,21 @@ switch ($action) {
           }
           break;
       
-	case 'checkin' :
-	    $sql1 = "UPDATE tblreservation SET STATUS = 'Checkedin' WHERE CONFIRMATIONCODE ='$code'";
-
-
-        $sql2 = "UPDATE tblpayment SET STATUS = 'Checkedin' WHERE CONFIRMATIONCODE ='$code'";
-
-        if ($connection->query($sql1) === TRUE && $connection->query($sql2) === TRUE) {
-        //     echo "<script> alert('Checkedin Booking Successfully.'); </script>";
-        // } else {
-        //     echo "<script> alert('Error on Checkedin Booking.'); </script>" ;
-        // }
-        // redirect('index.php');
+          case 'checkin' :
+            $sql1 = "UPDATE tblreservation SET STATUS = 'Checkedin' WHERE CONFIRMATIONCODE ='$code'";
+            $sql2 = "UPDATE tblpayment SET STATUS = 'Checkedin' WHERE CONFIRMATIONCODE ='$code'";
         
-        echo 'Executed PHP Code';
-        echo "<script>
-                Swal.fire({
-                  title: 'Success!',
-                  text: 'Check-in Booking Successfully.',
-                  icon: 'success'
-                }).then(function() {
-                  window.location.href = 'index.php';
-                });
-              </script>";
-    } else {
-        echo 'PHP Code Execution Failed';
-        echo "<script>
-                Swal.fire({
-                  title: 'Error!',
-                  text: 'Error on Check-in Booking.',
-                  icon: 'error'
-                }).then(function() {
-                  window.location.href = 'index.php';
-                });
-              </script>";
-    }
-	break;
+            if ($connection->query($sql1) === TRUE && $connection->query($sql2) === TRUE) {
+                // Redirect to index.php directly after successful update
+                header("Location: index.php");
+                exit();
+            } else {
+                // Redirect to index.php directly after failure
+                header("Location: index.php");
+                exit();
+            }
+            break;
+        
 	case 'checkout' :
 	    $sql1 = "UPDATE tblreservation SET STATUS = 'Checkedout' WHERE CONFIRMATIONCODE ='$code'";
         $sql = "UPDATE tblreservation r, tblroom rm SET ROOMNUM = ROOMNUM + 1 WHERE r.ROOMID=rm.ROOMID AND  CONFIRMATIONCODE = '$code' ";
