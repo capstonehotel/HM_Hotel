@@ -10,60 +10,46 @@ $action = (isset($_GET['action']) && $_GET['action'] != '') ? $_GET['action'] : 
 $code = $_GET['code'];
 
 switch ($action) {
-    case 'delete':
-        // Confirm delete action with SweetAlert
-        echo '<script src="../sweetalert2.all.min.js"></script>';
-        echo '<script>
-            document.addEventListener("DOMContentLoaded", function() {
-                Swal.fire({
-                    title: "Are you sure?",
-                    text: "You won\'t be able to revert this!",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Yes, delete it!"
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Perform deletion if confirmed
-                        window.location.href = "delete_process.php?action=confirm_delete&code=' . $code . '";
-                    } else {
-                        // Redirect back if cancelled
-                        window.location.href = "index.php";
-                    }
-                });
-            });
-            </script>';
-        break;
-        
-    case 'confirm_delete':
-        // Actual deletion logic to be handled here
-        $code = $_GET['code'];
-        $sql = "DELETE FROM tblreservation WHERE CONFIRMATIONCODE = '$code'";
-        $sql2 = "DELETE FROM tblpayment WHERE CONFIRMATIONCODE = '$code'";
+  case 'delete':
+    // Deletion logic
+    $code = $_GET['code'];
+    $sql = "DELETE FROM tblreservation WHERE CONFIRMATIONCODE = '$code'";
+    $sql2 = "DELETE FROM tblpayment WHERE CONFIRMATIONCODE = '$code'";
 
-        if (mysqli_query($connection, $sql) && mysqli_query($connection, $sql2)) {
-            echo '<script>
-                Swal.fire({
-                    title: "Deleted!",
-                    text: "The reservation has been deleted.",
-                    icon: "success"
-                }).then(() => {
-                    window.location.href = "index.php?confirm=true&code=' . $code . '";
-                });
-                </script>';
-        } else {
-            echo '<script>
-                Swal.fire({
-                    title: "Error!",
-                    text: "Error on deleting the reservation.",
-                    icon: "error"
-                }).then(() => {
-                    window.location.href = "index.php";
-                });
-                </script>';
-        }
-        break;
+    if (mysqli_query($connection, $sql) && mysqli_query($connection, $sql2)) {
+        echo json_encode(['status' => 'success', 'message' => 'The reservation has been deleted.']);
+    } else {
+        echo json_encode(['status' => 'error', 'message' => 'Error on deleting the reservation.']);
+    }
+    break;
+    // case 'confirm_delete':
+    //     // Actual deletion logic to be handled here
+    //     $code = $_GET['code'];
+    //     $sql = "DELETE FROM tblreservation WHERE CONFIRMATIONCODE = '$code'";
+    //     $sql2 = "DELETE FROM tblpayment WHERE CONFIRMATIONCODE = '$code'";
+
+    //     if (mysqli_query($connection, $sql) && mysqli_query($connection, $sql2)) {
+    //         echo '<script>
+    //             Swal.fire({
+    //                 title: "Deleted!",
+    //                 text: "The reservation has been deleted.",
+    //                 icon: "success"
+    //             }).then(() => {
+    //                 window.location.href = "index.php?confirm=true&code=' . $code . '";
+    //             });
+    //             </script>';
+    //     } else {
+    //         echo '<script>
+    //             Swal.fire({
+    //                 title: "Error!",
+    //                 text: "Error on deleting the reservation.",
+    //                 icon: "error"
+    //             }).then(() => {
+    //                 window.location.href = "index.php";
+    //             });
+    //             </script>';
+    //     }
+    //     break;
 
 
 

@@ -112,3 +112,50 @@ $code=$_GET['code'];
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        $('.delete-btn').on('click', function(e) {
+            e.preventDefault();
+            var code = $(this).data('code');
+            
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: 'controller.php',
+                        type: 'GET',
+                        data: {
+                            action: 'delete',
+                            code: code
+                        },
+                        success: function(response) {
+                            Swal.fire({
+                                title: 'Deleted!',
+                                text: 'The reservation has been deleted.',
+                                icon: 'success'
+                            }).then(() => {
+                                location.reload(); // Reload the page to reflect changes
+                            });
+                        },
+                        error: function() {
+                            Swal.fire({
+                                title: 'Error!',
+                                text: 'Error on deleting the reservation.',
+                                icon: 'error'
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    });
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="../sweetalert2.all.min.js"></script>
