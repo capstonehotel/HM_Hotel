@@ -6,57 +6,70 @@ if (!isset($_SESSION['ADMIN_ID'])){
     redirect(WEB_ROOT . "admin/login.php");
 }
 
-$action = isset($_GET['action']) ? $_GET['action'] : '';
+$action = (isset($_GET['action']) && $_GET['action'] != '') ? $_GET['action'] : '';
 $code = $_GET['code'];
-$response = ['success' => false, 'message' => 'Something went wrong!'];
+
+header('Content-Type: application/json'); // Set response type to JSON
 
 switch ($action) {
     case 'delete':
-        $sql = "DELETE FROM tblreservation WHERE CONFIRMATIONCODE = '$code'";
+        // Delete reservation and payment
+        $sql1 = "DELETE FROM tblreservation WHERE CONFIRMATIONCODE = '$code'";
         $sql2 = "DELETE FROM tblpayment WHERE CONFIRMATIONCODE = '$code'";
 
-        if (mysqli_query($connection, $sql) && mysqli_query($connection, $sql2)) {
-            $response = ['success' => true, 'message' => 'Reservation deleted successfully.'];
+        if (mysqli_query($connection, $sql1) && mysqli_query($connection, $sql2)) {
+            echo json_encode(['status' => 'success', 'message' => 'Reservation has been successfully deleted.']);
         } else {
-            $response = ['success' => false, 'message' => 'Failed to delete reservation.'];
+            echo json_encode(['status' => 'error', 'message' => 'Failed to delete reservation.']);
+        }
+        break;
+
+    case 'confirm':
+        // Update reservation status to 'Confirmed'
+        $sql = "UPDATE tblreservation SET status = 'Confirmed' WHERE CONFIRMATIONCODE = '$code'";
+
+        if (mysqli_query($connection, $sql)) {
+            echo json_encode(['status' => 'success', 'message' => 'Reservation has been confirmed.']);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Failed to confirm reservation.']);
         }
         break;
 
     case 'cancel':
-        $sql1 = "UPDATE tblreservation SET STATUS = 'Cancelled' WHERE CONFIRMATIONCODE = '$code'";
-        $sql = "UPDATE tblreservation r, tblroom rm SET ROOMNUM = ROOMNUM + 1 WHERE r.ROOMID=rm.ROOMID AND CONFIRMATIONCODE = '$code'";
-        $sql2 = "UPDATE tblpayment SET STATUS = 'Cancelled' WHERE CONFIRMATIONCODE = '$code'";
+        // Update reservation status to 'Cancelled'
+        $sql = "UPDATE tblreservation SET status = 'Cancelled' WHERE CONFIRMATIONCODE = '$code'";
 
-        if (mysqli_query($connection, $sql1) && mysqli_query($connection, $sql2) && mysqli_query($connection, $sql)) {
-            $response = ['success' => true, 'message' => 'Booking cancelled successfully.'];
+        if (mysqli_query($connection, $sql)) {
+            echo json_encode(['status' => 'success', 'message' => 'Reservation has been cancelled.']);
         } else {
-            $response = ['success' => false, 'message' => 'Failed to cancel booking.'];
+            echo json_encode(['status' => 'error', 'message' => 'Failed to cancel reservation.']);
         }
         break;
 
     case 'checkin':
-        $sql1 = "UPDATE tblreservation SET STATUS = 'Checkedin' WHERE CONFIRMATIONCODE = '$code'";
-        $sql2 = "UPDATE tblpayment SET STATUS = 'Checkedin' WHERE CONFIRMATIONCODE = '$code'";
+        // Update reservation status to 'Checked In'
+        $sql = "UPDATE tblreservation SET status = 'Checked In' WHERE CONFIRMATIONCODE = '$code'";
 
-        if (mysqli_query($connection, $sql1) && mysqli_query($connection, $sql2)) {
-            $response = ['success' => true, 'message' => 'Checked in successfully.'];
+        if (mysqli_query($connection, $sql)) {
+            echo json_encode(['status' => 'success', 'message' => 'Reservation has been checked in.']);
         } else {
-            $response = ['success' => false, 'message' => 'Failed to check in.'];
+            echo json_encode(['status' => 'error', 'message' => 'Failed to check in reservation.']);
         }
         break;
 
     case 'checkout':
-        $sql1 = "UPDATE tblreservation SET STATUS = 'Checkedout' WHERE CONFIRMATIONCODE = '$code'";
-        $sql2 = "UPDATE tblpayment SET STATUS = 'Checkedout' WHERE CONFIRMATIONCODE = '$code'";
-        $sql = "UPDATE tblreservation r, tblroom rm SET ROOMNUM = ROOMNUM + 1 WHERE r.ROOMID=rm.ROOMID AND CONFIRMATIONCODE = '$code'";
+        // Update reservation status to 'Checked Out'
+        $sql = "UPDATE tblreservation SET status = 'Checked Out' WHERE CONFIRMATIONCODE = '$code'";
 
-        if (mysqli_query($connection, $sql1) && mysqli_query($connection, $sql2) && mysqli_query($connection, $sql)) {
-            $response = ['success' => true, 'message' => 'Checked out successfully.'];
+        if (mysqli_query($connection, $sql)) {
+            echo json_encode(['status' => 'success', 'message' => 'Reservation has been checked out.']);
         } else {
-            $response = ['success' => false, 'message' => 'Failed to check out.'];
+            echo json_encode(['status' => 'error', 'message' => 'Failed to check out reservation.']);
         }
         break;
-}
 
-echo json_encode($response);
+    default:
+        echo json_encode(['status' => 'error', 'message' => 'Invalid action']);
+        break;
+}
 ?>

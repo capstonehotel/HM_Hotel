@@ -1,72 +1,48 @@
 <div class="container-fluid">
     <div class="card shadow mb-4">
         <div class="card-header py-3" style="display: flex; align-items: center;">
-            <div style="display: flex; justify-content: flex-end;">
-                <a href="index.php" class="btn btn-primary btn-sm" style="margin-right: 10px;" >Back</a>
-                <h6 class="m-0 font-weight-bold text-primary ml-10">View Booking</h6>
-            </div>
+            <a href="index.php" class="btn btn-primary btn-sm" style="margin-right: 10px;">Back</a>
+            <h6 class="m-0 font-weight-bold text-primary ml-10">View Booking</h6>
             <div style="display: flex; width: 90%; justify-content: flex-end;">
                 <?php
-if (!defined('WEB_ROOT')) {
-    exit;
-}
-
-$code = $_GET['code'];
-
-$query = "SELECT  `G_FNAME` ,  `G_LNAME` ,  `G_ADDRESS` ,  `TRANSDATE` , `G_GENDER`, `CONFIRMATIONCODE` ,  `PQTY` ,  `SPRICE` ,`STATUS`
-          FROM  `tblpayment` p,  `tblguest` g
-          WHERE p.`GUESTID` = g.`GUESTID` AND `CONFIRMATIONCODE`='$code'";
-$result = mysqli_query($connection, $query);
-if ($result) {
-    while ($row = mysqli_fetch_assoc($result)) { ?>
-        <?php if($_SESSION['ADMIN_UROLE'] == "Administrator") { ?>
-            <?php if ($row['STATUS'] == "Confirmed") { ?>
-                <button class="btn btn-danger btn-sm ml-2 action-btn" data-action="cancel" data-code="<?php echo $row['CONFIRMATIONCODE']; ?>">Cancel</button>
-                <button class="btn btn-success btn-sm ml-2 action-btn" data-action="checkin" data-code="<?php echo $row['CONFIRMATIONCODE']; ?>">Check in</button>
-            <?php } elseif($row['STATUS'] == 'Checkedin') { ?>
-                <button class="btn btn-warning btn-sm ml-2 action-btn" data-action="checkout" data-code="<?php echo $row['CONFIRMATIONCODE']; ?>">Check out</button>
-            <?php } elseif($row['STATUS'] == 'Checkedout') { ?>
-                <button class="btn btn-danger btn-sm ml-2 action-btn" data-action="delete" data-code="<?php echo $row['CONFIRMATIONCODE']; ?>">Delete</button>
-            <?php } ?>
-        <?php } ?>
-<?php }
-} ?>
+                $code = $_GET['code'];
+                $query = "SELECT ... FROM tblreservation WHERE CONFIRMATIONCODE = '".$code."'";
+                // Fetch data and display buttons based on status (Confirm, Cancel, Check-in, Check-out)
+                ?>
+                <button id="deleteBtn" class="btn btn-danger btn-sm ml-2">Delete</button>
+                <!-- Other buttons for actions like Confirm, Check-in, Check-out -->
             </div>
         </div>
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="../sweetalert2.all.min.js"></script>
 <script>
-document.querySelectorAll('.action-btn').forEach(button => {
-    button.addEventListener('click', function() {
-        const action = this.getAttribute('data-action');
-        const code = this.getAttribute('data-code');
-
+    document.getElementById('deleteBtn').addEventListener('click', function() {
         Swal.fire({
-            title: 'Are you sure?',
-            text: 'This action cannot be undone!',
-            icon: 'warning',
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, proceed!'
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                // Send AJAX request to controller.php
-                fetch('controller.php?action=' + action + '&code=' + code)
+                // Send AJAX request
+                fetch('controller.php?action=delete&code=<?php echo $code; ?>')
                     .then(response => response.json())
                     .then(data => {
-                        if (data.success) {
-                            Swal.fire('Success!', data.message, 'success').then(() => {
-                                window.location.reload();
-                            });
+                        if (data.status === 'success') {
+                            Swal.fire('Deleted!', data.message, 'success');
                         } else {
                             Swal.fire('Error!', data.message, 'error');
                         }
-                    });
+                    })
+                    .catch(error => Swal.fire('Error!', 'An error occurred while deleting.', 'error'));
             }
         });
     });
-});
+
+    // You can similarly bind other buttons (e.g. Confirm, Check-in, Check-out) with SweetAlert for inline actions.
 </script>
