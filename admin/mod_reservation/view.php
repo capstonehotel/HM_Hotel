@@ -1,146 +1,114 @@
-<?php
-require_once("../../includes/initialize.php");
-require_once("../../includes/config.php");
 
-if (!isset($_SESSION['ADMIN_ID'])) {
-    redirect(WEB_ROOT . "admin/login.php");
+
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3" style="display: flex; align-items: center;">
+            <div style="display: flex; justify-content: flex-end;">
+                <a href="index.php" class="btn btn-primary btn-sm" style="margin-right: 10px;" >Back</a>
+                <h6 class="m-0 font-weight-bold text-primary ml-10">View Booking</h6>
+            </div>
+            <div style="display: flex; width: 90%; justify-content: flex-end;">
+                <?php
+if (!defined('WEB_ROOT')) {
+    exit;
 }
 
-$code = $_GET['code']; // Assuming this is passed via GET
-$sql = "SELECT * FROM tblreservation WHERE CONFIRMATIONCODE = '$code'";
-$result = $connection->query($sql);
-$reservation = $result->fetch_assoc();
+$code=$_GET['code'];
 
-// Other logic related to displaying reservation details here...
+
+ 
+        $query="SELECT  `G_FNAME` ,  `G_LNAME` ,  `G_ADDRESS` ,  `TRANSDATE` , `G_GENDER`, `CONFIRMATIONCODE` ,  `PQTY` ,  `SPRICE` ,`STATUS`
+                FROM  `tblpayment` p,  `tblguest` g
+                WHERE p.`GUESTID` = g.`GUESTID` AND `CONFIRMATIONCODE`='".$code."'";
+        $result = mysqli_query($connection, $query);
+        if ($result) {
+            while ($row = mysqli_fetch_assoc($result)) { ?>
+
+                                <?php if($_SESSION['ADMIN_UROLE']=="Administrator"){ ?>
+                                    <?php if ($row['STATUS'] == "Confirmed" ) { ?>
+                                        <a href="controller.php?action=cancel&code=<?php echo $row['CONFIRMATIONCODE']; ?>" class="btn btn-danger btn-sm ml-2" ><i class="icon-edit">Cancel</a>
+                                        <a href="controller.php?action=checkin&code=<?php echo $row['CONFIRMATIONCODE']; ?>" class="btn btn-success btn-sm ml-2" ><i class="icon-edit">Check in</a>
+                                    <?php } elseif($row['STATUS'] == 'Checkedin') {?>
+                                        <a href="controller.php?action=checkout&code=<?php echo $row['CONFIRMATIONCODE'];?>" class="btn btn-warning btn-sm ml-2" ><i class="icon-edit">Check out</a>
+                                    <?php } elseif($row['STATUS'] == 'Checkedout') {?>
+                                <a href="controller.php?action=delete&code=<?php echo $row['CONFIRMATIONCODE']; ?>" class="btn btn-danger btn-sm ml-2    " ><i class="icon-edit">Delete</a>
+                                    <?php } else {?>
+                                        <a href="controller.php?action=confirm&code=<?php echo $row['CONFIRMATIONCODE']; ?>" class="btn btn-success btn-sm ml-2"  ><i class="icon-edit">Confirm</a>
+
+
+                                            <?php } ?>
+                                 <?php } ?>
+
+                                 <!-- <a href="controller.php?action=delete&code=<?php echo $row['CONFIRMATIONCODE']; ?>" class="btn btn-danger btn-sm " style="margin-left: 3px!important;"><i class="icon-edit">Delete</a>  -->
+            
+            </div>
+
+        </div>
+
+        <div class="card-body">
+            <div class="row" style="width: 100%;">
+                <div class="col-md-12 col-sm-12" style="margin-top: 10px;">  
+          <div class="box box-solid">
+            <div class="">
+              <h3 >Guest Information</h3>
+            </div>
+            <div class="box-body no-padding">
+              <ul class="nav " style="display: block;">
+                <li class="active"><a>Firstname:
+                  <span class="pull-right"><?php echo $row['G_FNAME'] ; ?></span></a></li>
+                <li class="active"><a>Lastname:
+                <span class="pull-right"><?php echo $row['G_LNAME'] ; ?></span></a></li>
+                <li class="active"><a>Address:
+                <?php echo $row['G_ADDRESS'] ; ?> </a></li>
+               <li class="active"><a>Gender:
+                <?php echo $row['G_GENDER'] ; ?> </a></li>
+              </ul>
+            </div>
+            <!-- /.box-body -->
+          </div>
+
+ </div> <br> <hr>
+  <?php } 
+            }
+        
+
+
 
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Reservation Details</title>
-    <link rel="stylesheet" href="../sweetalert2.min.css">
-    <script src="../sweetalert2.all.min.js"></script>
-</head>
-<body>
-
-<h2>Reservation Details for Confirmation Code: <?php echo $code; ?></h2>
-<!-- Display reservation details here -->
-<p>Status: <?php echo $reservation['STATUS']; ?></p>
-<!-- Add more details as needed -->
-
-<div class="actions">
-    <button id="confirmBtn" class="btn-confirm">Confirm</button>
-    <button id="cancelBtn" class="btn-cancel">Cancel</button>
-    <button id="checkinBtn" class="btn-checkin">Check In</button>
-    <button id="checkoutBtn" class="btn-checkout">Check Out</button>
-    <button id="deleteBtn" class="btn-delete">Delete</button>
+                <?php 
+                $query="SELECT * 
+                FROM  `tblreservation` r,  `tblguest` g,  `tblroom` rm, tblaccomodation a
+                WHERE r.`ROOMID` = rm.`ROOMID` 
+                AND a.`ACCOMID` = rm.`ACCOMID` 
+                AND g.`GUESTID` = r.`GUESTID`  AND r.`STATUS`<>'Cancelled'
+                AND  `CONFIRMATIONCODE` = '".$code."'";
+                $result = mysqli_query($connection, $query);
+        if ($result) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $image = WEB_ROOT. 'admin/mod_room/'.$row['ROOMIMAGE'];  
+                $day=dateDiff(date($row['ARRIVAL']),date($row['DEPARTURE']));
+                 ?>
+                 <div class="col-md-6 col-sm-12 " style="margin-top: 10px; text-align: center;"> 
+                    <img class="img-responsive img-hover" height="200px" width="250px" src="<?php echo $image ; ?>" alt=""> 
+                </div>
+                <div class="col-md-6 col-sm-12" style="margin-top: 10px;">
+                    <div class="box box-solid">
+                        <ul class="nav nav-pills nav-stacked">
+                <li><h3>
+                    <?php echo $row['ROOM']; ?> [ <small><?php echo $row['ACCOMODATION']; ?></small> ]
+                </h3>
+                </li>
+            </ul>
+                 
+                <p><strong>Check-in: </strong><?php echo date_format(date_create( $row['ARRIVAL'] ),'m/d/Y');?></p>
+                <p><strong>Check-out: </strong><?php echo date_format(date_create( $row['DEPARTURE'] ),'m/d/Y'); ?></p>
+                <p><strong>Night(s): </strong><?php echo ($day==0) ? '1' : $day; ?></p>
+                <p><strong>Price: &#8369</strong><?php echo $row['RPRICE' ]; ?></p>
+                </div>
+                </div>
+                <br><hr>
+             <?php } } ?>
+            </div>
+        </div>
+    </div>
 </div>
-
-<script>
-document.getElementById('confirmBtn').addEventListener('click', function() {
-    Swal.fire({
-        title: 'Are you sure?',
-        text: 'You are about to confirm this reservation.',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, confirm it!',
-        cancelButtonText: 'No, cancel'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            performAction('confirm', '<?php echo $code; ?>');
-        }
-    });
-});
-
-document.getElementById('cancelBtn').addEventListener('click', function() {
-    Swal.fire({
-        title: 'Are you sure?',
-        text: 'You are about to cancel this reservation.',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, cancel it!',
-        cancelButtonText: 'No, keep it'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            performAction('cancel', '<?php echo $code; ?>');
-        }
-    });
-});
-
-document.getElementById('checkinBtn').addEventListener('click', function() {
-    Swal.fire({
-        title: 'Are you sure?',
-        text: 'You are about to check in this reservation.',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, check in!',
-        cancelButtonText: 'No, cancel'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            performAction('checkin', '<?php echo $code; ?>');
-        }
-    });
-});
-
-document.getElementById('checkoutBtn').addEventListener('click', function() {
-    Swal.fire({
-        title: 'Are you sure?',
-        text: 'You are about to check out this reservation.',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, check out!',
-        cancelButtonText: 'No, cancel'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            performAction('checkout', '<?php echo $code; ?>');
-        }
-    });
-});
-
-document.getElementById('deleteBtn').addEventListener('click', function() {
-    Swal.fire({
-        title: 'Are you sure?',
-        text: 'You are about to delete this reservation. This action cannot be undone.',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, delete it!',
-        cancelButtonText: 'No, cancel'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            performAction('delete', '<?php echo $code; ?>');
-        }
-    });
-});
-
-function performAction(action, code) {
-    const xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            const response = JSON.parse(this.responseText);
-            if (response.success) {
-                Swal.fire({
-                    title: 'Success!',
-                    text: 'Action performed successfully.',
-                    icon: 'success'
-                }).then(() => {
-                    window.location.href = 'index.php';
-                });
-            } else {
-                Swal.fire({
-                    title: 'Error!',
-                    text: 'Failed to perform the action.',
-                    icon: 'error'
-                });
-            }
-        }
-    };
-    xhttp.open('POST', 'controller.php', true);
-    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xhttp.send(`action=${action}&code=${code}`);
-}
-</script>
-
-</body>
-</html>
