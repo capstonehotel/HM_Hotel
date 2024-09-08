@@ -79,7 +79,8 @@ switch ($action) {
     if (mysqli_query($connection, $sql)) {
         echo json_encode(['status' => 'success']);
     } else {
-        echo json_encode(['status' => 'error']);
+        error_log("SQL Error: " . mysqli_error($connection)); // Log the SQL error if the query fails.
+        echo json_encode(['status' => 'error', 'message' => 'Failed to confirm booking.']);
     }
     break;
 
