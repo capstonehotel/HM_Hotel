@@ -67,6 +67,15 @@ $result1 = mysqli_query($connection, $query1);
 }
 
     </style>
+    <script>
+        window.onload = function () {
+           
+            // Automatically close the window after printing or canceling
+            window.onafterprint = function () {
+                window.close();
+            };
+        };
+    </script>
 </head>
 <body onload="window.print();">
     <div class="wrapper">

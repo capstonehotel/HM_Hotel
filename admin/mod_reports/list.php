@@ -64,10 +64,7 @@
                                             <td align="center"><?php echo $row['SPRICE']; ?></td>
                                             <td align="center"><?php echo $row['STATUS']; ?></td>
                                             <td align="center">
-                                            <a href="printreport.php?code=<?php echo $row['CONFIRMATIONCODE']; ?>" target="_blank" class="btn btn-sm btn-primary">
-    <i class="icon-print"></i> Print
-</a>
-
+                                            <a href="printreport.php?code=<?php echo $row['CONFIRMATIONCODE']; ?>" target="_blank" class="btn btn-sm btn-primary"><i class="icon-print"></i> Print</a>
                                                 <?php if($_SESSION['ADMIN_UROLE']=="Administrator"){ ?>
                                                 <button type="button" class="btn btn-danger btn-sm delete-btn" data-id="<?php echo $row['CONFIRMATIONCODE']; ?>"><i class="icon-edit"></i> Delete</button>
                                                 <?php } ?>
