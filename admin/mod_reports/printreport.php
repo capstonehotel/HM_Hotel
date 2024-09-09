@@ -41,7 +41,7 @@ $result1 = mysqli_query($connection, $query1);
     <link rel="stylesheet" type="text/css" href="<?php echo WEB_ROOT; ?>css/responsive.css">
     <link rel="stylesheet" type="text/css" href="<?php echo WEB_ROOT; ?>css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="<?php echo WEB_ROOT; ?>fonts/css/font-awesome.min.css"> 
-    <link rel="stylesheet" type="text/css" href="<?php echo WEB_ROOT; ?>/css/custom-navbar.min.css"> 
+    <link rel="stylesheet" type="text/css" href="<?php echo WEB_ROOT; ?>css/custom-navbar.min.css"> 
     <link href="<?php echo WEB_ROOT; ?>css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
     <link href="<?php echo WEB_ROOT; ?>css/datepicker.css" rel="stylesheet" media="screen">
     <link href="<?php echo WEB_ROOT; ?>css/galery.css" rel="stylesheet" media="screen">
