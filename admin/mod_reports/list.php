@@ -19,38 +19,35 @@
                             </tr>
                         </thead>
                         <tbody>
-    <?php 
-        $query = "SELECT `G_FNAME`, `G_LNAME`, `TRANSDATE`, `CONFIRMATIONCODE`, `PQTY`, `STATUS`
-                  FROM `tblpayment` p, `tblguest` g
-                  WHERE p.`GUESTID` = g.`GUESTID` AND p.`STATUS` = 'Checkedout'
-                  ORDER BY p.`TRANSDATE` DESC";
-        $result = mysqli_query($connection, $query);
-        $number = 0;
-        while ($row = mysqli_fetch_assoc($result)) { 
-            $number++; ?>
-            <tr>
-                <td align="center"><?php echo $number; ?></td>
-                <td align="center"><?php echo $row['G_FNAME']; ?> <?php echo $row['G_LNAME']; ?></td>
-                <td align="center"><?php echo $row['TRANSDATE']; ?></td>
-                <td align="center"><?php echo $row['CONFIRMATIONCODE']; ?></td>
-                <td align="center"><?php echo $row['PQTY']; ?></td>
-                <td align="center"><?php echo $row['STATUS']; ?></td>
-                <td align="center">
-                    <div class="btn-group" role="group">
-                        <!-- Fix: Use GET form submission for each row's print button -->
-                        <form action="printreport.php" method="GET" target="_blank" id="printForm<?php echo $number; ?>">
-                            <input type="hidden" name="code" value="<?php echo $row['CONFIRMATIONCODE']; ?>">
-                            <button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-print"></i> Print</button>
-                        </form>
-                        <?php if ($_SESSION['ADMIN_UROLE'] == "Administrator") { ?>
-                            <button type="button" class="btn btn-sm btn-danger deleteBtn" data-id="<?php echo $row['CONFIRMATIONCODE']; ?>"><i class="icon-edit"></i> Delete</button>
-                        <?php } ?>
-                    </div>
-                </td>
-            </tr>
-        <?php } ?>  
-</tbody>
-
+                            <?php 
+                                $query = "SELECT `G_FNAME`, `G_LNAME`, `TRANSDATE`, `CONFIRMATIONCODE`, `PQTY`, `STATUS`
+                                          FROM `tblpayment` p, `tblguest` g
+                                          WHERE p.`GUESTID` = g.`GUESTID` AND p.`STATUS` = 'Checkedout'
+                                          ORDER BY p.`TRANSDATE` DESC";
+                                $result = mysqli_query($connection, $query);
+                                $number = 0;
+                                while ($row = mysqli_fetch_assoc($result)) { $number++; ?>
+                                    <tr>
+                                        <td align="center"><?php echo $number; ?></td>
+                                        <td align="center"><?php echo $row['G_FNAME']; ?> <?php echo $row['G_LNAME']; ?></td>
+                                        <td align="center"><?php echo $row['TRANSDATE']; ?></td>
+                                        <td align="center"><?php echo $row['CONFIRMATIONCODE']; ?></td>
+                                        <td align="center"><?php echo $row['PQTY']; ?></td>
+                                        <td align="center"><?php echo $row['STATUS']; ?></td>
+                                        <td align="center">
+                                            <div class="btn-group" role="group">
+                                                <form action="printreport.php" method="GET" target="_blank">
+                                                    <input type="hidden" name="code" value="<?php echo $row['CONFIRMATIONCODE']; ?>">
+                                                    <button class="btn btn-sm btn-primary"><i class="fa fa-print"></i> Print</button>
+                                                </form>
+                                                <?php if ($_SESSION['ADMIN_UROLE'] == "Administrator") { ?>
+                                                    <button type="button" class="btn btn-sm btn-danger deleteBtn" data-id="<?php echo $row['CONFIRMATIONCODE']; ?>"><i class="icon-edit"></i> Delete</button>
+                                                <?php } ?>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php } ?>  
+                        </tbody>
                     </table>
                 </div>
             </div>
