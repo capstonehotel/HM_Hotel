@@ -115,7 +115,7 @@ $(document).ready(function() {
                     success: function(response) {
                         Swal.fire(
                             'Deleted!',
-                            'The reservation has been deleted.',
+                            'The check-out reservation has been deleted.',
                             'success'
                         ).then(() => {
                             location.reload(); // Reload the page after deletion

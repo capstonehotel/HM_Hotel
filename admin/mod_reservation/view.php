@@ -116,6 +116,20 @@ $code=$_GET['code'];
             e.preventDefault();
             var action = $(this).data('action');
             var code = $(this).data('code');
+            var actionText = ''; // Declare a variable to hold the dynamic action text
+
+            // Set the action text based on the action performed
+            if(action === 'confirm') {
+                actionText = 'confirmed';
+            } else if(action === 'checkin') {
+                actionText = 'checked in';
+            } else if(action === 'checkout') {
+                actionText = 'checked out';
+            } else if(action === 'cancel') {
+                actionText = 'cancelled';
+            } else if(action === 'delete') {
+                actionText = 'deleted';
+            }
 
             Swal.fire({
                 title: 'Are you sure?',
@@ -137,7 +151,7 @@ $code=$_GET['code'];
                         success: function(response) {
                             Swal.fire({
                                 title: 'Success!',
-                                text: 'Action completed successfully.',
+                                text: `Booking has been ${actionText} successfully.`,
                                 icon: 'success'
                             }).then(() => {
                                 // Redirect to index.php directly
