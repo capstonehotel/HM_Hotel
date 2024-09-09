@@ -88,7 +88,7 @@ $result1 = mysqli_query($connection, $query1);
         window.onload = checkPrintStatus;
     </script>
 </head>
-<body onload="window.print();">
+<body >
     <div class="wrapper">
         <section class="invoice">
             <div class="row">
