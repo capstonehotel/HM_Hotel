@@ -8,6 +8,7 @@ if (!isset($_GET['code']) || empty($_GET['code'])) {
 
 $code = mysqli_real_escape_string($connection, $_GET['code']);
 
+// Fetch guest and reservation data
 $query = "SELECT g.`GUESTID`, `G_FNAME`, `G_LNAME`, `G_ADDRESS`, `G_CITY`, `ZIP`, `G_NATIONALITY`, `CONFIRMATIONCODE`, `TRANSDATE`, `ARRIVAL`, `DEPARTURE`, `RPRICE`
           FROM `tblguest` g
           JOIN `tblreservation` r ON g.`GUESTID` = r.`GUESTID`
@@ -24,10 +25,9 @@ $query1 = "SELECT A.ACCOMID, A.ACCOMODATION, RM.ROOM, RM.ROOMDESC, RM.NUMPERSON,
            FROM tblaccomodation A
            JOIN tblroom RM ON A.ACCOMID = RM.ACCOMID
            JOIN tblreservation RS ON RM.ROOMID = RS.ROOMID 
-           WHERE RS.CONFIRMATIONCODE = '".$_GET['code']."'";
+           WHERE RS.CONFIRMATIONCODE = '$code'";
 
 $result1 = mysqli_query($connection, $query1);
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,38 +48,26 @@ $result1 = mysqli_query($connection, $query1);
     <link href="../../css/ekko-lightbox.css" rel="stylesheet">
     <style>
        @media print {
-    body {
-        margin: 0.5in;
-    }
-    
-    thead th {
-        background-color: #f2f2f2; /* Change this to your desired background color */
-        color: #333; /* Change this to your desired text color */
-    }
+            body {
+                margin: 0.5in;
+            }
 
-    .lead {
-        font-weight: bold;
-    }
+            thead th {
+                background-color: #f2f2f2; /* Change this to your desired background color */
+                color: #333; /* Change this to your desired text color */
+            }
 
-    .table th, .table td {
-        border: 1px solid #ddd; /* Ensure borders are visible in print */
-    }
-}
+            .lead {
+                font-weight: bold;
+            }
 
+            .table th, .table td {
+                border: 1px solid #ddd; /* Ensure borders are visible in print */
+            }
+        }
     </style>
-    <script>
-        window.onload = function () {
-            // Trigger print dialog
-            window.print();
-            
-            // Automatically close the window after printing or canceling
-            window.onafterprint = function () {
-                window.close();
-            };
-        };
-    </script>
 </head>
-<body >
+<body onload="window.print();">
     <div class="wrapper">
         <section class="invoice">
             <div class="row">
@@ -103,17 +91,17 @@ $result1 = mysqli_query($connection, $query1);
                 <div class="col-sm-4 invoice-col">
                     To
                     <address>
-                        <strong><?php echo $row['G_FNAME'] . ' ' . $row['G_LNAME']; ?></strong><br>
-                        <?php echo $row['G_ADDRESS']; ?><br>
-                        <?php echo $row['G_CITY']; ?><br>
-                        <?php echo $row['G_NATIONALITY']; ?><br>
-                        <?php echo $row['ZIP']; ?>
+                        <strong><?php echo htmlspecialchars($row['G_FNAME'] . ' ' . $row['G_LNAME']); ?></strong><br>
+                        <?php echo htmlspecialchars($row['G_ADDRESS']); ?><br>
+                        <?php echo htmlspecialchars($row['G_CITY']); ?><br>
+                        <?php echo htmlspecialchars($row['G_NATIONALITY']); ?><br>
+                        <?php echo htmlspecialchars($row['ZIP']); ?>
                     </address>
                 </div>
                 <div class="col-sm-4 invoice-col">
-                    <b>Invoice No.</b> 00<?php echo $row['GUESTID']; ?><br>
-                    <b>Confirmation ID:</b> <?php echo $row['CONFIRMATIONCODE']; ?><br>
-                    <b>Transaction Date:</b> <?php echo $row['TRANSDATE']; ?>
+                    <b>Invoice No.</b> 00<?php echo htmlspecialchars($row['GUESTID']); ?><br>
+                    <b>Confirmation ID:</b> <?php echo htmlspecialchars($row['CONFIRMATIONCODE']); ?><br>
+                    <b>Transaction Date:</b> <?php echo htmlspecialchars($row['TRANSDATE']); ?>
                 </div>
             </div>
             <div class="row">
@@ -139,13 +127,13 @@ $result1 = mysqli_query($connection, $query1);
                                 $tot += $subtotal;
                                 ?>
                                 <tr> 
-                                    <td><?php echo $row1['ACCOMODATION'] . ' ' . $row1['ROOM']; ?></td>
-                                    <td><?php echo $row1['ROOMDESC']; ?><br><?php echo $row1['NUMPERSON']; ?></td>
-                                    <td>&#8369; <?php echo $row1['PRICE']; ?></td>
-                                    <td><?php echo date_format(date_create($row1['ARRIVAL']), 'm/d/Y'); ?></td>
-                                    <td><?php echo date_format(date_create($row1['DEPARTURE']), 'm/d/Y'); ?></td>
-                                    <td><?php echo ($days == 0) ? '1' : $days; ?></td>
-                                    <td>&#8369; <?php echo $subtotal; ?></td>
+                                    <td><?php echo htmlspecialchars($row1['ACCOMODATION'] . ' ' . $row1['ROOM']); ?></td>
+                                    <td><?php echo htmlspecialchars($row1['ROOMDESC']); ?><br><?php echo htmlspecialchars($row1['NUMPERSON']); ?></td>
+                                    <td>&#8369; <?php echo htmlspecialchars($row1['PRICE']); ?></td>
+                                    <td><?php echo htmlspecialchars(date_format(date_create($row1['ARRIVAL']), 'm/d/Y')); ?></td>
+                                    <td><?php echo htmlspecialchars(date_format(date_create($row1['DEPARTURE']), 'm/d/Y')); ?></td>
+                                    <td><?php echo htmlspecialchars($days == 0 ? '1' : $days); ?></td>
+                                    <td>&#8369; <?php echo htmlspecialchars($subtotal); ?></td>
                                 </tr>
                             <?php } ?>
                         </tbody>
@@ -159,7 +147,7 @@ $result1 = mysqli_query($connection, $query1);
                         <table class="table">
                             <tr>
                                 <th style="width:50%">Total:</th>
-                                <td>&#8369; <?php echo $tot; ?></td>
+                                <td>&#8369; <?php echo htmlspecialchars($tot); ?></td>
                             </tr>
                         </table>
                     </div>
