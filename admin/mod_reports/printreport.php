@@ -69,7 +69,9 @@ $result1 = mysqli_query($connection, $query1);
     </style>
     <script>
         window.onload = function () {
-           
+            // Trigger print dialog
+            window.print();
+            
             // Automatically close the window after printing or canceling
             window.onafterprint = function () {
                 window.close();
@@ -77,7 +79,7 @@ $result1 = mysqli_query($connection, $query1);
         };
     </script>
 </head>
-<body onload="window.print();">
+<body >
     <div class="wrapper">
         <section class="invoice">
             <div class="row">
