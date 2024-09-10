@@ -267,7 +267,7 @@ for ($i=0; $i < $count_cart  ; $i++) {
       </tbody>
                  </table>
             </div>
-            <div id="confirmModal" class="modal fade" role="dialog">
+              <div id="confirmModal" class="modal fade" role="dialog">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-body">
@@ -291,29 +291,43 @@ for ($i=0; $i < $count_cart  ; $i++) {
         </div>
       </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+<style>
+        .swal2-cancel {
+            background-color: red;
+            color: white;
+            margin-left: 10px;
+        }
+        .swal2-cancel:hover, .swal2-cancel:focus {
+            background-color: #b22222; /* Slightly darker red */
+            color: white;
+        }
+    </style>
 <script>
-$(document).ready(function() {
-    // Intercept the submit booking button click
-    $('button[data-target="#confirmModal"]').on('click', function(e) {
-        e.preventDefault(); // Prevent the default modal action
-
-        // Show SweetAlert instead of the modal
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "Do you want to submit your booking?",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, submit it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // If confirmed, submit the form
-                $('form[name="personal"]').submit();
-            }
-        });
+function showConfirmAlert() {
+    Swal.fire({
+        title: 'Are you sure you want to submit the booking?',
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No',
+        customClass: {
+            confirmButton: 'btn btn-primary',
+            cancelButton: 'btn btn-default'
+        },
+        buttonsStyling: false
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Create a form to submit the booking
+            var form = document.createElement('form');
+            form.method = 'POST';
+            form.action = ''; // Set the form action if needed
+            var input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'btnsubmitbooking';
+            input.value = '1'; // Set the value if needed
+            form.appendChild(input);
+            document.body.appendChild(form);
+            form.submit();
+        }
     });
-});
+}
 </script>
