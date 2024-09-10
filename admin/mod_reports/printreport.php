@@ -37,15 +37,15 @@ $result1 = mysqli_query($connection, $query1);
     <meta name="description" content="">
     <meta name="author" content="">
     <title>HM Hotel Reservation</title>
-    <link rel="stylesheet" type="text/css" href="../../style.css">  
-    <link rel="stylesheet" type="text/css" href="../../css/responsive.css">
-    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="../../fonts/css/font-awesome.min.css"> 
-    <link rel="stylesheet" type="text/css" href="../../css/custom-navbar.min.css"> 
-    <link href="../../css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
-    <link href="../../css/datepicker.css" rel="stylesheet" media="screen">
-    <link href="../../css/galery.css" rel="stylesheet" media="screen">
-    <link href="../../css/ekko-lightbox.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="<?php echo WEB_ROOT; ?>style.css">  
+    <link rel="stylesheet" type="text/css" href="<?php echo WEB_ROOT; ?>css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo WEB_ROOT; ?>css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo WEB_ROOT; ?>fonts/css/font-awesome.min.css"> 
+    <link rel="stylesheet" type="text/css" href="<?php echo WEB_ROOT; ?>css/custom-navbar.min.css"> 
+    <link href="<?php echo WEB_ROOT; ?>css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+    <link href="<?php echo WEB_ROOT; ?>css/datepicker.css" rel="stylesheet" media="screen">
+    <link href="<?php echo WEB_ROOT; ?>css/galery.css" rel="stylesheet" media="screen">
+    <link href="<?php echo WEB_ROOT; ?>css/ekko-lightbox.css" rel="stylesheet">
     <style>
        @media print {
     body {
