@@ -67,26 +67,38 @@ $result1 = mysqli_query($connection, $query1);
 }
 
     </style>
-     <script>
-        // Function to check if the user has canceled the print dialog
-        function checkPrintStatus() {
-            if (window.print) {
-                // Listen for print completion
-                window.onafterprint = function() {
-                    window.location.href = "index.php"; // Replace with the URL you want to redirect to
-                };
+    <script>
+    function handlePrint() {
+        let printCanceled = false;
 
-                // Trigger the print dialog
-                window.print();
-            } else {
-                // If the print function is not supported, redirect immediately
-                window.location.href = "index.php"; // Replace with the URL you want to redirect to
+        // Detect if the print dialog was canceled
+        window.onbeforeprint = function() {
+            printCanceled = false; // Reset cancellation status before print
+        };
+
+        window.onafterprint = function() {
+            if (printCanceled) {
+                // If print was canceled, redirect to the first page (index.php)
+                window.location.href = "index.php"; // Replace with your desired URL
             }
-        }
+            // Otherwise, stay on the same page after printing
+        };
 
-        // Call the function when the document is loaded
-        window.onload = checkPrintStatus;
-    </script>
+        // Optional: Detect Esc key press to track cancel action
+        window.onkeydown = function(e) {
+            if (e.key === "Escape") {
+                printCanceled = true;
+            }
+        };
+
+        // Trigger the print dialog
+        window.print();
+    }
+
+    // Trigger the print process when the page is loaded
+    window.onload = handlePrint;
+</script>
+
 </head>
 <body >
     <div class="wrapper">
