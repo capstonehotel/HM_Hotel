@@ -267,8 +267,7 @@ for ($i=0; $i < $count_cart  ; $i++) {
       </tbody>
                  </table>
             </div>
-                <!-- Keep the modal as is -->
-<div id="confirmModal" class="modal fade" role="dialog">
+            <div id="confirmModal" class="modal fade" role="dialog">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-body">
@@ -281,8 +280,17 @@ for ($i=0; $i < $count_cart  ; $i++) {
         </div>
     </div>
 </div>
-
-<!-- SweetAlert JS -->
+<div class="row"> 
+  <h3 align="right">Total: &#8369 <?php echo   $_SESSION['pay'] ;?></h3>
+</div>
+    <div class="pull-right flex-end" align="right">
+       <button  type="button" class="btn btn-primary" align="right"   onclick="showConfirmAlert()" >Submit Booking</button>
+    </div>
+</form>
+  </div>  
+        </div>
+      </div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
