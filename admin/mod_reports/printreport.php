@@ -68,31 +68,19 @@ $result1 = mysqli_query($connection, $query1);
 
     </style>
      <script>
-    // Function to check if the user has canceled the print dialog
     function checkPrintStatus() {
-        if (window.print) {
-            let printCanceled = true; // Assume printing is canceled by default
+        // Trigger the print dialog
+        window.print();
 
-            // Listen for print completion
-            window.onafterprint = function() {
-                printCanceled = false; // Set to false if print completes
-                window.location.href = "index.php"; // Redirect to the first page after printing
-            };
+        // Listen for when the print dialog is closed (either print or cancel)
+        window.onafterprint = function() {
+            window.location.href = "index.php"; // Redirect to the first page after printing or canceling
+        };
 
-            // Trigger the print dialog
-            window.print();
-
-            // Use a small timeout to detect if the print dialog was closed without printing
-            setTimeout(function() {
-                if (printCanceled) {
-                    // Redirect if print was canceled
-                    window.location.href = "index.php"; // Redirect to the first page if print is canceled
-                }
-            }, 500); // Adjust the timeout duration as needed
-        } else {
-            // If the print function is not supported, redirect immediately
-            window.location.href = "index.php"; // Redirect to the first page immediately
-        }
+        // Fallback: Redirect to the first page after a delay in case `onafterprint` doesn't work in some browsers
+        setTimeout(function() {
+            window.location.href = "index.php"; // Redirect to the first page after a set time
+        }, 1000); // Adjust delay if necessary (1 second in this case)
     }
 
     // Call the function when the document is loaded
