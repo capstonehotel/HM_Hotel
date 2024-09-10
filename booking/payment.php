@@ -267,32 +267,45 @@ for ($i=0; $i < $count_cart  ; $i++) {
       </tbody>
                  </table>
             </div>
-            <div class="row"> 
-  <h3 align="right">Total: &#8369 <?php echo $_SESSION['pay']; ?></h3>
-</div>
-<div class="pull-right flex-end" align="right">
-  <button type="button" class="btn btn-primary" align="right" id="submitBookingBtn">Submit Booking</button>
+                <!-- Keep the modal as is -->
+<div id="confirmModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>Are you sure you want to submit the booking?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                <button type="submit" class="btn btn-primary" align="right" name="btnsubmitbooking">Yes</button>
+            </div>
+        </div>
+    </div>
 </div>
 
+<!-- SweetAlert JS -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-  document.getElementById('submitBookingBtn').addEventListener('click', function(e) {
-    e.preventDefault(); // Prevent default form submission
 
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "Do you want to submit the booking?",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, submit it!',
-      cancelButtonText: 'No'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // If user confirms, submit the form
-        document.querySelector('form').submit(); 
-      }
+<script>
+$(document).ready(function() {
+    // Intercept the submit booking button click
+    $('button[data-target="#confirmModal"]').on('click', function(e) {
+        e.preventDefault(); // Prevent the default modal action
+
+        // Show SweetAlert instead of the modal
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you want to submit your booking?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, submit it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // If confirmed, submit the form
+                $('form[name="personal"]').submit();
+            }
+        });
     });
-  });
+});
 </script>
