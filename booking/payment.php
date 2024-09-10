@@ -6,7 +6,7 @@
 
 if (!isset($_SESSION['monbela_cart'])) {
   # code...
-  redirect('https://mcchmhotelreservation.com/index.php');
+  redirect( WEB_ROOT. 'index.php');
 }
 
 function createRandomPassword() {
