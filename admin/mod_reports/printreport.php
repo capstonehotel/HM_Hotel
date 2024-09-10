@@ -67,26 +67,49 @@ $result1 = mysqli_query($connection, $query1);
 }
 
     </style>
-     <script>
-        // Function to check if the user has canceled the print dialog
-        function checkPrintStatus() {
-            if (window.print) {
-                // Listen for print completion
-                window.onafterprint = function() {
-                    window.location.href = "index.php"; // Replace with the URL you want to redirect to
-                };
+    <script>
+    // Function to check if the user has canceled the print dialog
+    function checkPrintStatus() {
+        if (window.print) {
+            // Variable to track whether the print dialog was closed or completed
+            let printCancelled = false;
 
-                // Trigger the print dialog
+            // Listen for the "beforeprint" event to trigger the print dialog
+            window.onbeforeprint = function() {
+                printCancelled = false; // Reset the cancellation flag
+            };
+
+            // Listen for the "afterprint" event to handle print completion
+            window.onafterprint = function() {
+                if (!printCancelled) {
+                    // If the user closed the print dialog without printing, return to the website
+                    window.location.href = "index.php"; // Replace with your desired URL
+                }
+            };
+
+            // Delay the print dialog by 100ms to ensure proper execution
+            setTimeout(function() {
                 window.print();
-            } else {
-                // If the print function is not supported, redirect immediately
-                window.location.href = "index.php"; // Replace with the URL you want to redirect to
-            }
-        }
+            }, 100);
 
-        // Call the function when the document is loaded
-        window.onload = checkPrintStatus;
-    </script>
+            // If the user presses escape or cancels the print dialog manually, set the cancellation flag
+            setTimeout(function() {
+                window.onkeydown = function(e) {
+                    if (e.key === "Escape") {
+                        printCancelled = true; // Set the flag when print is canceled
+                    }
+                };
+            }, 200);
+        } else {
+            // If the print function is not supported, redirect immediately
+            window.location.href = "index.php"; // Replace with your desired URL
+        }
+    }
+
+    // Call the function when the document is loaded
+    window.onload = checkPrintStatus;
+</script>
+
 </head>
 <body >
     <div class="wrapper">
