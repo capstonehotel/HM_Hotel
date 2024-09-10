@@ -68,21 +68,25 @@ $result1 = mysqli_query($connection, $query1);
 
     </style>
      <script>
-    // Function to trigger the print dialog without redirection
-    function checkPrintStatus() {
-        if (window.print) {
-            // Simply trigger the print dialog
-            window.print();
-        } else {
-            // Handle if the print function is not supported
-            console.log('Print functionality is not supported.');
+        // Function to check if the user has canceled the print dialog
+        function checkPrintStatus() {
+            if (window.print) {
+                // Listen for print completion
+                window.onafterprint = function() {
+                    window.location.href = "index.php"; // Replace with the URL you want to redirect to
+                };
+
+                // Trigger the print dialog
+                window.print();
+            } else {
+                // If the print function is not supported, redirect immediately
+                window.location.href = "index.php"; // Replace with the URL you want to redirect to
+            }
         }
-    }
 
-    // Call the function when the document is loaded
-    window.onload = checkPrintStatus;
-</script>
-
+        // Call the function when the document is loaded
+        window.onload = checkPrintStatus;
+    </script>
 </head>
 <body >
     <div class="wrapper">
