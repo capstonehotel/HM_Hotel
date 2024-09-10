@@ -76,7 +76,7 @@ $result1 = mysqli_query($connection, $query1);
             // Listen for print completion
             window.onafterprint = function() {
                 printCanceled = false; // Set to false if print completes
-                window.location.href = "index.php"; // Redirect after printing
+                window.location.href = "index.php"; // Redirect to the first page after printing
             };
 
             // Trigger the print dialog
@@ -86,12 +86,12 @@ $result1 = mysqli_query($connection, $query1);
             setTimeout(function() {
                 if (printCanceled) {
                     // Redirect if print was canceled
-                    window.location.href = "index.php"; // Replace with the URL to redirect to
+                    window.location.href = "index.php"; // Redirect to the first page if print is canceled
                 }
-            }, 1000); // Adjust the timeout duration as needed
+            }, 500); // Adjust the timeout duration as needed
         } else {
             // If the print function is not supported, redirect immediately
-            window.location.href = "index.php"; // Replace with the URL to redirect to
+            window.location.href = "index.php"; // Redirect to the first page immediately
         }
     }
 
