@@ -68,46 +68,43 @@ $result1 = mysqli_query($connection, $query1);
 
     </style>
     <script>
-    // Function to check if the user has canceled the print dialog
-    function checkPrintStatus() {
+    // Function to handle the print process and stay on the same page after canceling or printing
+    function handlePrint() {
         if (window.print) {
-            // Variable to track whether the print dialog was closed or completed
+            // Variable to track print cancelation
             let printCancelled = false;
 
-            // Listen for the "beforeprint" event to trigger the print dialog
+            // Detect when the print dialog is triggered
             window.onbeforeprint = function() {
-                printCancelled = false; // Reset the cancellation flag
+                printCancelled = false; // Reset cancellation status
             };
 
-            // Listen for the "afterprint" event to handle print completion
+            // Detect when the print dialog is closed
             window.onafterprint = function() {
-                if (!printCancelled) {
-                    // If the user closed the print dialog without printing, return to the website
-                    window.location.href = "index.php"; // Replace with your desired URL
+                // If the print dialog is closed without printing, the user stays on the current page
+                printCancelled = true;
+            };
+
+            // Trigger print dialog without opening a new page
+            setTimeout(function() {
+                window.print(); // Call the print function
+            }, 100);
+
+            // Optional: Detect Esc key press to flag print cancelation
+            window.onkeydown = function(e) {
+                if (e.key === "Escape") {
+                    printCancelled = true;
                 }
             };
 
-            // Delay the print dialog by 100ms to ensure proper execution
-            setTimeout(function() {
-                window.print();
-            }, 100);
-
-            // If the user presses escape or cancels the print dialog manually, set the cancellation flag
-            setTimeout(function() {
-                window.onkeydown = function(e) {
-                    if (e.key === "Escape") {
-                        printCancelled = true; // Set the flag when print is canceled
-                    }
-                };
-            }, 200);
         } else {
-            // If the print function is not supported, redirect immediately
-            window.location.href = "index.php"; // Replace with your desired URL
+            // If print is not supported, redirect back to the original page
+            window.location.href = "index.php"; // Replace with your website URL
         }
     }
 
-    // Call the function when the document is loaded
-    window.onload = checkPrintStatus;
+    // Trigger the print process on page load
+    window.onload = handlePrint;
 </script>
 
 </head>
