@@ -67,46 +67,26 @@ $result1 = mysqli_query($connection, $query1);
 }
 
     </style>
-    <script>
-    // Function to handle the print process and stay on the same page after canceling or printing
-    function handlePrint() {
-        if (window.print) {
-            // Variable to track print cancelation
-            let printCancelled = false;
+     <script>
+        // Function to check if the user has canceled the print dialog
+        function checkPrintStatus() {
+            if (window.print) {
+                // Listen for print completion
+                window.onafterprint = function() {
+                    window.location.href = "index.php"; // Replace with the URL you want to redirect to
+                };
 
-            // Detect when the print dialog is triggered
-            window.onbeforeprint = function() {
-                printCancelled = false; // Reset cancellation status
-            };
-
-            // Detect when the print dialog is closed
-            window.onafterprint = function() {
-                // If the print dialog is closed without printing, the user stays on the current page
-                printCancelled = true;
-            };
-
-            // Trigger print dialog without opening a new page
-            setTimeout(function() {
-                window.print(); // Call the print function
-            }, 100);
-
-            // Optional: Detect Esc key press to flag print cancelation
-            window.onkeydown = function(e) {
-                if (e.key === "Escape") {
-                    printCancelled = true;
-                }
-            };
-
-        } else {
-            // If print is not supported, redirect back to the original page
-            window.location.href = "index.php"; // Replace with your website URL
+                // Trigger the print dialog
+                window.print();
+            } else {
+                // If the print function is not supported, redirect immediately
+                window.location.href = "index.php"; // Replace with the URL you want to redirect to
+            }
         }
-    }
 
-    // Trigger the print process on page load
-    window.onload = handlePrint;
-</script>
-
+        // Call the function when the document is loaded
+        window.onload = checkPrintStatus;
+    </script>
 </head>
 <body >
     <div class="wrapper">
