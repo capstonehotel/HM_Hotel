@@ -267,67 +267,32 @@ for ($i=0; $i < $count_cart  ; $i++) {
       </tbody>
                  </table>
             </div>
-                <div id="confirmModal" class="modal fade" role="dialog" >
-    <div class="modal-dialog modal-sm" >
-        <div class="modal-content" >
-            <div class="modal-body">
-                <p>Are you sure you want to submit the booking?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                <button type="submit" class="btn btn-primary" align="right" name="btnsubmitbooking">Yes</button>
-            </div>
-        </div>
-    </div>
+            <div class="row"> 
+  <h3 align="right">Total: &#8369 <?php echo $_SESSION['pay']; ?></h3>
 </div>
-<div class="row"> 
-  <h3 align="right">Total: &#8369 <?php echo   $_SESSION['pay'] ;?></h3>
+<div class="pull-right flex-end" align="right">
+  <button type="button" class="btn btn-primary" align="right" id="submitBookingBtn">Submit Booking</button>
 </div>
-    <div class="pull-right flex-end" align="right">
-       <button  type="button" class="btn btn-primary" align="right"   onclick="showConfirmAlert()" >Submit Booking</button>
-    </div>
-</form>
-  </div>  
-        </div>
-      </div>
-</div>
-<style>
-        .swal2-cancel {
-            background-color: red;
-            color: white;
-            margin-left: 10px;
-        }
-        .swal2-cancel:hover, .swal2-cancel:focus {
-            background-color: #b22222; /* Slightly darker red */
-            color: white;
-        }
-    </style>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-function showConfirmAlert() {
+  document.getElementById('submitBookingBtn').addEventListener('click', function(e) {
+    e.preventDefault(); // Prevent default form submission
+
     Swal.fire({
-        title: 'Are you sure you want to submit the booking?',
-        showCancelButton: true,
-        confirmButtonText: 'Yes',
-        cancelButtonText: 'No',
-        customClass: {
-            confirmButton: 'btn btn-primary',
-            cancelButton: 'btn btn-default'
-        },
-        buttonsStyling: false
+      title: 'Are you sure?',
+      text: "Do you want to submit the booking?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, submit it!',
+      cancelButtonText: 'No'
     }).then((result) => {
-        if (result.isConfirmed) {
-            // Create a form to submit the booking
-            var form = document.createElement('form');
-            form.method = 'POST';
-            form.action = ''; // Set the form action if needed
-            var input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = 'btnsubmitbooking';
-            input.value = '1'; // Set the value if needed
-            form.appendChild(input);
-            document.body.appendChild(form);
-            form.submit();
-        }
+      if (result.isConfirmed) {
+        // If user confirms, submit the form
+        document.querySelector('form').submit(); 
+      }
     });
-}
+  });
 </script>
