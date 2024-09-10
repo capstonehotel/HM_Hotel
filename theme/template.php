@@ -1,4 +1,4 @@
-<?php
+<?php include __DIR__ . '/../config.php'; ?><?php
 if(isset($_POST['avail'])){
 $_SESSION['from'] = $_POST['from'];
 $_SESSION['to']  = $_POST['to'];
@@ -8,7 +8,7 @@ $_SESSION['to']  = $_POST['to'];
 
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
-  <head><script src="https://mcchmhotelreservation.com/theme/assets/js/color-modes.js"></script>
+  <head><script src="<?php echo WEB_ROOT; ?>theme/assets/js/color-modes.js"></script>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
