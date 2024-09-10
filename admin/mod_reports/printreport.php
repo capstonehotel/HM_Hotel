@@ -67,12 +67,15 @@ $result1 = mysqli_query($connection, $query1);
 }
 
     </style>
-    <script>
-    // Function to trigger print without redirection
+     <script>
+    // Function to trigger the print dialog without redirection
     function checkPrintStatus() {
         if (window.print) {
-            // Trigger the print dialog
+            // Simply trigger the print dialog
             window.print();
+        } else {
+            // Handle if the print function is not supported
+            console.log('Print functionality is not supported.');
         }
     }
 
