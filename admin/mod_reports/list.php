@@ -24,7 +24,7 @@
             display: block;
         }
         td {
-            border: red thin solid;
+            border: red thin solid !important;
         }
     }
 </style>
