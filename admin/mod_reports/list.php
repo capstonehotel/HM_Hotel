@@ -203,12 +203,12 @@ $result1 = mysqli_query($connection, $query1);
 <!-- Initialize DataTables -->
 <script>
 
-<?php 
-if (isset($_GET['code'])) {
+<?php if (isset($_GET['code'])) { ?>
+   <script> 
     prt();
     alert('print');
-}
-?>
+    </script>
+<?php } ?>
 
 $(document).ready(function() {
     // Initialize DataTables for check-out tab
