@@ -64,7 +64,7 @@
                                             <td align="center"><?php echo $row['SPRICE']; ?></td>
                                             <td align="center"><?php echo $row['STATUS']; ?></td>
                                             <td align="center">
-                                            <a href="#print" onclick='printDiv();' class="btn btn-sm btn-primary"><i class="icon-print"></i> Print</a>
+                                            <button onclick='printDiv();' class="btn btn-sm btn-primary"><i class="icon-print"></i> Print</button>
                                                 <?php if($_SESSION['ADMIN_UROLE']=="Administrator"){ ?>
                                                 <button type="button" class="btn btn-danger btn-sm delete-btn" data-id="<?php echo $row['CONFIRMATIONCODE']; ?>"><i class="icon-edit"></i> Delete</button>
                                                 <?php } ?>
