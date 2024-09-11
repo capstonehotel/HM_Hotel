@@ -16,6 +16,9 @@
     .table-responsive {
         display: none; /* Hide table initially */
     }
+    #printthis {
+        visibility: hidden;
+    }
 </style>
 
 <div class="container-fluid">
@@ -207,8 +210,6 @@ $result1 = mysqli_query($connection, $query1);
     alert('print');
     printJS('printthis');
     $("#printthis").css("visibility", "visible");
-<?php } else { ?>
-    $("#printthis").css("visibility", "hidden");
 <?php } ?>
 
 $(document).ready(function() {
