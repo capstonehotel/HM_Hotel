@@ -64,7 +64,7 @@
                                             <td align="center"><?php echo $row['SPRICE']; ?></td>
                                             <td align="center"><?php echo $row['STATUS']; ?></td>
                                             <td align="center">
-                                            <button onclick='printDiv();' class="btn btn-sm btn-primary"><i class="icon-print"></i> Print</button>
+                                            <a href="?code=<?php echo $row['CONFIRMATIONCODE']; ?>" class="btn btn-sm btn-primary"><i class="icon-print"></i> Print</a>
                                                 <?php if($_SESSION['ADMIN_UROLE']=="Administrator"){ ?>
                                                 <button type="button" class="btn btn-danger btn-sm delete-btn" data-id="<?php echo $row['CONFIRMATIONCODE']; ?>"><i class="icon-edit"></i> Delete</button>
                                                 <?php } ?>
@@ -197,7 +197,8 @@ $result1 = mysqli_query($connection, $query1);
                 </div>
             </div>
         </section>
-<?php } ?>
+<?php } else { ?>
+<?php echo 'none'; } ?>
 
 <!-- Initialize DataTables -->
 <script>
@@ -254,21 +255,8 @@ $(document).ready(function() {
 
 
 // print
-function printDiv() 
-{
-
-  var divToPrint=document.getElementById('printthis');
-
-  var newWin=window.open('','Print-Window');
-
-  newWin.document.open();
-
-  newWin.document.write('<html><body onload="window.print()">'+divToPrint.innerHTML+'</body></html>');
-
-  newWin.document.close();
-
-  setTimeout(function(){newWin.close();},10);
-
+function prt(){
+  printJS('printthis', 'html')
 }
 
 });
