@@ -19,6 +19,11 @@
     #printthis {
         visibility: hidden;
     }
+    @media print {
+        #printthis {
+            visibility: visible;
+        }
+    }
 </style>
 
 <div class="container-fluid">
@@ -209,7 +214,6 @@ $result1 = mysqli_query($connection, $query1);
 <?php if (isset($_GET['code'])) { ?> 
     alert('print');
     printJS('printthis', 'html');
-    $("#printthis").css("visibility", "visible");
 <?php } ?>
 
 $(document).ready(function() {
