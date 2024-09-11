@@ -86,7 +86,7 @@
 <?php
 // Ensure the 'code' parameter is provided
 if (!isset($_GET['code']) || empty($_GET['code'])) {
-    die('Confirmation code not provided.');
+    //die('Confirmation code not provided.');
 }
 
 $code = mysqli_real_escape_string($connection, $_GET['code']);
