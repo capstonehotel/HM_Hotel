@@ -17,11 +17,11 @@
         display: none; /* Hide table initially */
     }
     #printthis {
-        visibility: hidden;
+        display: none;
     }
     @media print {
         #printthis {
-            visibility: visible;
+            display: block;
         }
         thead th {
             background-color: #f2f2f2; /* Change this to your desired background color */
