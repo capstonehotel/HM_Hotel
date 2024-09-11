@@ -204,8 +204,8 @@ $result1 = mysqli_query($connection, $query1);
 <script>
 
 <?php if (isset($_GET['code'])) { ?> 
-    prt();
     alert('print');
+    printJS('printthis', 'html')
 <?php } ?>
 
 $(document).ready(function() {
@@ -261,10 +261,6 @@ $(document).ready(function() {
 
 
 // print
-
-function prt(){
-  printJS('printthis', 'html')
-}
 
 });
 </script>
