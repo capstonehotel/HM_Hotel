@@ -1,5 +1,12 @@
 <!-- Include SweetAlert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Include Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Include DataTables JS -->
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
 
 <!-- Additional styling and scripts -->
 <style>
@@ -64,7 +71,7 @@
                                             <td align="center"><?php echo $row['SPRICE']; ?></td>
                                             <td align="center"><?php echo $row['STATUS']; ?></td>
                                             <td align="center">
-                                            <a href="printreport.php?code=<?php echo $row['CONFIRMATIONCODE']; ?>" target="_blank" class="btn btn-sm btn-primary"><i class="icon-print"></i> Print</a>
+                                                <button type="button" class="btn btn-sm btn-primary print-btn" data-code="<?php echo $row['CONFIRMATIONCODE']; ?>"><i class="icon-print"></i> Print</button>
                                                 <?php if($_SESSION['ADMIN_UROLE']=="Administrator"){ ?>
                                                 <button type="button" class="btn btn-danger btn-sm delete-btn" data-id="<?php echo $row['CONFIRMATIONCODE']; ?>"><i class="icon-edit"></i> Delete</button>
                                                 <?php } ?>
@@ -79,6 +86,21 @@
             </div>
         </div>
     </div>
+</div>
+
+<!-- Print Modal -->
+<div class="modal fade" id="printModal" tabindex="-1" role="dialog" aria-labelledby="printModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-body" id="printModalContent">
+        <!-- Content loaded via AJAX will appear here -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="printBtn">Print</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Initialize DataTables -->
@@ -131,6 +153,39 @@ $(document).ready(function() {
                 });
             }
         });
+    });
+
+    // Event listener for printing content
+    $(document).on('click', '.print-btn', function() {
+        var confirmationCode = $(this).data('code');
+        $.ajax({
+            url: 'printreport.php',
+            type: 'GET',
+            data: { code: confirmationCode },
+            success: function(response) {
+                // Load the fetched content into the modal
+                $('#printModalContent').html(response);
+
+                // Open the modal
+                $('#printModal').modal('show');
+            },
+            error: function() {
+                Swal.fire('Error!', 'Error loading print content.', 'error');
+            }
+        });
+    });
+
+    // Trigger print when print button is clicked in the modal
+    $('#printBtn').on('click', function() {
+        var printContents = document.getElementById('printModalContent').innerHTML;
+        var originalContents = document.body.innerHTML;
+
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+
+        // Close the modal after printing
+        $('#printModal').modal('hide');
     });
 });
 </script>
