@@ -85,7 +85,7 @@
 
 <?php
 // Ensure the 'code' parameter is provided
-if (isset($_GET['code']) || empty($_GET['code'])) {
+if (isset($_GET['code'])) {
     //die('Confirmation code not provided.');
 
 $code = mysqli_real_escape_string($connection, $_GET['code']);
@@ -202,6 +202,14 @@ $result1 = mysqli_query($connection, $query1);
 
 <!-- Initialize DataTables -->
 <script>
+
+<?php 
+if (isset($_GET['code'])) {
+    prt();
+    alert('print');
+}
+?>
+
 $(document).ready(function() {
     // Initialize DataTables for check-out tab
     $('#dataTableCheckout').DataTable({
