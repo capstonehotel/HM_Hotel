@@ -23,8 +23,8 @@
         #printthis {
             display: block;
         }
-        .invoice-col {
-            background: red !important;
+        td {
+            border: red thin solid;
         }
     }
 </style>
