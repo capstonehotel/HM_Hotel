@@ -1,34 +1,3 @@
-<?php
-// Ensure the 'code' parameter is provided
-if (!isset($_GET['code']) || empty($_GET['code'])) {
-    die('Confirmation code not provided.');
-}
-
-$code = mysqli_real_escape_string($connection, $_GET['code']);
-
-$query = "SELECT g.`GUESTID`, `G_FNAME`, `G_LNAME`, `G_ADDRESS`, `G_CITY`, `ZIP`, `G_NATIONALITY`, `CONFIRMATIONCODE`, `TRANSDATE`, `ARRIVAL`, `DEPARTURE`, `RPRICE`
-          FROM `tblguest` g
-          JOIN `tblreservation` r ON g.`GUESTID` = r.`GUESTID`
-          WHERE `CONFIRMATIONCODE` = '$code'";
-
-$result = mysqli_query($connection, $query);
-if ($result && mysqli_num_rows($result) > 0) {
-    $row = mysqli_fetch_assoc($result);
-} else {
-    die('No records found for the provided confirmation code.');
-}
-
-$query1 = "SELECT A.ACCOMID, A.ACCOMODATION, RM.ROOM, RM.ROOMDESC, RM.NUMPERSON, RM.PRICE, RM.ROOMID, RS.ARRIVAL, RS.DEPARTURE 
-           FROM tblaccomodation A
-           JOIN tblroom RM ON A.ACCOMID = RM.ACCOMID
-           JOIN tblreservation RS ON RM.ROOMID = RS.ROOMID 
-           WHERE RS.CONFIRMATIONCODE = '".$_GET['code']."'";
-
-$result1 = mysqli_query($connection, $query1);
-
-?>
-
-
 <!-- Include SweetAlert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -113,6 +82,36 @@ $result1 = mysqli_query($connection, $query1);
 </div>
 
 
+
+<?php
+// Ensure the 'code' parameter is provided
+if (!isset($_GET['code']) || empty($_GET['code'])) {
+    die('Confirmation code not provided.');
+}
+
+$code = mysqli_real_escape_string($connection, $_GET['code']);
+
+$query = "SELECT g.`GUESTID`, `G_FNAME`, `G_LNAME`, `G_ADDRESS`, `G_CITY`, `ZIP`, `G_NATIONALITY`, `CONFIRMATIONCODE`, `TRANSDATE`, `ARRIVAL`, `DEPARTURE`, `RPRICE`
+          FROM `tblguest` g
+          JOIN `tblreservation` r ON g.`GUESTID` = r.`GUESTID`
+          WHERE `CONFIRMATIONCODE` = '$code'";
+
+$result = mysqli_query($connection, $query);
+if ($result && mysqli_num_rows($result) > 0) {
+    $row = mysqli_fetch_assoc($result);
+} else {
+    die('No records found for the provided confirmation code.');
+}
+
+$query1 = "SELECT A.ACCOMID, A.ACCOMODATION, RM.ROOM, RM.ROOMDESC, RM.NUMPERSON, RM.PRICE, RM.ROOMID, RS.ARRIVAL, RS.DEPARTURE 
+           FROM tblaccomodation A
+           JOIN tblroom RM ON A.ACCOMID = RM.ACCOMID
+           JOIN tblreservation RS ON RM.ROOMID = RS.ROOMID 
+           WHERE RS.CONFIRMATIONCODE = '".$_GET['code']."'";
+
+$result1 = mysqli_query($connection, $query1);
+
+?>
 
 <section class="invoice">
             <div class="row">
