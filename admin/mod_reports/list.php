@@ -212,8 +212,6 @@ $result1 = mysqli_query($connection, $query1);
 <script>
 
 <?php if (isset($_GET['code'])) { ?> 
-    printJS('printthis', 'html');
-
     printJS({
         printable: 'printthis',
         type: 'html',
