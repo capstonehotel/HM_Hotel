@@ -24,7 +24,7 @@
             display: block;
         }
         .invoice-col {
-            background: red;
+            background: red !important;
         }
     }
 </style>
