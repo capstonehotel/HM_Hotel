@@ -205,7 +205,10 @@ $result1 = mysqli_query($connection, $query1);
 
 <?php if (isset($_GET['code'])) { ?> 
     alert('print');
-    printJS('printthis', 'html')
+    printJS('printthis');
+    $("#printthis").css("visibility", "visible");
+<?php } else { ?>
+    $("#printthis").css("visibility", "hidden");
 <?php } ?>
 
 $(document).ready(function() {
