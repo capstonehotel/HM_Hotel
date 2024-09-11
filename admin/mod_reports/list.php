@@ -90,12 +90,12 @@ if (isset($_GET['code'])) {
 
 $code = mysqli_real_escape_string($connection, $_GET['code']);
 
-$query = "SELECT g.`GUESTID`, `G_FNAME`, `G_LNAME`, `G_ADDRESS`, `G_CITY`, `ZIP`, `G_NATIONALITY`, `CONFIRMATIONCODE`, `TRANSDATE`, `ARRIVAL`, `DEPARTURE`, `RPRICE`
+$queryp = "SELECT g.`GUESTID`, `G_FNAME`, `G_LNAME`, `G_ADDRESS`, `G_CITY`, `ZIP`, `G_NATIONALITY`, `CONFIRMATIONCODE`, `TRANSDATE`, `ARRIVAL`, `DEPARTURE`, `RPRICE`
           FROM `tblguest` g
           JOIN `tblreservation` r ON g.`GUESTID` = r.`GUESTID`
           WHERE `CONFIRMATIONCODE` = '$code'";
 
-$result = mysqli_query($connection, $query);
+$result = mysqli_query($connection, $queryp);
 if ($result && mysqli_num_rows($result) > 0) {
     $row = mysqli_fetch_assoc($result);
 } else {
