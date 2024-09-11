@@ -1,191 +1,311 @@
-<!-- Include SweetAlert2 -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<!-- Include jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- Include Bootstrap JS -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<!-- Include DataTables JS -->
-<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checked-Out Reservations</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        .table td, .table th {
+            white-space: nowrap;
+            vertical-align: middle;
+        }
+        .table thead th {
+            text-align: center;
+        }
+        .btn-sm {
+            padding: 0.25rem 0.5rem;
+        }
+        .table-responsive {
+            display: none; /* Hide table initially */
+        }
+        @media print {
+            @page {
+                margin: 0.5in;
+            }
+            body {
+                margin: 0;
+            }
+            .modal-content {
+                border: none;
+            }
+            .modal-footer {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3" style="display: flex; align-items: center;">
+                <h6 class="m-0 font-weight-bold text-primary">Checked-Out Reservations</h6>
+            </div>
 
-<!-- Additional styling and scripts -->
-<style>
-    .table td, .table th {
-        white-space: nowrap;
-        vertical-align: middle;
-    }
-    .table thead th {
-        text-align: center;
-    }
-    .btn-sm {
-        padding: 0.25rem 0.5rem;
-    }
-    .table-responsive {
-        display: none; /* Hide table initially */
-    }
-</style>
+            <div class="tab-content">
+                <div class="tab-pane fade show active">
+                    <div class="card-body">
+                        <div class="table-responsive" style="width: 100%;">
+                            <table class="table table-striped" id="dataTableCheckout" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Guest</th>
+                                        <th>Transaction Date</th>
+                                        <th>Confirmation Code</th>
+                                        <th>Total Rooms</th>
+                                        <th>Total Price</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php 
+                                    require_once("../../includes/initialize.php");
 
-<div class="container-fluid">
-    <div class="card shadow mb-4">
-        <div class="card-header py-3" style="display: flex; align-items: center;">
-            <h6 class="m-0 font-weight-bold text-primary">Checked-Out Reservations</h6>
-        </div>
-
-        <div class="tab-content">
-            <div class="tab-pane fade show active">
-                <div class="card-body">
-                    <div class="table-responsive" style="width: 100%;">
-                        <table class="table table-striped" id="dataTableCheckout" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Guest</th>
-                                    <th>Transaction Date</th>
-                                    <th>Confirmation Code</th>
-                                    <th>Total Rooms</th>
-                                    <th>Total Price</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php 
-                                $query = "SELECT `G_FNAME`, `G_LNAME`, `TRANSDATE`, `CONFIRMATIONCODE`, `PQTY`, `SPRICE`, `STATUS` 
-                                          FROM `tblpayment` p, `tblguest` g 
-                                          WHERE p.`GUESTID` = g.`GUESTID` AND p.`STATUS` = 'checkedout' 
-                                          ORDER BY p.`TRANSDATE` DESC";
-                                $result = mysqli_query($connection, $query);
-                                if (!$result) {
-                                    echo "<tr><td colspan='8'>Query failed: " . mysqli_error($connection) . "</td></tr>";
-                                } else {
-                                    $number = 0;
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        $number++;
-                                        ?>
-                                        <tr>
-                                            <td align="center"><?php echo $number; ?></td>
-                                            <td align="center"><?php echo $row['G_FNAME']; ?> <?php echo $row['G_LNAME']; ?></td>
-                                            <td align="center"><?php echo $row['TRANSDATE']; ?></td>
-                                            <td align="center"><?php echo $row['CONFIRMATIONCODE']; ?></td>
-                                            <td align="center"><?php echo $row['PQTY']; ?></td>
-                                            <td align="center"><?php echo $row['SPRICE']; ?></td>
-                                            <td align="center"><?php echo $row['STATUS']; ?></td>
-                                            <td align="center">
-                                                <button type="button" class="btn btn-sm btn-primary print-btn" data-code="<?php echo $row['CONFIRMATIONCODE']; ?>"><i class="icon-print"></i> Print</button>
-                                                <?php if($_SESSION['ADMIN_UROLE']=="Administrator"){ ?>
-                                                <button type="button" class="btn btn-danger btn-sm delete-btn" data-id="<?php echo $row['CONFIRMATIONCODE']; ?>"><i class="icon-edit"></i> Delete</button>
-                                                <?php } ?>
-                                            </td>
-                                        </tr>
-                                    <?php } 
-                                } ?>
-                            </tbody>
-                        </table>
+                                    $query = "SELECT `G_FNAME`, `G_LNAME`, `TRANSDATE`, `CONFIRMATIONCODE`, `PQTY`, `SPRICE`, `STATUS` 
+                                              FROM `tblpayment` p, `tblguest` g 
+                                              WHERE p.`GUESTID` = g.`GUESTID` AND p.`STATUS` = 'checkedout' 
+                                              ORDER BY p.`TRANSDATE` DESC";
+                                    $result = mysqli_query($connection, $query);
+                                    if (!$result) {
+                                        echo "<tr><td colspan='8'>Query failed: " . mysqli_error($connection) . "</td></tr>";
+                                    } else {
+                                        $number = 0;
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            $number++;
+                                            ?>
+                                            <tr>
+                                                <td align="center"><?php echo $number; ?></td>
+                                                <td align="center"><?php echo $row['G_FNAME']; ?> <?php echo $row['G_LNAME']; ?></td>
+                                                <td align="center"><?php echo $row['TRANSDATE']; ?></td>
+                                                <td align="center"><?php echo $row['CONFIRMATIONCODE']; ?></td>
+                                                <td align="center"><?php echo $row['PQTY']; ?></td>
+                                                <td align="center"><?php echo $row['SPRICE']; ?></td>
+                                                <td align="center"><?php echo $row['STATUS']; ?></td>
+                                                <td align="center">
+                                                    <button type="button" class="btn btn-sm btn-primary print-btn" data-code="<?php echo $row['CONFIRMATIONCODE']; ?>"><i class="icon-print"></i> Print</button>
+                                                    <?php if($_SESSION['ADMIN_UROLE']=="Administrator"){ ?>
+                                                    <button type="button" class="btn btn-danger btn-sm delete-btn" data-id="<?php echo $row['CONFIRMATIONCODE']; ?>"><i class="icon-edit"></i> Delete</button>
+                                                    <?php } ?>
+                                                </td>
+                                            </tr>
+                                        <?php } 
+                                    } ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Print Modal -->
-<div class="modal fade" id="printModal" tabindex="-1" role="dialog" aria-labelledby="printModalLabel">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-body" id="printModalContent">
-        <!-- Content loaded via AJAX will appear here -->
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id="printBtn">Print</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <!-- Print Modal -->
+    <div class="modal fade" id="printModal" tabindex="-1" role="dialog" aria-labelledby="printModalLabel">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-body" id="printModalContent">
+            <!-- Content loaded via AJAX will appear here -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="printBtn">Print</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
-<!-- Initialize DataTables -->
-<script>
-$(document).ready(function() {
-    // Initialize DataTables for check-out tab
-    $('#dataTableCheckout').DataTable({
-        "paging": true,
-        "searching": true,
-        "lengthChange": true,
-        "pageLength": 10
-    });
+    <!-- Initialize DataTables -->
+    <script>
+    $(document).ready(function() {
+        // Initialize DataTables for check-out tab
+        $('#dataTableCheckout').DataTable({
+            "paging": true,
+            "searching": true,
+            "lengthChange": true,
+            "pageLength": 10
+        });
 
-    // Show table after initialization
-    $('.table-responsive').show();
+        // Show table after initialization
+        $('.table-responsive').show();
 
-    // Event listener for deleting a reservation
-    $(document).on('click', '.delete-btn', function() {
-        var confirmationCode = $(this).data('id');
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: 'delete.php',
-                    type: 'GET',
-                    data: { id: confirmationCode, confirm: 'true' },
-                    success: function(response) {
-                        Swal.fire(
-                            'Deleted!',
-                            'The check-out reservation has been deleted.',
-                            'success'
-                        ).then(() => {
-                            location.reload(); // Reload the page after deletion
-                        });
-                    },
-                    error: function() {
-                        Swal.fire(
-                            'Error!',
-                            'There was an error deleting the reservation.',
-                            'error'
-                        );
-                    }
-                });
-            }
+        // Event listener for deleting a reservation
+        $(document).on('click', '.delete-btn', function() {
+            var confirmationCode = $(this).data('id');
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: 'delete.php',
+                        type: 'GET',
+                        data: { id: confirmationCode, confirm: 'true' },
+                        success: function(response) {
+                            Swal.fire(
+                                'Deleted!',
+                                'The check-out reservation has been deleted.',
+                                'success'
+                            ).then(() => {
+                                location.reload(); // Reload the page after deletion
+                            });
+                        },
+                        error: function() {
+                            Swal.fire(
+                                'Error!',
+                                'There was an error deleting the reservation.',
+                                'error'
+                            );
+                        }
+                    });
+                }
+            });
+        });
+
+        // Event listener for printing content
+        $(document).on('click', '.print-btn', function() {
+            var confirmationCode = $(this).data('code');
+            $.ajax({
+                url: '',
+                type: 'GET',
+                data: { code: confirmationCode },
+                success: function(response) {
+                    var printContent = `
+                        <?php
+                        if (isset($_GET['code'])) {
+                            $code = mysqli_real_escape_string($connection, $_GET['code']);
+                            $query = "SELECT g.GUESTID, G_FNAME, G_LNAME, G_ADDRESS, G_CITY, ZIP, G_NATIONALITY, CONFIRMATIONCODE, TRANSDATE, ARRIVAL, DEPARTURE, RPRICE
+                                      FROM tblguest g
+                                      JOIN tblreservation r ON g.GUESTID = r.GUESTID
+                                      WHERE CONFIRMATIONCODE = '$code'";
+                            $result = mysqli_query($connection, $query);
+                            if ($result && mysqli_num_rows($result) > 0) {
+                                $row = mysqli_fetch_assoc($result);
+                            }
+                            $query1 = "SELECT A.ACCOMID, A.ACCOMODATION, RM.ROOM, RM.ROOMDESC, RM.NUMPERSON, RM.PRICE, RM.ROOMID, RS.ARRIVAL, RS.DEPARTURE 
+                                       FROM tblaccomodation A
+                                       JOIN tblroom RM ON A.ACCOMID = RM.ACCOMID
+                                       JOIN tblreservation RS ON RM.ROOMID = RS.ROOMID 
+                                       WHERE RS.CONFIRMATIONCODE = '$code'";
+                            $result1 = mysqli_query($connection, $query1);
+                        }
+                        ?>
+                        <div class="wrapper">
+                            <section class="invoice">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <h2 class="page-header">
+                                            <i class="fa fa-building"></i> HM Hotel Reservation
+                                        </h2>
+                                    </div>
+                                </div>
+                                <div class="row invoice-info">
+                                    <div class="col-sm-4 invoice-col">
+                                        From
+                                        <address>
+                                            <strong>HM Hotel Reservation</strong><br>
+                                            Crossing Bunakan<br>
+                                            Bunakan, Madridejos, Cebu<br>
+                                            Phone: 09317622381<br>
+                                            Email: hmhospitality@gmail.com
+                                        </address>
+                                    </div>
+                                    <div class="col-sm-4 invoice-col">
+                                        To
+                                        <address>
+                                            <strong><?php echo $row['G_FNAME']; ?> <?php echo $row['G_LNAME']; ?></strong><br>
+                                            Address: <?php echo $row['G_ADDRESS']; ?><br>
+                                            City: <?php echo $row['G_CITY']; ?><br>
+                                            Zip: <?php echo $row['ZIP']; ?><br>
+                                            Nationality: <?php echo $row['G_NATIONALITY']; ?>
+                                        </address>
+                                    </div>
+                                    <div class="col-sm-4 invoice-col">
+                                        <b>Confirmation Code:</b> <?php echo $row['CONFIRMATIONCODE']; ?><br>
+                                        <b>Transaction Date:</b> <?php echo $row['TRANSDATE']; ?><br>
+                                        <b>Arrival:</b> <?php echo $row['ARRIVAL']; ?><br>
+                                        <b>Departure:</b> <?php echo $row['DEPARTURE']; ?>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Accommodation</th>
+                                                    <th>Room</th>
+                                                    <th>Description</th>
+                                                    <th>No. of Persons</th>
+                                                    <th>Price</th>
+                                                    <th>Arrival</th>
+                                                    <th>Departure</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php while ($row1 = mysqli_fetch_assoc($result1)) { ?>
+                                                <tr>
+                                                    <td><?php echo $row1['ACCOMODATION']; ?></td>
+                                                    <td><?php echo $row1['ROOM']; ?></td>
+                                                    <td><?php echo $row1['ROOMDESC']; ?></td>
+                                                    <td><?php echo $row1['NUMPERSON']; ?></td>
+                                                    <td><?php echo $row1['PRICE']; ?></td>
+                                                    <td><?php echo $row1['ARRIVAL']; ?></td>
+                                                    <td><?php echo $row1['DEPARTURE']; ?></td>
+                                                </tr>
+                                                <?php } ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <p class="lead">Payment Details</p>
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <tr>
+                                                    <th>Total Price:</th>
+                                                    <td><?php echo $row['RPRICE']; ?></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    `;
+                    $('#printModalContent').html(printContent);
+                    $('#printModal').modal('show');
+                },
+                error: function() {
+                    Swal.fire('Error!', 'Error loading print content.', 'error');
+                }
+            });
+        });
+
+        // Trigger print when print button is clicked in the modal
+        $('#printBtn').on('click', function() {
+            var printContents = document.getElementById('printModalContent').innerHTML;
+            var originalContents = document.body.innerHTML;
+
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+
+            // Close the modal after printing
+            $('#printModal').modal('hide');
         });
     });
-
-    // Event listener for printing content
-    $(document).on('click', '.print-btn', function() {
-        var confirmationCode = $(this).data('code');
-        $.ajax({
-            url: 'printreport.php',
-            type: 'GET',
-            data: { code: confirmationCode },
-            success: function(response) {
-                // Load the fetched content into the modal
-                $('#printModalContent').html(response);
-
-                // Open the modal
-                $('#printModal').modal('show');
-            },
-            error: function() {
-                Swal.fire('Error!', 'Error loading print content.', 'error');
-            }
-        });
-    });
-
-    // Trigger print when print button is clicked in the modal
-    $('#printBtn').on('click', function() {
-        var printContents = document.getElementById('printModalContent').innerHTML;
-        var originalContents = document.body.innerHTML;
-
-        document.body.innerHTML = printContents;
-        window.print();
-        document.body.innerHTML = originalContents;
-
-        // Close the modal after printing
-        $('#printModal').modal('hide');
-    });
-});
-</script>
+    </script>
+</body>
+</html>
