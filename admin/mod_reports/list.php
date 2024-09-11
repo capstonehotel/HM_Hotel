@@ -23,9 +23,6 @@
         #printthis {
             display: block;
         }
-        td {
-            border: red thin solid !important;
-        }
     }
 </style>
 
@@ -216,6 +213,14 @@ $result1 = mysqli_query($connection, $query1);
 
 <?php if (isset($_GET['code'])) { ?> 
     printJS('printthis', 'html');
+
+    printJS({
+		printthis: html,
+		header: '<h3 class="custom-h3">HM Hotel Reservation</h3>',
+		style: 'td { color: red; }'
+	});
+
+
 <?php } ?>
 
 $(document).ready(function() {
