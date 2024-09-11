@@ -203,11 +203,9 @@ $result1 = mysqli_query($connection, $query1);
 <!-- Initialize DataTables -->
 <script>
 
-<?php if (isset($_GET['code'])) { ?>
-   <script> 
+<?php if (isset($_GET['code'])) { ?> 
     prt();
     alert('print');
-    </script>
 <?php } ?>
 
 $(document).ready(function() {
