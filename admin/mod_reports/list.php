@@ -23,17 +23,8 @@
         #printthis {
             display: block;
         }
-        thead th {
-            background-color: #f2f2f2; /* Change this to your desired background color */
-            color: #333; /* Change this to your desired text color */
-        }
-
-        .lead {
-            font-weight: bold;
-        }
-
-        .table th, .table td {
-            border: 1px solid #ddd; /* Ensure borders are visible in print */
+        .invoice-col {
+            background: red;
         }
     }
 </style>
