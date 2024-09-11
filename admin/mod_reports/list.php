@@ -199,7 +199,7 @@ $result1 = mysqli_query($connection, $query1);
         </section>
 <?php } else { ?>
 <?php echo 'none'; } ?>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/print-js/1.6.0/print.js" integrity="sha512-/fgTphwXa3lqAhN+I8gG8AvuaTErm1YxpUjbdCvwfTMyv8UZnFyId7ft5736xQ6CyQN4Nzr21lBuWWA9RTCXCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://printjs-4de6.kxcdn.com/print.min.js"></script> 
 <!-- Initialize DataTables -->
 <script>
 
