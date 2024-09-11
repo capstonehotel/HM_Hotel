@@ -78,7 +78,6 @@ $result1 = mysqli_query($connection, $query1);
 
                 // Trigger the print dialog
                 window.print();
-                window.close();
             } else {
                 // If the print function is not supported, redirect immediately
                 window.location.href = "index.php"; // Replace with the URL you want to redirect to

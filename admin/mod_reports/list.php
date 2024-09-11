@@ -22,7 +22,7 @@
             padding: 0.25rem 0.5rem;
         }
         .table-responsive {
-            display: none; /* Hide table initially */
+            display: block; /* Ensure table is visible */
         }
         @media print {
             @page {
@@ -111,7 +111,7 @@
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-body" id="printModalContent">
-            <!-- Content loaded via AJAX will appear here -->
+            <!-- Print content will be dynamically loaded here -->
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary" id="printBtn">Print</button>
@@ -124,16 +124,13 @@
     <!-- Initialize DataTables -->
     <script>
     $(document).ready(function() {
-        // Initialize DataTables for check-out tab
+        // Initialize DataTables
         $('#dataTableCheckout').DataTable({
             "paging": true,
             "searching": true,
             "lengthChange": true,
             "pageLength": 10
         });
-
-        // Show table after initialization
-        $('.table-responsive').show();
 
         // Event listener for deleting a reservation
         $(document).on('click', '.delete-btn', function() {
@@ -177,114 +174,11 @@
         $(document).on('click', '.print-btn', function() {
             var confirmationCode = $(this).data('code');
             $.ajax({
-                url: '',
+                url: 'printreport.php',
                 type: 'GET',
                 data: { code: confirmationCode },
                 success: function(response) {
-                    var printContent = `
-                        <?php
-                        if (isset($_GET['code'])) {
-                            $code = mysqli_real_escape_string($connection, $_GET['code']);
-                            $query = "SELECT g.GUESTID, G_FNAME, G_LNAME, G_ADDRESS, G_CITY, ZIP, G_NATIONALITY, CONFIRMATIONCODE, TRANSDATE, ARRIVAL, DEPARTURE, RPRICE
-                                      FROM tblguest g
-                                      JOIN tblreservation r ON g.GUESTID = r.GUESTID
-                                      WHERE CONFIRMATIONCODE = '$code'";
-                            $result = mysqli_query($connection, $query);
-                            if ($result && mysqli_num_rows($result) > 0) {
-                                $row = mysqli_fetch_assoc($result);
-                            }
-                            $query1 = "SELECT A.ACCOMID, A.ACCOMODATION, RM.ROOM, RM.ROOMDESC, RM.NUMPERSON, RM.PRICE, RM.ROOMID, RS.ARRIVAL, RS.DEPARTURE 
-                                       FROM tblaccomodation A
-                                       JOIN tblroom RM ON A.ACCOMID = RM.ACCOMID
-                                       JOIN tblreservation RS ON RM.ROOMID = RS.ROOMID 
-                                       WHERE RS.CONFIRMATIONCODE = '$code'";
-                            $result1 = mysqli_query($connection, $query1);
-                        }
-                        ?>
-                        <div class="wrapper">
-                            <section class="invoice">
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <h2 class="page-header">
-                                            <i class="fa fa-building"></i> HM Hotel Reservation
-                                        </h2>
-                                    </div>
-                                </div>
-                                <div class="row invoice-info">
-                                    <div class="col-sm-4 invoice-col">
-                                        From
-                                        <address>
-                                            <strong>HM Hotel Reservation</strong><br>
-                                            Crossing Bunakan<br>
-                                            Bunakan, Madridejos, Cebu<br>
-                                            Phone: 09317622381<br>
-                                            Email: hmhospitality@gmail.com
-                                        </address>
-                                    </div>
-                                    <div class="col-sm-4 invoice-col">
-                                        To
-                                        <address>
-                                            <strong><?php echo $row['G_FNAME']; ?> <?php echo $row['G_LNAME']; ?></strong><br>
-                                            Address: <?php echo $row['G_ADDRESS']; ?><br>
-                                            City: <?php echo $row['G_CITY']; ?><br>
-                                            Zip: <?php echo $row['ZIP']; ?><br>
-                                            Nationality: <?php echo $row['G_NATIONALITY']; ?>
-                                        </address>
-                                    </div>
-                                    <div class="col-sm-4 invoice-col">
-                                        <b>Confirmation Code:</b> <?php echo $row['CONFIRMATIONCODE']; ?><br>
-                                        <b>Transaction Date:</b> <?php echo $row['TRANSDATE']; ?><br>
-                                        <b>Arrival:</b> <?php echo $row['ARRIVAL']; ?><br>
-                                        <b>Departure:</b> <?php echo $row['DEPARTURE']; ?>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-12 table-responsive">
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Accommodation</th>
-                                                    <th>Room</th>
-                                                    <th>Description</th>
-                                                    <th>No. of Persons</th>
-                                                    <th>Price</th>
-                                                    <th>Arrival</th>
-                                                    <th>Departure</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php while ($row1 = mysqli_fetch_assoc($result1)) { ?>
-                                                <tr>
-                                                    <td><?php echo $row1['ACCOMODATION']; ?></td>
-                                                    <td><?php echo $row1['ROOM']; ?></td>
-                                                    <td><?php echo $row1['ROOMDESC']; ?></td>
-                                                    <td><?php echo $row1['NUMPERSON']; ?></td>
-                                                    <td><?php echo $row1['PRICE']; ?></td>
-                                                    <td><?php echo $row1['ARRIVAL']; ?></td>
-                                                    <td><?php echo $row1['DEPARTURE']; ?></td>
-                                                </tr>
-                                                <?php } ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-6">
-                                        <p class="lead">Payment Details</p>
-                                        <div class="table-responsive">
-                                            <table class="table">
-                                                <tr>
-                                                    <th>Total Price:</th>
-                                                    <td><?php echo $row['RPRICE']; ?></td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-                        </div>
-                    `;
-                    $('#printModalContent').html(printContent);
+                    $('#printModalContent').html(response);
                     $('#printModal').modal('show');
                 },
                 error: function() {
