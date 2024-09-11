@@ -215,7 +215,8 @@ $result1 = mysqli_query($connection, $query1);
     printJS('printthis', 'html');
 
     printJS({
-		printthis: html,
+        printable: 'printthis',
+        type: 'html'
 		header: '<h3 class="custom-h3">HM Hotel Reservation</h3>',
 		style: 'td { color: red; }'
 	});
