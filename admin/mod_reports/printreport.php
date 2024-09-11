@@ -48,40 +48,41 @@ $result1 = mysqli_query($connection, $query1);
     <link href="../../css/ekko-lightbox.css" rel="stylesheet">
     <style>
        @media print {
-    body {
-        margin: 0.5in;
-    }
-    
-    thead th {
-        background-color: #f2f2f2; /* Change this to your desired background color */
-        color: #333; /* Change this to your desired text color */
-    }
+            body {
+                margin: 0.5in;
+                background: none !important; /* Removes background of the printreport.php */
+            }
+            
+            thead th {
+                background-color: #f2f2f2; /* Change this to your desired background color */
+                color: #333; /* Change this to your desired text color */
+            }
 
-    .lead {
-        font-weight: bold;
-    }
+            .lead {
+                font-weight: bold;
+            }
 
-    .table th, .table td {
-        border: 1px solid #ddd; /* Ensure borders are visible in print */
-    }
-}
+            .table th, .table td {
+                border: 1px solid #ddd; /* Ensure borders are visible in print */
+            }
+        }
 
+        /* Keep background in list.php */
+        body {
+            background-color: #ffffff; /* Ensure it's white when not printing */
+        }
     </style>
-     <script>
+    <script>
         // Function to check if the user has canceled the print dialog
         function checkPrintStatus() {
             if (window.print) {
                 // Listen for print completion
                 window.onafterprint = function() {
-                    window.location.href = "index.php"; // Replace with the URL you want to redirect to
+                    window.location.href = "list.php"; // Redirect back to list.php after printing
                 };
 
                 // Trigger the print dialog
                 window.print();
-                window.close();
-            } else {
-                // If the print function is not supported, redirect immediately
-                window.location.href = "index.php"; // Replace with the URL you want to redirect to
             }
         }
 
@@ -89,7 +90,7 @@ $result1 = mysqli_query($connection, $query1);
         window.onload = checkPrintStatus;
     </script>
 </head>
-<body >
+<body>
     <div class="wrapper">
         <section class="invoice">
             <div class="row">
