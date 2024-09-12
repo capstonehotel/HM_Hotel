@@ -2,29 +2,45 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <!-- Additional styling and scripts -->
-<style>
-    .table td, .table th {
-        white-space: nowrap;
-        vertical-align: middle;
-    }
-    .table thead th {
-        text-align: center;
-    }
-    .btn-sm {
-        padding: 0.25rem 0.5rem;
-    }
+
+    <style>
     .table-responsive {
         display: none; /* Hide table initially */
     }
-    #printthis {
-        display: none;
-    }
+    
     @media print {
+        body {
+            margin: 0.5in;
+        }
+        
         #printthis {
+            display: block;
+        }
+
+        /* Ensure table layout is consistent in print */
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        thead th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        .lead {
+            font-weight: bold;
+        }
+
+        /* If you want the whole page printed, ensure hidden items are shown */
+        .container-fluid, .card, .table-responsive {
             display: block;
         }
     }
 </style>
+
+
 
 <div class="container-fluid">
     <div class="card shadow mb-4">
@@ -207,75 +223,67 @@ $result1 = mysqli_query($connection, $query1);
         </section>
 <?php } else { ?>
 <?php echo 'none'; } ?>
-<script src="https://printjs-4de6.kxcdn.com/print.min.js"></script> 
+<script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
 
-<!-- Initialize DataTables -->
 <script>
-
-<?php if (isset($_GET['code'])) { ?> 
-    printJS({
-        printable: 'printthis',
-        type: 'html',
-		header: '<h3 class="custom-h3">HM Hotel Reservation</h3>',
-		style: 'thead th { background-color: #f2f2f2; color: #333; } .lead { font-weight: bold; } .table th, .table td { border: 1px solid #ddd; }',
-	});
-
-<?php } ?>
-
-
-$(document).ready(function() {
-    // Initialize DataTables for check-out tab
-    $('#dataTableCheckout').DataTable({
-        "paging": true,
-        "searching": true,
-        "lengthChange": true,
-        "pageLength": 10
-    });
-
-    // Show table after initialization
-    $('.table-responsive').show();
-
-    // Event listener for deleting a reservation
-    $(document).on('click', '.delete-btn', function() {
-        var confirmationCode = $(this).data('id');
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: 'delete.php',
-                    type: 'GET',
-                    data: { id: confirmationCode, confirm: 'true' },
-                    success: function(response) {
-                        Swal.fire(
-                            'Deleted!',
-                            'The check-out reservation has been deleted.',
-                            'success'
-                        ).then(() => {
-                            location.reload(); // Reload the page after deletion
-                        });
-                    },
-                    error: function() {
-                        Swal.fire(
-                            'Error!',
-                            'There was an error deleting the reservation.',
-                            'error'
-                        );
-                    }
-                });
-            }
+    $(document).ready(function() {
+        // Initialize DataTables for check-out tab
+        $('#dataTableCheckout').DataTable({
+            "paging": true,
+            "searching": true,
+            "lengthChange": true,
+            "pageLength": 10
         });
+
+        // Show table after initialization
+        $('.table-responsive').show();
+
+        // Event listener for deleting a reservation
+        $(document).on('click', '.delete-btn', function() {
+            var confirmationCode = $(this).data('id');
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: 'delete.php',
+                        type: 'GET',
+                        data: { id: confirmationCode, confirm: 'true' },
+                        success: function(response) {
+                            Swal.fire(
+                                'Deleted!',
+                                'The check-out reservation has been deleted.',
+                                'success'
+                            ).then(() => {
+                                location.reload(); // Reload the page after deletion
+                            });
+                        },
+                        error: function() {
+                            Swal.fire(
+                                'Error!',
+                                'There was an error deleting the reservation.',
+                                'error'
+                            );
+                        }
+                    });
+                }
+            });
+        });
+
+        // Print when printJS is called
+        <?php if (isset($_GET['code'])) { ?> 
+            printJS({
+                printable: 'printthis',
+                type: 'html',
+                header: '<h3 class="custom-h3">HM Hotel Reservation</h3>',
+                style: 'thead th { background-color: #f2f2f2; color: #333; } .lead { font-weight: bold; } .table th, .table td { border: 1px solid #ddd; padding: 8px; text-align: center; }',
+            });
+        <?php } ?>
     });
-
-
-
-// print
-
-});
 </script>
