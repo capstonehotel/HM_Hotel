@@ -1,7 +1,8 @@
-<!-- Include SweetAlert2 -->
+<!-- Include SweetAlert2 and Print.js -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/print-js/1.6.0/print.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/print-js/1.6.0/print.min.css" />
 
-<!-- Additional styling and scripts -->
 <style>
     .table td, .table th {
         white-space: nowrap;
@@ -16,13 +17,9 @@
     .table-responsive {
         display: none; /* Hide table initially */
     }
-    #printthis {
+    /* Print section styling */
+    #printSection {
         display: none;
-    }
-    @media print {
-        #printthis {
-            display: block;
-        }
     }
 </style>
 
@@ -72,7 +69,7 @@
                                             <td align="center"><?php echo $row['SPRICE']; ?></td>
                                             <td align="center"><?php echo $row['STATUS']; ?></td>
                                             <td align="center">
-                                            <a href="?code=<?php echo $row['CONFIRMATIONCODE']; ?>" class="btn btn-sm btn-primary"><i class="icon-print"></i> Print</a>
+                                                <button type="button" class="btn btn-sm btn-primary print-btn" data-code="<?php echo $row['CONFIRMATIONCODE']; ?>"><i class="icon-print"></i> Print</button>
                                                 <?php if($_SESSION['ADMIN_UROLE']=="Administrator"){ ?>
                                                 <button type="button" class="btn btn-danger btn-sm delete-btn" data-id="<?php echo $row['CONFIRMATIONCODE']; ?>"><i class="icon-edit"></i> Delete</button>
                                                 <?php } ?>
@@ -89,38 +86,10 @@
     </div>
 </div>
 
-
-
-<?php
-// Ensure the 'code' parameter is provided
-if (isset($_GET['code'])) {
-    //die('Confirmation code not provided.');
-
-$code = mysqli_real_escape_string($connection, $_GET['code']);
-
-$queryp = "SELECT g.`GUESTID`, `G_FNAME`, `G_LNAME`, `G_ADDRESS`, `G_CITY`, `ZIP`, `G_NATIONALITY`, `CONFIRMATIONCODE`, `TRANSDATE`, `ARRIVAL`, `DEPARTURE`, `RPRICE`
-          FROM `tblguest` g
-          JOIN `tblreservation` r ON g.`GUESTID` = r.`GUESTID`
-          WHERE `CONFIRMATIONCODE` = '$code'";
-
-$result = mysqli_query($connection, $queryp);
-if ($result && mysqli_num_rows($result) > 0) {
-    $row = mysqli_fetch_assoc($result);
-} else {
-    die('No records found for the provided confirmation code.');
-}
-
-$query1 = "SELECT A.ACCOMID, A.ACCOMODATION, RM.ROOM, RM.ROOMDESC, RM.NUMPERSON, RM.PRICE, RM.ROOMID, RS.ARRIVAL, RS.DEPARTURE 
-           FROM tblaccomodation A
-           JOIN tblroom RM ON A.ACCOMID = RM.ACCOMID
-           JOIN tblreservation RS ON RM.ROOMID = RS.ROOMID 
-           WHERE RS.CONFIRMATIONCODE = '".$_GET['code']."'";
-
-$result1 = mysqli_query($connection, $query1);
-
-?>
-
-<section class="invoice" id="printthis">
+<!-- Hidden Print Section -->
+<div id="printSection">
+    <div class="wrapper">
+        <section class="invoice">
             <div class="row">
                 <div class="col-xs-12">
                     <h2 class="page-header">
@@ -129,35 +98,17 @@ $result1 = mysqli_query($connection, $query1);
                 </div>
             </div>
             <div class="row invoice-info">
-                <div class="col-sm-4 invoice-col">
-                    From
-                    <address>
-                        <strong>HM Hotel Reservation</strong><br>
-                        Crossing Bunakan<br>
-                        Bunakan, Madridejos, Cebu<br>
-                        Phone: 09317622381<br>
-                        Email: Hmhotelreservation@gmail.com
-                    </address>
+                <!-- Fill the print section content using JavaScript -->
+                <div class="col-sm-4 invoice-col" id="guestInfo">
+                    <!-- Guest Info here -->
                 </div>
-                <div class="col-sm-4 invoice-col">
-                    To
-                    <address>
-                        <strong><?php echo $row['G_FNAME'] . ' ' . $row['G_LNAME']; ?></strong><br>
-                        <?php echo $row['G_ADDRESS']; ?><br>
-                        <?php echo $row['G_CITY']; ?><br>
-                        <?php echo $row['G_NATIONALITY']; ?><br>
-                        <?php echo $row['ZIP']; ?>
-                    </address>
-                </div>
-                <div class="col-sm-4 invoice-col">
-                    <b>Invoice No.</b> 00<?php echo $row['GUESTID']; ?><br>
-                    <b>Confirmation ID:</b> <?php echo $row['CONFIRMATIONCODE']; ?><br>
-                    <b>Transaction Date:</b> <?php echo $row['TRANSDATE']; ?>
+                <div class="col-sm-4 invoice-col" id="invoiceInfo">
+                    <!-- Invoice Info here -->
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12 table-responsive">
-                    <table class="table table-striped">
+                    <table class="table table-striped" id="printTable">
                         <thead>
                             <tr>
                                 <th>Room</th>
@@ -170,23 +121,7 @@ $result1 = mysqli_query($connection, $query1);
                             </tr>
                         </thead>
                         <tbody>
-                            <?php 
-                            $tot = 0;
-                            while ($row1 = mysqli_fetch_assoc($result1)) {
-                                $days = dateDiff(date($row1['ARRIVAL']), date($row1['DEPARTURE']));
-                                $subtotal = $row1['PRICE'] * ($days == 0 ? 1 : $days);
-                                $tot += $subtotal;
-                                ?>
-                                <tr> 
-                                    <td><?php echo $row1['ACCOMODATION'] . ' ' . $row1['ROOM']; ?></td>
-                                    <td><?php echo $row1['ROOMDESC']; ?><br><?php echo $row1['NUMPERSON']; ?></td>
-                                    <td>&#8369; <?php echo $row1['PRICE']; ?></td>
-                                    <td><?php echo date_format(date_create($row1['ARRIVAL']), 'm/d/Y'); ?></td>
-                                    <td><?php echo date_format(date_create($row1['DEPARTURE']), 'm/d/Y'); ?></td>
-                                    <td><?php echo ($days == 0) ? '1' : $days; ?></td>
-                                    <td>&#8369; <?php echo $subtotal; ?></td>
-                                </tr>
-                            <?php } ?>
+                            <!-- Table data will be injected via JavaScript -->
                         </tbody>
                     </table>
                 </div>
@@ -198,31 +133,17 @@ $result1 = mysqli_query($connection, $query1);
                         <table class="table">
                             <tr>
                                 <th style="width:50%">Total:</th>
-                                <td>&#8369; <?php echo $tot; ?></td>
+                                <td id="totalAmount"></td>
                             </tr>
                         </table>
                     </div>
                 </div>
             </div>
         </section>
-<?php } else { ?>
-<?php echo 'none'; } ?>
-<script src="https://printjs-4de6.kxcdn.com/print.min.js"></script> 
+    </div>
+</div>
 
-<!-- Initialize DataTables -->
 <script>
-
-<?php if (isset($_GET['code'])) { ?> 
-    printJS({
-        printable: 'printthis',
-        type: 'html',
-		header: '<h3 class="custom-h3">HM Hotel Reservation</h3>',
-		style: 'thead th { background-color: #f2f2f2; color: #333; } .lead { font-weight: bold; } .table th, .table td { border: 1px solid #ddd; }',
-	});
-
-<?php } ?>
-
-
 $(document).ready(function() {
     // Initialize DataTables for check-out tab
     $('#dataTableCheckout').DataTable({
@@ -273,9 +194,30 @@ $(document).ready(function() {
         });
     });
 
+    // Print button event
+    $(document).on('click', '.print-btn', function() {
+        var confirmationCode = $(this).data('code');
 
+        // AJAX call to fetch the data for the given confirmation code
+        $.ajax({
+            url: 'printreport.php',
+            type: 'GET',
+            data: { code: confirmationCode },
+            success: function(response) {
+                // Inject the fetched data into the print section
+                $('#printSection #guestInfo').html($(response).find('#guestInfo').html());
+                $('#printSection #invoiceInfo').html($(response).find('#invoiceInfo').html());
+                $('#printSection #printTable tbody').html($(response).find('#printTable tbody').html());
+                $('#printSection #totalAmount').html($(response).find('#totalAmount').html());
 
-// print
-
+                // Use Print.js to print the section
+                printJS({
+                    printable: 'printSection',
+                    type: 'html',
+                    css: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'
+                });
+            }
+        });
+    });
 });
 </script>
