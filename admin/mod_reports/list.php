@@ -92,6 +92,7 @@
 
 
 <?php
+require_once("../../includes/initialize.php");
 // Ensure the 'code' parameter is provided
 if (isset($_GET['code'])) {
     //die('Confirmation code not provided.');
@@ -119,7 +120,15 @@ $query1 = "SELECT A.ACCOMID, A.ACCOMODATION, RM.ROOM, RM.ROOMDESC, RM.NUMPERSON,
 $result1 = mysqli_query($connection, $query1);
 
 ?>
-
+ <link rel="stylesheet" type="text/css" href="../../style.css">  
+    <link rel="stylesheet" type="text/css" href="../../css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../fonts/css/font-awesome.min.css"> 
+    <link rel="stylesheet" type="text/css" href="../../css/custom-navbar.min.css"> 
+    <link href="../../css/bootstrap-datetimepicker.min.css" rel="stylesheet" >
+    <link href="../../css/datepicker.css" rel="stylesheet" >
+    <link href="../../css/galery.css" rel="stylesheet">
+    <link href="../../css/ekko-lightbox.css" rel="stylesheet">
 <section class="invoice" id="printthis">
             <div class="row">
                 <div class="col-xs-12">
