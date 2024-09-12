@@ -187,7 +187,7 @@ if (isset($_SESSION['booking_notification_viewed'])) {
     </a>
     <span style="margin-left: 10px;"></span>
 </li>
-<li class="nav-item my-auto">
+<!-- <li class="nav-item my-auto">
     <a href="https://mcchmhotelreservation.com/admin/mod_reservation/index.php?viewed=bookings" class="text-dark" id="bookingNotification">
         <i class="fa fa-bell"></i>
         <?php if ($todayBookings > 0): ?>
@@ -195,10 +195,51 @@ if (isset($_SESSION['booking_notification_viewed'])) {
         <?php endif; ?>
     </a>
     <span style="margin-left: 10px;">|</span>
+</li> -->
+<li class="nav-item dropdown noti-dropdown my-auto">
+    <a href="#" class="dropdown-toggle nav-link text-dark" id="bookingNotification" data-toggle="dropdown">
+        <i class="fa fa-bell"></i>
+        <?php if ($todayBookings > 0): ?>
+            <span class="badge badge-pill badge-danger"><?php echo $todayBookings; ?></span>
+        <?php endif; ?>
+    </a>
+    <div class="dropdown-menu notifications">
+        <div class="topnav-dropdown-header">
+            <span class="notification-title">Notifications</span>
+            <a href="javascript:void(0)" class="clear-noti">Clear All</a>
+        </div>
+        <div class="noti-content">
+            <ul class="notification-list">
+                <!-- Example notification -->
+                <li class="notification-message">
+                    <a href="https://mcchmhotelreservation.com/admin/mod_reservation/index.php?viewed=bookings">
+                        <div class="media">
+                            <span class="avatar avatar-sm">
+                                <img class="avatar-img rounded-circle" alt="User Image" src="assets/img/profiles/avatar-02.jpg">
+                            </span>
+                            <div class="media-body">
+                                <p class="noti-details">
+                                    <span class="noti-title">New Booking</span> was made <span class="noti-title">for today</span>
+                                </p>
+                                <p class="noti-time">
+                                    <span class="notification-time">2 mins ago</span>
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <!-- Add more notifications dynamically -->
+            </ul>
+        </div>
+        <div class="topnav-dropdown-footer">
+            <a href="https://mcchmhotelreservation.com/admin/mod_reservation/index.php?viewed=all">View all Notifications</a>
+        </div>
+    </div>
+    <span style="margin-left: 10px;">|</span>
 </li>
 
 
-<style>
+<!-- <style>
 .notification-dot {
     position: relative;
     display: inline-block;
@@ -211,6 +252,80 @@ if (isset($_SESSION['booking_notification_viewed'])) {
     left: 8px; /* Adjust as needed */
 }
 
+</style> -->
+<style>.badge-pill {
+    position: absolute;
+    top: -10px;
+    right: -5px;
+    background-color: red;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 50px;
+    font-size: 12px;
+}
+
+.noti-dropdown .dropdown-menu {
+    width: 300px;
+    padding: 0;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.topnav-dropdown-header {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.notification-title {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.clear-noti {
+    font-size: 12px;
+    color: #007bff;
+    cursor: pointer;
+}
+
+.noti-content {
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.notification-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.notification-message {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.media {
+    display: flex;
+    align-items: center;
+}
+
+.media-body {
+    margin-left: 10px;
+}
+
+.notification-time {
+    font-size: 12px;
+    color: #999;
+}
+
+.topnav-dropdown-footer {
+    padding: 10px;
+    text-align: center;
+    border-top: 1px solid #eee;
+}
 </style>
 
 <?php
