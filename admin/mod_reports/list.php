@@ -92,6 +92,7 @@
 
 
 <?php
+require_once("../../includes/initialize.php");
 // Ensure the 'code' parameter is provided
 if (isset($_GET['code'])) {
     //die('Confirmation code not provided.');
