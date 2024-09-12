@@ -1,8 +1,7 @@
-<!-- Include SweetAlert2 and Print.js -->
+<!-- Include SweetAlert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/print-js/1.6.0/print.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/print-js/1.6.0/print.min.css" />
 
+<!-- Additional styling and scripts -->
 <style>
     .table td, .table th {
         white-space: nowrap;
@@ -17,9 +16,13 @@
     .table-responsive {
         display: none; /* Hide table initially */
     }
-    /* Print section styling */
-    #printSection {
+    #printthis {
         display: none;
+    }
+    @media print {
+        #printthis {
+            display: block;
+        }
     }
 </style>
 
@@ -69,7 +72,7 @@
                                             <td align="center"><?php echo $row['SPRICE']; ?></td>
                                             <td align="center"><?php echo $row['STATUS']; ?></td>
                                             <td align="center">
-                                                <button type="button" class="btn btn-sm btn-primary print-btn" data-code="<?php echo $row['CONFIRMATIONCODE']; ?>"><i class="icon-print"></i> Print</button>
+                                            <a href="?code=<?php echo $row['CONFIRMATIONCODE']; ?>" class="btn btn-sm btn-primary"><i class="icon-print"></i> Print</a>
                                                 <?php if($_SESSION['ADMIN_UROLE']=="Administrator"){ ?>
                                                 <button type="button" class="btn btn-danger btn-sm delete-btn" data-id="<?php echo $row['CONFIRMATIONCODE']; ?>"><i class="icon-edit"></i> Delete</button>
                                                 <?php } ?>
@@ -86,10 +89,38 @@
     </div>
 </div>
 
-<!-- Hidden Print Section -->
-<div id="printSection">
-    <div class="wrapper">
-        <section class="invoice">
+
+
+<?php
+// Ensure the 'code' parameter is provided
+if (isset($_GET['code'])) {
+    //die('Confirmation code not provided.');
+
+$code = mysqli_real_escape_string($connection, $_GET['code']);
+
+$queryp = "SELECT g.`GUESTID`, `G_FNAME`, `G_LNAME`, `G_ADDRESS`, `G_CITY`, `ZIP`, `G_NATIONALITY`, `CONFIRMATIONCODE`, `TRANSDATE`, `ARRIVAL`, `DEPARTURE`, `RPRICE`
+          FROM `tblguest` g
+          JOIN `tblreservation` r ON g.`GUESTID` = r.`GUESTID`
+          WHERE `CONFIRMATIONCODE` = '$code'";
+
+$result = mysqli_query($connection, $queryp);
+if ($result && mysqli_num_rows($result) > 0) {
+    $row = mysqli_fetch_assoc($result);
+} else {
+    die('No records found for the provided confirmation code.');
+}
+
+$query1 = "SELECT A.ACCOMID, A.ACCOMODATION, RM.ROOM, RM.ROOMDESC, RM.NUMPERSON, RM.PRICE, RM.ROOMID, RS.ARRIVAL, RS.DEPARTURE 
+           FROM tblaccomodation A
+           JOIN tblroom RM ON A.ACCOMID = RM.ACCOMID
+           JOIN tblreservation RS ON RM.ROOMID = RS.ROOMID 
+           WHERE RS.CONFIRMATIONCODE = '".$_GET['code']."'";
+
+$result1 = mysqli_query($connection, $query1);
+
+?>
+
+<section class="invoice" id="printthis">
             <div class="row">
                 <div class="col-xs-12">
                     <h2 class="page-header">
@@ -98,17 +129,35 @@
                 </div>
             </div>
             <div class="row invoice-info">
-                <!-- Fill the print section content using JavaScript -->
-                <div class="col-sm-4 invoice-col" id="guestInfo">
-                    <!-- Guest Info here -->
+                <div class="col-sm-4 invoice-col">
+                    From
+                    <address>
+                        <strong>HM Hotel Reservation</strong><br>
+                        Crossing Bunakan<br>
+                        Bunakan, Madridejos, Cebu<br>
+                        Phone: 09317622381<br>
+                        Email: Hmhotelreservation@gmail.com
+                    </address>
                 </div>
-                <div class="col-sm-4 invoice-col" id="invoiceInfo">
-                    <!-- Invoice Info here -->
+                <div class="col-sm-4 invoice-col">
+                    To
+                    <address>
+                        <strong><?php echo $row['G_FNAME'] . ' ' . $row['G_LNAME']; ?></strong><br>
+                        <?php echo $row['G_ADDRESS']; ?><br>
+                        <?php echo $row['G_CITY']; ?><br>
+                        <?php echo $row['G_NATIONALITY']; ?><br>
+                        <?php echo $row['ZIP']; ?>
+                    </address>
+                </div>
+                <div class="col-sm-4 invoice-col">
+                    <b>Invoice No.</b> 00<?php echo $row['GUESTID']; ?><br>
+                    <b>Confirmation ID:</b> <?php echo $row['CONFIRMATIONCODE']; ?><br>
+                    <b>Transaction Date:</b> <?php echo $row['TRANSDATE']; ?>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12 table-responsive">
-                    <table class="table table-striped" id="printTable">
+                    <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th>Room</th>
@@ -121,7 +170,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Table data will be injected via JavaScript -->
+                            <?php 
+                            $tot = 0;
+                            while ($row1 = mysqli_fetch_assoc($result1)) {
+                                $days = dateDiff(date($row1['ARRIVAL']), date($row1['DEPARTURE']));
+                                $subtotal = $row1['PRICE'] * ($days == 0 ? 1 : $days);
+                                $tot += $subtotal;
+                                ?>
+                                <tr> 
+                                    <td><?php echo $row1['ACCOMODATION'] . ' ' . $row1['ROOM']; ?></td>
+                                    <td><?php echo $row1['ROOMDESC']; ?><br><?php echo $row1['NUMPERSON']; ?></td>
+                                    <td>&#8369; <?php echo $row1['PRICE']; ?></td>
+                                    <td><?php echo date_format(date_create($row1['ARRIVAL']), 'm/d/Y'); ?></td>
+                                    <td><?php echo date_format(date_create($row1['DEPARTURE']), 'm/d/Y'); ?></td>
+                                    <td><?php echo ($days == 0) ? '1' : $days; ?></td>
+                                    <td>&#8369; <?php echo $subtotal; ?></td>
+                                </tr>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>
@@ -133,138 +198,84 @@
                         <table class="table">
                             <tr>
                                 <th style="width:50%">Total:</th>
-                                <td id="totalAmount"></td>
+                                <td>&#8369; <?php echo $tot; ?></td>
                             </tr>
                         </table>
                     </div>
                 </div>
             </div>
         </section>
-    </div>
-</div>
+<?php } else { ?>
+<?php echo 'none'; } ?>
+<script src="https://printjs-4de6.kxcdn.com/print.min.js"></script> 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/print-js/1.6.0/print.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- Initialize DataTables -->
 <script>
-    $(document).ready(function() {
-        // Event listener for print button click
-        $(document).on('click', '.print-btn', function() {
-            var confirmationCode = $(this).data('code'); // Get the confirmation code from button
 
-            // AJAX call to fetch invoice details
-            $.ajax({
-                url: 'printreport.php', // Fetch data from this file
-                type: 'GET',
-                data: { code: confirmationCode }, // Send confirmation code as parameter
-                dataType: 'json', // Expecting JSON response
-                success: function(response) {
-                    if (response.success) {
-                        // Prepare the HTML structure for the invoice
-                        var printContent = `
-                        <div class="wrapper">
-                            <section class="invoice">
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <h2 class="page-header">
-                                            <i class="fa fa-building"></i> HM Hotel Reservation
-                                        </h2>
-                                    </div>
-                                </div>
-                                <div class="row invoice-info">
-                                    <div class="col-sm-4 invoice-col">
-                                        From
-                                        <address>
-                                            <strong>HM Hotel Reservation</strong><br>
-                                            Crossing Bunakan<br>
-                                            Bunakan, Madridejos, Cebu<br>
-                                            Phone: 09317622381<br>
-                                            Email: Hmhotelreservation@gmail.com
-                                        </address>
-                                    </div>
-                                    <div class="col-sm-4 invoice-col">
-                                        To
-                                        <address>
-                                            <strong>` + response.guestName + `</strong><br>
-                                            ` + response.guestAddress + `<br>
-                                            ` + response.guestCity + `<br>
-                                            ` + response.guestNationality + `<br>
-                                            ` + response.guestZip + `
-                                        </address>
-                                    </div>
-                                    <div class="col-sm-4 invoice-col">
-                                        <b>Invoice No.</b> 00` + response.guestId + `<br>
-                                        <b>Confirmation ID:</b> ` + response.confirmationCode + `<br>
-                                        <b>Transaction Date:</b> ` + response.transactionDate + `
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-12 table-responsive">
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Room</th>
-                                                    <th>Description</th>
-                                                    <th>Price</th>
-                                                    <th>Checked in</th>
-                                                    <th>Checked out</th>
-                                                    <th>Night(s)</th>
-                                                    <th>Subtotal</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                ` + response.roomDetails.map(function(room) {
-                                                    return `
-                                                        <tr>
-                                                            <td>` + room.accommodation + ' ' + room.room + `</td>
-                                                            <td>` + room.roomDesc + `<br>` + room.numPerson + `</td>
-                                                            <td>&#8369; ` + room.price + `</td>
-                                                            <td>` + room.arrivalDate + `</td>
-                                                            <td>` + room.departureDate + `</td>
-                                                            <td>` + room.nights + `</td>
-                                                            <td>&#8369; ` + room.subtotal + `</td>
-                                                        </tr>
-                                                    `;
-                                                }).join('') + `
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-6">
-                                        <p class="lead">Total Amount</p>
-                                        <div class="table-responsive">
-                                            <table class="table">
-                                                <tr>
-                                                    <th style="width:50%">Total:</th>
-                                                    <td>&#8369; ` + response.totalAmount + `</td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-                        </div>`;
+<?php if (isset($_GET['code'])) { ?> 
+    printJS({
+        printable: 'printthis',
+        type: 'html',
+		header: '<h3 class="custom-h3">HM Hotel Reservation</h3>',
+		style: 'thead th { background-color: #f2f2f2; color: #333; } .lead { font-weight: bold; } .table th, .table td { border: 1px solid #ddd; }',
+	});
 
-                        // Inject the content into a hidden div for printing
-                        $('#printSection').html(printContent);
+<?php } ?>
 
-                        // Use printJS to print the content
-                        printJS({
-                            printable: 'printSection',
-                            type: 'html',
-                            css: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'
+
+$(document).ready(function() {
+    // Initialize DataTables for check-out tab
+    $('#dataTableCheckout').DataTable({
+        "paging": true,
+        "searching": true,
+        "lengthChange": true,
+        "pageLength": 10
+    });
+
+    // Show table after initialization
+    $('.table-responsive').show();
+
+    // Event listener for deleting a reservation
+    $(document).on('click', '.delete-btn', function() {
+        var confirmationCode = $(this).data('id');
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: 'delete.php',
+                    type: 'GET',
+                    data: { id: confirmationCode, confirm: 'true' },
+                    success: function(response) {
+                        Swal.fire(
+                            'Deleted!',
+                            'The check-out reservation has been deleted.',
+                            'success'
+                        ).then(() => {
+                            location.reload(); // Reload the page after deletion
                         });
-                    } else {
-                        Swal.fire('Error', 'Failed to load print data.', 'error');
+                    },
+                    error: function() {
+                        Swal.fire(
+                            'Error!',
+                            'There was an error deleting the reservation.',
+                            'error'
+                        );
                     }
-                },
-                error: function() {
-                    Swal.fire('Error', 'Failed to fetch print data.', 'error');
-                }
-            });
+                });
+            }
         });
     });
-</script>
 
-<!-- HTML to hold the print content temporarily -->
-<div id="printSection" style="display:none;"></div>
+
+
+// print
+
+});
+</script>
