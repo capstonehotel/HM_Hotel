@@ -25,11 +25,6 @@
         }
     }
 </style>
-<link rel="stylesheet" type="text/css" href="../../css/bootstrap.css">
-<link rel="stylesheet" type="text/css" href="../../fonts/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="../../css/custom-navbar.min.css">
-<link rel="stylesheet" type="text/css" href="../../css/galery.css">
-<link href="../../css/ekko-lightbox.css" rel="stylesheet">
 
 <div class="container-fluid">
     <div class="card shadow mb-4">
