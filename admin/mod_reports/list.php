@@ -40,6 +40,11 @@
     }
 </style>
 
+<link rel="stylesheet" type="text/css" href="../../css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="../../fonts/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="../../css/custom-navbar.min.css">
+<link rel="stylesheet" type="text/css" href="../../css/galery.css">
+<link href="../../css/ekko-lightbox.css" rel="stylesheet">
 
 
 <div class="container-fluid">
@@ -223,67 +228,75 @@ $result1 = mysqli_query($connection, $query1);
         </section>
 <?php } else { ?>
 <?php echo 'none'; } ?>
-<script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+<script src="https://printjs-4de6.kxcdn.com/print.min.js"></script> 
 
+<!-- Initialize DataTables -->
 <script>
-    $(document).ready(function() {
-        // Initialize DataTables for check-out tab
-        $('#dataTableCheckout').DataTable({
-            "paging": true,
-            "searching": true,
-            "lengthChange": true,
-            "pageLength": 10
-        });
 
-        // Show table after initialization
-        $('.table-responsive').show();
+<?php if (isset($_GET['code'])) { ?> 
+    printJS({
+        printable: 'printthis',
+        type: 'html',
+		header: '<h3 class="custom-h3">HM Hotel Reservation</h3>',
+		style: 'thead th { background-color: #f2f2f2; color: #333; } .lead { font-weight: bold; } .table th, .table td { border: 1px solid #ddd; }',
+	});
 
-        // Event listener for deleting a reservation
-        $(document).on('click', '.delete-btn', function() {
-            var confirmationCode = $(this).data('id');
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: 'delete.php',
-                        type: 'GET',
-                        data: { id: confirmationCode, confirm: 'true' },
-                        success: function(response) {
-                            Swal.fire(
-                                'Deleted!',
-                                'The check-out reservation has been deleted.',
-                                'success'
-                            ).then(() => {
-                                location.reload(); // Reload the page after deletion
-                            });
-                        },
-                        error: function() {
-                            Swal.fire(
-                                'Error!',
-                                'There was an error deleting the reservation.',
-                                'error'
-                            );
-                        }
-                    });
-                }
-            });
-        });
+<?php } ?>
 
-        // Print when printJS is called
-        <?php if (isset($_GET['code'])) { ?> 
-            printJS({
-                printable: 'printthis',
-                type: 'html',
-                header: '<h3 class="custom-h3">HM Hotel Reservation</h3>',
-                style: 'thead th { background-color: #f2f2f2; color: #333; } .lead { font-weight: bold; } .table th, .table td { border: 1px solid #ddd; padding: 8px; text-align: center; }',
-            });
-        <?php } ?>
+
+$(document).ready(function() {
+    // Initialize DataTables for check-out tab
+    $('#dataTableCheckout').DataTable({
+        "paging": true,
+        "searching": true,
+        "lengthChange": true,
+        "pageLength": 10
     });
+
+    // Show table after initialization
+    $('.table-responsive').show();
+
+    // Event listener for deleting a reservation
+    $(document).on('click', '.delete-btn', function() {
+        var confirmationCode = $(this).data('id');
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: 'delete.php',
+                    type: 'GET',
+                    data: { id: confirmationCode, confirm: 'true' },
+                    success: function(response) {
+                        Swal.fire(
+                            'Deleted!',
+                            'The check-out reservation has been deleted.',
+                            'success'
+                        ).then(() => {
+                            location.reload(); // Reload the page after deletion
+                        });
+                    },
+                    error: function() {
+                        Swal.fire(
+                            'Error!',
+                            'There was an error deleting the reservation.',
+                            'error'
+                        );
+                    }
+                });
+            }
+        });
+    });
+
+
+
+// print
+
+});
 </script>
