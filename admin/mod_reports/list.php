@@ -2,50 +2,34 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <!-- Additional styling and scripts -->
-
-    <style>
+<style>
+    .table td, .table th {
+        white-space: nowrap;
+        vertical-align: middle;
+    }
+    .table thead th {
+        text-align: center;
+    }
+    .btn-sm {
+        padding: 0.25rem 0.5rem;
+    }
     .table-responsive {
         display: none; /* Hide table initially */
     }
-    
+    #printthis {
+        display: none;
+    }
     @media print {
-        body {
-            margin: 0.5in;
-        }
-        
         #printthis {
-            display: block;
-        }
-
-        /* Ensure table layout is consistent in print */
-        .table th, .table td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }
-
-        thead th {
-            background-color: #f2f2f2;
-            color: #333;
-        }
-
-        .lead {
-            font-weight: bold;
-        }
-
-        /* If you want the whole page printed, ensure hidden items are shown */
-        .container-fluid, .card, .table-responsive {
             display: block;
         }
     }
 </style>
-
 <link rel="stylesheet" type="text/css" href="../../css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="../../fonts/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="../../css/custom-navbar.min.css">
 <link rel="stylesheet" type="text/css" href="../../css/galery.css">
 <link href="../../css/ekko-lightbox.css" rel="stylesheet">
-
 
 <div class="container-fluid">
     <div class="card shadow mb-4">
