@@ -143,81 +143,128 @@
     </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/print-js/1.6.0/print.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-$(document).ready(function() {
-    // Initialize DataTables for check-out tab
-    $('#dataTableCheckout').DataTable({
-        "paging": true,
-        "searching": true,
-        "lengthChange": true,
-        "pageLength": 10
-    });
+    $(document).ready(function() {
+        // Event listener for print button click
+        $(document).on('click', '.print-btn', function() {
+            var confirmationCode = $(this).data('code'); // Get the confirmation code from button
 
-    // Show table after initialization
-    $('.table-responsive').show();
+            // AJAX call to fetch invoice details
+            $.ajax({
+                url: 'printreport.php', // Fetch data from this file
+                type: 'GET',
+                data: { code: confirmationCode }, // Send confirmation code as parameter
+                dataType: 'json', // Expecting JSON response
+                success: function(response) {
+                    if (response.success) {
+                        // Prepare the HTML structure for the invoice
+                        var printContent = `
+                        <div class="wrapper">
+                            <section class="invoice">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <h2 class="page-header">
+                                            <i class="fa fa-building"></i> HM Hotel Reservation
+                                        </h2>
+                                    </div>
+                                </div>
+                                <div class="row invoice-info">
+                                    <div class="col-sm-4 invoice-col">
+                                        From
+                                        <address>
+                                            <strong>HM Hotel Reservation</strong><br>
+                                            Crossing Bunakan<br>
+                                            Bunakan, Madridejos, Cebu<br>
+                                            Phone: 09317622381<br>
+                                            Email: Hmhotelreservation@gmail.com
+                                        </address>
+                                    </div>
+                                    <div class="col-sm-4 invoice-col">
+                                        To
+                                        <address>
+                                            <strong>` + response.guestName + `</strong><br>
+                                            ` + response.guestAddress + `<br>
+                                            ` + response.guestCity + `<br>
+                                            ` + response.guestNationality + `<br>
+                                            ` + response.guestZip + `
+                                        </address>
+                                    </div>
+                                    <div class="col-sm-4 invoice-col">
+                                        <b>Invoice No.</b> 00` + response.guestId + `<br>
+                                        <b>Confirmation ID:</b> ` + response.confirmationCode + `<br>
+                                        <b>Transaction Date:</b> ` + response.transactionDate + `
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Room</th>
+                                                    <th>Description</th>
+                                                    <th>Price</th>
+                                                    <th>Checked in</th>
+                                                    <th>Checked out</th>
+                                                    <th>Night(s)</th>
+                                                    <th>Subtotal</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                ` + response.roomDetails.map(function(room) {
+                                                    return `
+                                                        <tr>
+                                                            <td>` + room.accommodation + ' ' + room.room + `</td>
+                                                            <td>` + room.roomDesc + `<br>` + room.numPerson + `</td>
+                                                            <td>&#8369; ` + room.price + `</td>
+                                                            <td>` + room.arrivalDate + `</td>
+                                                            <td>` + room.departureDate + `</td>
+                                                            <td>` + room.nights + `</td>
+                                                            <td>&#8369; ` + room.subtotal + `</td>
+                                                        </tr>
+                                                    `;
+                                                }).join('') + `
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <p class="lead">Total Amount</p>
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <tr>
+                                                    <th style="width:50%">Total:</th>
+                                                    <td>&#8369; ` + response.totalAmount + `</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>`;
 
-    // Event listener for deleting a reservation
-    $(document).on('click', '.delete-btn', function() {
-        var confirmationCode = $(this).data('id');
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: 'delete.php',
-                    type: 'GET',
-                    data: { id: confirmationCode, confirm: 'true' },
-                    success: function(response) {
-                        Swal.fire(
-                            'Deleted!',
-                            'The check-out reservation has been deleted.',
-                            'success'
-                        ).then(() => {
-                            location.reload(); // Reload the page after deletion
+                        // Inject the content into a hidden div for printing
+                        $('#printSection').html(printContent);
+
+                        // Use printJS to print the content
+                        printJS({
+                            printable: 'printSection',
+                            type: 'html',
+                            css: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'
                         });
-                    },
-                    error: function() {
-                        Swal.fire(
-                            'Error!',
-                            'There was an error deleting the reservation.',
-                            'error'
-                        );
+                    } else {
+                        Swal.fire('Error', 'Failed to load print data.', 'error');
                     }
-                });
-            }
+                },
+                error: function() {
+                    Swal.fire('Error', 'Failed to fetch print data.', 'error');
+                }
+            });
         });
     });
-
-    // Print button event
-    $(document).on('click', '.print-btn', function() {
-        var confirmationCode = $(this).data('code');
-
-        // AJAX call to fetch the data for the given confirmation code
-        $.ajax({
-            url: 'printreport.php',
-            type: 'GET',
-            data: { code: confirmationCode },
-            success: function(response) {
-                // Inject the fetched data into the print section
-                $('#printSection #guestInfo').html($(response).find('#guestInfo').html());
-                $('#printSection #invoiceInfo').html($(response).find('#invoiceInfo').html());
-                $('#printSection #printTable tbody').html($(response).find('#printTable tbody').html());
-                $('#printSection #totalAmount').html($(response).find('#totalAmount').html());
-
-                // Use Print.js to print the section
-                printJS({
-                    printable: 'printSection',
-                    type: 'html',
-                    css: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'
-                });
-            }
-        });
-    });
-});
 </script>
+
+<!-- HTML to hold the print content temporarily -->
+<div id="printSection" style="display:none;"></div>
