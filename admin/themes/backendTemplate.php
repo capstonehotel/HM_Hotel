@@ -196,47 +196,6 @@ if (isset($_SESSION['booking_notification_viewed'])) {
     </a>
     <span style="margin-left: 10px;">|</span>
 </li> -->
-<li class="nav-item dropdown noti-dropdown my-auto">
-    <a href="#" class="dropdown-toggle nav-link text-dark" id="bookingNotification" data-toggle="dropdown">
-        <i class="fa fa-bell"></i>
-        <?php if ($todayBookings > 0): ?>
-            <span class="badge badge-pill badge-danger"><?php echo $todayBookings; ?></span>
-        <?php endif; ?>
-    </a>
-    <div class="dropdown-menu notifications">
-        <div class="topnav-dropdown-header">
-            <span class="notification-title">Notifications</span>
-            <a href="javascript:void(0)" class="clear-noti">Clear All</a>
-        </div>
-        <div class="noti-content">
-            <ul class="notification-list">
-                <!-- Example notification -->
-                <li class="notification-message">
-                    <a href="https://mcchmhotelreservation.com/admin/mod_reservation/index.php?viewed=bookings">
-                        <div class="media">
-                            <span class="avatar avatar-sm">
-                                <img class="avatar-img rounded-circle" alt="User Image" src="assets/img/profiles/avatar-02.jpg">
-                            </span>
-                            <div class="media-body">
-                                <p class="noti-details">
-                                    <span class="noti-title">New Booking</span> was made <span class="noti-title">for today</span>
-                                </p>
-                                <p class="noti-time">
-                                    <span class="notification-time">2 mins ago</span>
-                                </p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <!-- Add more notifications dynamically -->
-            </ul>
-        </div>
-        <div class="topnav-dropdown-footer">
-            <a href="https://mcchmhotelreservation.com/admin/mod_reservation/index.php?viewed=all">View all Notifications</a>
-        </div>
-    </div>
-    <span style="margin-left: 10px;">|</span>
-</li>
 
 
 <!-- <style>
@@ -253,26 +212,94 @@ if (isset($_SESSION['booking_notification_viewed'])) {
 }
 
 </style> -->
-<style>.badge-pill {
+<li class="nav-item my-auto">
+    <a href="javascript:void(0);" class="text-dark" id="bookingNotification" onclick="toggleNotificationMenu()">
+        <i class="fa fa-bell"></i>
+        <?php if ($todayBookings > 0): ?>
+            <span class="badge badge-pill badge-danger"><?php echo $todayBookings; ?></span>
+        <?php endif; ?>
+    </a>
+    <!-- Notification menu -->
+    <div id="notificationMenu" class="notification-menu">
+        <div class="menu-header">
+            <span class="menu-title">Notifications</span>
+            <a href="javascript:void(0)" class="clear-noti">Clear All</a>
+        </div>
+        <div class="menu-content">
+            <!-- Bookings -->
+            <div class="menu-section">
+                <h5>Bookings</h5>
+                <ul class="notification-list">
+                    <li class="notification-message">
+                        <a href="https://mcchmhotelreservation.com/admin/mod_reservation/index.php?viewed=bookings">
+                            New booking made for today
+                            <span class="notification-time">2 mins ago</span>
+                        </a>
+                    </li>
+                    <!-- Add dynamic bookings -->
+                </ul>
+            </div>
+
+            <!-- Messages -->
+            <div class="menu-section">
+                <h5>Messages</h5>
+                <ul class="notification-list">
+                    <li class="notification-message">
+                        <a href="#">
+                            You have 3 unread messages
+                            <span class="notification-time">10 mins ago</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Chatbox -->
+            <div class="menu-section">
+                <h5>Chatbox</h5>
+                <ul class="notification-list">
+                    <li class="notification-message">
+                        <a href="#">
+                            Chat support is online
+                            <span class="notification-time">5 mins ago</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Payment -->
+            <div class="menu-section">
+                <h5>Payments</h5>
+                <ul class="notification-list">
+                    <li class="notification-message">
+                        <a href="#">
+                            Payment for booking #12345 received
+                            <span class="notification-time">15 mins ago</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="menu-footer">
+            <a href="https://mcchmhotelreservation.com/admin/mod_reservation/index.php?viewed=all">View all Notifications</a>
+        </div>
+    </div>
+    <span style="margin-left: 10px;">|</span>
+</li>
+<style>
+    .notification-menu {
+    display: none;
     position: absolute;
-    top: -10px;
-    right: -5px;
-    background-color: red;
-    color: white;
-    padding: 2px 8px;
-    border-radius: 50px;
-    font-size: 12px;
-}
-
-.noti-dropdown .dropdown-menu {
+    top: 40px;
+    right: 0;
     width: 300px;
-    padding: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    border: none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
 }
 
-.topnav-dropdown-header {
+.menu-header {
     padding: 10px;
     border-bottom: 1px solid #eee;
     display: flex;
@@ -280,9 +307,9 @@ if (isset($_SESSION['booking_notification_viewed'])) {
     align-items: center;
 }
 
-.notification-title {
+.menu-title {
     font-weight: bold;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .clear-noti {
@@ -291,42 +318,74 @@ if (isset($_SESSION['booking_notification_viewed'])) {
     cursor: pointer;
 }
 
-.noti-content {
+.menu-content {
     max-height: 250px;
     overflow-y: auto;
+    padding: 10px;
+}
+
+.menu-section {
+    margin-bottom: 15px;
 }
 
 .notification-list {
     list-style-type: none;
-    margin: 0;
     padding: 0;
+    margin: 0;
 }
 
 .notification-message {
-    padding: 10px;
+    padding: 8px;
     border-bottom: 1px solid #eee;
 }
 
-.media {
-    display: flex;
-    align-items: center;
-}
-
-.media-body {
-    margin-left: 10px;
+.notification-message a {
+    display: block;
+    color: #333;
+    text-decoration: none;
 }
 
 .notification-time {
     font-size: 12px;
     color: #999;
+    display: block;
+    margin-top: 5px;
 }
 
-.topnav-dropdown-footer {
+.menu-footer {
     padding: 10px;
     text-align: center;
     border-top: 1px solid #eee;
 }
+
+.menu-footer a {
+    font-size: 14px;
+    color: #007bff;
+}
+
 </style>
+
+<script>
+    function toggleNotificationMenu() {
+    var menu = document.getElementById("notificationMenu");
+    if (menu.style.display === "block") {
+        menu.style.display = "none";
+    } else {
+        menu.style.display = "block";
+    }
+}
+
+// Close the menu when clicking outside
+document.addEventListener('click', function(event) {
+    var menu = document.getElementById("notificationMenu");
+    var bellIcon = document.getElementById("bookingNotification");
+    
+    if (!menu.contains(event.target) && !bellIcon.contains(event.target)) {
+        menu.style.display = "none";
+    }
+});
+
+</script>
 
 <?php
 /// Update session variables based on the URL parameters
