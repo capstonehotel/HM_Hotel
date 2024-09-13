@@ -326,12 +326,7 @@ $msgCnt = $mydb->fetch_array($res);
 </li>
 <?php } ?>
 <style>
-  .scrollable-dropdown {
-    max-height: 300px; /* Adjust height based on your preference */
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-
+  
 </style>
           <?php 
             $g = New Guest() ;
