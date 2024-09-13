@@ -289,7 +289,7 @@ if (isset($_SESSION['booking_notification_viewed'])) {
     .notification-menu {
     display: none;
     position: absolute;
-    top: 40px;
+    top: 50px;
     right: 0;
     width: 300px;
     background-color: #fff;
@@ -321,7 +321,7 @@ if (isset($_SESSION['booking_notification_viewed'])) {
 .menu-content {
     max-height: 250px;
     overflow-y: auto;
-    padding: 15px;
+    padding: 10px;
 }
 
 .menu-section {
