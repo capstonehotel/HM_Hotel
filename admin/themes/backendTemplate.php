@@ -134,57 +134,89 @@
     </script>
                     <!-- Topbar Navbar -->
                   <ul class="navbar-nav ml-auto">
-                  <?php
+
+
+                  
+            <?php
+              $conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME, DB_PORT);
+              $id = $_SESSION['ADMIN_ID'];
+              $sql = "SELECT * FROM `tbluseraccount` WHERE `USERID` = '$id'";
+              $result = mysqli_query($conn, $sql);
+
+              $count_mess = $conn->query("SELECT COUNT(*) FROM tblcontact");
+              $cnt_message = $count_mess->fetch_array();
+            ?>
+            <!-- <li class="nav-item my-auto">
+                <a href="/HM_HotelReservation/admin/mod_contact_us/index.php" class="text-dark"><i class="fa fa-envelope"></i> <?php echo $cnt_message[0] ?></a> <span style="margin-left: 10px;">|</span>
+            </li> -->
+            <?php 
+    $querysi = "SELECT count(*) as 'Total' FROM tblreservation WHERE DATE(TRANSDATE) = CURDATE()";
+    $mydb->setQuery($querysi);
+    $curya = $mydb->loadResultList();  
+    $todayBookings = isset($curya[0]->Total) ? $curya[0]->Total : 0;
+?>
+<?php
 // Start the session if not already started
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-// Connect to the database
-$conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME, DB_PORT);
-
-// Check for connection errors
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
+// Check if the message notification has been viewed
+if (isset($_SESSION['message_notification_viewed'])) {
+    $cnt_message[0] = 0; // Reset the message count or use appropriate logic
 }
 
-// Get the admin ID from the session
-$id = $_SESSION['ADMIN_ID'];
-
-// Handle message notification viewing
-if (isset($_GET['viewed']) && $_GET['viewed'] === 'messages') {
-    $updateMessagesQuery = "UPDATE tblcontact SET is_read = 1 WHERE is_read = 0";
-    mysqli_query($conn, $updateMessagesQuery);
+// Check if the booking notification has been viewed
+if (isset($_SESSION['booking_notification_viewed'])) {
+    $todayBookings = 0; // Reset the booking count or use appropriate logic
 }
 
-// Handle booking notification viewing
-if (isset($_GET['viewed']) && $_GET['viewed'] === 'bookings') {
-    $updateBookingsQuery = "UPDATE tblreservation SET is_read = 1 WHERE is_read = 0 AND DATE(TRANSDATE) = CURDATE()";
-    mysqli_query($conn, $updateBookingsQuery);
-}
 
-// Count unread messages
-$count_messages_query = $conn->query("SELECT COUNT(*) FROM tblcontact WHERE is_read = 0");
-$cnt_message = $count_messages_query->fetch_array();
 
-// Count today's unread bookings
-$count_bookings_query = $conn->query("SELECT COUNT(*) FROM tblreservation WHERE is_read = 0 AND DATE(TRANSDATE) = CURDATE()");
-$today_bookings = $count_bookings_query->fetch_array();
 
-// Calculate total notifications
-$total_notifications = $cnt_message[0] + $today_bookings[0];
-
-// Close the database connection
-mysqli_close($conn);
 ?>
 
+<!-- HTML Code -->
+
+<li class="nav-item my-auto">
+    <a href="https://mcchmhotelreservation.com/admin/mod_contact_us/index.php?viewed=messages" class="text-dark" id="messageNotification">
+        <i class="fa fa-envelope"></i>
+        <?php if ($cnt_message[0] > 0): ?>
+            <span class="notification-dot"><?php echo $cnt_message[0]; ?></span>
+        <?php endif; ?>
+    </a>
+    <span style="margin-left: 10px;"></span>
+</li>
+<!-- <li class="nav-item my-auto">
+    <a href="https://mcchmhotelreservation.com/admin/mod_reservation/index.php?viewed=bookings" class="text-dark" id="bookingNotification">
+        <i class="fa fa-bell"></i>
+        <?php if ($todayBookings > 0): ?>
+            <span class="notification-dot"><?php echo $todayBookings; ?></span>
+        <?php endif; ?>
+    </a>
+    <span style="margin-left: 10px;">|</span>
+</li> -->
 
 
-<li class="nav-item my-auto" style="position: relative;">
+<!-- <style>
+.notification-dot {
+    position: relative;
+    display: inline-block;
+    background-color: red;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 50%;
+    font-size: 12px;
+    top: -8px; /* Adjust as needed */
+    left: 8px; /* Adjust as needed */
+}
+
+</style> -->
+<li class="nav-item my-auto">
     <a href="javascript:void(0);" class="text-dark" id="bookingNotification" onclick="toggleNotificationMenu()">
         <i class="fa fa-bell"></i>
-        <?php if ($total_notifications > 0): ?>
-            <span class="badge badge-pill badge-danger notification-badge"><?php echo $total_notifications; ?></span>
+        <?php if ($todayBookings > 0): ?>
+            <span class="badge badge-pill badge-danger"><?php echo $todayBookings; ?></span>
         <?php endif; ?>
     </a>
     <!-- Notification menu -->
@@ -195,31 +227,26 @@ mysqli_close($conn);
         </div>
         <div class="menu-content">
             <!-- Bookings -->
-<div class="menu-section">
-    <h5>Bookings</h5>
-    <ul class="notification-list">
-        <li class="notification-message">
-            <a href="https://mcchmhotelreservation.com/admin/mod_reservation/index.php?viewed=bookings">
-            <?php if ($today_bookings[0] > 0): ?>
-                <?php echo $today_bookings[0]; ?>  New booking<?php echo $today_bookings[0] > 1 ? 's' : ''; ?>  for today
-                    <span class="notification-time">2 mins ago</span>
-                <?php else: ?>
-                    No new bookings for today
-                <?php endif; ?>
-            </a>
-        </li>
-        <!-- Add dynamic bookings -->
-    </ul>
-</div>
-
+            <div class="menu-section">
+                <h5>Bookings</h5>
+                <ul class="notification-list">
+                    <li class="notification-message">
+                        <a href="https://mcchmhotelreservation.com/admin/mod_reservation/index.php?viewed=bookings">
+                            New booking made for today
+                            <span class="notification-time">2 mins ago</span>
+                        </a>
+                    </li>
+                    <!-- Add dynamic bookings -->
+                </ul>
+            </div>
 
             <!-- Messages -->
             <div class="menu-section">
                 <h5>Messages</h5>
                 <ul class="notification-list">
                     <li class="notification-message">
-                        <a href="https://mcchmhotelreservation.com/admin/mod_contact_us/index.php?viewed=messages">
-                        <?php if ($cnt_message[0] > 0): ?>
+                        <a href="https://mcchmhotelreservation.com/admin/mod_contact_us">
+                            <?php if ($cnt_message[0] > 0): ?>
                     You have <?php echo $cnt_message[0]; ?> unread messages
                     <span class="notification-time">10 mins ago</span>
                 <?php else: ?>
@@ -267,7 +294,7 @@ mysqli_close($conn);
     display: none;
     position: absolute;
     top: 50px;
-    right: -150px;
+    right: 0;
     width: 300px;
     background-color: #fff;
     border: 1px solid #ccc;
@@ -275,14 +302,7 @@ mysqli_close($conn);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     z-index: 1000;
 }
-.notification-badge {
-    position: absolute;
-    top: -10px;
-    right: 3px;
-    font-size: 0.65rem; /* Adjust font size of the badge */
-    padding: 3px 6px;
-    border-radius: 50%;
-}
+
 .menu-header {
     padding: 10px;
     border-bottom: 1px solid #eee;
@@ -348,6 +368,7 @@ mysqli_close($conn);
 }
 
 </style>
+
 <script>
     function toggleNotificationMenu() {
     var menu = document.getElementById("notificationMenu");
@@ -370,6 +391,81 @@ document.addEventListener('click', function(event) {
 
 </script>
 
+<?php
+/// Update session variables based on the URL parameters
+if (isset($_GET['viewed'])) {
+    if ($_GET['viewed'] == 'messages') {
+        $_SESSION['message_notification_viewed'] = true;
+    }
+
+    if ($_GET['viewed'] == 'bookings') {
+        $_SESSION['booking_notification_viewed'] = true;
+    }
+}
+?>
+<?php
+$conn = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME, DB_PORT);
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Mark the booking notification as new
+    $_SESSION['booking_notification_viewed'] = false;
+    $response = array('success' => true);
+    echo json_encode($response);
+}
+?>
+
+
+<script>
+   document.addEventListener('DOMContentLoaded', function() {
+    var messageNotification = document.getElementById('messageNotification');
+    var bookingNotification = document.getElementById('bookingNotification');
+
+    // Function to handle notification dot removal
+    function removeNotificationDot(element) {
+        var dot = element.querySelector('.notification-dot');
+        if (dot) {
+            dot.style.display = 'none';
+        }
+    }
+
+    // Event listeners for notification links
+    messageNotification.addEventListener('click', function() {
+        removeNotificationDot(this);
+    });
+
+    bookingNotification.addEventListener('click', function() {
+        removeNotificationDot(this);
+    });
+});
+
+
+   // Polling function to check for new notifications
+   function checkForNewNotifications() {
+        fetch('check_notifications.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.newBooking) {
+                    bookingDot.style.display = 'inline-block';
+                } else {
+                    bookingDot.style.display = 'none';
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    // Poll every 5 seconds
+    setInterval(checkForNewNotifications, 5000);
+
+    // Event listeners for notification links
+    bookingNotification.addEventListener('click', function() {
+        fetch('clear_notifications.php?viewed=bookings')
+            .then(response => {
+                bookingDot.style.display = 'none';
+            })
+            .catch(error => console.error('Error:', error));
+    });
+
+</script>
 
                  
                         <!-- Nav Item - User Information -->
