@@ -286,7 +286,7 @@ if (isset($_SESSION['booking_notification_viewed'])) {
     <span style="margin-left: 10px;">|</span>
 </li>
 <style>
-    .notification-menu {
+   .notification-menu {
     display: none;
     position: absolute;
     top: 40px;
@@ -300,7 +300,7 @@ if (isset($_SESSION['booking_notification_viewed'])) {
 }
 
 .menu-header {
-    padding: 10px;
+    padding: 8px; /* Reduced padding */
     border-bottom: 1px solid #eee;
     display: flex;
     justify-content: space-between;
@@ -319,13 +319,13 @@ if (isset($_SESSION['booking_notification_viewed'])) {
 }
 
 .menu-content {
-    max-height: 250px;
+    max-height: 200px; /* Reduced height */
     overflow-y: auto;
-    padding: 10px;
+    padding: 5px; /* Reduced padding */
 }
 
 .menu-section {
-    margin-bottom: 15px;
+    margin-bottom: 10px; /* Reduced margin */
 }
 
 .notification-list {
@@ -335,7 +335,7 @@ if (isset($_SESSION['booking_notification_viewed'])) {
 }
 
 .notification-message {
-    padding: 8px;
+    padding: 5px; /* Reduced padding */
     border-bottom: 1px solid #eee;
 }
 
@@ -349,11 +349,11 @@ if (isset($_SESSION['booking_notification_viewed'])) {
     font-size: 12px;
     color: #999;
     display: block;
-    margin-top: 5px;
+    margin-top: 2px; /* Reduced margin */
 }
 
 .menu-footer {
-    padding: 10px;
+    padding: 8px; /* Reduced padding */
     text-align: center;
     border-top: 1px solid #eee;
 }
