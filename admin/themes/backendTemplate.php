@@ -246,10 +246,13 @@ if (isset($_SESSION['booking_notification_viewed'])) {
                 <ul class="notification-list">
                     <li class="notification-message">
                         <a href="https://mcchmhotelreservation.com/admin/mod_contact_us">
-                            You have <?php if ($cnt_message[0] > 0): ?> unread messages
-                            <span class="notification-time">10 mins ago</span>
+                        <?php if ($cnt_message[0] > 0): ?>
+                    You have <?php echo $cnt_message[0]; ?> unread messages
+                    <span class="notification-time">10 mins ago</span>
+                <?php else: ?>
+                    No unread messages
+                <?php endif; ?>
                         </a>
-                        <?php endif; ?>
                     </li>
                 </ul>
             </div>
