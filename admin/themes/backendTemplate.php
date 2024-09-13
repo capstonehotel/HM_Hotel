@@ -321,7 +321,7 @@ if (isset($_SESSION['booking_notification_viewed'])) {
 .menu-content {
     max-height: 250px;
     overflow-y: auto;
-    padding: 10px;
+    padding: 15px;
 }
 
 .menu-section {
