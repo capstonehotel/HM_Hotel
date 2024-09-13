@@ -245,7 +245,7 @@ if (isset($_SESSION['booking_notification_viewed'])) {
                 <h5>Messages</h5>
                 <ul class="notification-list">
                     <li class="notification-message">
-                        <a href="#">
+                        <a href="https://mcchmhotelreservation.com/admin/mod_contact_us">
                             You have 3 unread messages
                             <span class="notification-time">10 mins ago</span>
                         </a>

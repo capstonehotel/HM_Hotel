@@ -293,40 +293,46 @@ $_SESSION['to']  = $_POST['to'];
             
             <?php if (isset($_SESSION['GUESTID'])) {
 
-             $sql = "SELECT count(*) as MSG FROM `tblpayment` WHERE STATUS<>'Pending'  AND  `MSGVIEW`=0 AND `GUESTID`=" . $_SESSION['GUESTID'];
-             $mydb->setQuery($sql);
-             $res =$mydb->executeQuery(); 
+$sql = "SELECT count(*) as MSG FROM `tblpayment` WHERE STATUS<>'Pending'  AND  `MSGVIEW`=0 AND `GUESTID`=" . $_SESSION['GUESTID'];
+$mydb->setQuery($sql);
+$res = $mydb->executeQuery(); 
 
-               $msgCnt = $mydb->fetch_array($res);
-              ?>
-              <li class="nav-item dropdown">
-              <a class="nav-link active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa fa-envelope-o" style="font-size: 20px;"></i>
-                  <span class="label label-success"><?php echo $msgCnt['MSG'] ; ?></span>
-                <i class="fa fa-caret-down fa-fw"></i> 
-              </a>
-                <ul class="dropdown-menu">
-                    <li class="header">You have <?php echo $msgCnt['MSG'] ; ?> messages</li>
-                    <?php 
-                   $sql = "SELECT  *  FROM `tblpayment` WHERE STATUS<>'Pending' AND `MSGVIEW`=0 AND `GUESTID`=" . $_SESSION['GUESTID'];
-                    $result = $connection->query($sql);
-                       while ($row = $result->fetch_assoc()) {
-                     ?>
-                    <li>
-                      <a target="_blank"  class="read dropdown-item" href="https://mcchmhotelreservation.com/guest/readmessage.php?code=<?php echo  $row['CONFIRMATIONCODE']; ?>" data-toggle="lightbox"   data-id="<?php echo  $row['CONFIRMATIONCODE']; ?> " >
-                        <div class="pull-left">
-                          <img src="https://mcchmhotelreservation.com/images/1607134500_avatar.jpg" style="width: 30px; height: 30px; border-radius: 50%;" alt="">
-                        </div>
-                        <h4>
-                          Admin
-                        </h4>
-                        <p>Reservation is already <?php echo   $row['STATUS']; ?>.. </p> 
-                      </a>
-                    </li>
-                    <?php } ?>
-                  </ul>
-            </li>
-            
+$msgCnt = $mydb->fetch_array($res);
+?>
+<li class="nav-item dropdown">
+<a class="nav-link active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="fa fa-envelope-o" style="font-size: 20px;"></i>
+    <span class="label label-success"><?php echo $msgCnt['MSG']; ?></span>
+    <i class="fa fa-caret-down fa-fw"></i> 
+</a>
+<ul class="dropdown-menu scrollable-dropdown">
+    <li class="header">You have <?php echo $msgCnt['MSG']; ?> messages</li>
+    <?php 
+    $sql = "SELECT  *  FROM `tblpayment` WHERE STATUS<>'Pending' AND `MSGVIEW`=0 AND `GUESTID`=" . $_SESSION['GUESTID'];
+    $result = $connection->query($sql);
+    while ($row = $result->fetch_assoc()) {
+    ?>
+    <li>
+        <a target="_blank" class="read dropdown-item" href="https://mcchmhotelreservation.com/guest/readmessage.php?code=<?php echo $row['CONFIRMATIONCODE']; ?>" data-toggle="lightbox" data-id="<?php echo $row['CONFIRMATIONCODE']; ?> ">
+            <div class="pull-left">
+                <img src="https://mcchmhotelreservation.com/images/1607134500_avatar.jpg" style="width: 30px; height: 30px; border-radius: 50%;" alt="">
+            </div>
+            <h4>Admin</h4>
+            <p>Reservation is already <?php echo $row['STATUS']; ?>..</p> 
+        </a>
+    </li>
+    <?php } ?>
+</ul>
+</li>
+<?php } ?>
+<style>
+  .scrollable-dropdown {
+    max-height: 300px; /* Adjust height based on your preference */
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+</style>
           <?php 
             $g = New Guest() ;
             $result = $g->single_guest($_SESSION['GUESTID']);
