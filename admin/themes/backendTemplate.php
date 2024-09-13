@@ -199,7 +199,7 @@ mysqli_close($conn);
     <h5>Bookings</h5>
     <ul class="notification-list">
         <li class="notification-message">
-            <a href="/HM_HotelReservation/admin/mod_reservation/index.php?viewed=bookings">
+            <a href="https://mcchmhotelreservation.com/admin/mod_reservation/index.php?viewed=bookings">
             <?php if ($today_bookings[0] > 0): ?>
                 <?php echo $today_bookings[0]; ?>  New booking<?php echo $today_bookings[0] > 1 ? 's' : ''; ?>  for today
                     <span class="notification-time">2 mins ago</span>
@@ -218,7 +218,7 @@ mysqli_close($conn);
                 <h5>Messages</h5>
                 <ul class="notification-list">
                     <li class="notification-message">
-                        <a href="/HM_HotelReservation/admin/mod_contact_us/index.php?viewed=messages">
+                        <a href="https://mcchmhotelreservation.com/admin/mod_contact_us/index.php?viewed=messages">
                         <?php if ($cnt_message[0] > 0): ?>
                     You have <?php echo $cnt_message[0]; ?> unread messages
                     <span class="notification-time">10 mins ago</span>
