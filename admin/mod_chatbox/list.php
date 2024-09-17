@@ -46,139 +46,10 @@
 .message-form button {
     margin-left: 10px;
 }
-/* Column 1 Styles */
-.chat-cont-left {
-    padding: 15px;
-    border-right: 1px solid #ddd;
-    background-color: #f8f9fa;
-}
-
-.chat-header {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 15px;
-}
-
-.chat-search {
-    margin-bottom: 15px;
-}
-
-.input-group-prepend i {
-    color: #007bff;
-}
-
-.chat-users-list {
-    max-height: 400px;
-    overflow-y: auto;
-}
-
-.media {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-}
-
-.media-img-wrap {
-    margin-right: 10px;
-}
-
-.avatar-img {
-    width: 50px;
-    height: 50px;
-}
-
-.media-body {
-    flex: 1;
-}
-
-.user-name {
-    font-weight: bold;
-}
-
-.user-last-chat {
-    color: #6c757d;
-}
-
-.last-chat-time {
-    font-size: 12px;
-    color: #6c757d;
-}
-
-.badge {
-    font-size: 12px;
-}
-
-/* Column 2 Styles */
-.chat-area {
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 15px;
-    background-color: #fff;
-}
-
-.chat-header {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.chat-messages {
-    height: 300px;
-    overflow-y: auto;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 15px;
-    margin-bottom: 15px;
-}
-
-.message {
-    display: flex;
-    margin-bottom: 15px;
-}
-
-.message.sent {
-    justify-content: flex-end;
-}
-
-.message .content {
-    display: inline-block;
-    max-width: 60%;
-    padding: 10px;
-    border-radius: 10px;
-    background-color: #007bff;
-    color: white;
-    word-wrap: break-word;
-}
-
-.message.sent .content {
-    background-color: #495057;
-}
-
-.message-form {
-    padding: 10px;
-    background-color: #e9ecef;
-    display: flex;
-    align-items: center;
-}
-
-.message-form input {
-    flex: 1;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-}
-
-.message-form button {
-    margin-left: 10px;
-}
-
 
 </style>
 <div class="container-fluid">
-    <div class="card shadow mb-4">
-    <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Chats</h6>
-        </div>
+
         
 
       <!-- Column 1: Chat List -->
@@ -234,32 +105,33 @@
 </div>
 
 
-                <!-- Column 2: Chat Area -->
-                <div class="col-md-8">
-                    <div class="chat-area" style="border: 1px solid #ddd; border-radius: 5px; padding: 15px;">
-                        <div class="chat-header" style="font-size: 16px; font-weight: bold; margin-bottom: 10px;">
-                            Chat with John Doe
-                        </div>
+               <!-- Column 2: Chat Area -->
+<div class="col-md-8">
+    <div class="chat-area">
+        <div class="chat-header">
+            Chat with John Doe
+        </div>
 
-                        <div class="chat-messages" style="height: 300px; overflow-y: auto; border-bottom: 1px solid #ddd; padding-bottom: 15px; margin-bottom: 15px;">
-                            <div class="message" style="margin-bottom: 10px;">
-                                <div class="content" style="background-color: #007bff; color: white; padding: 10px; border-radius: 10px;">
-                                    Hello, how are you?
-                                </div>
-                            </div>
-                            <div class="message sent" style="text-align: right; margin-bottom: 10px;">
-                                <div class="content" style="background-color: #495057; color: white; padding: 10px; border-radius: 10px;">
-                                    I am good, thank you!
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="message-form" style="display: flex; align-items: center;">
-                            <input type="text" class="form-control" placeholder="Type a message...">
-                            <button class="btn btn-primary" style="margin-left: 10px;"><i class="fa fa-paper-plane"></i></button>
-                        </div>
-                    </div>
+        <div class="chat-messages">
+            <div class="message">
+                <div class="content">
+                    Hello, how are you?
                 </div>
+            </div>
+            <div class="message sent">
+                <div class="content">
+                    I am good, thank you!
+                </div>
+            </div>
+        </div>
+
+        <div class="message-form">
+            <input type="text" class="form-control" placeholder="Type a message...">
+            <button class="btn btn-primary"><i class="fa fa-paper-plane"></i></button>
+        </div>
+    </div>
+</div>
+
             </div>
         </div>
     </div>
