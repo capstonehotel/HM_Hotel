@@ -95,6 +95,12 @@
                 <i class="fas fa-fw fa-money-bill"></i>
                     <span>Payment</a>
             </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="https://mcchmhotelreservation.com/admin/mod_chatbox/index.php">
+                <i class="fas fa-fw fa-comments"></i>
+                    <span>Chatbox</a>
+            </li>
+
 
 
             <li class="nav-item active">
