@@ -53,8 +53,8 @@
         <div class="card-body">
             <div class="row">
                 <!-- Column 1: Chat List -->
-                <div class="col-md-4" style="border-right: 1px solid #ddd;">
-                    <div class="chat-header" style="font-size: 18px; font-weight: bold; margin-bottom: 10px; border-bottom: 2px solid #ddd; padding-bottom: 10px;">
+                <div class="col-md-4">
+                    <div class="chat-list-header" style="font-size: 18px; font-weight: bold; border-bottom: 2px solid #ddd; padding-bottom: 10px; margin-bottom: 10px;">
                         Chats
                     </div>
                     <div class="list-group">
@@ -68,7 +68,7 @@
                 <!-- Column 2: Chat Area -->
                 <div class="col-md-8">
                     <div class="chat-area" style="border: 1px solid #ddd; border-radius: 5px; padding: 15px;">
-                        <div class="chat-header" style="font-size: 16px; font-weight: bold; margin-bottom: 10px;">
+                        <div class="chat-header" style="font-size: 16px; font-weight: bold; border-bottom: 2px solid #ddd; padding-bottom: 10px; margin-bottom: 10px;">
                             Chat with John Doe
                         </div>
 
