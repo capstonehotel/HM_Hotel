@@ -1,155 +1,48 @@
-<!-- Bootstrap CSS -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Bootstrap JS and dependencies -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<!-- Font Awesome -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-
-<style>
-    .chat-users-list {
-    max-height: 400px;
-    overflow-y: auto;
-}
-
-.chat-scroll {
-    padding: 10px;
-}
-
-.media {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-}
-
-.media:hover {
-    background-color: #f1f1f1;
-}
-
-.chat-body {
-    max-height: 400px;
-    overflow-y: auto;
-}
-
-.msg-box {
-    padding: 10px;
-    background-color: #f8f9fa;
-    border-radius: 10px;
-    margin-bottom: 10px;
-}
-
-.sent .msg-box {
-    background-color: #007bff;
-    color: white;
-}
-
-.received .msg-box {
-    background-color: #e9ecef;
-}
-
-</style>
 <div class="container-fluid">
-    <div class="row mt-5">
-        <!-- Chat User List Section -->
-        <div class="col-md-4 chat-cont-left">
-            <div class="card shadow mb-4">
-                <div class="card-header py-3" style="display: flex; justify-content: space-between;">
-                    <h6 class="m-0 font-weight-bold text-primary">Chats</h6>
-                    <a href="javascript:void(0)" class="chat-compose">
-                        <i class="material-icons">control_point</i>
-                    </a>
-                </div>
-                <div class="chat-search">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <i class="fas fa-search"></i>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Search">
-                    </div>
-                </div>
-                <div class="chat-users-list">
-                    <div class="chat-scroll">
-                        <a href="javascript:void(0);" class="media">
-                            <div class="media-img-wrap">
-                                <div class="avatar avatar-away">
-                                    <img src="assets/img/profiles/avatar-03.jpg" alt="User Image" class="avatar-img rounded-circle">
-                                </div>
-                            </div>
-                            <div class="media-body">
-                                <div class="user-name">Justin Lee</div>
-                                <div class="user-last-chat">Hey, How are you?</div>
-                            </div>
-                            <div class="last-chat-time block">2 min</div>
-                        </a>
-                        <!-- Additional chat users here -->
-                    </div>
-                </div>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3" style="display: flex; align-items: center;">
+            <h6 class="m-0 font-weight-bold text-primary">Chat List</h6>
+            <div style="display: flex; width: 100%; justify-content: flex-end;">
+                <!-- Additional header buttons or content can go here -->
             </div>
         </div>
 
-        <!-- Chat Window Section -->
-        <div class="col-md-8 chat-cont-right">
-            <div class="card shadow mb-4">
-                <div class="card-header py-3" style="display: flex; justify-content: space-between;">
-                    <div class="media">
-                        <div class="media-img-wrap">
-                            <div class="avatar avatar-online">
-                                <img src="assets/img/profiles/avatar-02.jpg" alt="User Image" class="avatar-img rounded-circle">
+        <div class="card-body">
+            <div class="row">
+                <!-- Column 1: Chat List -->
+                <div class="col-md-4">
+                    <div class="list-group">
+                        <a href="#" class="list-group-item list-group-item-action active">John Doe</a>
+                        <a href="#" class="list-group-item list-group-item-action">Jane Smith</a>
+                        <a href="#" class="list-group-item list-group-item-action">David Johnson</a>
+                        <a href="#" class="list-group-item list-group-item-action">Emily Davis</a>
+                    </div>
+                </div>
+
+                <!-- Column 2: Chat Area -->
+                <div class="col-md-8">
+                    <div class="chat-area" style="border: 1px solid #ddd; border-radius: 5px; padding: 15px;">
+                        <div class="chat-header" style="font-size: 16px; font-weight: bold; margin-bottom: 10px;">
+                            Chat with John Doe
+                        </div>
+
+                        <div class="chat-messages" style="height: 300px; overflow-y: auto; border-bottom: 1px solid #ddd; padding-bottom: 15px; margin-bottom: 15px;">
+                            <div class="message" style="margin-bottom: 10px;">
+                                <div class="content" style="background-color: #007bff; color: white; padding: 10px; border-radius: 10px;">
+                                    Hello, how are you?
+                                </div>
                             </div>
+                            <div class="message sent" style="text-align: right; margin-bottom: 10px;">
+                                <div class="content" style="background-color: #495057; color: white; padding: 10px; border-radius: 10px;">
+                                    I am good, thank you!
+                                </div>
+                            </div>
+                            <!-- Add more messages here -->
                         </div>
-                        <div class="media-body">
-                            <div class="user-name">John Doe</div>
-                            <div class="user-status">online</div>
-                        </div>
-                    </div>
-                    <div class="chat-options">
-                        <a href="javascript:void(0)">
-                            <i class="material-icons">local_phone</i>
-                        </a>
-                        <a href="javascript:void(0)">
-                            <i class="material-icons">videocam</i>
-                        </a>
-                        <a href="javascript:void(0)">
-                            <i class="material-icons">more_vert</i>
-                        </a>
-                    </div>
-                </div>
 
-                <div class="chat-body">
-                    <div class="chat-scroll">
-                        <ul class="list-unstyled">
-                            <li class="media sent">
-                                <div class="media-body">
-                                    <div class="msg-box">
-                                        <p>Hello. What can I do for you?</p>
-                                        <div class="chat-time"> <span>8:30 AM</span> </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="media received">
-                                <div class="avatar">
-                                    <img src="assets/img/profiles/avatar-02.jpg" alt="User Image" class="avatar-img rounded-circle">
-                                </div>
-                                <div class="media-body">
-                                    <div class="msg-box">
-                                        <p>I'm just looking around.</p>
-                                        <div class="chat-time"> <span>8:35 AM</span> </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <!-- Additional chat messages here -->
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="card-footer">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Type a message">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="button">Send</button>
+                        <div class="message-form" style="display: flex; align-items: center;">
+                            <input type="text" class="form-control" placeholder="Type a message...">
+                            <button class="btn btn-primary" style="margin-left: 10px;"><i class="fa fa-paper-plane"></i></button>
                         </div>
                     </div>
                 </div>
