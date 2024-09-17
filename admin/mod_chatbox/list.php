@@ -54,21 +54,65 @@
             <div class="row">
                 <!-- Column 1: Chat List -->
                 <div class="col-md-4">
-                    <div class="chat-list-header" style="font-size: 18px; font-weight: bold; border-bottom: 2px solid #ddd; padding-bottom: 10px; margin-bottom: 10px;">
-                        Chats
-                    </div>
-                    <div class="list-group">
-                        <a href="#" class="list-group-item list-group-item-action active">John Doe</a>
-                        <a href="#" class="list-group-item list-group-item-action">Jane Smith</a>
-                        <a href="#" class="list-group-item list-group-item-action">David Johnson</a>
-                        <a href="#" class="list-group-item list-group-item-action">Emily Davis</a>
+                    <div class="chat-cont-left">
+                        <!-- Chat Header -->
+                        <div class="chat-header" style="border-bottom: 1px solid #ddd; padding-bottom: 10px; margin-bottom: 10px;">
+                            <span>Chats</span>
+                        </div>
+
+                        <!-- Search Form -->
+                        <form class="chat-search mb-3">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Search">
+                            </div>
+                        </form>
+
+                        <!-- Chat Users List -->
+                        <div class="chat-users-list">
+                            <a href="javascript:void(0);" class="media d-flex align-items-center mb-2">
+                                <div class="media-img-wrap">
+                                    <div class="avatar avatar-away">
+                                        <img src="assets/img/profiles/avatar-03.jpg" alt="User Image" class="avatar-img rounded-circle">
+                                    </div>
+                                </div>
+                                <div class="media-body ml-2">
+                                    <div>
+                                        <div class="user-name">Justin Lee</div>
+                                        <div class="user-last-chat">Hey, How are you?</div>
+                                    </div>
+                                    <div>
+                                        <div class="last-chat-time block">2 min</div>
+                                        <div class="badge badge-success badge-pill">15</div>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="javascript:void(0);" class="media read-chat active d-flex align-items-center mb-2">
+                                <div class="media-img-wrap">
+                                    <div class="avatar avatar-online">
+                                        <img src="assets/img/profiles/avatar-04.jpg" alt="User Image" class="avatar-img rounded-circle">
+                                    </div>
+                                </div>
+                                <div class="media-body ml-2">
+                                    <div>
+                                        <div class="user-name">Joe Edwards</div>
+                                        <div class="user-last-chat">I'll call you later</div>
+                                    </div>
+                                    <div>
+                                        <div class="last-chat-time block">8:01 PM</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Column 2: Chat Area -->
                 <div class="col-md-8">
                     <div class="chat-area" style="border: 1px solid #ddd; border-radius: 5px; padding: 15px;">
-                        <div class="chat-header" style="font-size: 16px; font-weight: bold; border-bottom: 2px solid #ddd; padding-bottom: 10px; margin-bottom: 10px;">
+                        <div class="chat-header" style="font-size: 16px; font-weight: bold; margin-bottom: 10px; border-bottom: 1px solid #ddd;">
                             Chat with John Doe
                         </div>
 
