@@ -47,6 +47,17 @@
 .message-form button {
     margin-left: 10px;
 }
+.chat-list-header{
+    align-items: center;
+    background-color: #fff;
+    border-bottom: 1px solid #e0e3e4;
+    color: #324148;
+    display: flex;
+    height: 72px;
+    justify-content: space-between;
+    padding: 0 15px
+}
+
 
 </style>
 <div class="container-fluid">
