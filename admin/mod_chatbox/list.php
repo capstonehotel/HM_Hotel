@@ -60,7 +60,7 @@
  .chat-cont-left {
     border-right: 1px solid #e0e3e4;
     flex: 0 0 35%;
-    left: 0;
+    left: 80;
     max-width: 35%;
     position: relative;
     z-index: 4;
@@ -104,7 +104,7 @@
             <div class="col-md-8 chat-cont-right">
                 <div class="chat-area" style="border: 1px solid #ddd;">
                     <div class="chat-header" style="font-size: 16px; font-weight: bold; border-bottom: 1px solid #ddd; padding-bottom: 10px; margin-bottom: 10px;">
-                        Chat with John Doe
+                        John Doe
                     </div>
 
                     <div class="chat-messages" style="height: 300px; overflow-y: auto; border-bottom: 1px solid #ddd; padding-bottom: 15px; margin-bottom: 15px;">
