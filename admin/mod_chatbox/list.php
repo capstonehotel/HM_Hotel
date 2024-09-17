@@ -51,49 +51,41 @@
 </style>
 <div class="container-fluid">
     <div class="card shadow mb-4">
-            <div class="row">
-                <!-- Column 1: Chat List -->
-                <div class="col-md-4" style="border: 1px solid #ddd; ">
-                    <div class="chat-list-header" style="font-size: 18px; font-weight: bold; border-bottom: 1px solid #ddd; padding-bottom: 10px; margin-bottom: 10px;">
-                        Chats
-                    </div>
-                    <div class="list-group">
-                        <a href="#" class="list-group-item list-group-item-action active">John Doe</a>
-                        <a href="#" class="list-group-item list-group-item-action">Jane Smith</a>
-                        <a href="#" class="list-group-item list-group-item-action">David Johnson</a>
-                        <a href="#" class="list-group-item list-group-item-action">Emily Davis</a>
-                    </div>
+        <div class="row">
+            <!-- Column 1: Chat List -->
+            <div class="col-md-4" style="border: 1px solid #ddd;">
+                <div class="chat-list-header" style="font-size: 18px; font-weight: bold; border-bottom: 1px solid #ddd; padding-bottom: 10px; margin-bottom: 10px;">
+                    Chats
                 </div>
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action active">John Doe</a>
+                    <a href="#" class="list-group-item list-group-item-action">Jane Smith</a>
+                    <a href="#" class="list-group-item list-group-item-action">David Johnson</a>
+                    <a href="#" class="list-group-item list-group-item-action">Emily Davis</a>
+                </div>
+            </div>
 
-                <!-- Column 2: Chat Area -->
-                <div class="col-md-8">
-                    <div class="chat-area" style="border: 1px solid #ddd;">
-                        <div class="chat-header" style="font-size: 16px; font-weight: bold; border-bottom: 1px solid #ddd; padding-bottom: 10px; margin-bottom: 10px;">
-                            Chat with John Doe
-                        </div>
+            <!-- Column 2: Chat Area -->
+            <div class="col-md-8">
+                <div class="chat-area" style="border: 1px solid #ddd;">
+                    <div class="chat-header" style="font-size: 16px; font-weight: bold; border-bottom: 1px solid #ddd; padding-bottom: 10px; margin-bottom: 10px;">
+                        Chat with John Doe
+                    </div>
 
-                        <div class="chat-messages" style="height: 300px; overflow-y: auto; border-bottom: 1px solid #ddd; padding-bottom: 15px; margin-bottom: 15px;">
-                            <div class="message" style="margin-bottom: 10px;">
-                                <div class="content" style="background-color: #007bff; color: white; padding: 10px; border-radius: 10px;">
-                                    Hello, how are you?
-                                </div>
-                            </div>
-                            <div class="message sent" style="text-align: right; margin-bottom: 10px;">
-                                <div class="content" style="background-color: #495057; color: white; padding: 10px; border-radius: 10px;">
-                                    I am good, thank you!
-                                </div>
-                            </div>
-                        </div>
+                    <div class="chat-messages" style="height: 300px; overflow-y: auto; border-bottom: 1px solid #ddd; padding-bottom: 15px; margin-bottom: 15px;">
+                        <!-- Messages will be dynamically added here -->
+                    </div>
 
-                        <div class="message-form" style="display: flex; align-items: center;">
-                            <input type="text" class="form-control" placeholder="Type a message...">
-                            <button class="btn btn-primary" style="margin-left: 10px;"><i class="fa fa-paper-plane"></i></button>
-                        </div>
+                    <div class="message-form" style="padding: 10px; background-color: #e9ecef; display: flex; align-items: center;">
+                        <input type="text" class="form-control" placeholder="Type a message...">
+                        <button class="btn btn-primary" style="margin-left: 10px;"><i class="fa fa-paper-plane"></i></button>
                     </div>
                 </div>
             </div>
+        </div>
     </div>
 </div>
+
 
 <script>
     // Wait until the DOM is fully loaded
