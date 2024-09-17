@@ -57,14 +57,22 @@
     justify-content: space-between;
     padding: 0 15px
 }
-
+ .chat-cont-left {
+    border-right: 1px solid #e0e3e4;
+    flex: 0 0 35%;
+    left: 0;
+    max-width: 35%;
+    position: relative;
+    z-index: 4;
+    float: left;
+}
 
 </style>
 <div class="container-fluid">
     <div class="card shadow mb-4">
         <div class="row">
             <!-- Column 1: Chat List -->
-            <div class="col-md-4" style="border: 1px solid #ddd;">
+            <div class="col-md-4 chat-cont-left" style="border: 1px solid #ddd;">
                 <div class="chat-list-header" style="font-size: 18px; font-weight: bold; border-bottom: 1px solid #ddd; padding-bottom: 10px; margin-bottom: 10px;">
                     Chats
                 </div>
