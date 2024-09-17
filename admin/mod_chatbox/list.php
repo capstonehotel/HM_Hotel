@@ -53,17 +53,15 @@
         <div class="card-body">
             <div class="row">
                 <!-- Column 1: Chat List -->
-                <div class="col-md-4">
-                    <div class="chat-list" style="border: 1px solid #ddd; border-radius: 5px; padding: 15px;">
-                        <div class="chat-header" style="font-size: 16px; font-weight: bold; margin-bottom: 10px;">
-                            Chats
-                        </div>
-                        <div class="list-group">
-                            <a href="#" class="list-group-item list-group-item-action active">John Doe</a>
-                            <a href="#" class="list-group-item list-group-item-action">Jane Smith</a>
-                            <a href="#" class="list-group-item list-group-item-action">David Johnson</a>
-                            <a href="#" class="list-group-item list-group-item-action">Emily Davis</a>
-                        </div>
+                <div class="col-md-4" style="border-right: 1px solid #ddd;">
+                    <div class="chat-header" style="font-size: 18px; font-weight: bold; margin-bottom: 10px; border-bottom: 2px solid #ddd; padding-bottom: 10px;">
+                        Chats
+                    </div>
+                    <div class="list-group">
+                        <a href="#" class="list-group-item list-group-item-action active">John Doe</a>
+                        <a href="#" class="list-group-item list-group-item-action">Jane Smith</a>
+                        <a href="#" class="list-group-item list-group-item-action">David Johnson</a>
+                        <a href="#" class="list-group-item list-group-item-action">Emily Davis</a>
                     </div>
                 </div>
 
@@ -97,6 +95,7 @@
         </div>
     </div>
 </div>
+
 
 <script>
     // Wait until the DOM is fully loaded
