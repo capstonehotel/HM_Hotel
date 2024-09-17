@@ -50,12 +50,10 @@
 </style>
 <div class="container-fluid">
     <div class="card shadow mb-4">
-        <div class="card-header py-3" style="display: flex; align-items: center;">
-            <h6 class="m-0 font-weight-bold text-primary">Chat List</h6>
-            <div style="display: flex; width: 100%; justify-content: flex-end;">
-                <!-- You can add additional buttons or actions here -->
-            </div>
+    <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Messages</h6>
         </div>
+        
 
         <div class="card-body">
             <div class="row">
@@ -156,3 +154,4 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 </script>
+
