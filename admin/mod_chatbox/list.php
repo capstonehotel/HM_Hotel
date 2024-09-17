@@ -49,7 +49,7 @@
 
 </style>
 <div class="container-fluid">
-
+    <div class="card shadow mb-4">
         
 
       <!-- Column 1: Chat List -->
@@ -105,7 +105,7 @@
 </div>
 
 
-               <!-- Column 2: Chat Area -->
+              <!-- Column 2: Chat Area -->
 <div class="col-md-8">
     <div class="chat-area">
         <div class="chat-header">
