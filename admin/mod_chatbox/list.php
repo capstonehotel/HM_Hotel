@@ -1,3 +1,53 @@
+<style>
+    .chat-messages {
+    flex: 1;
+    padding: 20px;
+    background-color: #f8f9fa;
+    overflow-y: auto;
+}
+
+.message {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.message.sent {
+    justify-content: flex-end;
+}
+
+.message .content {
+    display: inline-block; /* Ensure it only takes up as much space as the text */
+    max-width: 60%; /* Set a max width so long messages wrap */
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #007bff;
+    color: white;
+    word-wrap: break-word; /* Ensure long words are wrapped */
+}
+
+.message.sent .content {
+    background-color: #495057;
+}
+
+.message-form {
+    padding: 10px;
+    background-color: #e9ecef;
+    display: flex;
+    align-items: center;
+}
+
+.message-form input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+.message-form button {
+    margin-left: 10px;
+}
+
+</style>
 <div class="container-fluid">
     <div class="card shadow mb-4">
         <div class="card-header py-3" style="display: flex; align-items: center;">
