@@ -65,14 +65,12 @@
     position: relative;
     z-index: 4;
     float: left;
-    padding-left: 15px; /* Padding for the content */
-    margin-right: 0; 
+    margin: 20px;
 }
  .chat-cont-right {
     flex: 0 0 65%;
     max-width: 65%;
-    float: left;
-    margin-left: 0;
+    float: left
 }
 
 .chat-cont-right .chat-header {
