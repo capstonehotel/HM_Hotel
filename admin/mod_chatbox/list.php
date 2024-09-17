@@ -61,7 +61,7 @@
     border-right: 1px solid #e0e3e4;
     flex: 0 0 35%;
     left: 0;
-    max-width: 35%;
+    max-width: 40%;
     position: relative;
     z-index: 4;
     float: left;
