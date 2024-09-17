@@ -50,7 +50,7 @@
 </style>
 <div class="container-fluid">
     <div class="card shadow mb-4">
-        <div class="card-body">
+        <!-- <div class="card-body"> -->
             <div class="row">
                 <!-- Column 1: Chat List -->
                 <div class="col-md-4" style="border: 1px solid #ddd; border-radius: 5px;">
@@ -92,7 +92,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        <!-- </div> -->
     </div>
 </div>
 
