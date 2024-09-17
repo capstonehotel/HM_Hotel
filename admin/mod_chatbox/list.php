@@ -3,12 +3,50 @@
         <div class="card-header py-3" style="display: flex; align-items: center;">
             <h6 class="m-0 font-weight-bold text-primary">Chat List</h6>
             <div style="display: flex; width: 100%; justify-content: flex-end;">
-                <!-- <a href="index.php?view=add" class="btn btn-sm btn-primary">Add New Accommodation</a> -->
+                <!-- Additional header buttons or content can go here -->
             </div>
         </div>
-        
 
+        <div class="card-body">
+            <div class="row">
+                <!-- Column 1: Chat List -->
+                <div class="col-md-4">
+                    <div class="list-group">
+                        <a href="#" class="list-group-item list-group-item-action active">John Doe</a>
+                        <a href="#" class="list-group-item list-group-item-action">Jane Smith</a>
+                        <a href="#" class="list-group-item list-group-item-action">David Johnson</a>
+                        <a href="#" class="list-group-item list-group-item-action">Emily Davis</a>
+                    </div>
+                </div>
 
+                <!-- Column 2: Chat Area -->
+                <div class="col-md-8">
+                    <div class="chat-area" style="border: 1px solid #ddd; border-radius: 5px; padding: 15px;">
+                        <div class="chat-header" style="font-size: 16px; font-weight: bold; margin-bottom: 10px;">
+                            Chat with John Doe
+                        </div>
+
+                        <div class="chat-messages" style="height: 300px; overflow-y: auto; border-bottom: 1px solid #ddd; padding-bottom: 15px; margin-bottom: 15px;">
+                            <div class="message" style="margin-bottom: 10px;">
+                                <div class="content" style="background-color: #007bff; color: white; padding: 10px; border-radius: 10px;">
+                                    Hello, how are you?
+                                </div>
+                            </div>
+                            <div class="message sent" style="text-align: right; margin-bottom: 10px;">
+                                <div class="content" style="background-color: #495057; color: white; padding: 10px; border-radius: 10px;">
+                                    I am good, thank you!
+                                </div>
+                            </div>
+                            <!-- Add more messages here -->
+                        </div>
+
+                        <div class="message-form" style="display: flex; align-items: center;">
+                            <input type="text" class="form-control" placeholder="Type a message...">
+                            <button class="btn btn-primary" style="margin-left: 10px;"><i class="fa fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-
