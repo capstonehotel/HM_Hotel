@@ -90,6 +90,12 @@
              <?php 
                     }
                 ?>
+                 <li class="nav-item active">
+                <a class="nav-link" href="https://mcchmhotelreservation.com/admin/mod_payment/index.php">
+                <i class="fas fa-fw fa-money-bill"></i>
+                    <span>Payment</a>
+            </li>
+
 
             <li class="nav-item active">
                 <a class="nav-link" href="https://mcchmhotelreservation.com/admin/mod_contact_us/index.php">
