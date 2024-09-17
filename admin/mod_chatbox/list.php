@@ -65,7 +65,7 @@
     position: relative;
     z-index: 4;
     float: left;
-    margin: 10px;
+    margin-right: 10px;
 }
  .chat-cont-right {
     flex: 0 0 65%;
