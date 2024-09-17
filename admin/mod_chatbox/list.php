@@ -48,7 +48,11 @@
 }
 
 </style>
-<div class="chat-cont-left">
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="row">
+            <div class="chat-cont-left">
                 <div class="chat-header"> <span>Chats</span>
                 </div>
                 <form class="chat-search">
@@ -87,6 +91,10 @@
                                 </div>
                             </div>
                         </a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     // Wait until the DOM is fully loaded
