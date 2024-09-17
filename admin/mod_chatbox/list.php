@@ -1,3 +1,18 @@
+<link href="https://mcchmhotelreservation.com/admin/css/sb-admin-2.min.css" rel="stylesheet">
+
+ <link href="https://mcchmhotelreservation.com/admin/assets/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href=".../assets/bootstrap/css/bootstrap.min.css">
+
+<link href="https://mcchmhotelreservation.com/admin/css/dataTables.bootstrap.css" rel="stylesheet" media="screen">
+<link rel="stylesheet" type="text/css" href="https://mcchmhotelreservation.com/admin/css/jquery.dataTables.css">
+<link href="https://mcchmhotelreservation.com/admin/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+<script type="text/javascript" language="javascript" src="https://mcchmhotelreservation.com/admin/js/jquery.js"></script>
+<script type="text/javascript" language="javascript" src="https://mcchmhotelreservation.com/admin/js/jquery.dataTables.js"></script>
+<script type="text/javascript" language="javascript" src="https://mcchmhotelreservation.com/admin/js/bootstrap.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://mcchmhotelreservation.com/admin/js/bootstrap-modal.js"></script>
+<script type="text/javascript" src="https://mcchmhotelreservation.com/admin/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="https://mcchmhotelreservation.com/admin/js/locales/bootstrap-datetimepicker.uk.js" charset="UTF-8"></script>
+
 <div class="content container-fluid">
 				<div class="row mt-5">
 					<div class="col-sm-12">
