@@ -66,6 +66,21 @@
     z-index: 4;
     float: left;
 }
+ .chat-cont-right {
+    flex: 0 0 65%;
+    max-width: 65%;
+    float: left
+}
+
+.chat-cont-right .chat-header {
+    align-items: center;
+    background-color: #fff;
+    border-bottom: 1px solid #e0e3e4;
+    display: flex;
+    height: 72px;
+    justify-content: space-between;
+    padding: 0 15px
+}
 
 </style>
 <div class="container-fluid">
@@ -85,7 +100,7 @@
             </div>
 
             <!-- Column 2: Chat Area -->
-            <div class="col-md-8">
+            <div class="col-md-8 chat-cont-right">
                 <div class="chat-area" style="border: 1px solid #ddd;">
                     <div class="chat-header" style="font-size: 16px; font-weight: bold; border-bottom: 1px solid #ddd; padding-bottom: 10px; margin-bottom: 10px;">
                         Chat with John Doe
