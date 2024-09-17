@@ -99,3 +99,60 @@
         </div>
     </div>
 </div>
+<script>
+    // Wait until the DOM is fully loaded
+document.addEventListener("DOMContentLoaded", function() {
+    // Get the necessary elements
+    const messageForm = document.querySelector(".message-form");
+    const messageInput = messageForm.querySelector("input");
+    const messageSendButton = messageForm.querySelector("button");
+    const chatMessages = document.querySelector(".chat-messages");
+
+    // Function to add a new message to the chat
+    function addMessage(content, isSent) {
+        // Create message container
+        const messageDiv = document.createElement("div");
+        messageDiv.classList.add("message");
+        if (isSent) {
+            messageDiv.classList.add("sent");
+        }
+
+        // Create content bubble
+        const contentDiv = document.createElement("div");
+        contentDiv.classList.add("content");
+        contentDiv.textContent = content;
+
+        // Append content to message container
+        messageDiv.appendChild(contentDiv);
+
+        // Append message to chat messages
+        chatMessages.appendChild(messageDiv);
+
+        // Scroll to the bottom of the chat
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Send button click event listener
+    messageSendButton.addEventListener("click", function() {
+        // Get the input text
+        const messageText = messageInput.value.trim();
+
+        // Only add the message if the input is not empty
+        if (messageText !== "") {
+            // Add sent message to the chat
+            addMessage(messageText, true);
+
+            // Clear the input field after sending
+            messageInput.value = "";
+        }
+    });
+
+    // Optionally, send message on pressing 'Enter' key
+    messageInput.addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            messageSendButton.click();
+        }
+    });
+});
+
+</script>
