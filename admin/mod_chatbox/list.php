@@ -50,7 +50,17 @@
 </style>
 <div class="container-fluid">
     <div class="card shadow mb-4">
-
+    <div class="chat-header">
+        <span>Chats</span>
+    </div>
+    <form class="chat-search">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <i class="fas fa-search"></i>
+            </div>
+            <input type="text" class="form-control" placeholder="Search">
+        </div>
+    </form>
         <div class="card-body">
             <div class="row">
                 <!-- Column 1: Chat List -->
