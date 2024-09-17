@@ -3,7 +3,7 @@
         <div class="card-header py-3" style="display: flex; align-items: center;">
             <h6 class="m-0 font-weight-bold text-primary">Chat List</h6>
             <div style="display: flex; width: 100%; justify-content: flex-end;">
-                <!-- Additional header buttons or content can go here -->
+                <!-- You can add additional buttons or actions here -->
             </div>
         </div>
 
@@ -37,7 +37,6 @@
                                     I am good, thank you!
                                 </div>
                             </div>
-                            <!-- Add more messages here -->
                         </div>
 
                         <div class="message-form" style="display: flex; align-items: center;">
