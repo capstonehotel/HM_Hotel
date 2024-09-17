@@ -15,6 +15,7 @@
                             <th>Name</th>
                             <th>Confirmation Code</th>
                             <th>Status</th>
+                            <th>Proof of Payment</th>
                             <th>Paid</th>
                             <th>Action</th>
                         </tr>
