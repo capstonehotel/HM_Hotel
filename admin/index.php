@@ -1,5 +1,5 @@
 <?php
-require_once("../includes/initialize.php");
+// require_once("../includes/initialize.php");
 
 
  if (!isset($_SESSION['ADMIN_ID'])){
