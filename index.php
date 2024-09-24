@@ -73,7 +73,7 @@ switch ($view) {
     $content ='home.php';   
 }
 
-include ('theme/template.php');
+// include ('theme/template.php');
 
 ?>
  
