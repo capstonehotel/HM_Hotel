@@ -11,6 +11,6 @@ require_once("../includes/initialize.php");
  
 $content='home.php';
 
-// include 'themes/backendTemplate.php';
+include 'themes/backendTemplate.php';
 
 ?>
