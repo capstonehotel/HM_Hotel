@@ -19,7 +19,7 @@
 
 
 
-require_once("includes/initialize.php");
+// require_once("includes/initialize.php");
 $content='home.php';
 $view = (isset($_GET['p']) && $_GET['p'] != '') ? $_GET['p'] : '';
 $account = 'guest/update.php';
@@ -73,7 +73,7 @@ switch ($view) {
     $content ='home.php';   
 }
 
-include ('theme/template.php');
+// include ('theme/template.php');
 
 ?>
  
