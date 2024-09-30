@@ -10,7 +10,7 @@
 
 if (!isset($_SESSION['monbela_cart'])) {
   # code...
-  redirect( 'index.php');
+  redirect( WEB_ROOT. 'index.php');
 }
 
 function createRandomPassword() {
@@ -183,7 +183,7 @@ $_SESSION['GUESTID'] =   $lastguest;
             }).then((result) => {
                 if (result.isConfirmed) {
                     // Redirect after confirmation
-                    window.location.href = "<?php echo WEB_ROOT . 'index.php'; ?>";
+                    window.location.href = "index.php";
                 }
             });
         </script>
