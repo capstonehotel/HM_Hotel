@@ -1,18 +1,6 @@
 <?php
 
 require_once("../includes/initialize.php");
-$sql = "CREATE TABLE tblpayment (
-    id INT(11) AUTO_INCREMENT PRIMARY KEY,
-    payment_proof VARCHAR(255),
-    status VARCHAR(255)
-)";
-
-// Execute query
-if ($connection->query($sql) === TRUE) {
-    echo "Table 'tblpayment' created successfully";
-} else {
-    echo "Error creating table: " . $connection->error;
-}
 
 ?>
 
