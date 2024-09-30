@@ -193,23 +193,25 @@ $code=$_GET['code'];
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
     // Confirm Booking
-    function confirmBooking() {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, confirm it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = "controller.php?action=confirm&code=<?php echo $code; ?>";
-            } else {
-                return false;
-            }
-        })
-    }
+function confirmBooking() {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, confirm it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Perform the redirect only after the user has confirmed the action
+            window.location.href = "controller.php?action=confirm&code=<?php echo $code; ?>";
+        } else {
+            // Do nothing if the user clicks "Cancel"
+            return false;
+        }
+    });
+}
 
     // Cancel Booking
     function cancelBooking() {
