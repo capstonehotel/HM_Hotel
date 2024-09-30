@@ -443,7 +443,7 @@ $_SESSION['GUESTID'] =   $lastguest;
     }).then((result) => {
         if (result.isConfirmed) {
             // Redirect after confirmation
-            window.location.href = "mcchmhotelreservation.com/index.php";
+            window.location.href = "index.php";
         }
     });
 </script>
