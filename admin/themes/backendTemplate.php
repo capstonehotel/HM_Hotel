@@ -235,11 +235,11 @@ if (isset($_SESSION['booking_notification_viewed'])) {
 }
 </style>
 
-<li class="nav-item my-auto">
+<li class="nav-item my-auto" style="position: relative;">
     <a href="javascript:void(0);" class="text-dark" id="bookingNotification" onclick="toggleNotificationMenu()">
         <i class="fa fa-bell"></i>
-        <?php if ($todayBookings > 0): ?>
-            <span class="badge badge-pill badge-danger"><?php echo $todayBookings; ?></span>
+        <?php if ($total_notifications > 0): ?>
+            <span class="badge badge-pill badge-danger notification-badge"><?php echo $total_notifications; ?></span>
         <?php endif; ?>
     </a>
     <!-- Notification menu -->
