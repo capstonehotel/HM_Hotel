@@ -515,10 +515,10 @@ $_SESSION['GUESTID'] =   $lastguest;
         </button>
         <div class="dropdown-menu" aria-labelledby="paymentDropdown">
             <a class="dropdown-item" href="javascript:void(0);" onclick="showPaymentModal('partial')">
-                <img src="<?php echo WEB_ROOT; ?>gcash.png" alt="GCash Icon" style="width: 20px; margin-right: 5px;"> Partial Payment
+                <img src="../gcash.png" alt="GCash Icon" style="width: 20px; margin-right: 5px;"> Partial Payment
             </a>
             <a class="dropdown-item" href="javascript:void(0);" onclick="showPaymentModal('full')">
-                <img src="<?php echo WEB_ROOT; ?>gcash.png" alt="GCash Icon" style="width: 20px; margin-right: 5px;"> Full Payment
+                <img src="../gcash.png" alt="GCash Icon" style="width: 20px; margin-right: 5px;"> Full Payment
             </a>
             <!-- <a class="dropdown-item" href="javascript:void(0);" onclick="showCashPaymentModal('cash')">
                 <i class="fas fa-money-bill-wave"></i> Cash Payment
@@ -590,7 +590,7 @@ for ($i=0; $i < $count_cart  ; $i++) {
             <div class="modal-body">
                 <!-- QR Code (Centered on Mobile) -->
                 <div class="qrcode-container">
-                    <img src="<?php echo WEB_ROOT; ?>qrcode.png" alt="GCash QR Code" class="qrcode">
+                    <img src="../qrcode.png" alt="GCash QR Code" class="qrcode">
                 </div>
 
                 <!-- GCash Payment Details (Left Aligned on Mobile) -->
