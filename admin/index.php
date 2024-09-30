@@ -1,5 +1,5 @@
 <?php
-require_once("../includes/initialize.php");
+// require_once("../includes/initialize.php");
 
 
  if (!isset($_SESSION['ADMIN_ID'])){
@@ -11,6 +11,6 @@ require_once("../includes/initialize.php");
  
 $content='home.php';
 
- include 'themes/backendTemplate.php';
+//  include 'themes/backendTemplate.php';
 
 ?>
