@@ -320,7 +320,7 @@ mysqli_close($conn);
     display: none;
     position: absolute;
     top: 50px;
-    right: 0;
+    right: -150px;
     width: 300px;
     background-color: #fff;
     border: 1px solid #ccc;
@@ -394,7 +394,6 @@ mysqli_close($conn);
 }
 
 </style>
-
 <script>
     function toggleNotificationMenu() {
     var menu = document.getElementById("notificationMenu");
