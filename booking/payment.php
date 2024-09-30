@@ -6,398 +6,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- Include SweetAlert2 -->
 
 
-<?php
-
-if (!isset($_SESSION['monbela_cart'])) {
-  # code...
-  redirect( WEB_ROOT. 'index.php');
-}
-
-function createRandomPassword() {
-
-    $chars = "abcdefghijkmnopqrstuvwxyz023456789";
-
-    srand((double)microtime()*1000000);
-
-    $i = 0;
-
-    $pass = '' ;
-    while ($i <= 7) {
-
-        $num = rand() % 33;
-
-        $tmp = substr($chars, $num, 1);
-
-        $pass = $pass . $tmp;
-
-        $i++;
-
-    }
-
-    return $pass;
-
-}
-
- $confirmation = createRandomPassword();
-$_SESSION['confirmation'] = $confirmation;
-
-
-
-// $arival    = $_SESSION['from']; 
-// $departure = $_SESSION['to'];
-// echo $name      = $_SESSION['name']; 
-// echo $last      = $_SESSION['last'];
-// echo $nationality   = $_SESSION['nationality'];
-// // echo // $city      = $_SESSION['city'] ;
-// echo $address   =  $_SESSION['city'] . ' ' . $_SESSION['address'];
-// echo $zip       = $_SESSION['zip'] ;
-// echo $phone     = $_SESSION['phone'];
-// echo $username     = $_SESSION['username'];
-// echo $company     = $_SESSION['company'];
-// echo $caddress     = $_SESSION['caddress'];
-// echo $password  = $_SESSION['pass'];
-// echo $dbirth   = $_SESSION['dbirth'];
-
-
- $count_cart = count($_SESSION['monbela_cart']);
-
-if(isset($_POST['btnsubmitbooking'])){
-  // $message = $_POST['message'];
-
- 
-
-
-//    $count_cart = count($_SESSION['monbela_cart']);
-
-//   for ($i=0; $i < $count_cart  ; $i++) {     
-//   $mydb->setQuery("SELECT * FROM room where roomNo=". $_SESSION['monbela_cart'][$i]['monbelaroomid']);
-//   $rmprice = $mydb->executeQuery();
-//   while($row = mysql_fetch_assoc($rmprice)){
-//     $rate = $row['price']; 
-//   }  
-// }
-//   $payable= $rate*$days;
-//   $_SESSION['pay']= $payable;
-
-if(!isset($_SESSION['GUESTID'])){
-
-  // var_dump($_SESSION);exit;
-
-$guest = New Guest();
-$guest->G_AVATAR          = $_SESSION['image'];
-$guest->G_FNAME          = $_SESSION['name'];    
-$guest->G_LNAME          = $_SESSION['last'];  
-$guest->G_CITY           = $_SESSION['city'];
-$guest->G_ADDRESS        = $_SESSION['address'] ;        
-$guest->DBIRTH           = date_format(date_create($_SESSION['dbirth']), 'Y-m-d');   
-$guest->G_PHONE          = $_SESSION['phone'];    
-$guest->G_NATIONALITY    = $_SESSION['nationality'];          
-$guest->G_COMPANY        = $_SESSION['company'];      
-$guest->G_CADDRESS       = $_SESSION['caddress'];        
-$guest->G_TERMS          = 1;    
-$guest->G_UNAME          = $_SESSION['username'];    
-$guest->G_PASS           = sha1($_SESSION['pass']);    
-$guest->ZIP              = $_SESSION['zip'];
-$guest->create(); 
-  $lastguest=$guest->id; 
-   
-$_SESSION['GUESTID'] =   $lastguest;
-
-}
- 
-    $count_cart = count($_SESSION['monbela_cart']);
-  
-
-    for ($i=0; $i < $count_cart  ; $i++) { 
-
-            // $rm = new Room();
-            // $result = $rm->single_room($_SESSION['monbela_cart'][$i]['monbelaroomid']);
-
-            // if($result->ROOMNUM>0){
-
-            //   $room = new Room(); 
-            //   $room->ROOMNUM    = $room->ROOMNUM - 1; 
-            //   $room->update($_SESSION['monbela_cart'][$i]['monbelaroomid']); 
-      
-            // }
-            
-
-            $reservation = new Reservation();
-            $reservation->CONFIRMATIONCODE  = $_POST['realconfirmation'];
-            $reservation->TRANSDATE         = date('Y-m-d h:i:s'); 
-            $reservation->ROOMID            = $_SESSION['monbela_cart'][$i]['monbelaroomid'];
-            $reservation->ARRIVAL           = date_format(date_create( $_SESSION['monbela_cart'][$i]['monbelacheckin']), 'Y-m-d');  
-            $reservation->DEPARTURE         = date_format(date_create( $_SESSION['monbela_cart'][$i]['monbelacheckout']), 'Y-m-d'); 
-            $reservation->RPRICE            = $_SESSION['monbela_cart'][$i]['monbelaroomprice'];  
-            $reservation->GUESTID           = $_SESSION['GUESTID']; 
-            $reservation->PRORPOSE          = 'Travel';
-            $reservation->STATUS            = 'Pending';
-            $reservation->create(); 
-
-            
-            @$tot += $_SESSION['monbela_cart'][$i]['monbelaroomprice'];
-            }
-
-           $item = count($_SESSION['monbela_cart']);
-           $paymentstatus = $_POST['txtstatus'];
-
-            $target_dir = "../uploads/";
-            $target_file = $target_dir . $_POST['realconfirmation'] ."_". basename($_FILES["proofOfPayment"]["name"]);
-            $file_name = $_POST['realconfirmation'] ."_". basename($_FILES["proofOfPayment"]["name"]);
-
-
-      $sql = "INSERT INTO `tblpayment` (`TRANSDATE`,`CONFIRMATIONCODE`,`PQTY`, `GUESTID`, `SPRICE`,`MSGVIEW`,`STATUS`)
-       VALUES ('" .date('Y-m-d h:i:s')."','" . $_POST['realconfirmation'] ."',".$item."," . $_SESSION['GUESTID'] . ",".$tot.",0,'Pending', '".$paymentstatus."', '".$file_name."')" ;
-        // mysql_query($sql);
-
-
-
-
-
-     $mydb->setQuery($sql);
-     $msg = $mydb->executeQuery();
-     move_uploaded_file($_FILES["proofOfPayment"]["tmp_name"], $target_file);
-
-    //   $lastreserv=mysql_insert_id(); 
-    //   $mydb->setQuery("INSERT INTO `comments` (`firstname`, `lastname`, `email`, `comment`) VALUES('$name','$last','$email','$message')");
-    //   $msg = $mydb->executeQuery();
-    //   message("New [". $name ."] created successfully!", "success");
-
-  //  unsetSessions();
-
-            unset($_SESSION['monbela_cart']);
-            // unset($_SESSION['confirmation']);
-            unset($_SESSION['pay']);
-            unset($_SESSION['from']);
-            unset($_SESSION['to']);
-            $_SESSION['activity'] = 1;
-?>
-            
-
-            <script type="text/javascript">
-            Swal.fire({
-                title: 'Success!',
-                text: 'Booking is successfully submitted!',
-                icon: 'success',
-                confirmButtonText: 'OK'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Redirect after confirmation
-                    window.location.href = "<?php echo WEB_ROOT . 'index.php'; ?>";
-                }
-            });
-        </script>
-<?php }?>
-<div class="card rounded" style="padding: 10px;">
-    <div  class="pagetitle">   
-        <h1  >Billing Details 
-        </h1> 
-    </div>
-    <nav aria-label="breadcrumb" >
-      <ol class="breadcrumb" style="margin-top: 10px;">
-        <li class="breadcrumb-item"><a href="https://mcchmhotelreservation.com/index.php">Home</a></li>
-        <li class="breadcrumb-item"><a href="https://mcchmhotelreservation.com/booking/">Booking Cart</a></li> 
-        <li class="breadcrumb-item active" aria-current="page">Billing Details </li>
-      </ol>
-    </nav>
-      <div class="container">
-        <div class="row">
-            <form action="index.php?view=payment" method="post"  name="personal" enctype="multipart/form-data">
-
-            <div class="col-md-8 col-sm-4">
-
-                <div class="col-md-12">
-                  <label>Name:</label>
-                  <?php echo $_SESSION['name'] . ' '. $_SESSION['last']; 
-                        echo $count_cart;
-                   ?>
-                </div>
-                <div class="col-md-12">
-                  <label>Address:</label>
-                  <?php echo isset($_SESSION['city']) ? $_SESSION['city']: ' '. ' ' .( isset($_SESSION['address'])  ? $_SESSION['address'] : ' '); ?> 
-                </div>
-                <div class="col-md-12"> 
-                <label>Phone #:</label>
-                 <?php echo $_SESSION['phone'] ; ?>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-2">
-              <div class="col-md-12">
-                <label>Transaction Date:</label>
-               <?php echo date("m/d/Y") ; ?>
-              </div>
-               <div class="col-md-12">
-               <label>Transaction Id:</label>
-    <span><?php echo $_SESSION['confirmation']; ?></span>
-    <input type="hidden" name="realconfirmation" value="<?php echo $_SESSION['confirmation']; ?>" />
-    <input type="hidden" id="payment_status_input"  name="txtstatus">
-</div>
-              
-            </div>
-            <div class="col-md-12 col-sm-2">
-    <label id="paymentLabel">Payment Options:</label>
-
-    <!-- Payment buttons for larger screens -->
-    <div class="d-none d-md-block">
-        <button type="button" class="btn btn-primary" onclick="showPaymentModal('partial')">
-            <img src="../gcash.png" alt="GCash Icon" style="width: 20px; margin-right: 5px;"> Partial Payment
-        </button>
-        <button type="button" class="btn btn-primary" onclick="showPaymentModal('full')">
-            <img src="../gcash.png" alt="GCash Icon" style="width: 20px; margin-right: 5px;"> Full Payment
-        </button>
-        <!-- <button type="button" class="btn btn-primary" onclick="showCashPaymentModal('cash')">
-            <i class="fas fa-money-bill-wave"></i> Cash Payment
-        </button> -->
-    </div>
-
-   <!-- Dropdown for smaller screens -->
-<div class="d-block d-md-none">
-    <div class="dropdown">
-        <button class="btn btn-blue dropdown-toggle" type="button" id="paymentDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Select Payment Option
-        </button>
-        <div class="dropdown-menu" aria-labelledby="paymentDropdown">
-            <a class="dropdown-item" href="javascript:void(0);" onclick="showPaymentModal('partial')">
-                <img src="../gcash.png" alt="GCash Icon" style="width: 20px; margin-right: 5px;"> Partial Payment
-            </a>
-            <a class="dropdown-item" href="javascript:void(0);" onclick="showPaymentModal('full')">
-                <img src="../gcash.png" alt="GCash Icon" style="width: 20px; margin-right: 5px;"> Full Payment
-            </a>
-            <!-- <a class="dropdown-item" href="javascript:void(0);" onclick="showCashPaymentModal('cash')">
-                <i class="fas fa-money-bill-wave"></i> Cash Payment
-            </a> -->
-        </div>
-    </div>
-</div>
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                          <td>Room</td>
-                          <td>Checked in</td>
-                          <td>Checked out</td>
-                          <td>Price</td>
-                          <td>Night(s)</td>
-                          <td>Subtotal</td>
-                        </tr>
-                      </thead> 
-                      <?php
-$payable = 0;
-if (isset( $_SESSION['monbela_cart'])){ 
-$count_cart = count($_SESSION['monbela_cart']);
-
-
-for ($i=0; $i < $count_cart  ; $i++) {  
-
-  $query = "SELECT * FROM `tblroom` r ,`tblaccomodation` a WHERE r.`ACCOMID`=a.`ACCOMID` AND ROOMID=" . $_SESSION['monbela_cart'][$i]['monbelaroomid'];
-   $mydb->setQuery($query);
-   $cur = $mydb->loadResultList(); 
-    foreach ($cur as $result) { 
-
-
-?>
-
-      
-        <tr>
-          <td><?php echo  $result->ROOM.' '. $result->ROOMDESC; ?></td>
-          <td><?php echo  date_format(date_create( $_SESSION['monbela_cart'][$i]['monbelacheckin']),"m/d/Y"); ?></td>
-          <td><?php echo  date_format(date_create( $_SESSION['monbela_cart'][$i]['monbelacheckout']),"m/d/Y"); ?></td>
-          <td><?php echo  ' &#8369 '. $result->PRICE; ?></td>
-          <td><?php echo   $_SESSION['monbela_cart'][$i]['monbeladay']; ?></td>
-          <td><?php echo ' &#8369 '.   $_SESSION['monbela_cart'][$i]['monbelaroomprice']; ?></td>
-        </tr>
-<?php
-       $payable += $_SESSION['monbela_cart'][$i]['monbelaroomprice'] ;
-      }
-
-    } 
-     $_SESSION['pay'] = $payable;
- } 
- ?> 
-      </tbody>
-                 </table>
-            </div>
-            <!-- GCash Payment Modal (for both Partial and Full) -->
-<div class="modal fade" id="gcashPaymentModal" tabindex="-1" role="dialog" aria-labelledby="gcashPaymentLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="gcashPaymentLabel"></h5> <!-- Dynamic title -->
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <!-- QR Code (Centered on Mobile) -->
-                <div class="qrcode-container">
-                    <img src="../qrcode.png" alt="GCash QR Code" class="qrcode">
-                </div>
-
-                <!-- GCash Payment Details (Left Aligned on Mobile) -->
-                <div class="payment-details">
-                    <h6>Payment Details</h6>
-                    <p><strong>Name:</strong><br>GCash Merchant Name</p>
-                    <p><strong>Number:</strong><br>09XXXXXXXXX</p>
-                    <p><strong>Total Amount Due:</strong><br>₱<span id="paymentAmount"></span></p> <!-- Dynamic amount -->
-                </div>
-
-                <!-- Proof of Payment (Centered on Mobile) -->
-                <div class="proof-of-payment">
-                    <label for="proofOfPayment">Upload Proof of Payment:</label>
-                    <input type="file" class="form-control-file" name="proofOfPayment" id="proofOfPayment" accept="image/*">
-                    
-                    <div id="proofOfPaymentPreview" class="image-preview"></div> <!-- Preview Container -->
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <!-- <button type="button" class="btn btn-primary" id="submitPayment">Submit Payment</button> -->
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-
-
-              <div id="confirmModal" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-body">
-                <p>Are you sure you want to submit the booking?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                <button type="submit" class="btn btn-primary" align="right" name="btnsubmitbooking">Yes</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row"> 
-  <h3 align="right">Total: &#8369 <?php echo   $_SESSION['pay'] ;?></h3>
-</div>
-    <div class="pull-right flex-end" align="right">
-       <button  type="button" class="btn btn-primary" align="right"  id="submitBookingButton" onclick="showConfirmAlert()" >Submit Booking</button>
-    </div>
-</form>
-  </div>  
-        </div>
-      </div>
-</div>
-<style>
-        .swal2-cancel {
-            background-color: red;
-            color: white;
-            margin-left: 10px;
-        }
-        .swal2-cancel:hover, .swal2-cancel:focus {
-            background-color: #b22222; /* Slightly darker red */
-            color: white;
-        }
-    </style>
-    <!-- CSS for Pop-out Animation -->
+<!-- CSS for Pop-out Animation -->
 <style>
  /* Add animation to modals */
 @keyframes popout {
@@ -657,35 +266,435 @@ for ($i=0; $i < $count_cart  ; $i++) {
 
 </style>
 
-<script>
-function showConfirmAlert() {
+
+<?php
+if (!isset($_SESSION['monbela_cart'])) {
+  # code...
+  redirect(WEB_ROOT.'index.php');
+}
+
+function createRandomPassword() {
+
+    $chars = "abcdefghijkmnopqrstuvwxyz023456789";
+
+    srand((double)microtime()*1000000);
+
+    $i = 0;
+
+    $pass = '' ;
+    while ($i <= 7) {
+
+        $num = rand() % 33;
+
+        $tmp = substr($chars, $num, 1);
+
+        $pass = $pass . $tmp;
+
+        $i++;
+
+    }
+
+    return $pass;
+
+}
+
+ $confirmation = createRandomPassword();
+$_SESSION['confirmation'] = $confirmation;
+
+
+
+// $arival    = $_SESSION['from']; 
+// $departure = $_SESSION['to'];
+// echo $name      = $_SESSION['name']; 
+// echo $last      = $_SESSION['last'];
+// echo $nationality   = $_SESSION['nationality'];
+// // echo // $city      = $_SESSION['city'] ;
+// echo $address   =  $_SESSION['city'] . ' ' . $_SESSION['address'];
+// echo $zip       = $_SESSION['zip'] ;
+// echo $phone     = $_SESSION['phone'];
+// echo $username     = $_SESSION['username'];
+// echo $company     = $_SESSION['company'];
+// echo $caddress     = $_SESSION['caddress'];
+// echo $password  = $_SESSION['pass'];
+// echo $dbirth   = $_SESSION['dbirth'];
+
+
+ $count_cart = count($_SESSION['monbela_cart']);
+
+if(isset($_POST['btnsubmitbooking'])){
+  // $message = $_POST['message'];
+
+ 
+
+
+//    $count_cart = count($_SESSION['monbela_cart']);
+
+//   for ($i=0; $i < $count_cart  ; $i++) {     
+//   $mydb->setQuery("SELECT * FROM room where roomNo=". $_SESSION['monbela_cart'][$i]['monbelaroomid']);
+//   $rmprice = $mydb->executeQuery();
+//   while($row = mysql_fetch_assoc($rmprice)){
+//     $rate = $row['price']; 
+//   }  
+// }
+//   $payable= $rate*$days;
+//   $_SESSION['pay']= $payable;
+
+if(!isset($_SESSION['GUESTID'])){
+
+  // var_dump($_SESSION);exit;
+
+$guest = New Guest();
+$guest->G_AVATAR          = $_SESSION['image'];
+$guest->G_FNAME          = $_SESSION['name'];    
+$guest->G_LNAME          = $_SESSION['last'];
+$guest->G_GENDER         = $_SESSION['gender'];    
+$guest->G_CITY           = $_SESSION['city'];
+$guest->G_ADDRESS        = $_SESSION['address'] ;        
+$guest->DBIRTH           = date_format(date_create($_SESSION['dbirth']), 'Y-m-d');   
+$guest->G_PHONE          = $_SESSION['phone'];    
+$guest->G_NATIONALITY    = $_SESSION['nationality'];          
+$guest->G_COMPANY        = $_SESSION['company'];      
+$guest->G_CADDRESS       = $_SESSION['caddress'];        
+$guest->G_TERMS          = 1;    
+$guest->G_UNAME          = $_SESSION['username'];    
+$guest->G_PASS           = sha1($_SESSION['pass']);    
+$guest->ZIP              = $_SESSION['zip'];
+$guest->create(); 
+  $lastguest=$guest->id; 
+   
+$_SESSION['GUESTID'] =   $lastguest;
+
+}
+ 
+    $count_cart = count($_SESSION['monbela_cart']);
+  
+
+    for ($i=0; $i < $count_cart  ; $i++) { 
+
+            // $rm = new Room();
+            // $result = $rm->single_room($_SESSION['monbela_cart'][$i]['monbelaroomid']);
+
+            // if($result->ROOMNUM>0){
+
+            //   $room = new Room(); 
+            //   $room->ROOMNUM    = $room->ROOMNUM - 1; 
+            //   $room->update($_SESSION['monbela_cart'][$i]['monbelaroomid']); 
+      
+            // }
+            
+
+            $reservation = new Reservation();
+            $reservation->CONFIRMATIONCODE  = $_POST['realconfirmation'];
+            $reservation->TRANSDATE         = date('Y-m-d h:i:s'); 
+            $reservation->ROOMID            = $_SESSION['monbela_cart'][$i]['monbelaroomid'];
+            $reservation->ARRIVAL           = date_format(date_create( $_SESSION['monbela_cart'][$i]['monbelacheckin']), 'Y-m-d');  
+            $reservation->DEPARTURE         = date_format(date_create( $_SESSION['monbela_cart'][$i]['monbelacheckout']), 'Y-m-d'); 
+            $reservation->RPRICE            = $_SESSION['monbela_cart'][$i]['monbelaroomprice'];  
+            $reservation->GUESTID           = $_SESSION['GUESTID']; 
+            $reservation->PRORPOSE          = 'Travel';
+            $reservation->STATUS            = 'Pending';
+            $reservation->create(); 
+
+            
+            @$tot += $_SESSION['monbela_cart'][$i]['monbelaroomprice'];
+            }
+
+           $item = count($_SESSION['monbela_cart']);
+           $paymentstatus = $_POST['txtstatus'];
+
+            $target_dir = "../uploads/";
+            $target_file = $target_dir . $_POST['realconfirmation'] ."_". basename($_FILES["proofOfPayment"]["name"]);
+            $file_name = $_POST['realconfirmation'] ."_". basename($_FILES["proofOfPayment"]["name"]);
+
+      $sql = "INSERT INTO `tblpayment` (`TRANSDATE`,`CONFIRMATIONCODE`,`PQTY`, `GUESTID`, `SPRICE`,`MSGVIEW`,`STATUS`,`PAYMENT_STATUS`, `PROOF_OF_PAYMENT`  )
+       VALUES ('" .date('Y-m-d h:i:s')."','" . $_POST['realconfirmation'] ."',".$item."," . $_SESSION['GUESTID'] . ",".$tot.",0,'Pending', '".$paymentstatus."', '".$file_name."' )" ;
+        // mysql_query($sql);
+
+
+
+
+
+     $mydb->setQuery($sql);
+     $msg = $mydb->executeQuery();
+
+     move_uploaded_file($_FILES["proofOfPayment"]["tmp_name"], $target_file);
+
+    //   $lastreserv=mysql_insert_id(); 
+    //   $mydb->setQuery("INSERT INTO `comments` (`firstname`, `lastname`, `email`, `comment`) VALUES('$name','$last','$email','$message')");
+    //   $msg = $mydb->executeQuery();
+    //   message("New [". $name ."] created successfully!", "success");
+
+  //  unsetSessions();
+
+            unset($_SESSION['monbela_cart']);
+            // unset($_SESSION['confirmation']);
+            unset($_SESSION['pay']);
+            unset($_SESSION['from']);
+            unset($_SESSION['to']);
+            $_SESSION['activity'] = 1;
+
+            ?> 
+<script type="text/javascript">
     Swal.fire({
-        title: 'Are you sure you want to submit the booking?',
-        showCancelButton: true,
-        confirmButtonText: 'Yes',
-        cancelButtonText: 'No',
-        customClass: {
-            confirmButton: 'btn btn-primary',
-            cancelButton: 'btn btn-default'
-        },
-        buttonsStyling: false
+        title: 'Success!',
+        text: 'Booking is successfully submitted!',
+        icon: 'success',
+        confirmButtonText: 'OK'
     }).then((result) => {
         if (result.isConfirmed) {
-            // Create a form to submit the booking
-            var form = document.createElement('form');
-            form.method = 'POST';
-            form.action = ''; // Set the form action if needed
-            var input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = 'btnsubmitbooking';
-            input.value = '1'; // Set the value if needed
-            form.appendChild(input);
-            document.body.appendChild(form);
-            form.submit();
+            // Redirect after confirmation
+            window.location.href = "<?php echo WEB_ROOT . 'index.php'; ?>";
         }
     });
-}
 </script>
+<?php }?>
+
+ 
+<!-- Add this in your HTML head section -->
+
+<div class="card rounded" style="padding: 10px;">
+    <div class="pagetitle">
+        <h1>Billing Details</h1>
+    </div>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb" style="margin-top: 10px;">
+            <li class="breadcrumb-item"><a href="<?php echo WEB_ROOT; ?>index.php">Home</a></li>
+            <li class="breadcrumb-item"><a href="<?php echo WEB_ROOT; ?>booking/">Booking Cart</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Billing Details</li>
+        </ol>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <form action="index.php?view=payment" method="post" name="personal" enctype="multipart/form-data">
+                <div class="col-md-8 col-sm-4">
+                    <div class="col-md-12">
+                        <label>Name:</label>
+                        <?php echo $_SESSION['name'] . ' ' . $_SESSION['last']; echo $count_cart; ?>
+                    </div>
+                    <div class="col-md-12">
+                        <label>Address:</label>
+                        <?php echo isset($_SESSION['city']) ? $_SESSION['city'] : ' ' . ' ' . (isset($_SESSION['address']) ? $_SESSION['address'] : ' '); ?> 
+                    </div>
+                    <div class="col-md-12">
+                        <label>Phone #:</label>
+                        <?php echo $_SESSION['phone']; ?>
+                    </div>
+                </div>
+                
+                    <div class="col-md-12">
+                        <label>Transaction Date:</label>
+                        <?php echo date("m/d/Y"); ?>
+                    </div>
+                    <div class="col-md-12">
+    <label>Transaction Id:</label>
+    <span><?php echo $_SESSION['confirmation']; ?></span>
+    <input type="hidden" name="realconfirmation" value="<?php echo $_SESSION['confirmation']; ?>" />
+    <input type="hidden" id="payment_status_input"  name="txtstatus">
+</div>
+                    <div class="col-md-12 col-sm-2">
+    <label id="paymentLabel">Payment Options:</label>
+
+    <!-- Payment buttons for larger screens -->
+    <div class="d-none d-md-block">
+        <button type="button" class="btn btn-primary" onclick="showPaymentModal('partial')">
+            <img src="<?php echo WEB_ROOT; ?>gcash.png" alt="GCash Icon" style="width: 20px; margin-right: 5px;"> Partial Payment
+        </button>
+        <button type="button" class="btn btn-primary" onclick="showPaymentModal('full')">
+            <img src="<?php echo WEB_ROOT; ?>gcash.png" alt="GCash Icon" style="width: 20px; margin-right: 5px;"> Full Payment
+        </button>
+        <!-- <button type="button" class="btn btn-primary" onclick="showCashPaymentModal('cash')">
+            <i class="fas fa-money-bill-wave"></i> Cash Payment
+        </button> -->
+    </div>
+
+   <!-- Dropdown for smaller screens -->
+<div class="d-block d-md-none">
+    <div class="dropdown">
+        <button class="btn btn-blue dropdown-toggle" type="button" id="paymentDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Select Payment Option
+        </button>
+        <div class="dropdown-menu" aria-labelledby="paymentDropdown">
+            <a class="dropdown-item" href="javascript:void(0);" onclick="showPaymentModal('partial')">
+                <img src="<?php echo WEB_ROOT; ?>gcash.png" alt="GCash Icon" style="width: 20px; margin-right: 5px;"> Partial Payment
+            </a>
+            <a class="dropdown-item" href="javascript:void(0);" onclick="showPaymentModal('full')">
+                <img src="<?php echo WEB_ROOT; ?>gcash.png" alt="GCash Icon" style="width: 20px; margin-right: 5px;"> Full Payment
+            </a>
+            <!-- <a class="dropdown-item" href="javascript:void(0);" onclick="showCashPaymentModal('cash')">
+                <i class="fas fa-money-bill-wave"></i> Cash Payment
+            </a> -->
+        </div>
+    </div>
+</div>
+
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <td>Room</td>
+                                <td>Checked in</td>
+                                <td>Checked out</td>
+                                <td>Price</td>
+                                <td>Night(s)</td>
+                                <td>Subtotal</td>
+                            </tr>
+                        </thead>
+                      
+<?php
+$payable = 0;
+if (isset( $_SESSION['monbela_cart'])){ 
+$count_cart = count($_SESSION['monbela_cart']);
+
+
+for ($i=0; $i < $count_cart  ; $i++) {  
+
+  $query = "SELECT * FROM `tblroom` r ,`tblaccomodation` a WHERE r.`ACCOMID`=a.`ACCOMID` AND ROOMID=" . $_SESSION['monbela_cart'][$i]['monbelaroomid'];
+   $mydb->setQuery($query);
+   $cur = $mydb->loadResultList(); 
+    foreach ($cur as $result) { 
+
+
+?>
+
+      
+        <tr>
+          <td><?php echo  $result->ROOM.' '. $result->ROOMDESC; ?></td>
+          <td><?php echo  date_format(date_create( $_SESSION['monbela_cart'][$i]['monbelacheckin']),"m/d/Y"); ?></td>
+          <td><?php echo  date_format(date_create( $_SESSION['monbela_cart'][$i]['monbelacheckout']),"m/d/Y"); ?></td>
+          <td><?php echo  ' &#8369 '. $result->PRICE; ?></td>
+          <td><?php echo   $_SESSION['monbela_cart'][$i]['monbeladay']; ?></td>
+          <td><?php echo ' &#8369 '.   $_SESSION['monbela_cart'][$i]['monbelaroomprice']; ?></td>
+        </tr>
+<?php
+       $payable += $_SESSION['monbela_cart'][$i]['monbelaroomprice'] ;
+      }
+
+    } 
+     $_SESSION['pay'] = $payable;
+ } 
+ ?> 
+      </tbody>
+                 </table>
+            </div>
+
+<!-- GCash Payment Modal (for both Partial and Full) -->
+<div class="modal fade" id="gcashPaymentModal" tabindex="-1" role="dialog" aria-labelledby="gcashPaymentLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="gcashPaymentLabel"></h5> <!-- Dynamic title -->
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- QR Code (Centered on Mobile) -->
+                <div class="qrcode-container">
+                    <img src="<?php echo WEB_ROOT; ?>qrcode.png" alt="GCash QR Code" class="qrcode">
+                </div>
+
+                <!-- GCash Payment Details (Left Aligned on Mobile) -->
+                <div class="payment-details">
+                    <h6>Payment Details</h6>
+                    <p><strong>Name:</strong><br>GCash Merchant Name</p>
+                    <p><strong>Number:</strong><br>09XXXXXXXXX</p>
+                    <p><strong>Total Amount Due:</strong><br>₱<span id="paymentAmount"></span></p> <!-- Dynamic amount -->
+                </div>
+
+                <!-- Proof of Payment (Centered on Mobile) -->
+                <div class="proof-of-payment">
+                    <label for="proofOfPayment">Upload Proof of Payment:</label>
+                    <input type="file" class="form-control-file" name="proofOfPayment" id="proofOfPayment" accept="image/*">
+                    
+                    <div id="proofOfPaymentPreview" class="image-preview"></div> <!-- Preview Container -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-primary" id="submitPayment">Submit Payment</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Cash Payment Modal -->
+<div class="modal fade" id="cashPaymentModal" tabindex="-1" role="dialog" aria-labelledby="cashPaymentLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cashPaymentLabel">Cash Payment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Please visit our office to complete the payment.</p>
+                <p><strong>Total Amount Due:</strong> ₱<?php echo number_format($_SESSION['pay'], 2); ?></p>
+                <!-- You could add a barcode or reference number for internal processing if needed -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-primary">Confirm Cash Payment</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+                <div id="confirmModal" class="modal fade" role="dialog" >
+    <div class="modal-dialog modal-sm" >
+        <div class="modal-content" >
+            <div class="modal-body">
+                <p>Are you sure you want to submit the booking?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                <button type="submit" class="btn btn-primary" align="right" name="btnsubmitbooking">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <script>
+function submitBooking() {
+  Swal.fire({
+    title: 'Are you sure?',
+    text: 'You want to submit the booking?',
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonText: 'Yes',
+    cancelButtonText: 'No',
+    reverseButtons: true
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Submit the booking form
+      var button = document.querySelector('[name="btnsubmitbooking"]');
+      var event = new MouseEvent('click', {
+        view: window,
+        bubbles: true,
+        cancelable: true
+      });
+      button.dispatchEvent(event);
+    }
+  });
+}
+</script> -->
+
+<div class="row"> 
+  <h3 align="right">Total: &#8369 <?php echo   $_SESSION['pay'] ;?></h3>
+</div>
+
+    <div class="pull-right flex-end" align="right">
+    <button  type="button" id="submitBookingButton" class="btn btn-primary" align="right" data-toggle="modal" data-target="#confirmModal">Submit Booking</button>
+       <!-- <button  type="button"  id="submitBookingButton" class="btn btn-primary" align="right" onclick="submitBooking()" >Submit Booking</button> -->
+    </div>
+</form>
+  </div>  
+  
+
+  
+        </div>
+      </div>
+</div>
 <script>
 // Get the proof of payment input field and the submit booking button
 const proofOfPaymentInput = document.getElementById('proofOfPayment');
@@ -844,3 +853,139 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+
+<!-- <script>
+    function showPaymentModal(paymentType) {
+    // Hide all modals first
+    $('#partialPaymentModal').modal('hide');
+    $('#fullPaymentModal').modal('hide');
+    $('#cashPaymentModal').modal('hide');
+
+    // Determine which modal to show based on payment type
+    if (paymentType === 'partial') {
+        $('#partialPaymentModal').modal('show');
+    } else if (paymentType === 'full') {
+        $('#fullPaymentModal').modal('show');
+    } else if (paymentType === 'cash') {
+        $('#cashPaymentModal').modal('show');
+    }
+}
+    // Function to handle image preview
+    function handleImagePreview(inputElement, previewElement) {
+        const file = inputElement.files[0];
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                previewElement.src = e.target.result;
+                previewElement.style.display = 'block'; // Show the preview
+            };
+            reader.readAsDataURL(file);
+        } else {
+            previewElement.style.display = 'none'; // Hide preview if not an image
+        }
+    }
+
+    // Event listeners for file inputs
+    document.addEventListener('DOMContentLoaded', function () {
+        const fileInputs = document.querySelectorAll('input[type="file"]'); // Get all file inputs
+        fileInputs.forEach(inputElement => {
+            const previewElement = document.getElementById(inputElement.getAttribute('data-preview-id')); // Get corresponding preview element using data attribute
+            if (previewElement) {
+                inputElement.addEventListener('change', function () {
+                    handleImagePreview(inputElement, previewElement);
+                });
+            }
+        });
+    });
+
+    // Function to close the modal with animation
+    function closeModal(modalId) {
+        const modalElement = document.getElementById(modalId);
+        if (modalElement) {
+            $(modalElement).modal('hide');
+            setTimeout(() => {
+                // Reset transform after closing animation
+                modalElement.querySelector('.modal-dialog').style.transform = 'scale(1)';
+            }, 300); // Match the duration with CSS transition
+        }
+    }
+
+    // Event listeners for modal close buttons
+    document.addEventListener('DOMContentLoaded', function () {
+        const closeButtons = document.querySelectorAll('.modal .close, .modal .btn-secondary');
+        closeButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const modalId = this.closest('.modal').id;
+                closeModal(modalId);
+            });
+        });
+    });
+    function confirmPayment(paymentType) {
+    var formId = '';
+    var data = new FormData();
+
+    // Determine form ID based on payment type
+    if (paymentType === 'partial') {
+        formId = '#partialPaymentForm';
+        data.append('paymentType', 'partial');
+    } else if (paymentType === 'full') {
+        formId = '#fullPaymentForm';
+        data.append('paymentType', 'full');
+    } else if (paymentType === 'cash') {
+        formId = '#cashPaymentForm';
+        data.append('paymentType', 'cash');
+    }
+
+    // Append form data
+    $(formId).find('input, select, textarea').each(function() {
+        var name = $(this).attr('name');
+        var value = $(this).val();
+        if (name) {
+            data.append(name, value);
+        }
+    });
+
+    // Handle file input
+    var fileInput = $(formId).find('input[type="file"]');
+    if (fileInput.length) {
+        var files = fileInput[0].files;
+        if (files.length > 0) {
+            for (var i = 0; i < files.length; i++) {
+                data.append('proofOfPayment', files[i]);
+            }
+        }
+    }
+
+    // Send AJAX request
+    $.ajax({
+        url: 'processpayment.php',
+        type: 'POST',
+        data: data,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            var res = JSON.parse(response);
+            if (res.status === 'success') {
+                Swal.fire({
+                    title: 'Success!',
+                    text: res.message,
+                    icon: 'success'
+                }).then(function() {
+                    location.reload();
+                });
+            } else {
+                Swal.fire({
+                    title: 'Error!',
+                    text: res.message,
+                    icon: 'error'
+                });
+            }
+        }
+    });
+}
+ 
+   // Run on initial load and whenever the window is resized
+   window.addEventListener('resize', updatePaymentLabel);
+    window.addEventListener('load', updatePaymentLabel);
+
+</script> -->
