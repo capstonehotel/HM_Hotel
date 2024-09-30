@@ -1,6 +1,6 @@
 <?php 
-require_once("initialize.php");
-include 'config.php'; 
+// require_once("initialize.php");
+// // // include 'config.php'; 
 // require_once("includes/config.php");
 // //load basic functions next so that everything after can use them
 // require_once("includes/functions.php");
@@ -17,18 +17,6 @@ include 'config.php';
 // require_once("includes/database.php");
 
 
-$sql = "CREATE TABLE tblpayment (
-  id INT(11) AUTO_INCREMENT PRIMARY KEY,
-  payment_proof VARCHAR(255),
-  status VARCHAR(255)
-)";
-
-// Execute query
-if ($conn->query($sql) === TRUE) {
-  echo "Table 'tblpayment' created successfully";
-} else {
-  echo "Error creating table: " . $conn->error;
-}
 
 
 // require_once("includes/initialize.php");
@@ -85,7 +73,7 @@ switch ($view) {
     $content ='home.php';   
 }
 
-include ('theme/template.php');
+// include ('theme/template.php');
 
 ?>
  
