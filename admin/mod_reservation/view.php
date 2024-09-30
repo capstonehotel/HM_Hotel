@@ -51,7 +51,7 @@ $code=$_GET['code'];
     <?php } elseif($row['STATUS'] == 'Checkedout') {?>
         <a href="controller.php?action=delete&code=<?php echo $row['CONFIRMATIONCODE']; ?>" class="btn btn-danger btn-sm ml-2" onclick="deleteBooking()"><i class="icon-edit">Delete</a>
     <?php } else {?>
-        <a href="controller.php?action=confirm&code=<?php echo $row['CONFIRMATIONCODE']; ?>" class="btn btn-success btn-sm ml-2" onclick="confirmBooking()"><i class="icon-edit">Confirm</a>
+        <a href="controller.php?action=confirm&code=<?php echo $row['CONFIRMATIONCODE']; ?>" class="btn btn-success btn-sm ml-2" onclick="confirmBooking(event)"><i class="icon-edit">Confirm</a>
     <?php } ?>
 <?php } ?>
 
@@ -193,7 +193,8 @@ $code=$_GET['code'];
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
     // Confirm Booking
-function confirmBooking() {
+function confirmBooking(event) {
+    event.preventDefault();
     Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
