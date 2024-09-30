@@ -1,5 +1,5 @@
 <?php 
-// require_once("initialize.php");
+require_once("initialize.php");
 // // // include 'config.php'; 
 // require_once("includes/config.php");
 // //load basic functions next so that everything after can use them
@@ -73,7 +73,7 @@ switch ($view) {
     $content ='home.php';   
 }
 
-// include ('theme/template.php');
+include ('theme/template.php');
 
 ?>
  
