@@ -497,10 +497,10 @@ $_SESSION['GUESTID'] =   $lastguest;
     <!-- Payment buttons for larger screens -->
     <div class="d-none d-md-block">
         <button type="button" class="btn btn-primary" onclick="showPaymentModal('partial')">
-            <img src="<?php echo WEB_ROOT; ?>gcash.png" alt="GCash Icon" style="width: 20px; margin-right: 5px;"> Partial Payment
+            <img src="../gcash.png" alt="GCash Icon" style="width: 20px; margin-right: 5px;"> Partial Payment
         </button>
         <button type="button" class="btn btn-primary" onclick="showPaymentModal('full')">
-            <img src="<?php echo WEB_ROOT; ?>gcash.png" alt="GCash Icon" style="width: 20px; margin-right: 5px;"> Full Payment
+            <img src="../gcash.png" alt="GCash Icon" style="width: 20px; margin-right: 5px;"> Full Payment
         </button>
         <!-- <button type="button" class="btn btn-primary" onclick="showCashPaymentModal('cash')">
             <i class="fas fa-money-bill-wave"></i> Cash Payment
