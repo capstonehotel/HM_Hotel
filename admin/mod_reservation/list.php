@@ -3,26 +3,39 @@
 
 <!-- Additional styling and scripts -->
 <style>
-    .table td, .table th {
-        white-space: nowrap;
-        vertical-align: middle;
-    }
-    .table thead th {
-        text-align: center;
-    }
-    .btn-sm {
-        padding: 0.25rem 0.5rem;
-    }
-    .table-responsive {
+   .table td, .table th {
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.table thead th {
+    text-align: center;
+}
+
+.table td.payment-column {
+    max-width: 100px; /* Adjust this value based on your preference */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+}
+
+.table-responsive {
     display: none; /* Hide tables initially */
 }
+
+
 </style>
 
 <div class="container-fluid">
-    <div class="card shadow mb-4">
+    <div class="card shadow mb-4" >
         <div class="card-header py-3" style="display: flex; align-items: center;">
             <h6 class="m-0 font-weight-bold text-primary">List of Reservations</h6>
         </div>
+       
         <!-- Tab Navigation -->
         <ul class="nav nav-tabs" id="reservationTabs" role="tablist">
             <?php 
@@ -37,12 +50,12 @@
         <div class="tab-content" id="reservationTabsContent">
             <?php 
             $queries = [
-                "list" => "SELECT `G_FNAME`, `G_LNAME`, `TRANSDATE`, `CONFIRMATIONCODE`, `PQTY`, `SPRICE`, `STATUS` FROM `tblpayment` p, `tblguest` g WHERE p.`GUESTID` = g.`GUESTID` ORDER BY p.`STATUS`='pending' DESC, p.`TRANSDATE` DESC",
-                "pending" => "SELECT `G_FNAME`, `G_LNAME`, `TRANSDATE`, `CONFIRMATIONCODE`, `PQTY`, `SPRICE`, `STATUS` FROM `tblpayment` p, `tblguest` g WHERE p.`GUESTID` = g.`GUESTID` AND p.`STATUS` = 'pending' ORDER BY p.`TRANSDATE` DESC",
-                "confirmed" => "SELECT `G_FNAME`, `G_LNAME`, `TRANSDATE`, `CONFIRMATIONCODE`, `PQTY`, `SPRICE`, `STATUS` FROM `tblpayment` p, `tblguest` g WHERE p.`GUESTID` = g.`GUESTID` AND p.`STATUS` = 'confirmed' ORDER BY p.`TRANSDATE` DESC",
-                "check-in" => "SELECT `G_FNAME`, `G_LNAME`, `TRANSDATE`, `CONFIRMATIONCODE`, `PQTY`, `SPRICE`, `STATUS` FROM `tblpayment` p, `tblguest` g WHERE p.`GUESTID` = g.`GUESTID` AND p.`STATUS` = 'checkedin' ORDER BY p.`TRANSDATE` DESC",
-                "check-out" => "SELECT `G_FNAME`, `G_LNAME`, `TRANSDATE`, `CONFIRMATIONCODE`, `PQTY`, `SPRICE`, `STATUS` FROM `tblpayment` p, `tblguest` g WHERE p.`GUESTID` = g.`GUESTID` AND p.`STATUS` = 'checkedout' ORDER BY p.`TRANSDATE` DESC",
-                "cancelled" => "SELECT `G_FNAME`, `G_LNAME`, `TRANSDATE`, `CONFIRMATIONCODE`, `PQTY`, `SPRICE`, `STATUS` FROM `tblpayment` p, `tblguest` g WHERE p.`GUESTID` = g.`GUESTID` AND p.`STATUS` = 'cancelled' ORDER BY p.`TRANSDATE` DESC"
+                "list" => "SELECT `G_FNAME`, `G_LNAME`, `TRANSDATE`, `CONFIRMATIONCODE`, `PQTY`, `SPRICE`, `STATUS`, `PAYMENT_STATUS` FROM `tblpayment` p, `tblguest` g WHERE p.`GUESTID` = g.`GUESTID` ORDER BY p.`STATUS`='pending' DESC, p.`TRANSDATE` DESC",
+                "pending" => "SELECT `G_FNAME`, `G_LNAME`, `TRANSDATE`, `CONFIRMATIONCODE`, `PQTY`, `SPRICE`, `STATUS`, `PAYMENT_STATUS` FROM `tblpayment` p, `tblguest` g WHERE p.`GUESTID` = g.`GUESTID` AND p.`STATUS` = 'pending' ORDER BY p.`TRANSDATE` DESC",
+                "confirmed" => "SELECT `G_FNAME`, `G_LNAME`, `TRANSDATE`, `CONFIRMATIONCODE`, `PQTY`, `SPRICE`, `STATUS`, `PAYMENT_STATUS` FROM `tblpayment` p, `tblguest` g WHERE p.`GUESTID` = g.`GUESTID` AND p.`STATUS` = 'confirmed' ORDER BY p.`TRANSDATE` DESC",
+                "check-in" => "SELECT `G_FNAME`, `G_LNAME`, `TRANSDATE`, `CONFIRMATIONCODE`, `PQTY`, `SPRICE`, `STATUS`, `PAYMENT_STATUS` FROM `tblpayment` p, `tblguest` g WHERE p.`GUESTID` = g.`GUESTID` AND p.`STATUS` = 'checkedin' ORDER BY p.`TRANSDATE` DESC",
+                "check-out" => "SELECT `G_FNAME`, `G_LNAME`, `TRANSDATE`, `CONFIRMATIONCODE`, `PQTY`, `SPRICE`, `STATUS`, `PAYMENT_STATUS` FROM `tblpayment` p, `tblguest` g WHERE p.`GUESTID` = g.`GUESTID` AND p.`STATUS` = 'checkedout' ORDER BY p.`TRANSDATE` DESC",
+                "cancelled" => "SELECT `G_FNAME`, `G_LNAME`, `TRANSDATE`, `CONFIRMATIONCODE`, `PQTY`, `SPRICE`, `STATUS`, `PAYMENT_STATUS` FROM `tblpayment` p, `tblguest` g WHERE p.`GUESTID` = g.`GUESTID` AND p.`STATUS` = 'cancelled' ORDER BY p.`TRANSDATE` DESC"
             ];
 
             foreach ($tabs as $tab) { ?>
@@ -57,7 +70,8 @@
                                         <th>Transaction Date</th>
                                         <th>Confirmation Code</th>
                                         <th>Total Rooms</th>
-                                        <th>Total Price</th>
+                                        <!-- <th>Total Price</th> -->
+                                        <th>Payment</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -78,7 +92,8 @@
                                                 <td align="center"><?php echo $row['TRANSDATE']; ?></td>
                                                 <td align="center"><?php echo $row['CONFIRMATIONCODE']; ?></td>
                                                 <td align="center"><?php echo $row['PQTY']; ?></td>
-                                                <td align="center"><?php echo $row['SPRICE']; ?></td>
+                                                <!-- <td align="center"><?php echo $row['SPRICE']; ?></td> -->
+                                                <td align="center" class="payment-column"><?php echo $row['PAYMENT_STATUS']; ?></td>
                                                 <td align="center"><?php echo $row['STATUS']; ?></td>
                                                 <td align="center">
                                                     <a href="index.php?view=view&code=<?php echo $row['CONFIRMATIONCODE']; ?>" class="btn btn-sm btn-primary"><i class="icon-edit"></i> View</a>
@@ -120,30 +135,17 @@ $(document).ready(function() {
     // Show tables after initialization
     $('.table-responsive').show();
 
-    // Load the active tab from localStorage if it exists
-    var activeTab = localStorage.getItem('activeTab');
-    if (activeTab) {
-        $('#reservationTabs a[href="' + activeTab + '"]').tab('show');
-    }
-
-    // Save the active tab and current page state to localStorage before page reload
+    // Save the active tab to localStorage
     function saveState() {
         var currentTab = $('#reservationTabs .nav-link.active').attr('href');
         localStorage.setItem('activeTab', currentTab);
-
-        // Save the current page number for the active table
-        var table = $(currentTab + ' table').DataTable();
-        localStorage.setItem('currentPage', table.page.info().page);
     }
 
     // Restore the page state after reload
     function restoreState() {
         var currentTab = localStorage.getItem('activeTab');
-        var currentPage = localStorage.getItem('currentPage');
-
-        if (currentTab && currentPage !== null) {
-            var table = $(currentTab + ' table').DataTable();
-            table.page(parseInt(currentPage)).draw(false);
+        if (currentTab) {
+            $('#reservationTabs a[href="' + currentTab + '"]').tab('show');
         }
     }
 
@@ -170,7 +172,7 @@ $(document).ready(function() {
                             'The reservation has been deleted.',
                             'success'
                         ).then(() => {
-                            saveState(); // Save the tab and page state before reloading
+                            saveState(); // Save the tab state before reloading
                             location.reload(); // Reload the page
                         });
                     },
@@ -188,8 +190,22 @@ $(document).ready(function() {
 
     // Restore the page state after the table is reloaded
     $(window).on('load', function() {
-        restoreState(); // Restore tab and page state
+        restoreState(); // Restore tab state
+    });
+
+    // Handle tab change events to reset table page to 1
+    $('#reservationTabs a').on('shown.bs.tab', function(e) {
+        var currentTab = $(e.target).attr('href');
+        var table = $(currentTab + ' table').DataTable();
+        
+        // Reset DataTable to the first page
+        table.page('first').draw(false);
+
+        // Save the active tab
+        saveState();
     });
 });
-
 </script>
+
+
+
