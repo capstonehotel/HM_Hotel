@@ -190,8 +190,104 @@ $code=$_GET['code'];
         });
     });
 </script> -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+    // Confirm Booking
+    function confirmBooking() {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, confirm it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "controller.php?action=confirm&code=<?php echo $code; ?>";
+            } else {
+                return false;
+            }
+        })
+    }
 
+    // Cancel Booking
+    function cancelBooking() {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, cancel it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "controller.php?action=cancel&code=<?php echo $code; ?>";
+            } else {
+                return false;
+            }
+        })
+    }
+
+    // Check in Booking
+    function checkinBooking() {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, check in!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "controller.php?action=checkin&code=<?php echo $code; ?>";
+            } else {
+                return false;
+            }
+        })
+    }
+
+    // Check out Booking
+    function checkoutBooking() {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, check out!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "controller.php?action=checkout&code=<?php echo $code; ?>";
+            } else {
+                return false;
+            }
+        })
+    }
+
+    // Delete Booking
+    function deleteBooking() {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "controller.php?action=delete&code=<?php echo $code; ?>";
+            } else {
+                return false;
+            }
+        })
+    }
+</script>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
-
+<!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+ -->
