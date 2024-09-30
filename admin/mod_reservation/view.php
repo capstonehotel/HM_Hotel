@@ -36,20 +36,20 @@ $code=$_GET['code'];
 <?php } ?> -->
 <?php if($_SESSION['ADMIN_UROLE']=="Administrator"){ ?>
     <?php if ($row['STATUS'] == "Confirmed" && $row['PAYMENT_STATUS'] == "Partial") { ?>
-        <a href="../mod_payment/index.php?view=view&code=<?php echo $row['CONFIRMATIONCODE']; ?>" class="btn btn-primary btn-sm ml-2" onclick="confirmBooking()"><i class="icon-edit">Pay Balance</a>
+        <a href="../mod_payment/index.php?view=view&code=<?php echo $row['CONFIRMATIONCODE']; ?>" class="btn btn-primary btn-sm ml-2" ><i class="icon-edit">Pay Balance</a>
     <?php } ?>
     <?php if ($row['STATUS'] == "Confirmed" ) { ?>
     <?php if ($row['PAYMENT_STATUS'] == "Fully Paid") { ?>
-        <a href="controller.php?action=checkin&code=<?php echo $row['CONFIRMATIONCODE']; ?>" class="btn btn-success btn-sm ml-2" onclick="checkinBooking()"><i class="icon-edit">Check in</a>
+        <a href="controller.php?action=checkin&code=<?php echo $row['CONFIRMATIONCODE']; ?>" class="btn btn-success btn-sm ml-2" onclick="checkinBooking(event)"><i class="icon-edit">Check in</a>
     <?php } else { ?>
         <button class="btn btn-success btn-sm ml-2" disabled>Check in</button>
     <?php } ?>
-    <a href="controller.php?action=cancel&code=<?php echo $row['CONFIRMATIONCODE']; ?>" class="btn btn-danger btn-sm ml-2" onclick="cancelBooking()"><i class="icon-edit">Cancel</a>
+    <a href="controller.php?action=cancel&code=<?php echo $row['CONFIRMATIONCODE']; ?>" class="btn btn-danger btn-sm ml-2" onclick="cancelBooking(event)"><i class="icon-edit">Cancel</a>
 
     <?php } elseif($row['STATUS'] == 'Checkedin') {?>
-        <a href="controller.php?action=checkout&code=<?php echo $row['CONFIRMATIONCODE']; ?>" class="btn btn-warning btn-sm ml-2" onclick="checkoutBooking()"><i class="icon-edit">Check out</a>
+        <a href="controller.php?action=checkout&code=<?php echo $row['CONFIRMATIONCODE']; ?>" class="btn btn-warning btn-sm ml-2" onclick="checkoutBooking(event)"><i class="icon-edit">Check out</a>
     <?php } elseif($row['STATUS'] == 'Checkedout') {?>
-        <a href="controller.php?action=delete&code=<?php echo $row['CONFIRMATIONCODE']; ?>" class="btn btn-danger btn-sm ml-2" onclick="deleteBooking()"><i class="icon-edit">Delete</a>
+        <a href="controller.php?action=delete&code=<?php echo $row['CONFIRMATIONCODE']; ?>" class="btn btn-danger btn-sm ml-2" onclick="deleteBooking(event)"><i class="icon-edit">Delete</a>
     <?php } else {?>
         <a href="controller.php?action=confirm&code=<?php echo $row['CONFIRMATIONCODE']; ?>" class="btn btn-success btn-sm ml-2" onclick="confirmBooking(event)"><i class="icon-edit">Confirm</a>
     <?php } ?>
@@ -215,80 +215,84 @@ function confirmBooking(event) {
 }
 
     // Cancel Booking
-    function cancelBooking() {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, cancel it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = "controller.php?action=cancel&code=<?php echo $code; ?>";
-            } else {
-                return false;
-            }
-        })
-    }
+function cancelBooking(event) {
+    event.preventDefault();
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, cancel it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = "controller.php?action=cancel&code=<?php echo $code; ?>";
+        } else {
+            return false;
+        }
+    })
+}
 
-    // Check in Booking
-    function checkinBooking() {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, check in!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = "controller.php?action=checkin&code=<?php echo $code; ?>";
-            } else {
-                return false;
-            }
-        })
-    }
+// Check in Booking
+function checkinBooking(event) {
+    event.preventDefault();
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, check in!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = "controller.php?action=checkin&code=<?php echo $code; ?>";
+        } else {
+            return false;
+        }
+    })
+}
 
-    // Check out Booking
-    function checkoutBooking() {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, check out!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = "controller.php?action=checkout&code=<?php echo $code; ?>";
-            } else {
-                return false;
-            }
-        })
-    }
+// Check out Booking
+function checkoutBooking(event) {
+    event.preventDefault();
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, check out!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = "controller.php?action=checkout&code=<?php echo $code; ?>";
+        } else {
+            return false;
+        }
+    })
+}
 
-    // Delete Booking
-    function deleteBooking() {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = "controller.php?action=delete&code=<?php echo $code; ?>";
-            } else {
-                return false;
-            }
-        })
-    }
+// Delete Booking
+function deleteBooking(event) {
+    event.preventDefault();
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = "controller.php?action=delete&code=<?php echo $code; ?>";
+        } else {
+            return false;
+        }
+    })
+}
 </script>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
