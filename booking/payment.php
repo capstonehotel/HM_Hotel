@@ -10,7 +10,7 @@
 
 if (!isset($_SESSION['monbela_cart'])) {
   # code...
-  redirect( WEB_ROOT. 'index.php');
+  redirect( 'index.php');
 }
 
 function createRandomPassword() {
