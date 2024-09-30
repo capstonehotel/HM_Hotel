@@ -17,14 +17,14 @@ $code=$_GET['code'];
 
 
  
-        $query="SELECT  `G_FNAME` ,  `G_LNAME` ,  `G_ADDRESS` ,  `TRANSDATE` , `G_GENDER`, `CONFIRMATIONCODE` ,  `PQTY` ,  `SPRICE` ,`STATUS`
+        $query="SELECT  `G_FNAME` ,  `G_LNAME` ,  `G_ADDRESS` ,  `TRANSDATE` , `G_GENDER`, `CONFIRMATIONCODE` ,  `PQTY` ,  `SPRICE` ,`STATUS`,`PAYMENT_STATUS`, `PROOF_OF_PAYMENT`
                 FROM  `tblpayment` p,  `tblguest` g
                 WHERE p.`GUESTID` = g.`GUESTID` AND `CONFIRMATIONCODE`='".$code."'";
         $result = mysqli_query($connection, $query);
         if ($result) {
             while ($row = mysqli_fetch_assoc($result)) { ?>
 
-                                <?php if($_SESSION['ADMIN_UROLE']=="Administrator"){ ?>
+                                <!-- <?php if($_SESSION['ADMIN_UROLE']=="Administrator"){ ?>
                                     <?php if ($row['STATUS'] == "Confirmed" ) { ?>
         <button class="btn btn-danger btn-sm ml-2 action-btn" data-action="cancel" data-code="<?php echo $row['CONFIRMATIONCODE']; ?>"><i class="icon-edit">Cancel</i></button>
         <button class="btn btn-success btn-sm ml-2 action-btn" data-action="checkin" data-code="<?php echo $row['CONFIRMATIONCODE']; ?>"><i class="icon-edit">Check in</i></button>
@@ -35,7 +35,28 @@ $code=$_GET['code'];
     <?php } else {?>
         <button class="btn btn-success btn-sm ml-2 action-btn" data-action="confirm" data-code="<?php echo $row['CONFIRMATIONCODE']; ?>"><i class="icon-edit">Confirm</i></button>
     <?php } ?>
+<?php } ?> -->
+<?php if($_SESSION['ADMIN_UROLE']=="Administrator"){ ?>
+    <?php if ($row['STATUS'] == "Confirmed" && $row['PAYMENT_STATUS'] == "Partial") { ?>
+        <a href="../mod_payment/index.php?view=view&code=<?php echo $row['CONFIRMATIONCODE']; ?>"  class="btn btn-primary btn-sm ml-2" onclick="confirmBooking()"><i class="icon-edit">Pay Balance</a>
+    <?php } ?>
+    <?php if ($row['STATUS'] == "Confirmed" ) { ?>
+    <?php if ($row['PAYMENT_STATUS'] == "Fully Paid") { ?>
+        <a href="controller.php?action=checkin&code=<?php echo $row['CONFIRMATIONCODE']; ?>" data-action="checkin" class="btn btn-success btn-sm ml-2" onclick="checkinBooking()"><i class="icon-edit">Check in</a>
+    <?php } else { ?>
+        <button class="btn btn-success btn-sm ml-2" disabled>Check in</button>
+    <?php } ?>
+    <a href="controller.php?action=cancel&code=<?php echo $row['CONFIRMATIONCODE']; ?>" data-action="cancel" class="btn btn-danger btn-sm ml-2" onclick="cancelBooking()"><i class="icon-edit">Cancel</a>
+
+    <?php } elseif($row['STATUS'] == 'Checkedin') {?>
+        <a href="controller.php?action=checkout&code=<?php echo $row['CONFIRMATIONCODE']; ?>"  data-action="checkout"class="btn btn-warning btn-sm ml-2" onclick="checkoutBooking()"><i class="icon-edit">Check out</a>
+    <?php } elseif($row['STATUS'] == 'Checkedout') {?>
+        <a href="controller.php?action=delete&code=<?php echo $row['CONFIRMATIONCODE']; ?>" data-action="delete" class="btn btn-danger btn-sm ml-2" onclick="deleteBooking()"><i class="icon-edit">Delete</a>
+    <?php } else {?>
+        <a href="controller.php?action=confirm&code=<?php echo $row['CONFIRMATIONCODE']; ?>" data-action="confirm"  class="btn btn-success btn-sm ml-2" onclick="confirmBooking()"><i class="icon-edit">Confirm</a>
+    <?php } ?>
 <?php } ?>
+
 
                                  <!-- <a href="controller.php?action=delete&code=<?php echo $row['CONFIRMATIONCODE']; ?>" class="btn btn-danger btn-sm " style="margin-left: 3px!important;"><i class="icon-edit">Delete</a>  -->
             
