@@ -42,18 +42,18 @@ $code=$_GET['code'];
     <?php } ?>
     <?php if ($row['STATUS'] == "Confirmed" ) { ?>
     <?php if ($row['PAYMENT_STATUS'] == "Fully Paid") { ?>
-        <a href="controller.php?action=checkin&code=<?php echo $row['CONFIRMATIONCODE']; ?>" data-action="checkin" class="btn btn-success btn-sm ml-2" onclick="checkinBooking()"><i class="icon-edit">Check in</a>
+        <a href="controller.php?action=checkin&code=<?php echo $row['CONFIRMATIONCODE']; ?>" data-action="checkin" data-code="<?php echo $row['CONFIRMATIONCODE']; ?>" class="btn btn-success btn-sm ml-2" onclick="checkinBooking()"><i class="icon-edit">Check in</a>
     <?php } else { ?>
         <button class="btn btn-success btn-sm ml-2" disabled>Check in</button>
     <?php } ?>
-    <a href="controller.php?action=cancel&code=<?php echo $row['CONFIRMATIONCODE']; ?>" data-action="cancel" class="btn btn-danger btn-sm ml-2" onclick="cancelBooking()"><i class="icon-edit">Cancel</a>
+    <a href="controller.php?action=cancel&code=<?php echo $row['CONFIRMATIONCODE']; ?>" data-action="cancel"  data-code="<?php echo $row['CONFIRMATIONCODE']; ?>" class="btn btn-danger btn-sm ml-2" onclick="cancelBooking()"><i class="icon-edit">Cancel</a>
 
     <?php } elseif($row['STATUS'] == 'Checkedin') {?>
-        <a href="controller.php?action=checkout&code=<?php echo $row['CONFIRMATIONCODE']; ?>"  data-action="checkout"class="btn btn-warning btn-sm ml-2" onclick="checkoutBooking()"><i class="icon-edit">Check out</a>
+        <a href="controller.php?action=checkout&code=<?php echo $row['CONFIRMATIONCODE']; ?>"  data-action="checkout" data-code="<?php echo $row['CONFIRMATIONCODE']; ?>" class="btn btn-warning btn-sm ml-2" onclick="checkoutBooking()"><i class="icon-edit">Check out</a>
     <?php } elseif($row['STATUS'] == 'Checkedout') {?>
-        <a href="controller.php?action=delete&code=<?php echo $row['CONFIRMATIONCODE']; ?>" data-action="delete" class="btn btn-danger btn-sm ml-2" onclick="deleteBooking()"><i class="icon-edit">Delete</a>
+        <a href="controller.php?action=delete&code=<?php echo $row['CONFIRMATIONCODE']; ?>" data-action="delete"  data-code="<?php echo $row['CONFIRMATIONCODE']; ?>" class="btn btn-danger btn-sm ml-2" onclick="deleteBooking()"><i class="icon-edit">Delete</a>
     <?php } else {?>
-        <a href="controller.php?action=confirm&code=<?php echo $row['CONFIRMATIONCODE']; ?>" data-action="confirm"  class="btn btn-success btn-sm ml-2" onclick="confirmBooking()"><i class="icon-edit">Confirm</a>
+        <a href="controller.php?action=confirm&code=<?php echo $row['CONFIRMATIONCODE']; ?>" data-action="confirm" data-code="<?php echo $row['CONFIRMATIONCODE']; ?>"  class="btn btn-success btn-sm ml-2" onclick="confirmBooking()"><i class="icon-edit">Confirm</a>
     <?php } ?>
 <?php } ?> -->
 
