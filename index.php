@@ -1,6 +1,6 @@
 <?php 
 require_once("initialize.php");
-// // // include 'config.php'; 
+include 'config.php'; 
 // require_once("includes/config.php");
 // //load basic functions next so that everything after can use them
 // require_once("includes/functions.php");
