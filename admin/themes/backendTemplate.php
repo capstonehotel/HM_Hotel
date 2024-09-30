@@ -190,7 +190,7 @@ if (isset($_SESSION['booking_notification_viewed'])) {
 
 <!-- HTML Code -->
 
-<li class="nav-item my-auto">
+<!-- <li class="nav-item my-auto">
     <a href="https://mcchmhotelreservation.com/admin/mod_contact_us/index.php?viewed=messages" class="text-dark" id="messageNotification">
         <i class="fa fa-envelope"></i>
         <?php if ($cnt_message[0] > 0): ?>
@@ -198,7 +198,7 @@ if (isset($_SESSION['booking_notification_viewed'])) {
         <?php endif; ?>
     </a>
     <span style="margin-left: 10px;"></span>
-</li>
+</li> -->
 <!-- <li class="nav-item my-auto">
     <a href="https://mcchmhotelreservation.com/admin/mod_reservation/index.php?viewed=bookings" class="text-dark" id="bookingNotification">
         <i class="fa fa-bell"></i>
@@ -224,6 +224,17 @@ if (isset($_SESSION['booking_notification_viewed'])) {
 }
 
 </style> -->
+<style>
+.notification-badge {
+    position: absolute;
+    top: -10px;
+    right: 3px;
+    font-size: 0.65rem; /* Adjust font size of the badge */
+    padding: 3px 6px;
+    border-radius: 50%;
+}
+</style>
+
 <li class="nav-item my-auto">
     <a href="javascript:void(0);" class="text-dark" id="bookingNotification" onclick="toggleNotificationMenu()">
         <i class="fa fa-bell"></i>
