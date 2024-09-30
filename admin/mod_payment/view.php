@@ -39,9 +39,9 @@
                         <?php if ($_SESSION['ADMIN_UROLE'] == "Administrator") { ?>
                             <?php if ($row['PAYMENT_STATUS'] == "Partial" || $row['PAYMENT_STATUS'] == "Full") { ?>
                                 <a href="controller.php?action=unpaid&code=<?php echo $row['CONFIRMATIONCODE']; ?>" class="btn btn-warning btn-sm ml-2" onclick="markAsUnpaid('<?php echo $row['CONFIRMATIONCODE']; ?>'); return false;"><i class="icon-edit">Mark as Unpaid</i></a>
-                                <!-- <?php if ($row['PAYMENT_STATUS'] != "Partial") { ?> -->
+                                
             <a href="controller.php?action=confirm&code=<?php echo $row['CONFIRMATIONCODE']; ?>" class="btn btn-success btn-sm ml-2" onclick="confirmConfirmation('<?php echo $row['CONFIRMATIONCODE']; ?>'); return false;"><i class="icon-edit">Confirm</i></a>
-        <!-- <?php } ?> -->
+       
                                 <!-- <a href="controller.php?action=cancel&code=<?php echo $row['CONFIRMATIONCODE']; ?>" class="btn btn-danger btn-sm ml-2" onclick="cancelConfirmation ('<?php echo $row['CONFIRMATIONCODE']; ?>'); return false;"><i class="icon-edit">Cancel</i></a> -->
                                 <?php } else if ($row['PAYMENT_STATUS'] == "Unpaid") { ?>
         <a href="controller.php?action=confirm&code=<?php echo $row['CONFIRMATIONCODE']; ?>" class="btn btn-success btn-sm ml-2" onclick="confirmConfirmation('<?php echo $row['CONFIRMATIONCODE']; ?>'); return false;"><i class="icon-edit">Confirm</i></a>
