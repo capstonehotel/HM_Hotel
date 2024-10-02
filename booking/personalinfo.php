@@ -89,8 +89,8 @@ redirect('index.php?view=payment');
   /* Ensure the image preview is fixed at 300x300 pixels (2x2) */
   #imagePreview {
     display: none;
-    width: 300px;
-    height: 300px;
+    width: 150px;
+    height: 150px;
     object-fit: cover; /* Ensures the image fits inside the preview box */
     border: 2px solid #ddd;
     margin-top: 10px;
