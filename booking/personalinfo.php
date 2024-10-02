@@ -137,8 +137,7 @@ function previewImage(event) {
             </div>
         </div>
 
-        <!-- Second Column -->
-        <div class="col-md-6 col-sm-12">
+       
             <!-- Date of Birth -->
             <div class="form-group">
                 <label for="dbirth">Date of Birth <span class="text-danger">*</span></label>
@@ -167,7 +166,8 @@ function previewImage(event) {
                 <label for="nationality">Nationality <span class="text-danger">*</span></label>
                 <input name="nationality" type="text" class="form-control" id="nationality" maxlength="17" onkeyup="capitalizeInput(this)" required>
             </div>
-
+ <!-- Second Column -->
+ <div class="col-md-6 col-sm-12">
             <!-- Company -->
             <div class="form-group">
                 <label for="company">Company <span class="text-danger">*</span></label>
