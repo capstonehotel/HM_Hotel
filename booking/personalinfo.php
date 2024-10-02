@@ -78,7 +78,7 @@ redirect('index.php?view=payment');
          		<form class="form-horizontal" action="index.php?view=logininfo" method="post"  name="personal" enctype="multipart/form-data">
 					 <h2>Personal Details</h2> 
 
-					 < <div class="row">
+					  <div class="row">
         <div class="col-md-6 col-sm-12">
             <div class="form-group">
                 <label for="image">Avatar</label>
@@ -149,7 +149,7 @@ function previewImage(event) {
                 <label for="address">Address:</label>
                 <input name="address" type="text" class="form-control" id="address" maxlength="50" onkeyup="capitalizeInput(this)">
             </div>
-
+			<div class="col-md-6 col-sm-12">
             <div class="form-group">
                 <label for="nationality">Nationality:</label>
                 <input name="nationality" type="text" class="form-control" id="nationality" maxlength="17" onkeyup="capitalizeInput(this)">
