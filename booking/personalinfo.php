@@ -79,15 +79,11 @@ redirect('index.php?view=payment');
 					 <h2>Personal Details</h2> 
 
 					 <div class="row">
-					 
-        <!-- First Column -->
         <div class="col-md-6 col-sm-12">
-            <!-- Avatar -->
             <div class="form-group">
-                <label for="image">Avatar <span class="text-danger">*</span></label>
-                <input type="file" name="image" id="image" accept=".jpg, .jpeg, .png" class="form-control-file" required onchange="previewImage(event)">
-                <img id="imagePreview" src="#" alt="Image Preview" class="mt-2 img-fluid" style="display: none; max-width: 100%; height: auto;">
-            
+                <label for="name">Avatar</label>
+                <input type="file" name="image" id="image" accept=".jpg, .jpeg, .png" onchange="previewImage(event)" required>
+                <img id="imagePreview" src="#" alt="Image Preview" style="display: none; max-width: 300px; max-height: 300px;">
 
 <script>
 function previewImage(event) {
@@ -111,7 +107,7 @@ function previewImage(event) {
 </script>
 									
 			            </div>
-			        
+			          </div> 
 
 					           <!-- First Name -->
 							   <div class="form-group">
@@ -137,7 +133,8 @@ function previewImage(event) {
             </div>
         </div>
 
-       
+        <!-- Second Column -->
+        <div class="col-md-6 col-sm-12">
             <!-- Date of Birth -->
             <div class="form-group">
                 <label for="dbirth">Date of Birth <span class="text-danger">*</span></label>
@@ -166,8 +163,7 @@ function previewImage(event) {
                 <label for="nationality">Nationality <span class="text-danger">*</span></label>
                 <input name="nationality" type="text" class="form-control" id="nationality" maxlength="17" onkeyup="capitalizeInput(this)" required>
             </div>
- <!-- Second Column -->
- <div class="col-md-6 col-sm-12">
+
             <!-- Company -->
             <div class="form-group">
                 <label for="company">Company <span class="text-danger">*</span></label>
