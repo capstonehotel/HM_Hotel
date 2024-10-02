@@ -10,13 +10,14 @@ require 'PHPMailer/src/SMTP.php';
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
 
-
+try{
     //Server settings
     $mail->isSMTP();                                            //Send using SMTP
     $mail->Host       = 'mcchmhotelreservation.com';                     //Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
     $mail->Username   = 'ungonkathleen@gmail.com';                     //SMTP username
-    $mail->Password   = 'oeaou moot albc ucmx';                               //SMTP password            //Enable implicit TLS encryption
+    $mail->Password   = 'oeaou moot albc ucmx';                               //SMTP password    
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;        //Enable implicit TLS encryption
     $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
     //Recipients
@@ -32,6 +33,6 @@ $mail = new PHPMailer(true);
 
     $mail->send();
     echo 'Message has been sent';
- catch (Exception $e) {
+}catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
