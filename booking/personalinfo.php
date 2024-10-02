@@ -79,11 +79,11 @@ redirect('index.php?view=payment');
 					 <h2>Personal Details</h2> 
 
 					 <div class="form-group">
-			            <div class="col-md-8">
+			            <div class="col-md-6">
 			              <label class="col-md-4 control-label" for=
 			              "name">Avatar</label>
 
-			              <div class="col-md-8">
+			              <div class="col-md-6">
 			              	<input name="" type="hidden" value="">
 			              	<input required type="file" name="image" id="image" accept=".jpg, .jpeg, .png" onchange="previewImage(event)">
 			              </div>
@@ -114,11 +114,11 @@ function previewImage(event) {
 			          </div> 
 
 					  <div class="form-group">
-			            <div class="col-md-8">
+			            <div class="col-md-6">
 			              <label class="col-md-4 control-label" for=
 			              "name">First Name:</label>
 
-			              <div class="col-md-8">
+			              <div class="col-md-6">
 			              	<input name="" type="hidden" value="">
 			                <input onkeyup="capitalizeInput(this)" name="name" type="text" class="form-control input-sm" id="name" /  maxlength="16">
 			              </div>
@@ -126,17 +126,17 @@ function previewImage(event) {
 			          </div> 
 
 			            <div class="form-group">
-			            <div class="col-md-8">
+			            <div class="col-md-6">
 			              <label class="col-md-4 control-label" for=
 			              "last">Last Name:</label>
 
-			              <div class="col-md-8">
+			              <div class="col-md-6">
 			                <input onkeyup="capitalizeInput(this)" name="last" type="text" class="form-control input-sm" id="last" / maxlength="16" required>
 			              </div>
 			            </div>
 			          </div>
 					  <div class="form-group">
-    <div class="col-md-8">
+    <div class="col-md-6">
         <label class="col-md-4 control-label" for="gender">Gender:</label>
         <div class="col-md-8">
             <select name="gender" class="form-control input-sm" id="gender" required>
@@ -152,32 +152,32 @@ function previewImage(event) {
 			      
 
 			           <div class="form-group">
-			            <div class="col-md-8">
+			            <div class="col-md-6">
 			              <label class="col-md-4 control-label" for=
 			              "city">City:</label>
 
-			              <div class="col-md-8">
+			              <div class="col-md-6">
 			                <input onkeyup="capitalizeInput(this)" name="city" type="text" class="form-control input-sm" id="city" />
 			              </div> 
 			            </div>
 			          </div>
 			           <div class="form-group">
-			            <div class="col-md-8">
+			            <div class="col-md-6">
 			              <label  class="col-md-4 control-label" for=
 			              "address">Address:</label>
 
-			              <div class="col-md-8">
+			              <div class="col-md-6">
 			                <input onkeyup="capitalizeInput(this)" name="address" type="text" class="form-control input-sm" id="address" / maxlength="50">
 			              </div>
 			            </div>
 			          </div> 
 
 			            <div class="form-group  ">
-			            <div class="col-md-8">
+			            <div class="col-md-6">
 			              <label class="col-md-4 control-label" for=
 			              "dbirth">Date of Birth:</label>
 
-			              <div class="col-md-8">
+			              <div class="col-md-6">
 							    <input type="date"
 							           required
 							           name="dbirth"
@@ -191,9 +191,9 @@ function previewImage(event) {
 			          </div>
 
 					  <div class="form-group">
-  <div class="col-md-8">
+  <div class="col-md-6">
     <label class="col-md-4 control-label" for="phone">Phone:</label>
-    <div class="col-md-8">
+    <div class="col-md-6">
       <input 
         name="phone" 
         required 
@@ -210,32 +210,32 @@ function previewImage(event) {
 
 
 			           <div class="form-group">
-			            <div class="col-md-8">
+			            <div class="col-md-6">
 			              <label class="col-md-4 control-label" for=
 			              "nationality">Nationality:</label>
 
-			              <div class="col-md-8">
+			              <div class="col-md-6">
 			                <input onkeyup="capitalizeInput(this)" name="nationality" type="text" class="form-control input-sm" id="nationality" /  maxlength="17">
 			              </div>
 			            </div>
 			          </div>
 			         
 			             <div class="form-group">
-			            <div class="col-md-8">
+			            <div class="col-md-6">
 			              <label class="col-md-4 control-label" for=
 			              "company">Company:</label>
 
-			              <div class="col-md-8">
+			              <div class="col-md-6">
 			                <input onkeyup="capitalizeInput(this)" name="company" type="text" class="form-control input-sm" id="company" / required>
 			              </div>
 			            </div>
 			          </div>
 			              <div class="form-group">
-			            <div class="col-md-8">
+			            <div class="col-md-6">
 			              <label class="col-md-4 control-label" for=
 			              "caddress">Address:</label>
 
-			              <div class="col-md-8">
+			              <div class="col-md-6">
 			                <input onkeyup="capitalizeInput(this)" name="caddress" type="text" class="form-control input-sm" id="caddress" / required>
 			              </div>
 			            </div>
@@ -243,11 +243,11 @@ function previewImage(event) {
 			    
 			         
 			            <div class="form-group">
-			            <div class="col-md-8">
+			            <div class="col-md-6">
 			              <label class="col-md-4 control-label" for=
 			              "username">Username:</label>
 
-			              <div class="col-md-8">
+			              <div class="col-md-6">
 			                <input name="username" type="email" class="form-control input-sm" id="username" / placeholder="User@gmail.com">
 			              </div>
 			            </div>
@@ -264,7 +264,7 @@ function previewImage(event) {
 			            </div>
 			          </div> -->
 					  <div class="form-group">
-					    <div class="col-md-8">
+					    <div class="col-md-6">
 					        <label class="col-md-4 control-label" for="password">Password:</label>
 					        <div class="col-md-8">
 					            <input name="pass" type="password" class="form-control input-sm" id="password" onkeyup="validatePassword()" required / placeholder="Ex@mple123">
@@ -273,11 +273,11 @@ function previewImage(event) {
 					    </div>
 					</div>
 			          <div class="form-group">
-			            <div class="col-md-8">
+			            <div class="col-md-6">
 			              <label class="col-md-4 control-label" for=
 			              "zip">Zip Code:</label>
 
-			              <div class="col-md-8">
+			              <div class="col-md-6">
 			                <input name="zip" type="number" class="form-control input-sm" id="zip" / maxlength="4" minlength="4" required="">
 			              </div>
 			            </div>
