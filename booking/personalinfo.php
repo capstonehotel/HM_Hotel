@@ -109,111 +109,98 @@ function previewImage(event) {
 			            </div>
 			          </div> 
 
-					           <!-- First Name -->
-							   <div class="form-group">
-                <label for="name">First Name <span class="text-danger">*</span></label>
+					  <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label for="name">First Name:</label>
                 <input name="name" type="text" class="form-control" id="name" maxlength="16" onkeyup="capitalizeInput(this)" required>
             </div>
+        </div>
 
-            <!-- Last Name -->
+        <div class="col-md-6 col-sm-12">
             <div class="form-group">
-                <label for="last">Last Name <span class="text-danger">*</span></label>
+                <label for="last">Last Name:</label>
                 <input name="last" type="text" class="form-control" id="last" maxlength="16" onkeyup="capitalizeInput(this)" required>
             </div>
+        </div>
 
-            <!-- Gender -->
+        <div class="col-md-6 col-sm-12">
             <div class="form-group">
-                <label for="gender">Gender <span class="text-danger">*</span></label>
+                <label for="gender">Gender:</label>
                 <select name="gender" class="form-control" id="gender" required>
                     <option value="" disabled selected>Select Gender</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
-                    <!-- Add more options if needed -->
                 </select>
             </div>
         </div>
 
-        <!-- Second Column -->
         <div class="col-md-6 col-sm-12">
-            <!-- Date of Birth -->
             <div class="form-group">
-                <label for="dbirth">Date of Birth <span class="text-danger">*</span></label>
+                <label for="city">City:</label>
+                <input name="city" type="text" class="form-control" id="city" onkeyup="capitalizeInput(this)">
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <input name="address" type="text" class="form-control" id="address" maxlength="50" onkeyup="capitalizeInput(this)">
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label for="dbirth">Date of Birth:</label>
                 <input type="date" name="dbirth" class="form-control" max="<?php echo date('Y-m-d', strtotime('-18 years')); ?>" required>
             </div>
-
-            <!-- Phone -->
-            <div class="form-group">
-                <label for="phone">Phone <span class="text-danger">*</span></label>
-                <input 
-                    name="phone" 
-                    type="tel" 
-                    class="form-control" 
-                    id="phone" 
-                    pattern="09\d{9}" 
-                    value="09" 
-                    required 
-                    oninput="this.value = this.value.replace(/\D/g, '').slice(0,11)"
-                    placeholder="09XXXXXXXXX"
-                >
-                <small class="form-text text-muted">Format: 09XXXXXXXXX</small>
-            </div>
-
-            <!-- Nationality -->
-            <div class="form-group">
-                <label for="nationality">Nationality <span class="text-danger">*</span></label>
-                <input name="nationality" type="text" class="form-control" id="nationality" maxlength="17" onkeyup="capitalizeInput(this)" required>
-            </div>
-
-            <!-- Company -->
-            <div class="form-group">
-                <label for="company">Company <span class="text-danger">*</span></label>
-                <input name="company" type="text" class="form-control" id="company" onkeyup="capitalizeInput(this)" required>
-            </div>
-
-            <!-- Company Address -->
-            <div class="form-group">
-                <label for="caddress">Company Address <span class="text-danger">*</span></label>
-                <input name="caddress" type="text" class="form-control" id="caddress" onkeyup="capitalizeInput(this)" required>
-            </div>
         </div>
-    </div>
 
-    <!-- Additional Fields (Address, City, etc.) -->
-    <div class="row">
         <div class="col-md-6 col-sm-12">
-            <!-- City -->
             <div class="form-group">
-                <label for="city">City <span class="text-danger">*</span></label>
-                <input name="city" type="text" class="form-control" id="city" onkeyup="capitalizeInput(this)" required>
-            </div>
-
-            <!-- Address -->
-            <div class="form-group">
-                <label for="address">Address <span class="text-danger">*</span></label>
-                <input name="address" type="text" class="form-control" id="address" maxlength="50" onkeyup="capitalizeInput(this)" required>
+                <label for="phone">Phone:</label>
+                <input name="phone" type="tel" class="form-control" pattern="09\d{9}" id="phone" value="09" required oninput="this.value = this.value.replace(/\D/, ''); if(this.value.length > 11) this.value = this.value.slice(0, 11);">
             </div>
         </div>
 
         <div class="col-md-6 col-sm-12">
-            <!-- Email -->
             <div class="form-group">
-                <label for="username">Email <span class="text-danger">*</span></label>
-                <input name="username" type="email" class="form-control" id="username" placeholder="User@gmail.com" required>
+                <label for="nationality">Nationality:</label>
+                <input name="nationality" type="text" class="form-control" id="nationality" maxlength="17" onkeyup="capitalizeInput(this)">
             </div>
+        </div>
 
-            <!-- Password -->
+        <div class="col-md-6 col-sm-12">
             <div class="form-group">
-                <label for="password">Password <span class="text-danger">*</span></label>
+                <label for="company">Company:</label>
+                <input name="company" type="text" class="form-control" id="company" required onkeyup="capitalizeInput(this)">
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label for="caddress">Company Address:</label>
+                <input name="caddress" type="text" class="form-control" id="caddress" required onkeyup="capitalizeInput(this)">
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label for="username">Email:</label>
+                <input name="username" type="email" class="form-control" id="username" placeholder="User@gmail.com">
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label for="password">Password:</label>
                 <input name="pass" type="password" class="form-control" id="password" placeholder="Ex@mple123" required onkeyup="validatePassword()">
-                <span id="password-error" class="text-danger"></span>
-                <small class="form-text text-muted">
-                    Password must be at least 6 characters long, include a capital letter, a number, and a special character.
-                </small>
+                <span id="password-error" style="color: red;"></span>
             </div>
+        </div>
 
-            <!-- Zip Code -->
+        <div class="col-md-6 col-sm-12">
             <div class="form-group">
-                <label for="zip">Zip Code <span class="text-danger">*</span></label>
+                <label for="zip">Zip Code:</label>
                 <input name="zip" type="number" class="form-control" id="zip" minlength="4" maxlength="4" required>
             </div>
         </div>
