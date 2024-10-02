@@ -138,7 +138,7 @@ function previewImage(event) {
 					  <div class="form-group">
     <div class="col-md-6">
         <label class="col-md-4 control-label" for="gender">Gender:</label>
-        <div class="col-md-8">
+        <div class="col-md-6">
             <select name="gender" class="form-control input-sm" id="gender" required>
                 <option value="" disabled selected>Select Gender</option>
                 <option value="Male">Male</option>
@@ -266,7 +266,7 @@ function previewImage(event) {
 					  <div class="form-group">
 					    <div class="col-md-6">
 					        <label class="col-md-4 control-label" for="password">Password:</label>
-					        <div class="col-md-8">
+					        <div class="col-md-6">
 					            <input name="pass" type="password" class="form-control input-sm" id="password" onkeyup="validatePassword()" required / placeholder="Ex@mple123">
 					            <span id="password-error" style="color: red;"></span>
 					        </div>
