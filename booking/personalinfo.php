@@ -165,9 +165,7 @@ redirect('index.php?view=payment');
                 <label for="zip">Zip Code:</label>
                 <input name="zip" type="number" class="form-control" id="zip" minlength="4" maxlength="4" required>
             </div>
-        </div>
-    </div>
-			
+       
             <div class="form-group">
                 <label for="nationality">Nationality:</label>
                 <input name="nationality" type="text" class="form-control" id="nationality" maxlength="17" onkeyup="capitalizeInput(this)">
@@ -194,7 +192,10 @@ redirect('index.php?view=payment');
                 <span id="password-error" style="color: red;"></span>
             </div>
 
-            			 &nbsp; &nbsp;
+           
+        </div>
+    </div>
+					 &nbsp; &nbsp;
 				 <div class="form-group">
 			        <div class="col-md-6">
 					<p>
@@ -209,7 +210,7 @@ redirect('index.php?view=payment');
 					    </div>
 					</div>
 					NOTE: 
-					We recommend that your password should be at least 8 characters long and should be different from your username.
+					We recommend that your password should be at least 6 characters long and should be different from your username.
 					Your e-mail address must be valid. We use e-mail for communication purposes (order notifications, etc). Therefore, it is essential to provide a valid e-mail address to be able to use our services correctly.
 					All your private data is confidential. We will never sell, exchange or market it in any way. For further information on the responsibilities of both parties, you may refer to us.
 			    </div>
