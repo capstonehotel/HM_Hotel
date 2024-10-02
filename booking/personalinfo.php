@@ -77,6 +77,16 @@ redirect('index.php?view=payment');
    
          		<form class="form-horizontal" action="index.php?view=logininfo" method="post"  name="personal" enctype="multipart/form-data">
 					 <h2>Personal Details</h2> 
+					 <div class="row">
+        <div class="col-md-6">
+            <!-- First Column -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="name">Avatar</label>
+                <div class="col-md-8">
+                    <input required type="file" name="image" id="image" accept=".jpg, .jpeg, .png" onchange="previewImage(event)">
+                    <img id="imagePreview" src="#" alt="Image Preview" style="display: none; max-width: 300px; max-height: 300px;">
+                </div>
+            </div>
 
 					 <div class="form-group">
 			            <div class="col-md-8">
@@ -114,16 +124,11 @@ function previewImage(event) {
 			          </div> 
 
 					  <div class="form-group">
-			            <div class="col-md-8">
-			              <label class="col-md-4 control-label" for=
-			              "name">First Name:</label>
-
-			              <div class="col-md-8">
-			              	<input name="" type="hidden" value="">
-			                <input onkeyup="capitalizeInput(this)" name="name" type="text" class="form-control input-sm" id="name" /  maxlength="16">
-			              </div>
-			            </div>
-			          </div> 
+                <label class="col-md-4 control-label" for="name">First Name:</label>
+                <div class="col-md-8">
+                    <input name="name" type="text" class="form-control input-sm" id="name" maxlength="16" onkeyup="capitalizeInput(this)">
+                </div>
+            </div>
 
 			            <div class="form-group">
 			            <div class="col-md-8">
@@ -332,9 +337,9 @@ function validatePassword() {
     var hasNumber = /\d/.test(password);
     var hasCapital = /[A-Z]/.test(password);
     
-    if (password.length < 6) {
-        passwordError.textContent = "Password must be at least 6 characters long.";
-        passwordInput.setCustomValidity("Password must be at least 6 characters long.");
+    if (password.length < 8) {
+        passwordError.textContent = "Password must be at least 8 characters long.";
+        passwordInput.setCustomValidity("Password must be at least 8 characters long.");
     } else if (!hasSpecialChar) {
         passwordError.textContent = "Password must contain at least one special character.";
         passwordInput.setCustomValidity("Password must contain at least one special character.");
