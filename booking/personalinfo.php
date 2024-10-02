@@ -78,16 +78,12 @@ redirect('index.php?view=payment');
          		<form class="form-horizontal" action="index.php?view=logininfo" method="post"  name="personal" enctype="multipart/form-data">
 					 <h2>Personal Details</h2> 
 
-					 <div class="form-group">
-			            <div class="col-md-6">
-			              <label class="col-md-4 control-label" for=
-			              "name">Avatar</label>
-
-			              <div class="col-md-6">
-			              	<input name="" type="hidden" value="">
-			              	<input required type="file" name="image" id="image" accept=".jpg, .jpeg, .png" onchange="previewImage(event)">
-			              </div>
-			              <img id="imagePreview" src="#" alt="Image Preview" style="display: none; max-width: 300px; max-height: 300px;">
+					 <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label for="name">Avatar</label>
+                <input type="file" name="image" id="image" accept=".jpg, .jpeg, .png" onchange="previewImage(event)" required>
+                <img id="imagePreview" src="#" alt="Image Preview" style="display: none; max-width: 300px; max-height: 300px;">
 
 <script>
 function previewImage(event) {
@@ -113,175 +109,102 @@ function previewImage(event) {
 			            </div>
 			          </div> 
 
-					  <div class="form-group">
-			            <div class="col-md-6">
-			              <label class="col-md-4 control-label" for=
-			              "name">First Name:</label>
+					  <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label for="name">First Name:</label>
+                <input name="name" type="text" class="form-control" id="name" maxlength="16" onkeyup="capitalizeInput(this)" required>
+            </div>
+        </div>
 
-			              <div class="col-md-6">
-			              	<input name="" type="hidden" value="">
-			                <input onkeyup="capitalizeInput(this)" name="name" type="text" class="form-control input-sm" id="name" /  maxlength="16">
-			              </div>
-			            </div>
-			          </div> 
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label for="last">Last Name:</label>
+                <input name="last" type="text" class="form-control" id="last" maxlength="16" onkeyup="capitalizeInput(this)" required>
+            </div>
+        </div>
 
-			            <div class="form-group">
-			            <div class="col-md-6">
-			              <label class="col-md-4 control-label" for=
-			              "last">Last Name:</label>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select name="gender" class="form-control" id="gender" required>
+                    <option value="" disabled selected>Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+        </div>
 
-			              <div class="col-md-6">
-			                <input onkeyup="capitalizeInput(this)" name="last" type="text" class="form-control input-sm" id="last" / maxlength="16" required>
-			              </div>
-			            </div>
-			          </div>
-					  <div class="form-group">
-    <div class="col-md-6">
-        <label class="col-md-4 control-label" for="gender">Gender:</label>
-        <div class="col-md-6">
-            <select name="gender" class="form-control input-sm" id="gender" required>
-                <option value="" disabled selected>Select Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-               
-            </select>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label for="city">City:</label>
+                <input name="city" type="text" class="form-control" id="city" onkeyup="capitalizeInput(this)">
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <input name="address" type="text" class="form-control" id="address" maxlength="50" onkeyup="capitalizeInput(this)">
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label for="dbirth">Date of Birth:</label>
+                <input type="date" name="dbirth" class="form-control" max="<?php echo date('Y-m-d', strtotime('-18 years')); ?>" required>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input name="phone" type="tel" class="form-control" pattern="09\d{9}" id="phone" value="09" required oninput="this.value = this.value.replace(/\D/, ''); if(this.value.length > 11) this.value = this.value.slice(0, 11);">
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label for="nationality">Nationality:</label>
+                <input name="nationality" type="text" class="form-control" id="nationality" maxlength="17" onkeyup="capitalizeInput(this)">
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label for="company">Company:</label>
+                <input name="company" type="text" class="form-control" id="company" required onkeyup="capitalizeInput(this)">
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label for="caddress">Company Address:</label>
+                <input name="caddress" type="text" class="form-control" id="caddress" required onkeyup="capitalizeInput(this)">
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label for="username">Email:</label>
+                <input name="username" type="email" class="form-control" id="username" placeholder="User@gmail.com">
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input name="pass" type="password" class="form-control" id="password" placeholder="Ex@mple123" required onkeyup="validatePassword()">
+                <span id="password-error" style="color: red;"></span>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label for="zip">Zip Code:</label>
+                <input name="zip" type="number" class="form-control" id="zip" minlength="4" maxlength="4" required>
+            </div>
         </div>
     </div>
-</div>
-
-			      
-
-			           <div class="form-group">
-			            <div class="col-md-6">
-			              <label class="col-md-4 control-label" for=
-			              "city">City:</label>
-
-			              <div class="col-md-6">
-			                <input onkeyup="capitalizeInput(this)" name="city" type="text" class="form-control input-sm" id="city" />
-			              </div> 
-			            </div>
-			          </div>
-			           <div class="form-group">
-			            <div class="col-md-6">
-			              <label  class="col-md-4 control-label" for=
-			              "address">Address:</label>
-
-			              <div class="col-md-6">
-			                <input onkeyup="capitalizeInput(this)" name="address" type="text" class="form-control input-sm" id="address" / maxlength="50">
-			              </div>
-			            </div>
-			          </div> 
-
-			            <div class="form-group  ">
-			            <div class="col-md-6">
-			              <label class="col-md-4 control-label" for=
-			              "dbirth">Date of Birth:</label>
-
-			              <div class="col-md-6">
-							    <input type="date"
-							           required
-							           name="dbirth"
-							           value=""
-							           max="<?php echo date('Y-m-d', strtotime('-18 years')); ?>"
-							           class="form-control input-sm">
-							</div>
-
-			              
-			            </div>
-			          </div>
-
-					  <div class="form-group">
-  <div class="col-md-6">
-    <label class="col-md-4 control-label" for="phone">Phone:</label>
-    <div class="col-md-6">
-      <input 
-        name="phone" 
-        required 
-        pattern="09\d{9}" 
-        type="tel" 
-        class="form-control input-sm" 
-        id="phone" 
-        value="09" 
-        oninput="this.value = this.value.replace(/\D/, ''); if(this.value.length > 11) this.value = this.value.slice(0, 11);" 
-      />
-    </div>
-  </div>
-</div>
-
-
-			           <div class="form-group">
-			            <div class="col-md-6">
-			              <label class="col-md-4 control-label" for=
-			              "nationality">Nationality:</label>
-
-			              <div class="col-md-6">
-			                <input onkeyup="capitalizeInput(this)" name="nationality" type="text" class="form-control input-sm" id="nationality" /  maxlength="17">
-			              </div>
-			            </div>
-			          </div>
-			         
-			             <div class="form-group">
-			            <div class="col-md-6">
-			              <label class="col-md-4 control-label" for=
-			              "company">Company:</label>
-
-			              <div class="col-md-6">
-			                <input onkeyup="capitalizeInput(this)" name="company" type="text" class="form-control input-sm" id="company" / required>
-			              </div>
-			            </div>
-			          </div>
-			              <div class="form-group">
-			            <div class="col-md-6">
-			              <label class="col-md-4 control-label" for=
-			              "caddress">Address:</label>
-
-			              <div class="col-md-6">
-			                <input onkeyup="capitalizeInput(this)" name="caddress" type="text" class="form-control input-sm" id="caddress" / required>
-			              </div>
-			            </div>
-			          </div>
-			    
-			         
-			            <div class="form-group">
-			            <div class="col-md-6">
-			              <label class="col-md-4 control-label" for=
-			              "username">Username:</label>
-
-			              <div class="col-md-6">
-			                <input name="username" type="email" class="form-control input-sm" id="username" / placeholder="User@gmail.com">
-			              </div>
-			            </div>
-			       		 </div>
-			  <!--     
-			          <div class="form-group">
-			            <div class="col-md-8">
-			              <label class="col-md-4 control-label" for=
-			              "cemail">CONFRIM E-MAIL:</label>
-
-			              <div class="col-md-8">
-			                <input name="cemail" type="text" class="form-control input-sm" id="cemail" />
-			              </div>
-			            </div>
-			          </div> -->
-					  <div class="form-group">
-					    <div class="col-md-6">
-					        <label class="col-md-4 control-label" for="password">Password:</label>
-					        <div class="col-md-6">
-					            <input name="pass" type="password" class="form-control input-sm" id="password" onkeyup="validatePassword()" required / placeholder="Ex@mple123">
-					            <span id="password-error" style="color: red;"></span>
-					        </div>
-					    </div>
-					</div>
-			          <div class="form-group">
-			            <div class="col-md-6">
-			              <label class="col-md-4 control-label" for=
-			              "zip">Zip Code:</label>
-
-			              <div class="col-md-6">
-			                <input name="zip" type="number" class="form-control input-sm" id="zip" / maxlength="4" minlength="4" required="">
-			              </div>
-			            </div>
-			          </div>
  
 					 &nbsp; &nbsp;
 				 <div class="form-group">
