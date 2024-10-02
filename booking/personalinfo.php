@@ -85,25 +85,37 @@ redirect('index.php?view=payment');
                 <input type="file" name="image" id="image" accept=".jpg, .jpeg, .png" onchange="previewImage(event)" required>
                 <img id="imagePreview" src="#" alt="Image Preview" style="display: none; max-width: 300px; max-height: 300px;">
             </div>
-<script>
-function previewImage(event) {
-  const input = event.target;
-  const imagePreview = document.getElementById('imagePreview');
-  
-  if (input.files && input.files[0]) {
-    const reader = new FileReader();
-
-    reader.onload = function (e) {
-      imagePreview.style.display = 'block';
-      imagePreview.src = e.target.result;
-    };
-
-    reader.readAsDataURL(input.files[0]);
-  } else {
-    imagePreview.style.display = 'none';
-    imagePreview.src = '#';
+			<style>
+  /* Ensure the image preview is fixed at 300x300 pixels (2x2) */
+  #imagePreview {
+    display: none;
+    width: 300px;
+    height: 300px;
+    object-fit: cover; /* Ensures the image fits inside the preview box */
+    border: 2px solid #ddd;
+    margin-top: 10px;
   }
-}
+</style>
+
+<script>
+  function previewImage(event) {
+    const input = event.target;
+    const imagePreview = document.getElementById('imagePreview');
+
+    if (input.files && input.files[0]) {
+      const reader = new FileReader();
+
+      reader.onload = function (e) {
+        imagePreview.style.display = 'block';
+        imagePreview.src = e.target.result;
+      };
+
+      reader.readAsDataURL(input.files[0]);
+    } else {
+      imagePreview.style.display = 'none';
+      imagePreview.src = '#';
+    }
+  }
 </script>
 									
 			            <!-- </div>
