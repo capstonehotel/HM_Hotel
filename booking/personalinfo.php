@@ -87,7 +87,7 @@ redirect('index.php?view=payment');
                 <label for="image">Avatar <span class="text-danger">*</span></label>
                 <input type="file" name="image" id="image" accept=".jpg, .jpeg, .png" class="form-control-file" required onchange="previewImage(event)">
                 <img id="imagePreview" src="#" alt="Image Preview" class="mt-2 img-fluid" style="display: none; max-width: 100%; height: auto;">
-            <
+            
 
 <script>
 function previewImage(event) {
@@ -111,7 +111,7 @@ function previewImage(event) {
 </script>
 									
 			            </div>
-			          </div> 
+			        
 
 					           <!-- First Name -->
 							   <div class="form-group">
