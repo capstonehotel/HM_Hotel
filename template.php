@@ -529,6 +529,7 @@ $_SESSION['to']  = $_POST['to'];
         <script type="text/javascript" language="javascript" src="../js/html5.js"></script>
         <script type="text/javascript" language="javascript" src="../js/retina.js"></script>
         <script type="text/javascript" language="javascript" src="../js/global.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <script>
             // tooltip demo
