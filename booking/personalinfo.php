@@ -78,13 +78,13 @@ redirect('index.php?view=payment');
          		<form class="form-horizontal" action="index.php?view=logininfo" method="post"  name="personal" enctype="multipart/form-data">
 					 <h2>Personal Details</h2> 
 
-					 <div class="row">
+					 < <div class="row">
         <div class="col-md-6 col-sm-12">
             <div class="form-group">
-                <label for="name">Avatar</label>
+                <label for="image">Avatar</label>
                 <input type="file" name="image" id="image" accept=".jpg, .jpeg, .png" onchange="previewImage(event)" required>
                 <img id="imagePreview" src="#" alt="Image Preview" style="display: none; max-width: 300px; max-height: 300px;">
-
+            </div>
 <script>
 function previewImage(event) {
   const input = event.target;
@@ -106,24 +106,19 @@ function previewImage(event) {
 }
 </script>
 									
-			            </div>
-			          </div> 
+			            <!-- </div>
+			          </div>  -->
 
-					  <div class="col-md-6 col-sm-12">
-            <div class="form-group">
+					  <div class="form-group">
                 <label for="name">First Name:</label>
                 <input name="name" type="text" class="form-control" id="name" maxlength="16" onkeyup="capitalizeInput(this)" required>
             </div>
-        </div>
 
-        <div class="col-md-6 col-sm-12">
             <div class="form-group">
                 <label for="last">Last Name:</label>
                 <input name="last" type="text" class="form-control" id="last" maxlength="16" onkeyup="capitalizeInput(this)" required>
             </div>
-        </div>
 
-        <div class="col-md-6 col-sm-12">
             <div class="form-group">
                 <label for="gender">Gender:</label>
                 <select name="gender" class="form-control" id="gender" required>
@@ -132,30 +127,12 @@ function previewImage(event) {
                     <option value="Female">Female</option>
                 </select>
             </div>
-        </div>
 
-        <div class="col-md-6 col-sm-12">
-            <div class="form-group">
-                <label for="city">City:</label>
-                <input name="city" type="text" class="form-control" id="city" onkeyup="capitalizeInput(this)">
-            </div>
-        </div>
-
-        <div class="col-md-6 col-sm-12">
-            <div class="form-group">
-                <label for="address">Address:</label>
-                <input name="address" type="text" class="form-control" id="address" maxlength="50" onkeyup="capitalizeInput(this)">
-            </div>
-        </div>
-
-        <div class="col-md-6 col-sm-12">
             <div class="form-group">
                 <label for="dbirth">Date of Birth:</label>
                 <input type="date" name="dbirth" class="form-control" max="<?php echo date('Y-m-d', strtotime('-18 years')); ?>" required>
             </div>
-        </div>
 
-        <div class="col-md-6 col-sm-12">
             <div class="form-group">
                 <label for="phone">Phone:</label>
                 <input name="phone" type="tel" class="form-control" pattern="09\d{9}" id="phone" value="09" required oninput="this.value = this.value.replace(/\D/, ''); if(this.value.length > 11) this.value = this.value.slice(0, 11);">
@@ -164,48 +141,47 @@ function previewImage(event) {
 
         <div class="col-md-6 col-sm-12">
             <div class="form-group">
+                <label for="city">City:</label>
+                <input name="city" type="text" class="form-control" id="city" onkeyup="capitalizeInput(this)">
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <input name="address" type="text" class="form-control" id="address" maxlength="50" onkeyup="capitalizeInput(this)">
+            </div>
+
+            <div class="form-group">
                 <label for="nationality">Nationality:</label>
                 <input name="nationality" type="text" class="form-control" id="nationality" maxlength="17" onkeyup="capitalizeInput(this)">
             </div>
-        </div>
 
-        <div class="col-md-6 col-sm-12">
             <div class="form-group">
                 <label for="company">Company:</label>
                 <input name="company" type="text" class="form-control" id="company" required onkeyup="capitalizeInput(this)">
             </div>
-        </div>
 
-        <div class="col-md-6 col-sm-12">
             <div class="form-group">
                 <label for="caddress">Company Address:</label>
                 <input name="caddress" type="text" class="form-control" id="caddress" required onkeyup="capitalizeInput(this)">
             </div>
-        </div>
 
-        <div class="col-md-6 col-sm-12">
             <div class="form-group">
                 <label for="username">Email:</label>
                 <input name="username" type="email" class="form-control" id="username" placeholder="User@gmail.com">
             </div>
-        </div>
 
-        <div class="col-md-6 col-sm-12">
             <div class="form-group">
                 <label for="password">Password:</label>
                 <input name="pass" type="password" class="form-control" id="password" placeholder="Ex@mple123" required onkeyup="validatePassword()">
                 <span id="password-error" style="color: red;"></span>
             </div>
-        </div>
 
-        <div class="col-md-6 col-sm-12">
             <div class="form-group">
                 <label for="zip">Zip Code:</label>
                 <input name="zip" type="number" class="form-control" id="zip" minlength="4" maxlength="4" required>
             </div>
         </div>
     </div>
- 
 					 &nbsp; &nbsp;
 				 <div class="form-group">
 			        <div class="col-md-6">
