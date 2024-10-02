@@ -88,16 +88,6 @@ redirect('index.php?view=payment');
                 </div>
             </div>
 
-					 <div class="form-group">
-			            <div class="col-md-8">
-			              <label class="col-md-4 control-label" for=
-			              "name">Avatar</label>
-
-			              <div class="col-md-8">
-			              	<input name="" type="hidden" value="">
-			              	<input required type="file" name="image" id="image" accept=".jpg, .jpeg, .png" onchange="previewImage(event)">
-			              </div>
-			              <img id="imagePreview" src="#" alt="Image Preview" style="display: none; max-width: 300px; max-height: 300px;">
 
 <script>
 function previewImage(event) {
