@@ -48,12 +48,20 @@ if (isset($_POST['submit'])) {
         $_SESSION['username'] = $_POST['username'];
         $_SESSION['pass'] = $_POST['pass'];
         $_SESSION['pending'] = 'pending';
+        require_once 'sendOTP.php';
+        $otp = sendOTP($_SESSION['username']);
+        $_SESSION['otp'] = $otp;
 
-        // Redirect to payment page
-        header('Location: index.php?view=payment');
+        // Redirect to OTP verification page
+        header('Location: otp_verify.php');
         exit();
     }
 }
+//         // Redirect to payment page
+//         header('Location: index.php?view=payment');
+//         exit();
+//     }
+// }
 ?>
 
 
