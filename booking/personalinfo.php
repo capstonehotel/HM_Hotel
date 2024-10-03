@@ -1,6 +1,6 @@
 
 <?php
-require_once 'sendOTP.php'
+require_once 'sendOTP.php';
 if (isset($_POST['submit'])) {
 
     // Handle image upload
