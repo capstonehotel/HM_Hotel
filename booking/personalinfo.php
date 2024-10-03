@@ -206,7 +206,7 @@ if (isset($_POST['submit'])) {
 
       <div class="form-group">
     <label  class ="control-label" for="password">Password:</label>
-    <input name="pass" type="password" class="form-control input-sm" id="password"  required onkeyup="validatePassword()" placeholder="Ex@mple123">
+    <input name="pass" type="password" class="form-control input-sm" id="password"  required onkeyup="validatePassword(input)" placeholder="Ex@mple123">
     <span id="password-error" style="color: red;"></span>
 </div>
 
@@ -273,7 +273,7 @@ function validateDOB(input) {
 
 
 <script>
-function validatePassword() {
+function validatePassword(input) {
     var passwordInput = document.getElementById("password");
     var password = passwordInput.value;
     var passwordError = document.getElementById("password-error");
