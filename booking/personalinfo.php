@@ -173,7 +173,7 @@ redirect('index.php?view=payment');
       
       <div class="form-group">
         <label for="zip">Zip Code:</label>
-        <input name="zip" type="number" class="form-control" id="zip" maxlength="4" required>
+        <input name="zip" type="number" class="form-control" id="zip" maxlength="4" required oninput="this.value = this.value.replace(/\D/, ''); if(this.value.length > 10) this.value = this.value.slice(0, 10);">
       </div>
 	  
       <div class="form-group">
