@@ -452,6 +452,7 @@ $_SESSION['to']  = $_POST['to'];
 </main>
 <script src="https://mcchmhotelreservation.com/theme/assets/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 
  <script src="https://mcchmhotelreservation.com/jquery/jquery.min.js"></script>
         <!-- Bootstrap Core JavaScript -->
@@ -603,8 +604,8 @@ $_SESSION['to']  = $_POST['to'];
                     g == "" ||
                     h == "username" ||
                     h == "" ||
-                    j == "password" ||
-                    j == ""
+                    i == "password" ||
+                    i == ""
                 ) {
                     alert("all field are required!");
                     return false;
