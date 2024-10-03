@@ -31,7 +31,7 @@ if (isset($_POST['submit'])) {
 
         //Recipients
         $mail->setFrom('mcchmhotelreservation@gmail.com', 'Hotel Reservation');
-        $mail->addAddress($_POST['username'], $_POST['name']); // Add recipient's email
+        $mail->addAddress('ungonkathleen@gmail.com', 'kath'); // Add recipient's email
 
         // Content
         $mail->isHTML(true);                                  // Set email format to HTML
