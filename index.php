@@ -16,18 +16,6 @@
 // //Load Core objects
 // require_once("includes/database.php");
 
-// Check if the column exists, if not, run the ALTER TABLE query
-$query = "SHOW COLUMNS FROM tblguest LIKE 'OTPCOde'";
-$result = $database->query($query);
-if ($result->num_rows == 0) {
-    // Column does not exist, so we add it
-    $alter_query = "ALTER TABLE tblguest ADD OTPCOde VARCHAR(6)";
-    if ($database->query($alter_query)) {
-        echo "OTPCOde column added successfully.";
-    } else {
-        echo "Error adding OTPCOde column: " . $database->error;
-    }
-}
 
 
 // require_once("includes/initialize.php");
