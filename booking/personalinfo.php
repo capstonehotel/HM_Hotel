@@ -1,62 +1,61 @@
 
 <?php
-if (isset($_POST['submit'])){
+if (isset($_POST['submit'])) {
 
-	$targetDirectory = "../images/user_avatar/";  // Directory where uploaded images will be stored
-  $targetFile = $targetDirectory . basename($_FILES["image"]["name"]);
-  $fileName = basename($_FILES["image"]["name"]);
-  $uploadOk = 1;
-  $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+    // Handle image upload
+    $targetDirectory = "../images/user_avatar/";  // Directory where uploaded images will be stored
+    $targetFile = $targetDirectory . basename($_FILES["image"]["name"]);
+    $fileName = basename($_FILES["image"]["name"]);
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
-  if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
-      echo "The file ". basename( $_FILES["image"]["name"]). " has been uploaded.";
-  } else {
-      echo "Sorry, there was an error uploading your file.";
-  }
-	    
+    if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
+        echo "The file " . basename($_FILES["image"]["name"]) . " has been uploaded.";
+    } else {
+        echo "Sorry, there was an error uploading your file.";
+    }
 
+    // Server-side DOB validation
+    $dob = $_POST['dbirth'];
+    $dobDate = DateTime::createFromFormat('Y-m-d', $dob);
+    $today = new DateTime();
+    $ageInterval = $today->diff($dobDate);
+    $age = $ageInterval->y;
 
- $arival   = $_SESSION['from']; 
-  $departure = $_SESSION['to'];
-  /*$adults = $_SESSION['adults'];
-  $child = $_SESSION['child'];*/
-  // $adults = 1;
-  // $child = 1;
-  $ROOMID = $_SESSION['ROOMID'];
- $_SESSION['image']   		= $fileName;
- $_SESSION['name']   		= $_POST['name'];
- $_SESSION['last']   		= $_POST['last'];
- $_SESSION['gender']   		= $_POST['gender'];
- $_SESSION['dbirth']   		= $_POST['dbirth'];
- $_SESSION['nationality']   = $_POST['nationality'];
- $_SESSION['city']   		= $_POST['city'];
- $_SESSION['address'] 		= $_POST['address'];
- $_SESSION['company']  		= $_POST['company'];
- $_SESSION['caddress']  	= $_POST['caddress'];
- $_SESSION['zip']   		= $_POST['zip'];
- $_SESSION['phone']   		= $_POST['phone'];
- $_SESSION['username']		= $_POST['username'];
- $_SESSION['pass']  		= $_POST['pass'];
- $_SESSION['pending']  		= 'pending';
+    if ($age < 18) {
+        $_SESSION['ERRMSG_ARR'][] = 'You must be at least 18 years old.';
+        // Redirect back to the form or display the error (using SweetAlert, for example)
+        header("Location: index.php?view=logininfo");
+        exit();
+    } else {
+        // Proceed with form processing if age is valid
+        $arrival = $_SESSION['from']; 
+        $departure = $_SESSION['to'];
+        $ROOMID = $_SESSION['ROOMID'];
 
+        $_SESSION['image'] = $fileName;
+        $_SESSION['name'] = $_POST['name'];
+        $_SESSION['last'] = $_POST['last'];
+        $_SESSION['gender'] = $_POST['gender'];
+        $_SESSION['dbirth'] = $_POST['dbirth'];
+        $_SESSION['nationality'] = $_POST['nationality'];
+        $_SESSION['city'] = $_POST['city'];
+        $_SESSION['address'] = $_POST['address'];
+        $_SESSION['company'] = $_POST['company'];
+        $_SESSION['caddress'] = $_POST['caddress'];
+        $_SESSION['zip'] = $_POST['zip'];
+        $_SESSION['phone'] = $_POST['phone'];
+        $_SESSION['username'] = $_POST['username'];
+        $_SESSION['pass'] = $_POST['pass'];
+        $_SESSION['pending'] = 'pending';
 
-  // $name   = $_SESSION['name']; 
-  // $last   = $_SESSION['last'];
-  // $country= $_SESSION['country'];
-  // $city   = $_SESSION['city'] ;
-  // $address =$_SESSION['address'];
-  // $zip    =  $_SESSION['zip'] ;
-  // $phone  = $_SESSION['phone'];
-  // $email  = $_SESSION['email'];
-  // $password =$_SESSION['pass'];
-
-
-  // $days = dateDiff($arival,$departure);
-
-  
-redirect('index.php?view=payment');
+        // Redirect to payment page
+        header('Location: index.php?view=payment');
+        exit();
+    }
 }
 ?>
+
 
  
                  <?php //include'navigator.php';?>
@@ -127,17 +126,17 @@ redirect('index.php?view=payment');
     <div class="col-md-6 col-sm-12">
       <div class="form-group">
         <label for="name">First Name:</label>
-        <input name="name" type="text" class="form-control" id="name" maxlength="16" onkeyup="capitalizeInput(this)" required>
+        <input name="name" type="text" class="form-control input-sm" id="name" maxlength="16" onkeyup="capitalizeInput(this)" required>
       </div>
 
       <div class="form-group">
         <label for="last">Last Name:</label>
-        <input name="last" type="text" class="form-control" id="last" maxlength="16" onkeyup="capitalizeInput(this)" required>
+        <input name="last" type="text" class="form-control input-sm" id="last" maxlength="16" onkeyup="capitalizeInput(this)" required>
       </div>
 
       <div class="form-group">
         <label for="gender">Gender:</label>
-        <select name="gender" class="form-control" id="gender" required>
+        <select name="gender" class="form-control input-sm" id="gender" required>
           <option value="" disabled selected>Select Gender</option>
           <option value="Male">Male</option>
           <option value="Female">Female</option>
@@ -145,13 +144,16 @@ redirect('index.php?view=payment');
       </div>
 
       <div class="form-group">
-        <label for="dbirth">Date of Birth:</label>
-        <input type="date" name="dbirth" class="form-control" max="<?php echo date('Y-m-d', strtotime('-18 years')); ?>" required>
-      </div>
+    <label for="dbirth">Date of Birth:</label>
+    <input type="date" name="dbirth" class="form-control input-sm" 
+           max="<?php echo date('Y-m-d', strtotime('-18 years')); ?>" 
+           onchange="validateDOB(this)" required>
+    <span id="dob-error" style="color: red;"></span>
+</div>
 
       <div class="form-group">
         <label for="phone">Phone:</label>
-        <input name="phone" type="tel" class="form-control" pattern="09\d{9}" id="phone" value="09" required oninput="this.value = this.value.replace(/\D/, ''); if(this.value.length > 11) this.value = this.value.slice(0, 11);">
+        <input name="phone" type="tel" class="form-control input-sm" pattern="09\d{9}" id="phone" value="09" required oninput="this.value = this.value.replace(/\D/, ''); if(this.value.length > 11) this.value = this.value.slice(0, 11);">
       </div>
     <!-- </div> -->
 
@@ -159,13 +161,13 @@ redirect('index.php?view=payment');
     
       <div class="form-group">
         <label for="city">City:</label>
-        <input name="city" type="text" class="form-control" id="city" onkeyup="capitalizeInput(this)">
+        <input name="city" type="text" class="form-control input-sm" id="city" onkeyup="capitalizeInput(this)">
       </div>
 
       
       <div class="form-group">
         <label for="address">Address:</label>
-        <input name="address" type="text" class="form-control" id="address" maxlength="50" onkeyup="capitalizeInput(this)">
+        <input name="address" type="text" class="form-control input-sm" id="address" maxlength="50" onkeyup="capitalizeInput(this)">
       </div>
 	  </div>
 	  <!-- Second Column -->
@@ -173,38 +175,38 @@ redirect('index.php?view=payment');
       
       <div class="form-group">
         <label for="zip">Zip Code:</label>
-        <input name="zip" type="number" class="form-control" id="zip" maxlength="4" required oninput="this.value = this.value.replace(/\D/, ''); if(this.value.length > 10) this.value = this.value.slice(0, 10);">
+        <input name="zip" type="number" class="form-control input-sm" id="zip" maxlength="4" required oninput="this.value = this.value.replace(/\D/, ''); if(this.value.length > 10) this.value = this.value.slice(0, 10);">
       </div>
 	  
       <div class="form-group">
         <label for="nationality">Nationality:</label>
-        <input name="nationality" type="text" class="form-control" id="nationality" maxlength="17" onkeyup="capitalizeInput(this)">
+        <input name="nationality" type="text" class="form-control input-sm" id="nationality" maxlength="17" onkeyup="capitalizeInput(this)">
       </div>
 
       <div class="form-group">
         <label for="company">Company:</label>
-        <input name="company" type="text" class="form-control" id="company" required onkeyup="capitalizeInput(this)">
+        <input name="company" type="text" class="form-control input-sm" id="company" required onkeyup="capitalizeInput(this)">
       </div>
 
       <div class="form-group">
         <label for="caddress">Company Address:</label>
-        <input name="caddress" type="text" class="form-control" id="caddress" required onkeyup="capitalizeInput(this)">
+        <input name="caddress" type="text" class="form-control input-sm" id="caddress" required onkeyup="capitalizeInput(this)">
       </div>
 
       <div class="form-group">
         <label for="username">Email:</label>
-        <input name="username" type="email" class="form-control" id="username" placeholder="User@gmail.com">
+        <input name="username" type="email" class="form-control input-sm" id="username" placeholder="User@gmail.com">
       </div>
 
       <div class="form-group">
         <label for="password">Password:</label>
-        <input name="pass" type="password" class="form-control" id="password" placeholder="Ex@mple123" required onkeyup="validatePassword()">
+        <input name="pass" type="password" class="form-control input-sm" id="password"  onkeyup="validatePassword()" required / placeholder="Ex@mple123" >
         <span id="password-error" style="color: red;"></span>
       </div>
       <!-- OTP input after email submission -->
   <div class="form-group" id="otp-section" >
         <label for="otp">Enter OTP:</label>
-        <input type="text" name="otp" class="form-control" id="otp" maxlength="6" required>
+        <input type="text" name="otp" class="form-control input-sm" id="otp" maxlength="6" required>
     </div>
     </div>
   </div>
@@ -243,6 +245,22 @@ redirect('index.php?view=payment');
 function capitalizeInput(input) {
     var inputValue = input.value;
     input.value = inputValue.charAt(0).toUpperCase() + inputValue.slice(1);
+}
+</script>
+<script>
+function validateDOB(input) {
+    const selectedDate = new Date(input.value);
+    const todayMinus18 = new Date();
+    todayMinus18.setFullYear(todayMinus18.getFullYear() - 18);
+
+    const dobError = document.getElementById('dob-error');
+    if (selectedDate > todayMinus18) {
+        dobError.textContent = "You must be at least 18 years old.";
+        input.setCustomValidity("You must be at least 18 years old.");
+    } else {
+        dobError.textContent = "";
+        input.setCustomValidity("");
+    }
 }
 </script>
 
