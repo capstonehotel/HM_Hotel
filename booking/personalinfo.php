@@ -202,10 +202,10 @@ redirect('index.php?view=payment');
         <span id="password-error" style="color: red;"></span>
       </div>
       <!-- OTP input after email submission -->
-  <!-- <div class="form-group" id="otp-section" style="display: none;">
+  <div class="form-group" id="otp-section" style="display: none;">
         <label for="otp">Enter OTP:</label>
         <input type="text" name="otp" class="form-control" id="otp" maxlength="6" required>
-    </div> -->
+    </div>
     </div>
   </div>
  
@@ -274,6 +274,28 @@ function validatePassword() {
     }
 }
 </script>
+<?php
+
+
+if (isset($_POST['verify_otp'])) {
+    $user_otp = $_POST['otp'];
+
+    if ($user_otp == $_SESSION['otp']) {
+        echo "OTP verified successfully!";
+        // Proceed to next step, e.g., form submission confirmation
+    } else {
+        echo "Incorrect OTP. Please try again.";
+    }
+}
+?>
+
+<!-- Simple OTP Form -->
+<form method="post" action="">
+    <label for="otp">Enter OTP:</label>
+    <input type="text" name="otp" maxlength="6" required>
+    <button type="submit" name="verify_otp">Verify OTP</button>
+</form>
+
 
 			
  
