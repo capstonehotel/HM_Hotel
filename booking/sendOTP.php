@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-use ..\PHPMailer\PHPMailer\PHPMailer;
-use ..\PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 // require 'vendor/autoload.php'; // Ensure PHPMailer is installed
 
@@ -36,13 +36,13 @@ if (isset($_POST['submit'])) {
         // Content
         $mail->isHTML(true);                                  // Set email format to HTML
         $mail->Subject = 'Your OTP for Hotel Reservation';
-        $mail->Body    = "Hello {$_POST['name']},<br><br>Your OTP is: <b>{$otp}</b><br><br>Please enter this OTP to proceed.";
+        $mail->Body    = "Hello kath,<br><br>Your OTP is: <b>1233</b><br><br>Please enter this OTP to proceed.";
 
         $mail->send();
         echo 'OTP has been sent to your email.';
 
         // Redirect to the OTP input page (or update front-end accordingly)
-        header("Location: otp_verify.php");
+        //header("Location: otp_verify.php");
 
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
