@@ -4,7 +4,7 @@ if ($_POST['otp'] == $_SESSION['otp']) {
     // Further actions like account creation, login, etc.
     echo "OTP verified for user: " . $_SESSION['username'];
     // Redirect to the next page
-    header('Location: next_page.php');
+    header('Location: index.php?view=payment');
     exit();
 } else {
     echo "Invalid OTP. Please try again.";
@@ -12,11 +12,11 @@ if ($_POST['otp'] == $_SESSION['otp']) {
 ?>
 
 <!-- Simple OTP Form -->
-<form method="post" action="" id="otp-form">
+<!-- <form method="post" action="" id="otp-form">
     <label for="otp">Enter OTP:</label>
     <input type="text" name="otp" maxlength="6" required>
     <button type="submit" name="verify_otp">Verify OTP</button>
-</form>
+</form> -->
 
 <!-- Modal for OTP Verification -->
 <div class="modal fade" id="otp-modal" tabindex="-1" role="dialog" aria-labelledby="otp-modal-label" aria-hidden="true">
