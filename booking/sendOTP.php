@@ -5,7 +5,10 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 // require 'vendor/autoload.php'; // Ensure PHPMailer is installed
-
+// Include PHPMailer files
+require '../PHPMailer/src/Exception.php';
+require '../PHPMailer/src/PHPMailer.php';
+require '../PHPMailer/src/SMTP.php';
 
     $mail = new PHPMailer(true);
 
