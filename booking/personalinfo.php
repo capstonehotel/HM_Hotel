@@ -1,5 +1,6 @@
 
 <?php
+// require_once 'sendOTP.php'
 if (isset($_POST['submit'])){
 
 	$targetDirectory = "../images/user_avatar/";  // Directory where uploaded images will be stored
@@ -311,10 +312,11 @@ function validatePassword() {
     var hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password);
     var hasNumber = /\d/.test(password);
     var hasCapital = /[A-Z]/.test(password);
+    var hasWhitespace = /\s/.test(password);
     
-    if (password.length < 8) {
-        passwordError.textContent = "Password must be at least 8 characters long.";
-        passwordInput.setCustomValidity("Password must be at least 8 characters long.");
+    if (hasWhitespace) {
+        passwordError.textContent = "Password must not contain any whitespace characters.";
+        passwordInput.setCustomValidity("Password must not contain any whitespace characters.");
     } else if (!hasSpecialChar) {
         passwordError.textContent = "Password must contain at least one special character.";
         passwordInput.setCustomValidity("Password must contain at least one special character.");
@@ -324,6 +326,9 @@ function validatePassword() {
     } else if (!hasCapital) {
         passwordError.textContent = "Password must contain at least one capital letter.";
         passwordInput.setCustomValidity("Password must contain at least one capital letter.");
+    } else if (password.length < 8) {
+        passwordError.textContent = "Password must be at least 8 characters long.";
+        passwordInput.setCustomValidity("Password must be at least 8 characters long.");
     } else {
         passwordError.textContent = "";
         passwordInput.setCustomValidity("");
