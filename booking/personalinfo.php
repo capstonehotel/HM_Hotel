@@ -120,7 +120,7 @@ redirect('index.php?view=payment');
 									
 			            </div>
 			          </div> 
-
+<br>
 					 <!-- Form Fields in Two Columns -->
   <div class="row">
     <!-- First Column -->
@@ -168,6 +168,7 @@ redirect('index.php?view=payment');
         <input name="address" type="text" class="form-control" id="address" maxlength="50" onkeyup="capitalizeInput(this)">
       </div>
 	  </div>
+	  <!-- Second Column -->
 	  <div class="col-md-6 col-sm-12">
       
       <div class="form-group">
