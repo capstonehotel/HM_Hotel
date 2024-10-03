@@ -24,9 +24,7 @@ if (isset($_POST['submit'])) {
 
     if ($age < 18) {
         $_SESSION['ERRMSG_ARR'][] = 'You must be at least 18 years old.';
-        // Redirect back to the form or display the error (using SweetAlert, for example)
-        header("Location: index.php?view=logininfo");
-        exit();
+        
     } else {
         // Proceed with form processing if age is valid
         $arrival = $_SESSION['from']; 
