@@ -120,7 +120,7 @@ redirect('index.php?view=payment');
 									
 			            <!-- </div>
 			          </div>  -->
-
+					  <div class="row">
 					  <div class="form-group">
                 <label for="name">First Name:</label>
                 <input name="name" type="text" class="form-control" id="name" maxlength="16" onkeyup="capitalizeInput(this)" required>
