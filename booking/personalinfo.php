@@ -199,10 +199,11 @@ if (isset($_POST['submit'])) {
       </div>
 
       <div class="form-group">
-        <label for="password">Password:</label>
-        <input name="pass" type="password" class="form-control input-sm" id="password"  onkeyup="validatePassword()" required / placeholder="Ex@mple123" >
-        <span id="password-error" style="color: red;"></span>
-      </div>
+    <label for="password">Password:</label>
+    <input name="pass" type="password" class="form-control input-sm" id="password" onkeyup="validatePassword()" required placeholder="Ex@mple123">
+    <span id="password-error" style="color: red;"></span>
+</div>
+
       <!-- OTP input after email submission -->
   <div class="form-group" id="otp-section" >
         <label for="otp">Enter OTP:</label>
@@ -273,23 +274,24 @@ function validatePassword() {
     var hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password);
     var hasNumber = /\d/.test(password);
     var hasCapital = /[A-Z]/.test(password);
-    
-    if (password.length < 8) {
+    var isValidLength = password.length >= 8; // Check for minimum length
+
+    // Reset error message
+    passwordError.textContent = "";
+
+    // Validate password according to all criteria
+    if (!isValidLength) {
         passwordError.textContent = "Password must be at least 8 characters long.";
-        passwordInput.setCustomValidity("Password must be at least 8 characters long.");
-    } else if (!hasSpecialChar) {
-        passwordError.textContent = "Password must contain at least one special character.";
-        passwordInput.setCustomValidity("Password must contain at least one special character.");
-    } else if (!hasNumber) {
-        passwordError.textContent = "Password must contain at least one number.";
-        passwordInput.setCustomValidity("Password must contain at least one number.");
     } else if (!hasCapital) {
         passwordError.textContent = "Password must contain at least one capital letter.";
-        passwordInput.setCustomValidity("Password must contain at least one capital letter.");
-    } else {
-        passwordError.textContent = "";
-        passwordInput.setCustomValidity("");
+    } else if (!hasSpecialChar) {
+        passwordError.textContent = "Password must contain at least one special character.";
+    } else if (!hasNumber) {
+        passwordError.textContent = "Password must contain at least one number.";
     }
+
+    // Set custom validity based on the current validation
+    passwordInput.setCustomValidity(passwordError.textContent ? passwordError.textContent : "");
 }
 </script>
 
