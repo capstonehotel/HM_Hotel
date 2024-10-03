@@ -277,29 +277,42 @@ function validatePassword() {
     var passwordInput = document.getElementById("password");
     var password = passwordInput.value;
     var passwordError = document.getElementById("password-error");
-    
+
+    // Regex patterns to check for different password requirements
     var hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password);
     var hasNumber = /\d/.test(password);
     var hasCapital = /[A-Z]/.test(password);
     
+    // Build the error message dynamically based on the missing criteria
+    var errorMessage = [];
+
     if (password.length < 8) {
-        passwordError.textContent = "Password must be at least 8 characters long.";
-        passwordInput.setCustomValidity("Password must be at least 8 characters long.");
-    } else if (!hasCapital) {
-        passwordError.textContent = "Password must contain at least one capital letter.";
-        passwordInput.setCustomValidity("Password must contain at least one capital letter.");
-    } else if (!hasSpecialChar) {
-        passwordError.textContent = "Password must contain at least one special character.";
-        passwordInput.setCustomValidity("Password must contain at least one special character.");
-    } else if (!hasNumber) {
-        passwordError.textContent = "Password must contain at least one number.";
-        passwordInput.setCustomValidity("Password must contain at least one number.");
+        errorMessage.push("Password must be at least 8 characters long.");
+    }
+    if (!hasCapital) {
+        errorMessage.push("Password must contain at least one capital letter.");
+    }
+    if (!hasSpecialChar) {
+        errorMessage.push("Password must contain at least one special character.");
+    }
+    if (!hasNumber) {
+        errorMessage.push("Password must contain at least one number.");
+    }
+
+    // If there are any errors, display them and set custom validity, otherwise clear the error
+    if (errorMessage.length > 0) {
+        passwordError.innerHTML = errorMessage.join("<br>"); // Display errors with line breaks
+        passwordInput.setCustomValidity("Invalid password"); // Set custom validity so form doesn't submit
     } else {
-        passwordError.textContent = ""; // Clear error message
+        passwordError.innerHTML = ""; // Clear error messages
         passwordInput.setCustomValidity(""); // Clear custom validity
     }
 }
+
+// Attach the `input` event to validate password in real-time as the user types
+document.getElementById('password').addEventListener('input', validatePassword);
 </script>
+
 
 
 			
