@@ -277,43 +277,29 @@ function validatePassword() {
     var passwordInput = document.getElementById("password");
     var password = passwordInput.value;
     var passwordError = document.getElementById("password-error");
-
-    // Regex patterns to check for different password requirements
+    
     var hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password);
     var hasNumber = /\d/.test(password);
     var hasCapital = /[A-Z]/.test(password);
     
-    // Clear the error message array
-    var errorMessage = [];
-
-    // Check each requirement and push specific messages if the requirement is not met
     if (password.length < 8) {
-        errorMessage.push("Password must be at least 8 characters long.");
-    }
-    if (!hasCapital) {
-        errorMessage.push("Password must contain at least one capital letter.");
-    }
-    if (!hasSpecialChar) {
-        errorMessage.push("Password must contain at least one special character.");
-    }
-    if (!hasNumber) {
-        errorMessage.push("Password must contain at least one number.");
-    }
-
-    // Display the error messages or clear them if all requirements are met
-    if (errorMessage.length > 0) {
-        passwordError.innerHTML = errorMessage.join("<br>"); // Display errors with line breaks
-        passwordInput.setCustomValidity("Invalid password"); // Prevent form submission
+        passwordError.textContent = "Password must be at least 8 characters long.";
+        passwordInput.setCustomValidity("Password must be at least 8 characters long.");
+    } else if (!hasCapital) {
+        passwordError.textContent = "Password must contain at least one capital letter.";
+        passwordInput.setCustomValidity("Password must contain at least one capital letter.");
+    } else if (!hasSpecialChar) {
+        passwordError.textContent = "Password must contain at least one special character.";
+        passwordInput.setCustomValidity("Password must contain at least one special character.");
+    } else if (!hasNumber) {
+        passwordError.textContent = "Password must contain at least one number.";
+        passwordInput.setCustomValidity("Password must contain at least one number.");
     } else {
-        passwordError.innerHTML = ""; // Clear error messages when all conditions are met
-        passwordInput.setCustomValidity(""); // Allow form submission
+        passwordError.textContent = ""; // Clear error message
+        passwordInput.setCustomValidity(""); // Clear custom validity
     }
 }
-
-// Attach the `input` event to validate the password in real-time as the user types
-document.getElementById('password').addEventListener('input', validatePassword);
 </script>
-
 
 
 			
