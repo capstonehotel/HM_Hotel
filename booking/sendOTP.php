@@ -6,17 +6,7 @@ use PHPMailer\PHPMailer\Exception;
 
 // require 'vendor/autoload.php'; // Ensure PHPMailer is installed
 
-if (isset($_POST['submit'])) {
-    // Store form data in session
-    $_SESSION['name'] = $_POST['name'];
-    $_SESSION['last'] = $_POST['last'];
-    $_SESSION['email'] = $_POST['username'];
 
-    // Generate OTP
-    $otp = rand(100000, 999999);
-    $_SESSION['otp'] = $otp; // Store OTP in session
-
-    // Send OTP via PHPMailer
     $mail = new PHPMailer(true);
 
     try {
@@ -47,5 +37,5 @@ if (isset($_POST['submit'])) {
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
-}
+
 ?>
