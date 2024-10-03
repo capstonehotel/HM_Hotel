@@ -202,7 +202,7 @@ redirect('index.php?view=payment');
         <span id="password-error" style="color: red;"></span>
       </div>
       <!-- OTP input after email submission -->
-  <div class="form-group" id="otp-section" style="display: none;">
+  <div class="form-group" id="otp-section" >
         <label for="otp">Enter OTP:</label>
         <input type="text" name="otp" class="form-control" id="otp" maxlength="6" required>
     </div>
@@ -290,11 +290,11 @@ if (isset($_POST['verify_otp'])) {
 ?>
 
 <!-- Simple OTP Form -->
-<form method="post" action="">
+<!-- <form method="post" action="">
     <label for="otp">Enter OTP:</label>
     <input type="text" name="otp" maxlength="6" required>
     <button type="submit" name="verify_otp">Verify OTP</button>
-</form>
+</form> -->
 
 
 			
