@@ -79,7 +79,7 @@ redirect('index.php?view=payment');
 					 <h2>Personal Details</h2> 
 
 					 <div class="row">
-    <div class="col-md-12 text-center">
+    <div class="col-md-6">
       <div class="form-group">
         <label for="image">Avatar</label>
         <input type="file" name="image" id="image" accept=".jpg, .jpeg, .png" onchange="previewImage(event)" required>
@@ -161,13 +161,13 @@ redirect('index.php?view=payment');
         <label for="city">City:</label>
         <input name="city" type="text" class="form-control" id="city" onkeyup="capitalizeInput(this)">
       </div>
-
+	  <div class="col-md-6 col-sm-12">
+      <div class="form-group">
       <div class="form-group">
         <label for="address">Address:</label>
         <input name="address" type="text" class="form-control" id="address" maxlength="50" onkeyup="capitalizeInput(this)">
       </div>
-	  </div>
-	  <div class="col-md-6 col-sm-12">
+	  
       <div class="form-group">
         <label for="zip">Zip Code:</label>
         <input name="zip" type="number" class="form-control" id="zip" minlength="4" maxlength="4" required>
