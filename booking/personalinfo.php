@@ -209,14 +209,12 @@ redirect('index.php?view=payment');
         <input type="text" name="otp" class="form-control" id="otp" maxlength="6" required>
     </div>
 
-    <div class="col-md-4">
-        <input name="submit" type="submit" value="Confirm" class="btn btn-primary" id="confirm-btn"/>
-    </div>
+    
 
     <p id="email-msg" style="color: green; display: none;">An OTP has been sent to your email. Please check your inbox.</p>
 
 
-    
+
 					 &nbsp; &nbsp;
 				 <div class="form-group">
 			        <div class="col-md-6">
@@ -228,7 +226,7 @@ redirect('index.php?view=payment');
 						<!-- <img src="captcha_code_file.php?rand=<?php echo rand(); ?>" id='captchaimg' ><a href='javascript: refreshCaptcha();'><img src="<?php echo WEB_ROOT;?>images/refresh.png" alt="refresh" border="0" style="margin-top:5px; margin-left:5px;" /></a>
 						<br /><small>If you are a Human Enter the code above here :</small><input id="6_letters_code" name="6_letters_code" type="text" class="form-control input-sm" width="20"></p><br/>
 					 -->	<div class="col-md-4">
-					    	<input name="submit" type="submit" value="Confirm"  class="btn btn-primary" onclick="return personalInfo();"/>
+					    	<input name="submit" type="submit" value="Confirm" id="confirm-btn" class="btn btn-primary" onclick="return personalInfo();"/>
 					    </div>
 					</div>
 					NOTE: 
