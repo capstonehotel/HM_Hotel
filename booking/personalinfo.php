@@ -173,7 +173,7 @@ redirect('index.php?view=payment');
       
       <div class="form-group">
         <label for="zip">Zip Code:</label>
-        <input name="zip" type="number" class="form-control" id="zip" minlength="4" maxlength="4" required>
+        <input name="zip" type="number" class="form-control" id="zip" maxlength="4" required>
       </div>
 	  
       <div class="form-group">
