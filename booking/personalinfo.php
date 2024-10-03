@@ -201,7 +201,7 @@ if (isset($_POST['submit'])) {
 
       <div class="form-group">
         <label  class ="control-label" for="username">Email:</label>
-        <input name="username" type="email" class="form-control input-sm" id="username" placeholder="User@gmail.com">
+        <input name="username" type="email" class="form-control input-sm" id="username" required / placeholder="User@gmail.com">
       </div>
 
       <div class="form-group">
