@@ -161,6 +161,7 @@ redirect('index.php?view=payment');
         <label for="city">City:</label>
         <input name="city" type="text" class="form-control" id="city" onkeyup="capitalizeInput(this)">
       </div>
+</div>
 	  <div class="col-md-6 col-sm-12">
       
       <div class="form-group">
