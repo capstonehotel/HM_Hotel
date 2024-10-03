@@ -203,6 +203,20 @@ redirect('index.php?view=payment');
       </div>
     </div>
   </div>
+  <!-- OTP input after email submission -->
+  <div class="form-group" id="otp-section" style="display: none;">
+        <label for="otp">Enter OTP:</label>
+        <input type="text" name="otp" class="form-control" id="otp" maxlength="6" required>
+    </div>
+
+    <div class="col-md-4">
+        <input name="submit" type="submit" value="Confirm" class="btn btn-primary" id="confirm-btn"/>
+    </div>
+
+    <p id="email-msg" style="color: green; display: none;">An OTP has been sent to your email. Please check your inbox.</p>
+
+
+    
 					 &nbsp; &nbsp;
 				 <div class="form-group">
 			        <div class="col-md-6">
