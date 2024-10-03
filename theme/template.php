@@ -569,12 +569,15 @@ $_SESSION['to']  = $_POST['to'];
     var g = document.forms["personal"]["phone"].value;
     var h = document.forms["personal"]["username"].value;
     var i = document.forms["personal"]["password"].value;
-    validatePassword();
-
-    // Check if the password is valid
+    
     var passwordError = document.getElementById("password-error");
     if (passwordError.textContent !== "") {
         // Password is not valid, prevent form from submitting
+        Swal.fire({
+            icon: 'error',
+            title: 'Password Error',
+            text: 'Password does not meet the requirements.',
+        });
         return false;
     }
     if (document.personal.condition.checked == false) {
