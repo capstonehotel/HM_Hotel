@@ -79,7 +79,7 @@ redirect('index.php?view=payment');
 					 <h2>Personal Details</h2> 
 
 					 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 text-center">
       <div class="form-group">
         <label for="image">Avatar</label>
         <input type="file" name="image" id="image" accept=".jpg, .jpeg, .png" onchange="previewImage(event)" required>
