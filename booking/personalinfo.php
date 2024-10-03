@@ -202,10 +202,10 @@ redirect('index.php?view=payment');
         <span id="password-error" style="color: red;"></span>
       </div>
       <!-- OTP input after email submission -->
-  <div class="form-group" id="otp-section" style="display: none;">
+  <!-- <div class="form-group" id="otp-section" style="display: none;">
         <label for="otp">Enter OTP:</label>
         <input type="text" name="otp" class="form-control" id="otp" maxlength="6" required>
-    </div>
+    </div> -->
     </div>
   </div>
  
