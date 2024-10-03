@@ -555,125 +555,72 @@ $_SESSION['to']  = $_POST['to'];
         forceParse: 0,
     });
 });
-//Validates Personal Info
-function personalInfo() {
-                var a = document.forms["personal"]["name"].value;
-                var b = document.forms["personal"]["last"].value;
-               var b1 = document.forms["personal"]["gender"].value; 
-                var c = document.forms["personal"]["city"].value;
-                var d = document.forms["personal"]["address"].value;
-                var e = document.forms["personal"]["dbirth"].value;
-                var f = document.forms["personal"]["zip"].value;
-                var g = document.forms["personal"]["phone"].value;
-                var h = document.forms["personal"]["username"].value;
-                var i = document.forms["personal"]["password"].value;
 
-                // var atpos=f.indexOf("@");
-                // var dotpos=f.lastIndexOf(".");
-                // if (atpos<1 || dotpos<atpos+2 || dotpos+2>=f.length)
-                //   {
-                //   alert("Not a valid e-mail address");
-                //   return false;
-                //   }
-                // if( f != g ) {
-                // alert("email does not match");
-                //   return false;
-                // }
-                if (document.personal.condition.checked == false) {
-                    alert("pls. agree the term and condition of this hotel");
-                    return false;
-                }
-                if (
-                    a == "Firstname" ||
-                    a == "" ||
-                    b == "lastname" ||
-                    b == "" ||
-                   b1 == "gender" ||
-                    b1 == "" ||
-                    c == "City" ||
-                    c == "" ||
-                    d == "address" ||
-                    d == "" ||
-                    e == "dateofbirth" ||
-                    e == "" ||
-                    f == "Zip" ||
-                    f == "" ||
-                    g == "Phone" ||
-                    g == "" ||
-                    h == "username" ||
-                    h == "" ||
-                    j == "password" ||
-                    j == ""
-                ) {
-                    alert("all field are required!");
-                    return false;
-                }
-              }
 
-//             //Validates Personal Info
-//             function personalInfo() {
-//     var a = document.forms["personal"]["name"].value;
-//     var b = document.forms["personal"]["last"].value;
-//     var b1 = document.forms["personal"]["gender"].value; 
-//     var c = document.forms["personal"]["city"].value;
-//     var d = document.forms["personal"]["address"].value;
-//     var e = document.forms["personal"]["dbirth"].value;
-//     var f = document.forms["personal"]["zip"].value;
-//     var g = document.forms["personal"]["phone"].value;
-//     var h = document.forms["personal"]["username"].value;
-//     var i = document.forms["personal"]["password"].value;
+            //Validates Personal Info
+            function personalInfo() {
+    var a = document.forms["personal"]["name"].value;
+    var b = document.forms["personal"]["last"].value;
+    var b1 = document.forms["personal"]["gender"].value; 
+    var c = document.forms["personal"]["city"].value;
+    var d = document.forms["personal"]["address"].value;
+    var e = document.forms["personal"]["dbirth"].value;
+    var f = document.forms["personal"]["zip"].value;
+    var g = document.forms["personal"]["phone"].value;
+    var h = document.forms["personal"]["username"].value;
+    var i = document.forms["personal"]["password"].value;
     
-//     var passwordError = document.getElementById("password-error");
-//     if (passwordError.textContent !== "") {
-//         // Password is not valid, prevent form from submitting
-//         Swal.fire({
-//             icon: 'error',
-//             title: 'Password Error',
-//             text: 'Password does not meet the requirements.',
-//         });
-//         return false;
-//     }
-//     if (document.personal.condition.checked == false) {
-//         Swal.fire({
-//             icon: 'error',
-//             title: 'Terms & Conditions',
-//             text: 'Please agree to the terms and conditions of this hotel.',
-//         });
-//         return false;
-//     }
+    var passwordError = document.getElementById("password-error");
+    if (passwordError.textContent !== "") {
+        // Password is not valid, prevent form from submitting
+        Swal.fire({
+            icon: 'error',
+            title: 'Password Error',
+            text: 'Password does not meet the requirements.',
+        });
+        return false;
+    }
+    if (document.personal.condition.checked == false) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Terms & Conditions',
+            text: 'Please agree to the terms and conditions of this hotel.',
+        });
+        return false;
+    }
 
-//     if (
-//         a == "Firstname" ||
-//         a == "" ||
-//         b == "lastname" ||
-//         b == "" ||
-//         b1 == "gender" ||
-//         b1 == "" ||
-//         c == "City" ||
-//         c == "" ||
-//         d == "address" ||
-//         d == "" ||
-//         e == "dateofbirth" ||
-//         e == "" ||
-//         f == "Zip" ||
-//         f == "" ||
-//         g == "Phone" ||
-//         g == "" ||
-//         h == "username" ||
-//         h == "" ||
-//         i == "password" ||
-//         i == ""
-//     ) {
-//         Swal.fire({
-//             icon: 'warning',
-//             title: 'Missing Information',
-//             text: 'All fields are required!',
-//         });
-//         return false;
-//     }
+    if (
+        a == "Firstname" ||
+        a == "" ||
+        b == "lastname" ||
+        b == "" ||
+        b1 == "gender" ||
+        b1 == "" ||
+        c == "City" ||
+        c == "" ||
+        d == "address" ||
+        d == "" ||
+        e == "dateofbirth" ||
+        e == "" ||
+        f == "Zip" ||
+        f == "" ||
+        g == "Phone" ||
+        g == "" ||
+        h == "username" ||
+        h == "" ||
+        i == "password" ||
+        i == ""
+    ) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Missing Information',
+            text: 'All fields are required!',
+        });
+        return false;
+    }
 
-//     return true;
-// }
+    return true;
+}
 
         </script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
