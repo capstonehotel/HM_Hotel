@@ -153,7 +153,7 @@ redirect('index.php?view=payment');
         <label for="phone">Phone:</label>
         <input name="phone" type="tel" class="form-control" pattern="09\d{9}" id="phone" value="09" required oninput="this.value = this.value.replace(/\D/, ''); if(this.value.length > 11) this.value = this.value.slice(0, 11);">
       </div>
-    </div>
+    <!-- </div> -->
 
     <!-- Second Column -->
     
@@ -171,6 +171,7 @@ redirect('index.php?view=payment');
         <label for="zip">Zip Code:</label>
         <input name="zip" type="number" class="form-control" id="zip" minlength="4" maxlength="4" required>
       </div>
+	  </div>
 	  <div class="col-md-6 col-sm-12">
       <div class="form-group">
         <label for="nationality">Nationality:</label>
