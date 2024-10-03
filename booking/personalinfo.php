@@ -213,10 +213,10 @@ if (isset($_POST['submit'])) {
 </div>
 
       <!-- OTP input after email submission -->
-  <div class="form-group" id="otp-section" >
+  <!-- <div class="form-group" id="otp-section" >
         <label for="otp">Enter OTP:</label>
         <input type="text" name="otp" class="form-control input-sm" id="otp" maxlength="6" required>
-    </div>
+    </div> -->
     </div>
   </div>
  
