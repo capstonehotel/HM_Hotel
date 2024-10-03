@@ -283,9 +283,10 @@ function validatePassword() {
     var hasNumber = /\d/.test(password);
     var hasCapital = /[A-Z]/.test(password);
     
-    // Build the error message dynamically based on the missing criteria
+    // Clear the error message array
     var errorMessage = [];
 
+    // Check each requirement and push specific messages if the requirement is not met
     if (password.length < 8) {
         errorMessage.push("Password must be at least 8 characters long.");
     }
@@ -299,17 +300,17 @@ function validatePassword() {
         errorMessage.push("Password must contain at least one number.");
     }
 
-    // If there are any errors, display them and set custom validity, otherwise clear the error
+    // Display the error messages or clear them if all requirements are met
     if (errorMessage.length > 0) {
         passwordError.innerHTML = errorMessage.join("<br>"); // Display errors with line breaks
-        passwordInput.setCustomValidity("Invalid password"); // Set custom validity so form doesn't submit
+        passwordInput.setCustomValidity("Invalid password"); // Prevent form submission
     } else {
-        passwordError.innerHTML = ""; // Clear error messages
-        passwordInput.setCustomValidity(""); // Clear custom validity
+        passwordError.innerHTML = ""; // Clear error messages when all conditions are met
+        passwordInput.setCustomValidity(""); // Allow form submission
     }
 }
 
-// Attach the `input` event to validate password in real-time as the user types
+// Attach the `input` event to validate the password in real-time as the user types
 document.getElementById('password').addEventListener('input', validatePassword);
 </script>
 
