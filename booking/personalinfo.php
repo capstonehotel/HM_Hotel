@@ -274,24 +274,23 @@ function validatePassword() {
     var hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password);
     var hasNumber = /\d/.test(password);
     var hasCapital = /[A-Z]/.test(password);
-    var isValidLength = password.length >= 8; // Check for minimum length
-
-    // Reset error message
-    passwordError.textContent = "";
-
-    // Validate password according to all criteria
-    if (!isValidLength) {
+    
+    if (password.length < 8) {
         passwordError.textContent = "Password must be at least 8 characters long.";
+        passwordInput.setCustomValidity("Password must be at least 8 characters long.");
     } else if (!hasCapital) {
         passwordError.textContent = "Password must contain at least one capital letter.";
+        passwordInput.setCustomValidity("Password must contain at least one capital letter.");
     } else if (!hasSpecialChar) {
         passwordError.textContent = "Password must contain at least one special character.";
+        passwordInput.setCustomValidity("Password must contain at least one special character.");
     } else if (!hasNumber) {
         passwordError.textContent = "Password must contain at least one number.";
+        passwordInput.setCustomValidity("Password must contain at least one number.");
+    } else {
+        passwordError.textContent = ""; // Clear error message
+        passwordInput.setCustomValidity(""); // Clear custom validity
     }
-
-    // Set custom validity based on the current validation
-    passwordInput.setCustomValidity(passwordError.textContent ? passwordError.textContent : "");
 }
 </script>
 
