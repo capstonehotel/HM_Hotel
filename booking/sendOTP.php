@@ -15,7 +15,7 @@ require '../PHPMailer/src/SMTP.php';
     try {
         //Server settings
         $mail->isSMTP();
-        $mail->Host = 'smtp.mcchmhotelreservation.com';       // Gmail SMTP server
+        $mail->Host = 'smtp.gmail.com';       // Gmail SMTP server
         $mail->SMTPAuth = true;
         $mail->Username = 'mcchmhotelreservation@gmail.com';  // SMTP username
         $mail->Password = 'bkdb giql jcxw mmcc';      // SMTP password or app-specific password
