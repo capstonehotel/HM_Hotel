@@ -206,7 +206,7 @@ if (isset($_POST['submit'])) {
 
       <div class="form-group">
     <label  class ="control-label" for="password">Password:</label>
-    <input name="pass" type="password" class="form-control input-sm" id="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" required / placeholder="Ex@mple123">
+    <input name="pass" type="password" class="form-control input-sm" id="password"  required / placeholder="Ex@mple123">
     <span id="password-error" style="color: red;"></span>
 </div>
 

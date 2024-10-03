@@ -198,7 +198,7 @@ if (isset($_POST['submit'])) {
 
       <div class="form-group">
     <label  class ="control-label" for="password">Password:</label>
-    <input name="pass" type="password" class="form-control input-sm" id="password"  pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" required / placeholder="Ex@mple123">
+    <input name="pass" type="password" class="form-control input-sm" id="password" onkeyup="validatePassword()"  required / placeholder="Ex@mple123">
     <span id="password-error" style="color: red;"></span>
 </div>
 
@@ -262,43 +262,8 @@ function validateDOB(input) {
     }
 }
 </script>
+
 <script>
-    const passwordInput = document.getElementById('password');
-    const passwordErrorSpan = document.getElementById('password-error');
-
-    passwordInput.addEventListener('invalid', function() {
-        let errorMessage = '';
-
-        if (passwordInput.value.length < 8) {
-            errorMessage += 'Password must be at least 8 characters long. ';
-        }
-
-        if (!/[a-z]/.test(passwordInput.value)) {
-            errorMessage += 'Password must contain at least one lowercase letter. ';
-        }
-
-        if (!/[A-Z]/.test(passwordInput.value)) {
-            errorMessage += 'Password must contain at least one uppercase letter. ';
-        }
-
-        if (!/\d/.test(passwordInput.value)) {
-            errorMessage += 'Password must contain at least one digit. ';
-        }
-
-        if (!/[@$!%*?&]/.test(passwordInput.value)) {
-            errorMessage += 'Password must contain at least one special character. ';
-        }
-
-        passwordErrorSpan.textContent = errorMessage.trim();
-    });
-
-    passwordInput.addEventListener('input', function() {
-        if (passwordInput.validity.valid) {
-            passwordErrorSpan.textContent = '';
-        }
-    });
-</script>
-<!-- <script>
 function validatePassword() {
     var passwordInput = document.getElementById("password");
     var password = passwordInput.value;
@@ -326,6 +291,7 @@ function validatePassword() {
     }
 }
 </script>
--->
 
+
+			
  
