@@ -162,7 +162,7 @@ redirect('index.php?view=payment');
         <input name="city" type="text" class="form-control" id="city" onkeyup="capitalizeInput(this)">
       </div>
 	  <div class="col-md-6 col-sm-12">
-      <div class="form-group">
+      
       <div class="form-group">
         <label for="address">Address:</label>
         <input name="address" type="text" class="form-control" id="address" maxlength="50" onkeyup="capitalizeInput(this)">
