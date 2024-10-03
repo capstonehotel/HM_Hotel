@@ -80,7 +80,7 @@ if (isset($_POST['submit'])) {
 					 <div class="row">
     <div class="col-md-12">
       <div class="form-group">
-        <label for="image">Avatar</label>
+        <label class ="control-label" for="image">Avatar</label>
         <input type="file" name="image" id="image" accept=".jpg, .jpeg, .png" onchange="previewImage(event)" required>
         <img id="imagePreview" src="#" alt="Image Preview" style="display: none; max-width: 150px; max-height: 150px;">
       </div>
@@ -125,17 +125,17 @@ if (isset($_POST['submit'])) {
     <!-- First Column -->
     <div class="col-md-6 col-sm-12">
       <div class="form-group">
-        <label for="name">First Name:</label>
+        <label class ="control-label" for="name">First Name:</label>
         <input name="name" type="text" class="form-control input-sm" id="name" maxlength="16" onkeyup="capitalizeInput(this)" required>
       </div>
 
       <div class="form-group">
-        <label for="last">Last Name:</label>
+        <label class ="control-label" for="last">Last Name:</label>
         <input name="last" type="text" class="form-control input-sm" id="last" maxlength="16" onkeyup="capitalizeInput(this)" required>
       </div>
 
       <div class="form-group">
-        <label for="gender">Gender:</label>
+        <label class ="control-label" for="gender">Gender:</label>
         <select name="gender" class="form-control input-sm" id="gender" required>
           <option value="" disabled selected>Select Gender</option>
           <option value="Male">Male</option>
@@ -144,7 +144,7 @@ if (isset($_POST['submit'])) {
       </div>
 
       <div class="form-group">
-    <label for="dbirth">Date of Birth:</label>
+    <label class ="control-label" for="dbirth">Date of Birth:</label>
     <input type="date" name="dbirth" class="form-control input-sm" 
            max="<?php echo date('Y-m-d', strtotime('-18 years')); ?>" 
            onchange="validateDOB(this)" required>
@@ -152,7 +152,7 @@ if (isset($_POST['submit'])) {
 </div>
 
       <div class="form-group">
-        <label for="phone">Phone:</label>
+        <label class ="control-label" for="phone">Phone:</label>
         <input name="phone" type="tel" class="form-control input-sm" pattern="09\d{9}" id="phone" value="09" required oninput="this.value = this.value.replace(/\D/, ''); if(this.value.length > 11) this.value = this.value.slice(0, 11);">
       </div>
     <!-- </div> -->
@@ -160,13 +160,13 @@ if (isset($_POST['submit'])) {
     <!-- Second Column -->
     
       <div class="form-group">
-        <label for="city">City:</label>
+        <label class ="control-label" for="city">City:</label>
         <input name="city" type="text" class="form-control input-sm" id="city" onkeyup="capitalizeInput(this)">
       </div>
 
       
       <div class="form-group">
-        <label for="address">Address:</label>
+        <label class ="control-label" for="address">Address:</label>
         <input name="address" type="text" class="form-control input-sm" id="address" maxlength="50" onkeyup="capitalizeInput(this)">
       </div>
 	  </div>
@@ -174,33 +174,33 @@ if (isset($_POST['submit'])) {
 	  <div class="col-md-6 col-sm-12">
       
       <div class="form-group">
-        <label for="zip">Zip Code:</label>
+        <label class ="control-label" for="zip">Zip Code:</label>
         <input name="zip" type="number" class="form-control input-sm" id="zip" maxlength="4" required oninput="this.value = this.value.replace(/\D/, ''); if(this.value.length > 10) this.value = this.value.slice(0, 10);">
       </div>
 	  
       <div class="form-group">
-        <label for="nationality">Nationality:</label>
+        <label class ="control-label" for="nationality">Nationality:</label>
         <input name="nationality" type="text" class="form-control input-sm" id="nationality" maxlength="17" onkeyup="capitalizeInput(this)">
       </div>
 
       <div class="form-group">
-        <label for="company">Company:</label>
+        <label class ="control-label" for="company">Company:</label>
         <input name="company" type="text" class="form-control input-sm" id="company" required onkeyup="capitalizeInput(this)">
       </div>
 
       <div class="form-group">
-        <label for="caddress">Company Address:</label>
+        <label class ="control-label" for="caddress">Company Address:</label>
         <input name="caddress" type="text" class="form-control input-sm" id="caddress" required onkeyup="capitalizeInput(this)">
       </div>
 
       <div class="form-group">
-        <label for="username">Email:</label>
+        <label  class ="control-label" for="username">Email:</label>
         <input name="username" type="email" class="form-control input-sm" id="username" placeholder="User@gmail.com">
       </div>
 
       <div class="form-group">
-    <label for="password">Password:</label>
-    <input name="pass" type="password" class="form-control input-sm" id="password" onkeyup="validatePassword()" required placeholder="Ex@mple123">
+    <label  class ="control-label" for="password">Password:</label>
+    <input name="pass" type="password" class="form-control input-sm" id="password" onkeyup="validatePassword()" required / placeholder="Ex@mple123">
     <span id="password-error" style="color: red;"></span>
 </div>
 
