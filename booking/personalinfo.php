@@ -161,14 +161,15 @@ redirect('index.php?view=payment');
         <label for="city">City:</label>
         <input name="city" type="text" class="form-control" id="city" onkeyup="capitalizeInput(this)">
       </div>
-</div>
-	  <div class="col-md-6 col-sm-12">
+
       
       <div class="form-group">
         <label for="address">Address:</label>
         <input name="address" type="text" class="form-control" id="address" maxlength="50" onkeyup="capitalizeInput(this)">
       </div>
-	  
+	  </div>
+	  <div class="col-md-6 col-sm-12">
+      
       <div class="form-group">
         <label for="zip">Zip Code:</label>
         <input name="zip" type="number" class="form-control" id="zip" minlength="4" maxlength="4" required>
