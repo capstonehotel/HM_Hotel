@@ -285,20 +285,29 @@ function validatePassword() {
     if (password.length < 8) {
         passwordError.textContent = "Password must be at least 8 characters long.";
         passwordInput.setCustomValidity("Password must be at least 8 characters long.");
+        return false; // Prevent form submission
     } else if (!hasCapital) {
         passwordError.textContent = "Password must contain at least one capital letter.";
         passwordInput.setCustomValidity("Password must contain at least one capital letter.");
+        return false; // Prevent form submission
     } else if (!hasSpecialChar) {
         passwordError.textContent = "Password must contain at least one special character.";
         passwordInput.setCustomValidity("Password must contain at least one special character.");
+        return false; // Prevent form submission
     } else if (!hasNumber) {
         passwordError.textContent = "Password must contain at least one number.";
         passwordInput.setCustomValidity("Password must contain at least one number.");
+        return false; // Prevent form submission
     } else {
         passwordError.textContent = ""; // Clear error message
         passwordInput.setCustomValidity(""); // Clear custom validity
+        return true; // Password is valid
     }
 }
+
+document.querySelector('form').onsubmit = function () {
+    return validatePassword(); // Validate password before form submission
+};
 </script>
 
 
