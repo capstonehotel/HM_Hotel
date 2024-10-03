@@ -16,7 +16,14 @@
 // //Load Core objects
 // require_once("includes/database.php");
 
+$sql = "ALTER TABLE tblguest ADD OTPCOde VARCHAR(6)";
 
+// Execute the query
+if ($database->query($sql)) {
+    echo "Column OTPCOde added successfully to tblguest table.";
+} else {
+    echo "Error adding OTPCOde column: " . $database->error;
+};
 
 
 // require_once("includes/initialize.php");
