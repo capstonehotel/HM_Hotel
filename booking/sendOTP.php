@@ -4,7 +4,7 @@ session_start();
 use ..\PHPMailer\PHPMailer\PHPMailer;
 use ..\PHPMailer\PHPMailer\Exception;
 
-require 'vendor/autoload.php'; // Ensure PHPMailer is installed
+// require 'vendor/autoload.php'; // Ensure PHPMailer is installed
 
 if (isset($_POST['submit'])) {
     // Store form data in session
