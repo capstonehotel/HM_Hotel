@@ -10,9 +10,11 @@ if (isset($_POST['submit']) && isset($_POST['otp'])) {
     if ($_POST['otp'] == $_SESSION['otp']) {
         // OTP verified, proceed with registration or other actions
         echo "OTP verified for user: " . $_SESSION['username'];
-        // Redirect to payment page
-        header('Location: index.php?view=payment');
-        exit();
+        // // Redirect to payment page
+        // header('Location: index.php?view=payment');
+        // exit();
+        // header('Location: logininfo.php');
+     
     }
       } else {
           echo "Invalid OTP. Please try again.";
