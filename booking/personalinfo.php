@@ -349,7 +349,7 @@ document.querySelector('form').onsubmit = function () {
 
  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
-
+<!-- 
 <script>
    document.getElementById('confirmButton').addEventListener('click', function(event) {
     event.preventDefault(); 
@@ -429,4 +429,4 @@ document.querySelector('form').onsubmit = function () {
 });
 
 </script>
- 
+  -->
