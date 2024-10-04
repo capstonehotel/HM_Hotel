@@ -2,7 +2,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
 <?php
-session_start(); 
+
 if (isset($_GET['view']) && $_GET['view'] == 'payment' && isset($_GET['verify'])) {
     var_dump($_GET['view']);
     var_dump($_GET['verify']);
