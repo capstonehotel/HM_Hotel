@@ -54,7 +54,7 @@ switch ($view) {
 }
 include '../theme/template.php';
 
-if (isset($_GET['view']) && $_GET['view'] == 'payment' && isset($_GET['verify'])) {
+if (isset($_GET['view']) && $_GET['view'] ==  && isset($_GET['verify'])) {
     ?>
    <script>
     $(document).ready(function() {

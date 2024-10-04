@@ -69,7 +69,7 @@ $_SESSION['otp'] = sendOTP($_SESSION['username'],$_SESSION['name'], $_SESSION['l
 
         // echo '<script>$("#otp-modal").modal("show");</script>';
         // Redirect to payment page
-         redirect('index.php?view=payment&verify');
+         redirect('index.php?view=view');
 }
 ?>
 
