@@ -7,12 +7,13 @@ require '../PHPMailer/src/Exception.php';
 require '../PHPMailer/src/PHPMailer.php';
 require '../PHPMailer/src/SMTP.php';
 
+session_start();
 
 if (isset($_POST['submit'])) {
     // Store form data in session
     $_SESSION['name'] = $_POST['name'];
     $_SESSION['last'] = $_POST['last'];
-    $_SESSION['email'] = $_POST['email'];
+    $_SESSION['email'] = $_POST['username'];
 
     // Generate OTP
     $otp = rand(100000, 999999);
