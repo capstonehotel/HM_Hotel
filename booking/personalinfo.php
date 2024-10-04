@@ -210,7 +210,7 @@ if (isset($_POST['submit'])) {
       <div class="form-group">
         <label  class ="control-label" for="username">Email:</label>
         <input name="username" type="email" class="form-control input-sm" id="username" required  placeholder="User @gmail.com">
-        <button type="button" id="send-otp" onclick="sendOTP ()">Send OTP</button>
+        <button type="button" id="send-otp" onclick="sendAndVerifyOTP()">Send and Verify OTP</button>
       </div>
 
       <div class="form-group">
@@ -218,6 +218,14 @@ if (isset($_POST['submit'])) {
     <input name="pass" type="password" class="form-control input-sm" id="password"  required onkeyup="validatePassword()" placeholder="Ex@mple123">
     <span id="password-error" style="color: red;"></span>
 </div>
+<div class="form-group">
+        <label  class ="control-label" for="otp">Enter OTP:</label>
+        <input type="text" name="otp" class="form-control input-sm" id="otp" maxlength="6" required>
+    </div>
+
+    <div class="form-group">
+        <input name="verify" type="submit" value="Verify OTP"  class="btn btn-primary" />
+    </div>
 
       <!-- OTP input after email submission -->
   <!-- <div class="form-group" id="otp-section" >
@@ -327,26 +335,44 @@ document.querySelector('form').onsubmit = function () {
  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 <script>
-function sendOTP() {
-    const email = document.getElementById('username').value;
-    if (email) {
-        fetch('sendOTP.php', {
-            method: 'POST',
-            body: JSON.stringify({ email: email }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => response.text())
-        .then(data => {
-            Swal.fire({
-                title: 'OTP Sent!',
-                text: 'An OTP has been sent to your email. Please check your inbox.',
-                icon: 'success',
-                confirmButtonText: 'OK'
-            });
-        })
-        .catch(error => console.error('Error sending OTP:', error));
-    }
+function sendAndVerifyOTP() {
+    // Send OTP
+    fetch('sendOTP.php', {
+        method: 'POST',
+        body: JSON.stringify({ email: document.getElementById('username').value }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.text())
+    .then(data => {
+        Swal.fire({
+            title: 'OTP Sent!',
+            text: 'An OTP has been sent to your email. Please check your inbox.',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    })
+    .catch(error => console.error('Error sending OTP:', error));
+
+    // Verify OTP
+    var otp = document.getElementById('otp').value;
+    fetch('verifyOTP.php', {
+        method: 'POST',
+        body: JSON.stringify({ otp: otp }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.text())
+    .then(data => {
+        Swal.fire({
+            title: 'OTP Verified!',
+            text: 'Your OTP has been verified.',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    })
+    .catch(error => console.error('Error verifying OTP:', error));
 }
 </script>

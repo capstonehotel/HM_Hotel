@@ -202,6 +202,7 @@ if (isset($_POST['submit'])) {
     <span id="password-error" style="color: red;"></span>
 </div>
 
+
       <!-- OTP input after email submission -->
   <!-- <div class="form-group" id="otp-section" >
         <label for="otp">Enter OTP:</label>
