@@ -389,15 +389,6 @@ document.getElementById('confirmButton').addEventListener('click', function(even
  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 
-<form class="form-horizontal" id="personalInfoForm" enctype="multipart/form-data">
-  <!-- Form fields for personal info -->
-  <input name="name" type="text" id="name" required />
-  <input name="username" type="email" id="username" required />
-  <input name="password" type="password" id="password" required />
-  <!-- Add other form fields as needed -->
-
-  <input type="submit" value="Confirm" id="confirmButton" class="btn btn-primary" />
-</form>
 
 <script>
   document.getElementById('personalInfoForm').onsubmit = function(event) {
