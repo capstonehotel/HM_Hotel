@@ -49,7 +49,8 @@ if (isset($_POST['submit'])) {
         $_SESSION['username'] = $_POST['username'];
         $_SESSION['pass'] = $_POST['pass'];
         $_SESSION['pending'] = 'pending';
-        $_SESSION['otp'] = sendOTP($_SESSION['username']);;
+        $_SESSION['otp'] = sendOTP($_SESSION['username']);
+        echo '<script>$("#otp-modal").modal("show");</script>';
         // // Redirect to payment page
         //  header('Location: index.php?view=payment');
         // exit();
@@ -210,7 +211,6 @@ if (isset($_POST['submit'])) {
       <div class="form-group">
         <label  class ="control-label" for="username">Email:</label>
         <input name="username" type="email" class="form-control input-sm" id="username" required  placeholder="User@gmail.com">
-        <button type="button" id="send-otp" onclick="sendAndVerifyOTP()">Send and Verify OTP</button>
       </div>
 
       <div class="form-group">
@@ -218,14 +218,7 @@ if (isset($_POST['submit'])) {
     <input name="pass" type="password" class="form-control input-sm" id="password"  required onkeyup="validatePassword()" placeholder="Ex@mple123">
     <span id="password-error" style="color: red;"></span>
 </div>
-<div class="form-group">
-        <label  class ="control-label" for="otp">Enter OTP:</label>
-        <input type="text" name="otp" class="form-control input-sm" id="otp" maxlength="6" required>
-    </div>
 
-    <div class="form-group">
-        <input name="verify" type="submit" value="Verify OTP"  class="btn btn-primary" />
-    </div>
 
       <!-- OTP input after email submission -->
   <!-- <div class="form-group" id="otp-section" >
@@ -327,52 +320,48 @@ document.querySelector('form').onsubmit = function () {
 };
 </script>
 
+<!-- OTP Modal -->
+<div id="otp-modal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Enter OTP</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="otp-form">
+                    <div class="form-group">
+                        <label for="otp">Enter OTP:</label>
+                        <input type="text" name="otp" id="otp" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Verify</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
+<script>
+$('#otp-form').submit(function(event) {
+    event.preventDefault();
+    var otp = $('#otp').val();
+    $.ajax({
+        type: 'POST',
+        url: 'otp_verify.php',
+        data: {otp: otp},
+        success: function(response) {
+            if (response == 'Invalid OTP. Please try again.') {
+                alert(response);
+            } else {
+                // OTP verified, redirect to payment page
+                window.location.href = 'index.php?view=payment';
+            }
+        }
+    });
+});
+</script>
 	
 
-<!-- Include SweetAlert library -->
 
- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
-<script>
-function sendAndVerifyOTP() {
-    // Send OTP
-    fetch('sendOTP.php', {
-        method: 'POST',
-        body: JSON.stringify({ email: document.getElementById('username').value }),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => response.text())
-    .then(data => {
-        Swal.fire({
-            title: 'OTP Sent!',
-            text: 'An OTP has been sent to your email. Please check your inbox.',
-            icon: 'success',
-            confirmButtonText: 'OK'
-        });
-    })
-    .catch(error => console.error('Error sending OTP:', error));
-
-    // Verify OTP
-    var otp = document.getElementById('otp').value;
-    fetch('otp_verify.php', {
-        method: 'POST',
-        body: JSON.stringify({ otp: otp }),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => response.text())
-    .then(data => {
-        Swal.fire({
-            title: 'OTP Verified!',
-            text: 'Your OTP has been verified.',
-            icon: 'success',
-            confirmButtonText: 'OK'
-        });
-    })
-    .catch(error => console.error('Error verifying OTP:', error));
-}
-</script>
