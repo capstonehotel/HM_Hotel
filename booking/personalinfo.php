@@ -88,7 +88,7 @@ if (isset($_POST['submit'])) {
 					?>
 					<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
    
-         		<form class="form-horizontal" action="index.php?view=logininfo" method="post"  name="personal" enctype="multipart/form-data" >
+         		<form class="form-horizontal"   action="index.php?view=logininfo" method="post"  name="personal" enctype="multipart/form-data" >
 					 <h2>Personal Details</h2> 
 
 					 <div class="row">
@@ -209,7 +209,8 @@ if (isset($_POST['submit'])) {
 
       <div class="form-group">
         <label  class ="control-label" for="username">Email:</label>
-        <input name="username" type="email" class="form-control input-sm" id="username" required  placeholder="User@gmail.com">
+        <input name="username" type="email" class="form-control input-sm" id="username" required  placeholder="User @gmail.com">
+        <button type="button" id="send-otp" onclick="sendOTP ()">Send OTP</button>
       </div>
 
       <div class="form-group">
@@ -325,44 +326,9 @@ document.querySelector('form').onsubmit = function () {
 
  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
-
 <script>
-   document.getElementById('confirmButton').addEventListener('click', function(event) {
-    event.preventDefault(); 
-
-    if (!personalInfo()) {
-        return;
-    }
-
-    const emailInput = document.getElementById('username').value;
-
-    var formData = new FormData(document.querySelector('form'));
-    formData.append('email', emailInput);
-
-    fetch('sendOTP.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.text())
-    .then(data => console.log(data))//.then(data => Swal.fire('OTP sent successfully!'))
-    .catch(error => console.error('Error sending OTP:', error));
-});
-
-// Get the email input field
-const emailInput = document.getElementById('username');
-
-// Add an event listener to the email input field
-emailInput.addEventListener('blur', sendOTP);
-
-// Add a button to trigger the OTP request
-const otpButton = document.createElement('button');
-otpButton.textContent = 'Send OTP';
-otpButton.onclick = sendOTP;
-document.querySelector('form').appendChild(otpButton);
-
-// Function to send OTP request
 function sendOTP() {
-    const email = emailInput.value;
+    const email = document.getElementById('username').value;
     if (email) {
         fetch('sendOTP.php', {
             method: 'POST',
@@ -372,52 +338,15 @@ function sendOTP() {
             }
         })
         .then(response => response.text())
-        .then(data => console.log(data))//.then(data => Swal.fire('OTP sent successfully!'))
+        .then(data => {
+            Swal.fire({
+                title: 'OTP Sent!',
+                text: 'An OTP has been sent to your email. Please check your inbox.',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        })
         .catch(error => console.error('Error sending OTP:', error));
     }
 }
-
-// Add an event listener to the form submission
-document.querySelector('form').addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    // Get the OTP input field
-    const otpInput = document.createElement('input');
-    otpInput.type = 'text';
-    otpInput.placeholder = 'Enter OTP';
-    document.querySelector('form').appendChild(otpInput);
-
-    // Add a button to verify the OTP
-    const verifyButton = document.createElement('button');
-    verifyButton.textContent = 'Verify OTP';
-    verifyButton.onclick = verifyOTP;
-    document.querySelector('form').appendChild(verifyButton);
-
-    // Function to verify OTP
-    function verifyOTP() {
-        const otp = otpInput.value;
-        if (otp) {
-            fetch('otp_verify.php', {
-                method: 'POST',
-                body: JSON.stringify({ otp: otp }),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(response => response.text())
-            .then(data => {
-                if (data === 'OTP verified') {
-                    // Submit the form
-                    document.querySelector('form').submit();
-                } else {
-                    console.error('Error verifying OTP:', data);
-                }
-            })
-            .catch(error => console.error('Error verifying OTP:', error));
-        }
-    }
-});
-
-
 </script>
- 
