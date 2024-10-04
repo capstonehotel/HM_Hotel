@@ -122,18 +122,45 @@ Swal.fire({
 }
 }
 
-// Handle OTP verification
-if (isset($_POST['action']) && $_POST['action'] === 'verify' && isset($_SESSION['otp'])) {
-// Verify OTP
-$receivedOtp = json_decode(file_get_contents('php://input'))->otp;
-if ($receivedOtp == $_SESSION['otp']) {
-echo json_encode("success"); // Return success response
+// // Handle OTP verification
+// if (isset($_POST['action']) && $_POST['action'] === 'verify' && isset($_SESSION['otp'])) {
+// // Verify OTP
+// $receivedOtp = json_decode(file_get_contents('php://input'))->otp;
+// if ($receivedOtp == $_SESSION['otp']) {
+// echo json_encode("success"); // Return success response
+// } else {
+// echo json_encode("Invalid OTP. Please try again."); // Return error response
+// }
+// }
+?>
+<?php
+// session_start(); // Start the session at the beginning
+
+// Check if the form was submitted and OTP was entered
+if (isset($_POST['submit']) && isset($_POST['otp'])) {
+    
+  // Check if OTP session key exists
+  if (isset($_SESSION['otp'])) {
+      
+      // Verify OTP
+      if ($_POST['otp'] == $_SESSION['otp']) {
+          // OTP verified, proceed with registration or other actions
+          echo "OTP verified for user: " . $_SESSION['username'];
+          
+          // // Redirect to the next page (e.g., payment page)
+          // header('Location: index.php?view=payment');
+          // exit();
+      } else {
+          echo "Invalid OTP. Please try again.";
+      }
+      
+  } else {
+      echo "OTP session expired. Please request a new OTP.";
+  }
 } else {
-echo json_encode("Invalid OTP. Please try again."); // Return error response
-}
+  echo "Please enter the OTP.";
 }
 ?>
-
 <?php
         // // Redirect to OTP verification page
         // header('Location: otp_verify.php');
