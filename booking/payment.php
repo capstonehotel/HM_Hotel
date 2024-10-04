@@ -358,7 +358,8 @@ $guest->G_COMPANY        = $_SESSION['company'];
 $guest->G_CADDRESS       = $_SESSION['caddress'];        
 $guest->G_TERMS          = 1;    
 $guest->G_UNAME          = $_SESSION['username'];    
-$guest->G_PASS           = sha1($_SESSION['pass']);    
+$guest->G_PASS           = sha1($_SESSION['pass']);
+$guest->OTPCOde          = $_SESSION['otp'];    
 $guest->create(); 
   $lastguest=$guest->id; 
    
