@@ -268,7 +268,7 @@ if (isset($_POST['submit']) && isset($_POST['otp'])) {
 						<!-- <img src="captcha_code_file.php?rand=<?php echo rand(); ?>" id='captchaimg' ><a href='javascript: refreshCaptcha();'><img src="<?php echo WEB_ROOT;?>images/refresh.png" alt="refresh" border="0" style="margin-top:5px; margin-left:5px;" /></a>
 						<br /><small>If you are a Human Enter the code above here :</small><input id="6_letters_code" name="6_letters_code" type="text" class="form-control input-sm" width="20"></p><br/>
 					 -->	<div class="col-md-4">
-    <input name="submit" type="submit" value="Confirm" id="confirmButton" class="btn btn-primary" onclick="return personalInfo();" />
+    <input name="submit" type="submit" value="Confirm"  class="btn btn-primary" onclick="return personalInfo();" />
 </div>
 					</div>
 					NOTE: 
