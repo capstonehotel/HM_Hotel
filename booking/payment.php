@@ -1,11 +1,12 @@
 <?php
 if (isset($_GET['view']) && $_GET['view'] == 'payment' && isset($_GET['verify'])) {
     ?>
-    <script>
-        $(document).ready(function() {
-            $('#verifyModal').modal('show');
-        });
-    </script>
+   <script>
+    $(document).ready(function() {
+        console.log("Modal script is running"); // Debugging
+        $('#verifyModal').modal('show');
+    });
+</script>
     <?php
 } else {
     // Payment page content
