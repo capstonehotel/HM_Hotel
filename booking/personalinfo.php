@@ -68,7 +68,7 @@ if (isset($_POST['submit'])){
 $_SESSION['otp'] = sendOTP($_SESSION['username'],$_SESSION['name'], $_SESSION['last']);
         // echo '<script>$("#otp-modal").modal("show");</script>';
         // Redirect to payment page
-         redirect('index.php?view=payment&verify');
+         redirect('index.php?view=payment');
 }
 ?>
 
