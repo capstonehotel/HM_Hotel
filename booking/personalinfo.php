@@ -235,8 +235,8 @@ if (isset($_POST['submit'])) {
 						<!-- <img src="captcha_code_file.php?rand=<?php echo rand(); ?>" id='captchaimg' ><a href='javascript: refreshCaptcha();'><img src="<?php echo WEB_ROOT;?>images/refresh.png" alt="refresh" border="0" style="margin-top:5px; margin-left:5px;" /></a>
 						<br /><small>If you are a Human Enter the code above here :</small><input id="6_letters_code" name="6_letters_code" type="text" class="form-control input-sm" width="20"></p><br/>
 					 -->	<div class="col-md-4">
-					    	<input name="submit" type="submit" value="Confirm" id="confirmButton"  class="btn btn-primary" onclick="return personalInfo();" id="submitFormButton"/>
-					    </div>
+    <input name="submit" type="submit" value="Confirm" id="confirmButton" class="btn btn-primary" onclick="return personalInfo();" />
+</div>
 					</div>
 					NOTE: 
 					We recommend that your password should be at least 8 characters long and should be different from your username.
@@ -406,63 +406,70 @@ document.getElementById('confirmButton').addEventListener('click', function(even
 </div> -->
 
 <!-- Include SweetAlert library -->
+
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
-   document.getElementById('confirmButton').addEventListener('click', function(event) {
-    event.preventDefault(); // Prevent default form submission
+    document.getElementById('confirmButton').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent default form submission
 
-    // Send the form data to trigger OTP email via AJAX
-    var formData = new FormData(document.querySelector('form'));
+        // Check personal info first
+        if (!personalInfo()) {
+            return; // If personalInfo() returns false, do not proceed
+        }
 
-    fetch('sendOTP.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.text())
-    .then(data => {
-        console.log(data); // Log server response for debugging
-        Swal.fire({
-            title: 'OTP Verification',
-            input: 'text',
-            inputLabel: 'Enter the OTP sent to your email',
-            inputAttributes: {
-                maxlength: 6
-            },
-            showCancelButton: true,
-            confirmButtonText: 'Verify',
-            cancelButtonText: 'Cancel',
-            preConfirm: (otp) => {
-                if (!otp) {
-                    Swal.showValidationMessage('Please enter the OTP');
-                } else {
-                    // Send OTP for verification
-                    return fetch('verifyOTP.php', { // Make sure to create this endpoint
-                        method: 'POST',
-                        body: JSON.stringify({ otp: otp }),
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    }).then(response => {
-                        if (!response.ok) {
-                            throw new Error('Invalid OTP');
-                        }
-                        return response.json(); // Assuming the server returns a JSON response
-                    }).catch(error => {
-                        Swal.showValidationMessage(error.message);
-                    });
+        // Send the form data to trigger OTP email via AJAX
+        var formData = new FormData(document.querySelector('form'));
+
+        fetch('sendOTP.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            console.log(data); // Log server response for debugging
+            Swal.fire({
+                title: 'OTP Verification',
+                input: 'text',
+                inputLabel: 'Enter the OTP sent to your email',
+                inputAttributes: {
+                    maxlength: 6
+                },
+                showCancelButton: true,
+                confirmButtonText: 'Verify',
+                cancelButtonText: 'Cancel',
+                preConfirm: (otp) => {
+                    if (!otp) {
+                        Swal.showValidationMessage('Please enter the OTP');
+                    } else {
+                        // Send OTP for verification
+                        return fetch('verifyOTP.php', { // Make sure to create this endpoint
+                            method: 'POST',
+                            body: JSON.stringify({ otp: otp }),
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        }).then(response => {
+                            if (!response.ok) {
+                                throw new Error('Invalid OTP');
+                            }
+                            return response.json(); // Assuming the server returns a JSON response
+                        }).catch(error => {
+                            Swal.showValidationMessage(error.message);
+                        });
+                    }
                 }
-            }
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire('Success!', 'OTP verified successfully.', 'success');
-                // Optionally redirect after successful verification
-                window.location.href = 'index.php?view=payment';
-            }
-        });
-    })
-    .catch(error => console.error('Error:', error));
-});
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire('Success!', 'OTP verified successfully.', 'success');
+                    // Optionally redirect after successful verification
+                    window.location.href = 'index.php?view=payment';
+                }
+            });
+        })
+        .catch(error => console.error('Error:', error));
+    });
 
 </script>
