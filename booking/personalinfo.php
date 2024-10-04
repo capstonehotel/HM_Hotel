@@ -50,40 +50,13 @@ if (isset($_POST['submit'])) {
         $_SESSION['pass'] = $_POST['pass'];
         $_SESSION['pending'] = 'pending';
         // $_SESSION['otp'] = sendOTP($_SESSION['username']);;
-        // Redirect to payment page
-         header('Location: index.php?view=payment');
-        exit();
+        // // Redirect to payment page
+        //  header('Location: index.php?view=payment');
+        // exit();
     }
   }
 ?>
-<?php
-// session_start(); // Start the session at the beginning
 
-// Check if the form was submitted and OTP was entered
-if (isset($_POST['submit']) && isset($_POST['otp'])) {
-    
-  // Check if OTP session key exists
-  if (isset($_SESSION['otp'])) {
-      
-      // Verify OTP
-      if ($_POST['otp'] == $_SESSION['otp']) {
-          // OTP verified, proceed with registration or other actions
-          echo "OTP verified for user: " . $_SESSION['username'];
-          
-          // // Redirect to the next page (e.g., payment page)
-          // header('Location: index.php?view=payment');
-          // exit();
-      } else {
-          echo "Invalid OTP. Please try again.";
-      }
-      
-  } else {
-      echo "OTP session expired. Please request a new OTP.";
-  }
-} else {
-  echo "Please enter the OTP.";
-}
-?>
 <?php
         // // Redirect to OTP verification page
         // header('Location: otp_verify.php');
@@ -403,5 +376,48 @@ function sendOTP() {
         .catch(error => console.error('Error sending OTP:', error));
     }
 }
+
+// Add an event listener to the form submission
+document.querySelector('form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    // Get the OTP input field
+    const otpInput = document.createElement('input');
+    otpInput.type = 'text';
+    otpInput.placeholder = 'Enter OTP';
+    document.querySelector('form').appendChild(otpInput);
+
+    // Add a button to verify the OTP
+    const verifyButton = document.createElement('button');
+    verifyButton.textContent = 'Verify OTP';
+    verifyButton.onclick = verifyOTP;
+    document.querySelector('form').appendChild(verifyButton);
+
+    // Function to verify OTP
+    function verifyOTP() {
+        const otp = otpInput.value;
+        if (otp) {
+            fetch('otp_verify.php', {
+                method: 'POST',
+                body: JSON.stringify({ otp: otp }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.text())
+            .then(data => {
+                if (data === 'OTP verified') {
+                    // Submit the form
+                    document.querySelector('form').submit();
+                } else {
+                    console.error('Error verifying OTP:', data);
+                }
+            })
+            .catch(error => console.error('Error verifying OTP:', error));
+        }
+    }
+});
+
+
 </script>
  
