@@ -52,13 +52,13 @@ if (isset($_POST['submit'])) {
         // // Redirect to OTP verification page
         // header('Location: otp_verify.php');
 //         // exit();
-//     }
-// }
-        // Redirect to payment page
-        header('Location: index.php?view=payment');
-        exit();
     }
 }
+//         // Redirect to payment page
+//         header('Location: index.php?view=payment');
+//         exit();
+//     }
+// }
 ?>
 
 
