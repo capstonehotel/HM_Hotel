@@ -31,8 +31,7 @@ if (isset($_POST['submit']) && isset($_POST['otp'])) {
   } else {
       echo "OTP session expired. Please request a new OTP.";
   
-} else {
-  echo "Please enter the OTP.";
+
 }
 ?>
 <div class="card rounded" style="padding: 10px;">
