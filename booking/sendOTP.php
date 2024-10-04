@@ -12,7 +12,7 @@ if (isset($_POST['submit'])) {
     // Store form data in session
     $_SESSION['name'] = $_POST['name'];
     $_SESSION['last'] = $_POST['last'];
-    $_SESSION['email'] = $_POST['username'];
+    $_SESSION['email'] = $_POST['email'];
 
     // Generate OTP
     $otp = rand(100000, 999999);

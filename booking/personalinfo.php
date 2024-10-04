@@ -361,8 +361,13 @@ document.querySelector('form').onsubmit = function () {
             return; // If personalInfo() returns false, do not proceed
         }
 
-        // Send the form data to trigger OTP email via AJAX
+        // Extract the email input value
+        const emailInput = document.getElementById('username').value;
+
+        // Prepare form data to send via AJAX
         var formData = new FormData(document.querySelector('form'));
+        formData.append('email', emailInput); // Add the email to the formData
+
 
         fetch('sendOTP.php', {
             method: 'POST',
