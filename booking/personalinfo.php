@@ -384,8 +384,8 @@ document.getElementById('confirmButton').addEventListener('click', function(even
 </script>
 
 <!-- Modal for OTP Verification -->
-<div class="modal fade" id="otp-modal" tabindex="-1" role="dialog" aria-labelledby="otp-modal-label" aria-hidden="true">
-    <div class="modal-dialog modal-sm" role="document"> <!-- Use modal-sm for a smaller modal -->
+<!-- <div class="modal fade" id="otp-modal" tabindex="-1" role="dialog" aria-labelledby="otp-modal-label" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document"> >
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="otp-modal-label">OTP Verification</h5>
@@ -403,60 +403,66 @@ document.getElementById('confirmButton').addEventListener('click', function(even
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 <!-- Include SweetAlert library -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
-    $(document).ready(function() {
-        // Show the modal for OTP verification when Confirm button is clicked
-        $('#confirmButton').click(function(e) {
-            e.preventDefault(); // Prevent form submission
+   document.getElementById('confirmButton').addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent default form submission
 
-            // Perform form validation
-            var isValid = true;
+    // Send the form data to trigger OTP email via AJAX
+    var formData = new FormData(document.querySelector('form'));
 
-            // Example: Validate all required fields here
-            $('form').find('input').each(function() {
-                if (!$(this).val()) {
-                    isValid = false;
-                    return false; // Exit each loop early if any field is empty
+    fetch('sendOTP.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log(data); // Log server response for debugging
+        Swal.fire({
+            title: 'OTP Verification',
+            input: 'text',
+            inputLabel: 'Enter the OTP sent to your email',
+            inputAttributes: {
+                maxlength: 6
+            },
+            showCancelButton: true,
+            confirmButtonText: 'Verify',
+            cancelButtonText: 'Cancel',
+            preConfirm: (otp) => {
+                if (!otp) {
+                    Swal.showValidationMessage('Please enter the OTP');
+                } else {
+                    // Send OTP for verification
+                    return fetch('verifyOTP.php', { // Make sure to create this endpoint
+                        method: 'POST',
+                        body: JSON.stringify({ otp: otp }),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }).then(response => {
+                        if (!response.ok) {
+                            throw new Error('Invalid OTP');
+                        }
+                        return response.json(); // Assuming the server returns a JSON response
+                    }).catch(error => {
+                        Swal.showValidationMessage(error.message);
+                    });
                 }
-            });
-
-            if (!isValid) {
-                // Show SweetAlert for empty fields
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Please fill out all fields before confirming!',
-                });
-                return;
             }
-
-            // All fields are filled, show OTP modal
-            $('#otp-modal').modal('show');
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire('Success!', 'OTP verified successfully.', 'success');
+                // Optionally redirect after successful verification
+                window.location.href = 'index.php?view=payment';
+            }
         });
+    })
+    .catch(error => console.error('Error:', error));
+});
 
-        // Example: Handle OTP verification button click
-        $('#verifyOtpButton').click(function() {
-            // Here you can handle OTP verification logic if needed
-            var otp = $('#otpInput').val();
-
-            // Example: Perform AJAX request to verify OTP
-            // This part depends on your backend implementation
-            // For simplicity, we'll assume the OTP is verified successfully
-            // and proceed with some action like redirecting to payment page
-            Swal.fire({
-                icon: 'success',
-                title: 'OTP Verified!',
-                text: 'Proceeding to payment page...',
-                timer: 2000, // Optional: Automatically close the alert after 2 seconds
-                showConfirmButton: false // Optional: Remove the "OK" button
-            }).then(function() {
-                window.location.href = 'index.php?view=payment'; // Redirect to payment page
-            });
-        });
-    });
 </script>
