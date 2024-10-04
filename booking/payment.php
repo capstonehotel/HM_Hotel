@@ -1,3 +1,4 @@
+
 <?php
 if (isset($_GET['view']) && $_GET['view'] == 'payment' && isset($_GET['verify'])) {
     ?>
