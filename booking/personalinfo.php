@@ -62,14 +62,27 @@ if (isset($_POST['submit'])){
 
 
   // $days = dateDiff($arival,$departure);
+ // Try to send OTP
+ try {
+  $_SESSION['otp'] = sendOTP($_SESSION['username']);
+} catch (Exception $e) {
+  // Log the error
+  error_log($e->getMessage());
 
-  
-// redirect('index.php?view=payment');
-// $_SESSION['otp'] = sendOTP($_SESSION['username']);
-        // echo '<script>$("#otp-modal").modal("show");</script>';
-        // Redirect to payment page
-         redirect('index.php?view=payment');
+  // Redirect to payment page without generating OTP
+  redirect('index.php?view=payment');
 }
+
+// Redirect to payment page
+redirect('index.php?view=payment');
+}
+  
+// // redirect('index.php?view=payment');
+// $_SESSION['otp'] = sendOTP($_SESSION['username']);
+//         // echo '<script>$("#otp-modal").modal("show");</script>';
+//         // Redirect to payment page
+//          redirect('index.php?view=payment');
+// }
 ?>
 
  
