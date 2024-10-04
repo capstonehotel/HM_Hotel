@@ -49,7 +49,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['username'] = $_POST['username'];
         $_SESSION['pass'] = $_POST['pass'];
         $_SESSION['pending'] = 'pending';
-        // $_SESSION['otp'] = sendOTP($_SESSION['username']);;
+        $_SESSION['otp'] = sendOTP($_SESSION['username']);;
         // // Redirect to payment page
         //  header('Location: index.php?view=payment');
         // exit();
@@ -209,7 +209,7 @@ if (isset($_POST['submit'])) {
 
       <div class="form-group">
         <label  class ="control-label" for="username">Email:</label>
-        <input name="username" type="email" class="form-control input-sm" id="username" required  placeholder="User @gmail.com">
+        <input name="username" type="email" class="form-control input-sm" id="username" required  placeholder="User@gmail.com">
         <button type="button" id="send-otp" onclick="sendAndVerifyOTP()">Send and Verify OTP</button>
       </div>
 
@@ -357,7 +357,7 @@ function sendAndVerifyOTP() {
 
     // Verify OTP
     var otp = document.getElementById('otp').value;
-    fetch('verifyOTP.php', {
+    fetch('otp_verify.php', {
         method: 'POST',
         body: JSON.stringify({ otp: otp }),
         headers: {
