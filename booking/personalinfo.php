@@ -1,5 +1,6 @@
 
 <?php
+require_once 'sendOTP.php';
 if (isset($_POST['submit'])){
 
 	$targetDirectory = "../images/user_avatar/";  // Directory where uploaded images will be stored
@@ -15,7 +16,16 @@ if (isset($_POST['submit'])){
   }
 	    
 
+    // Server-side DOB validation
+    $dob = $_POST['dbirth'];
+    $dobDate = DateTime::createFromFormat('Y-m-d', $dob);
+    $today = new DateTime();
+    $ageInterval = $today->diff($dobDate);
+    $age = $ageInterval->y;
 
+    if ($age < 18) {
+        $_SESSION['ERRMSG_ARR'][] = 'You must be at least 18 years old.';
+      } else {};
  $arival   = $_SESSION['from']; 
   $departure = $_SESSION['to'];
   /*$adults = $_SESSION['adults'];
@@ -54,7 +64,11 @@ if (isset($_POST['submit'])){
   // $days = dateDiff($arival,$departure);
 
   
-redirect('index.php?view=payment');
+// redirect('index.php?view=payment');
+$_SESSION['otp'] = sendOTP($_SESSION['username']);
+        // echo '<script>$("#otp-modal").modal("show");</script>';
+        // Redirect to payment page
+         redirect('index.php?view=payment');
 }
 ?>
 
@@ -77,198 +91,133 @@ redirect('index.php?view=payment');
          		<form class="form-horizontal" action="index.php?view=logininfo" method="post"  name="personal" enctype="multipart/form-data">
 					 <h2>Personal Details</h2> 
 
-					 <div class="form-group">
-			            <div class="col-md-8">
-			              <label class="col-md-4 control-label" for=
-			              "name">Avatar</label>
-
-			              <div class="col-md-8">
-			              	<input name="" type="hidden" value="">
-			              	<input required type="file" name="image" id="image" accept=".jpg, .jpeg, .png" onchange="previewImage(event)">
-			              </div>
-			              <img id="imagePreview" src="#" alt="Image Preview" style="display: none; max-width: 300px; max-height: 300px;">
+           <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label class ="control-label" for="image">Avatar</label>
+        <input type="file" name="image" id="image" accept=".jpg, .jpeg, .png" onchange="previewImage(event)" required>
+        <img id="imagePreview" src="#" alt="Image Preview" style="display: none; max-width: 150px; max-height: 150px;">
+      </div>
+      <style>
+  /* Ensure the image preview is fixed at 300x300 pixels (2x2) */
+  #imagePreview {
+    display: none;
+    width: 150px;
+    height: 150px;
+    object-fit: cover; /* Ensures the image fits inside the preview box */
+    border: 2px solid #ddd;
+    margin-top: 10px;
+  }
+</style>
 
 <script>
-function previewImage(event) {
-  const input = event.target;
-  const imagePreview = document.getElementById('imagePreview');
-  
-  if (input.files && input.files[0]) {
-    const reader = new FileReader();
+  function previewImage(event) {
+    const input = event.target;
+    const imagePreview = document.getElementById('imagePreview');
 
-    reader.onload = function (e) {
-      imagePreview.style.display = 'block';
-      imagePreview.src = e.target.result;
-    };
+    if (input.files && input.files[0]) {
+      const reader = new FileReader();
 
-    reader.readAsDataURL(input.files[0]);
-  } else {
-    imagePreview.style.display = 'none';
-    imagePreview.src = '#';
+      reader.onload = function (e) {
+        imagePreview.style.display = 'block';
+        imagePreview.src = e.target.result;
+      };
+
+      reader.readAsDataURL(input.files[0]);
+    } else {
+      imagePreview.style.display = 'none';
+      imagePreview.src = '#';
+    }
   }
-}
 </script>
 									
 			            </div>
 			          </div> 
+<br>
+									
+					   <!-- Form Fields in Two Columns -->
+  <div class="row">
+    <!-- First Column -->
+    <div class="col-md-6 col-sm-12">
+      <div class="form-group">
+        <label class ="control-label" for="name">First Name:</label>
+        <input name="name" type="text" class="form-control input-sm" id="name" maxlength="16" onkeyup="capitalizeInput(this)" required>
+      </div>
 
-					  <div class="form-group">
-			            <div class="col-md-8">
-			              <label class="col-md-4 control-label" for=
-			              "name">First Name:</label>
+      <div class="form-group">
+        <label class ="control-label" for="last">Last Name:</label>
+        <input name="last" type="text" class="form-control input-sm" id="last" maxlength="16" onkeyup="capitalizeInput(this)" required>
+      </div>
 
-			              <div class="col-md-8">
-			              	<input name="" type="hidden" value="">
-			                <input onkeyup="capitalizeInput(this)" name="name" type="text" class="form-control input-sm" id="name" /  maxlength="16">
-			              </div>
-			            </div>
-			          </div> 
+      <div class="form-group">
+        <label class ="control-label" for="gender">Gender:</label>
+        <select name="gender" class="form-control input-sm" id="gender" required>
+          <option value="" disabled selected>Select Gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+      </div>
 
-			            <div class="form-group">
-			            <div class="col-md-8">
-			              <label class="col-md-4 control-label" for=
-			              "last">Last Name:</label>
+      <div class="form-group">
+    <label class ="control-label" for="dbirth">Date of Birth:</label>
+    <input type="date" name="dbirth" class="form-control input-sm" 
+           max="<?php echo date('Y-m-d', strtotime('-18 years')); ?>" 
+           onchange="validateDOB(this)" required>
+    <span id="dob-error" style="color: red;"></span>
+</div>
 
-			              <div class="col-md-8">
-			                <input onkeyup="capitalizeInput(this)" name="last" type="text" class="form-control input-sm" id="last" / maxlength="16" required>
-			              </div>
-			            </div>
-			          </div>
-                     <div class="form-group">
-			            <div class="col-md-8">
-			              <label class="col-md-4 control-label" for=
-			              "gender">Gender:</label>
+      <div class="form-group">
+        <label class ="control-label" for="phone">Phone:</label>
+        <input name="phone" type="tel" class="form-control input-sm" pattern="09\d{9}" id="phone" value="09" required oninput="this.value = this.value.replace(/\D/, ''); if(this.value.length > 11) this.value = this.value.slice(0, 11);">
+      </div>
+    <!-- </div> -->
 
-			              <div class="col-md-8">
-			                <input onkeyup="capitalizeInput(this)" name="gender" type="text" class="form-control input-sm" id="gender" / required="" minlength="6" maxlength="6">
-			              </div>
-			            </div>
-			          </div>
-			      
+    <!-- Second Column -->
+    
+      <div class="form-group">
+        <label class ="control-label" for="city">City:</label>
+        <input name="city" type="text" class="form-control input-sm" id="city" onkeyup="capitalizeInput(this)">
+      </div>
 
-			           <div class="form-group">
-			            <div class="col-md-8">
-			              <label class="col-md-4 control-label" for=
-			              "city">City:</label>
+      
+      <div class="form-group">
+        <label class ="control-label" for="address">Address:</label>
+        <input name="address" type="text" class="form-control input-sm" id="address" maxlength="50" onkeyup="capitalizeInput(this)">
+      </div>
+	  </div>
+	  <!-- Second Column -->
+	  <div class="col-md-6 col-sm-12">
+      
+      <div class="form-group">
+        <label class ="control-label" for="zip">Zip Code:</label>
+        <input name="zip" type="number" class="form-control input-sm" id="zip" maxlength="4" required oninput="this.value = this.value.replace(/\D/, ''); if(this.value.length > 10) this.value = this.value.slice(0, 10);">
+      </div>
+	  
+      <div class="form-group">
+        <label class ="control-label" for="nationality">Nationality:</label>
+        <input name="nationality" type="text" class="form-control input-sm" id="nationality" maxlength="17" onkeyup="capitalizeInput(this)">
+      </div>
 
-			              <div class="col-md-8">
-			                <input onkeyup="capitalizeInput(this)" name="city" type="text" class="form-control input-sm" id="city" />
-			              </div> 
-			            </div>
-			          </div>
-			           <div class="form-group">
-			            <div class="col-md-8">
-			              <label  class="col-md-4 control-label" for=
-			              "address">Address:</label>
+      <div class="form-group">
+        <label class ="control-label" for="company">Company:</label>
+        <input name="company" type="text" class="form-control input-sm" id="company" required onkeyup="capitalizeInput(this)">
+      </div>
 
-			              <div class="col-md-8">
-			                <input onkeyup="capitalizeInput(this)" name="address" type="text" class="form-control input-sm" id="address" / maxlength="50">
-			              </div>
-			            </div>
-			          </div> 
+      <div class="form-group">
+        <label class ="control-label" for="caddress">Company Address:</label>
+        <input name="caddress" type="text" class="form-control input-sm" id="caddress" required onkeyup="capitalizeInput(this)">
+      </div>
 
-			            <div class="form-group  ">
-			            <div class="col-md-8">
-			              <label class="col-md-4 control-label" for=
-			              "dbirth">Date of Birth:</label>
+      <div class="form-group">
+        <label  class ="control-label" for="username">Email:</label>
+        <input name="username" type="email" class="form-control input-sm" id="username" required  placeholder="User@gmail.com">
+      </div>
 
-			              <div class="col-md-8">
-							    <input type="date"
-							           required
-							           name="dbirth"
-							           value=""
-							           max="<?php echo date('Y-m-d', strtotime('-18 years')); ?>"
-							           class="form-control input-sm">
-							</div>
-
-			              
-			            </div>
-			          </div>
-
-			           <div class="form-group">
-			            <div class="col-md-8">
-			              <label class="col-md-4 control-label" for=
-			              "phone ">Phone:</label>
-
-			              <div class="col-md-8">
-			                <input name="phone" required pattern="09\d{9}" type="number" max-len="11" , class="form-control input-sm" id="phone" value="09"  />
-			              </div>
-			            </div>
-			           </div>
-
-			           <div class="form-group">
-			            <div class="col-md-8">
-			              <label class="col-md-4 control-label" for=
-			              "nationality">Nationality:</label>
-
-			              <div class="col-md-8">
-			                <input onkeyup="capitalizeInput(this)" name="nationality" type="text" class="form-control input-sm" id="nationality" /  maxlength="17">
-			              </div>
-			            </div>
-			          </div>
-			         
-			             <div class="form-group">
-			            <div class="col-md-8">
-			              <label class="col-md-4 control-label" for=
-			              "company">Company:</label>
-
-			              <div class="col-md-8">
-			                <input onkeyup="capitalizeInput(this)" name="company" type="text" class="form-control input-sm" id="company" / required>
-			              </div>
-			            </div>
-			          </div>
-			              <div class="form-group">
-			            <div class="col-md-8">
-			              <label class="col-md-4 control-label" for=
-			              "caddress">Address:</label>
-
-			              <div class="col-md-8">
-			                <input onkeyup="capitalizeInput(this)" name="caddress" type="text" class="form-control input-sm" id="caddress" / required>
-			              </div>
-			            </div>
-			          </div>
-			    
-			         
-			            <div class="form-group">
-			            <div class="col-md-8">
-			              <label class="col-md-4 control-label" for=
-			              "username">Username:</label>
-
-			              <div class="col-md-8">
-			                <input name="username" type="email" class="form-control input-sm" id="username" / placeholder="User@gmail.com">
-			              </div>
-			            </div>
-			       		 </div>
-			  <!--     
-			          <div class="form-group">
-			            <div class="col-md-8">
-			              <label class="col-md-4 control-label" for=
-			              "cemail">CONFRIM E-MAIL:</label>
-
-			              <div class="col-md-8">
-			                <input name="cemail" type="text" class="form-control input-sm" id="cemail" />
-			              </div>
-			            </div>
-			          </div> -->
-			          <div class="form-group">
-					    <div class="col-md-8">
-					        <label class="col-md-4 control-label" for="password">Password:</label>
-					        <div class="col-md-8">
-					            <input name="pass" type="password" class="form-control input-sm" id="password" onkeyup="validatePassword()" required / placeholder="Ex@mple123">
-					            <span id="password-error" style="color: red;"></span>
-					        </div>
-					    </div>
-					</div>
-
-
-			          <div class="form-group">
-			            <div class="col-md-8">
-			              <label class="col-md-4 control-label" for=
-			              "zip">Zip Code:</label>
-
-			              <div class="col-md-8">
-			                <input name="zip" type="number" class="form-control input-sm" id="zip" / maxlength="4" minlength="4" required="">
-			              </div>
+      <div class="form-group">
+    <label  class ="control-label" for="password">Password:</label>
+    <input name="pass" type="password" class="form-control input-sm" id="password"  required onkeyup="validatePassword()" placeholder="Ex@mple123">
+    <span id="password-error" style="color: red;"></span>
+</div>
 			            </div>
 			          </div>
  
@@ -301,7 +250,22 @@ function capitalizeInput(input) {
     input.value = inputValue.charAt(0).toUpperCase() + inputValue.slice(1);
 }
 </script>
+<script>
+function validateDOB(input) {
+    const selectedDate = new Date(input.value);
+    const todayMinus18 = new Date();
+    todayMinus18.setFullYear(todayMinus18.getFullYear() - 18);
 
+    const dobError = document.getElementById('dob-error');
+    if (selectedDate > todayMinus18) {
+        dobError.textContent = "You must be at least 18 years old.";
+        input.setCustomValidity("You must be at least 18 years old.");
+    } else {
+        dobError.textContent = "";
+        input.setCustomValidity("");
+    }
+}
+</script>
 <script>
 function validatePassword() {
     var passwordInput = document.getElementById("password");
