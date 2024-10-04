@@ -3,56 +3,74 @@
 
 <?php
 require_once 'sendOTP.php';
-if (isset($_POST['submit'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  if(isset($_POST['submit'])) {
+      // Verify OTP
+      if(isset($_POST['otp'])) {
+          if(isset($_SESSION['otp']) && $_POST['otp'] == $_SESSION['otp']) {
+              // OTP is correct, proceed with form processing
 
-    // Handle image upload
-    $targetDirectory = "../images/user_avatar/";  // Directory where uploaded images will be stored
-    $targetFile = $targetDirectory . basename($_FILES["image"]["name"]);
-    $fileName = basename($_FILES["image"]["name"]);
-    $uploadOk = 1;
-    $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+              // Handle image upload
+              $targetDirectory = "../images/user_avatar/";  // Directory where uploaded images will be stored
+              $targetFile = $targetDirectory . basename($_FILES["image"]["name"]);
+              $fileName = basename($_FILES["image"]["name"]);
+              $uploadOk = 1;
+              $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
-    if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
-        echo "The file " . basename($_FILES["image"]["name"]) . " has been uploaded.";
-    } else {
-        echo "Sorry, there was an error uploading your file.";
-    }
+              if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
+                  echo "The file " . htmlspecialchars(basename($_FILES["image"]["name"])) . " has been uploaded.<br>";
+              } else {
+                  echo "Sorry, there was an error uploading your file.<br>";
+              }
 
-    // Server-side DOB validation
-    $dob = $_POST['dbirth'];
-    $dobDate = DateTime::createFromFormat('Y-m-d', $dob);
-    $today = new DateTime();
-    $ageInterval = $today->diff($dobDate);
-    $age = $ageInterval->y;
+              // Server-side DOB validation
+              $dob = $_POST['dbirth'];
+              $dobDate = DateTime::createFromFormat('Y-m-d', $dob);
+              $today = new DateTime();
+              $ageInterval = $today->diff($dobDate);
+              $age = $ageInterval->y;
 
-    if ($age < 18) {
-        $_SESSION['ERRMSG_ARR'][] = 'You must be at least 18 years old.';
-        
-    } else {
-        // Proceed with form processing if age is valid
-        $arrival = $_SESSION['from']; 
-        $departure = $_SESSION['to'];
-        $ROOMID = $_SESSION['ROOMID'];
+              if ($age < 18) {
+                  $_SESSION['ERRMSG_ARR'][] = 'You must be at least 18 years old.';
+              } else {
+                  // Proceed with form processing if age is valid
+                  $arrival = $_SESSION['from']; 
+                  $departure = $_SESSION['to'];
+                  $ROOMID = $_SESSION['ROOMID'];
 
-        $_SESSION['image'] = $fileName;
-        $_SESSION['name'] = $_POST['name'];
-        $_SESSION['last'] = $_POST['last'];
-        $_SESSION['gender'] = $_POST['gender'];
-        $_SESSION['dbirth'] = $_POST['dbirth'];
-        $_SESSION['zip'] = $_POST['zip'];
-        $_SESSION['nationality'] = $_POST['nationality'];
-        $_SESSION['city'] = $_POST['city'];
-        $_SESSION['address'] = $_POST['address'];
-        $_SESSION['company'] = $_POST['company'];
-        $_SESSION['caddress'] = $_POST['caddress'];
-        $_SESSION['phone'] = $_POST['phone'];
-        $_SESSION['username'] = $_POST['username'];
-        $_SESSION['pass'] = $_POST['pass'];
-        $_SESSION['pending'] = 'pending';
-        $_SESSION['otp'] = sendOTP($_SESSION['username']);;
-    }
+                  $_SESSION['image'] = $fileName;
+                  $_SESSION['name'] = $_POST['name'];
+                  $_SESSION['last'] = $_POST['last'];
+                  $_SESSION['gender'] = $_POST['gender'];
+                  $_SESSION['dbirth'] = $_POST['dbirth'];
+                  $_SESSION['zip'] = $_POST['zip'];
+                  $_SESSION['nationality'] = $_POST['nationality'];
+                  $_SESSION['city'] = $_POST['city'];
+                  $_SESSION['address'] = $_POST['address'];
+                  $_SESSION['company'] = $_POST['company'];
+                  $_SESSION['caddress'] = $_POST['caddress'];
+                  $_SESSION['phone'] = $_POST['phone'];
+                  $_SESSION['username'] = $_POST['username'];
+                  $_SESSION['pass'] = password_hash($_POST['pass'], PASSWORD_DEFAULT); // Always hash passwords
+                  $_SESSION['pending'] = 'pending';
+                  
+                  // Optionally, unset the OTP after successful verification
+                  unset($_SESSION['otp']);
+
+                  // Redirect to the next page (e.g., payment page)
+                  header('Location: index.php?view=payment');
+                  exit();
+              }
+          } else {
+              $_SESSION['ERRMSG_ARR'][] = 'Invalid OTP. Please try again.';
+          }
+      } else {
+          $_SESSION['ERRMSG_ARR'][] = 'Please enter the OTP.';
+      }
   }
+}
 ?>
+
 <?php
 // session_start(); // Start the session at the beginning
 
@@ -233,10 +251,26 @@ if (isset($_POST['submit']) && isset($_POST['otp'])) {
       </div>
 
       <div class="form-group">
-        <label  class ="control-label" for="username">Email:</label>
-        <input name="username" type="email" class="form-control input-sm" id="username" required  placeholder="User@gmail.com">
-      </div>
-
+    <label class="control-label" for="username">Email:</label>
+    <div class="input-group">
+        <input 
+            name="username" 
+            type="email" 
+            class="form-control input-sm" 
+            id="username" 
+            required 
+            placeholder="User@gmail.com">
+        <div class="input-group-append">
+            <button 
+                type="button" 
+                class="btn btn-secondary" 
+                id="sendOtpButton">Send OTP</button>
+        </div>
+    </div>
+    <small id="emailHelp" class="form-text text-muted">
+        Click "Send OTP" to receive a verification code.
+    </small>
+</div>
       <div class="form-group">
     <label  class ="control-label" for="password">Password:</label>
     <input name="pass" type="password" class="form-control input-sm" id="password"  required onkeyup="validatePassword()" placeholder="Ex@mple123">
@@ -244,10 +278,24 @@ if (isset($_POST['submit']) && isset($_POST['otp'])) {
 </div>
 
       <!-- OTP input after email submission -->
-  <!-- <div class="form-group" id="otp-section" >
-        <label for="otp">Enter OTP:</label>
-        <input type="text" name="otp" class="form-control input-sm" id="otp" maxlength="6" required>
-    </div> -->
+      <div class="form-group" id="otp-section" style="display: none;">
+    <label for="otp">Enter OTP:</label>
+    <input 
+        type="text" 
+        name="otp" 
+        class="form-control input-sm" 
+        id="otp" 
+        maxlength="6" 
+        required>
+    <small id="otpHelp" class="form-text text-muted">
+        Please enter the 6-digit OTP sent to your email.
+    </small>
+</div>
+
+<p id="email-msg" style="color: green; display: none;">
+    An OTP has been sent to your email. Please check your inbox.
+</p>
+
     </div>
   </div>
  
@@ -341,5 +389,66 @@ function validatePassword() {
 document.querySelector('form').onsubmit = function () {
     return validatePassword(); // Validate password before form submission
 };
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function(){
+    $('#sendOtpButton').click(function(){
+        // Collect necessary data
+        var name = $('#name').val().trim();
+        var last = $('#last').val().trim();
+        var email = $('#username').val().trim();
+
+        // Basic validation
+        if(name === '' || last === '' || email === ''){
+            alert('Please fill in your First Name, Last Name, and Email before requesting an OTP.');
+            return;
+        }
+
+        // Simple email format validation
+        var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if(!emailPattern.test(email)){
+            alert('Please enter a valid email address.');
+            return;
+        }
+
+        // Disable the button to prevent multiple clicks
+        $('#sendOtpButton').prop('disabled', true).text('Sending...');
+
+        // Send AJAX request to sendOTP.php
+        $.ajax({
+            url: 'sendOTP.php',
+            type: 'POST',
+            data: {
+                name: name,
+                last: last,
+                username: email
+            },
+            success: function(response){
+                // Parse JSON response
+                try {
+                    var res = JSON.parse(response);
+                    if(res.status === 'success'){
+                        alert(res.message);
+                        // Show OTP section
+                        $('#otp-section').show();
+                        $('#email-msg').show();
+                    } else {
+                        alert(res.message);
+                    }
+                } catch(e){
+                    alert('An unexpected error occurred.');
+                }
+            },
+            error: function(){
+                alert('Failed to send OTP. Please try again.');
+            },
+            complete: function(){
+                // Re-enable the button
+                $('#sendOtpButton').prop('disabled', false).text('Send OTP');
+            }
+        });
+    });
+});
 </script>
 
