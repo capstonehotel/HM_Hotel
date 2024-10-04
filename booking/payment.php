@@ -12,7 +12,7 @@ if (isset($_GET['verify'])) {
     // Payment page content
 }
 
-if (isset($_POST['otp_verify'])) {
+if (isset($_POST['verify_otp'])) {
     $otp = $_POST['otp'];
     if ($otp == $_SESSION['otp']) {
         // OTP is valid, redirect to payment page
