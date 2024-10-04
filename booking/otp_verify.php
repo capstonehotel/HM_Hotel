@@ -1,14 +1,19 @@
 <?php
-session_start(); 
+session_start();
 if (isset($_POST['otp'])) {
-    $otp = $_POST['otp'];
-    var_dump($_SESSION['otp']);
-    if ($otp == $_SESSION['otp']) {
-        // OTP is valid, return success message
-        echo 'valid';
+    $userOtp = $_POST['otp'];
+    var_dump($userOtp); // Verify that the user-input OTP is being received correctly
+    if (isset($_SESSION['otp'])) {
+        var_dump($_SESSION['otp']); // Verify that the OTP is being retrieved correctly from the session
+        if ($userOtp == $_SESSION['otp']) {
+            // OTP is valid, return success message
+            echo 'valid';
+        } else {
+            // OTP is invalid, return error message
+            echo 'invalid';
+        }
     } else {
-        // OTP is invalid, return error message
-        echo 'invalid';
+        echo 'OTP not found in session'; // Handle the case where the OTP is not found in the session
     }
 }
 ?>
