@@ -393,7 +393,7 @@ if(isset($_POST['btnsubmitbooking'])){
 // }
 //   $payable= $rate*$days;
 //   $_SESSION['pay']= $payable;
-
+if (verifyOTP($_SESSION['otp'])) {
 if(!isset($_SESSION['GUESTID'])){
 
   // var_dump($_SESSION);exit;
@@ -421,7 +421,7 @@ $guest->create();
 $_SESSION['GUESTID'] =   $lastguest;
 
 }
- 
+}
     $count_cart = count($_SESSION['monbela_cart']);
   
 
