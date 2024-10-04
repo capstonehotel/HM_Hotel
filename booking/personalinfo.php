@@ -352,7 +352,7 @@ document.querySelector('form').onsubmit = function () {
 
  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
-<!-- 
+
 <script>
    document.getElementById('confirmButton').addEventListener('click', function(event) {
     event.preventDefault(); 
@@ -371,65 +371,37 @@ document.querySelector('form').onsubmit = function () {
         body: formData
     })
     .then(response => response.text())
-    .then(data => {
-        console.log(data); 
-
-        let timeLeft = 300; 
-        otpTimeout = setInterval(() => {
-            if (timeLeft <= 0) {
-                clearInterval(otpTimeout);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'OTP Expired',
-                    text: 'The OTP has expired. Please request a new one.',
-                });
-            } else {
-                timeLeft--;
-                Swal.update({
-                    title: 'OTP Verification',
-                    text: `You have ${timeLeft} seconds to enter the OTP.`
-                });
-            }
-        }, 1000);
-
-        Swal.fire({
-            title: 'OTP Verification',
-            input: 'text',
-            inputLabel: 'Enter the OTP sent to your email',
-            inputAttributes: {
-                maxlength: 6
-            },
-            showCancelButton: true,
-            confirmButtonText: 'Verify',
-            cancelButtonText: 'Cancel',
-            preConfirm: (otp) => {
-                if (!otp) {
-                    Swal.showValidationMessage('Please enter the OTP');
-                } else {
-                    return fetch('verifyOTP.php', {
-                        method: 'POST',
-                        body: JSON.stringify({ otp: otp }),
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    }).then(response => {
-                        if (!response.ok) {
-                            throw new Error('Invalid OTP');
-                        }
-                        return response.text();
-                    }).catch(error => {
-                        Swal.showValidationMessage('Invalid OTP. Please try again.');
-                    });
-                }
-            }
-        }).then(result => {
-            if (result.isConfirmed) {
-                // OTP is correct, proceed with form submission
-                document.querySelector('form').submit();
-            }
-        });
-    });
+    .then(data => console.log(data))//.then(data => Swal.fire('OTP sent successfully!'))
+    .catch(error => console.error('Error sending OTP:', error));
 });
 
+// Get the email input field
+const emailInput = document.getElementById('username');
+
+// Add an event listener to the email input field
+emailInput.addEventListener('blur', sendOTP);
+
+// Add a button to trigger the OTP request
+const otpButton = document.createElement('button');
+otpButton.textContent = 'Send OTP';
+otpButton.onclick = sendOTP;
+document.querySelector('form').appendChild(otpButton);
+
+// Function to send OTP request
+function sendOTP() {
+    const email = emailInput.value;
+    if (email) {
+        fetch('sendOTP.php', {
+            method: 'POST',
+            body: JSON.stringify({ email: email }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.text())
+        .then(data => console.log(data))//.then(data => Swal.fire('OTP sent successfully!'))
+        .catch(error => console.error('Error sending OTP:', error));
+    }
+}
 </script>
-  -->
+ 
