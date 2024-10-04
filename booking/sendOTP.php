@@ -7,7 +7,7 @@ require '../PHPMailer/src/Exception.php';
 require '../PHPMailer/src/PHPMailer.php';
 require '../PHPMailer/src/SMTP.php';
 
-function sendOTP($email) {
+function sendOTP($email,$name, $lastname) {
     // Generate OTP
     $otp = rand(100000, 999999);
 
@@ -31,7 +31,7 @@ function sendOTP($email) {
         // Content
         $mail->isHTML(true);                                
         $mail->Subject = 'Your OTP for Hotel Reservation';
-        $mail->Body    = "Hello,<br><br>Your OTP is: <b>{$otp}</b><br><br>Please enter this OTP to proceed.";
+        $mail->Body    = "Hello, $name, $lastname <br><br>Your OTP is: <b>{$otp}</b><br><br>Please enter this OTP to proceed.";
 
         $mail->send();
         return $otp;
