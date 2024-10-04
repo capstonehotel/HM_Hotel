@@ -1,52 +1,9 @@
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
 <?php
-
 if (isset($_GET['view']) && $_GET['view'] == 'payment' && isset($_GET['verify'])) {
-    var_dump($_GET['view']);
-    var_dump($_GET['verify']);
     ?>
     <script>
-        console.log('SweetAlert2 script is running');
-        Swal.fire({
-            title: 'Enter OTP',
-            input: 'text',
-            inputPlaceholder: 'Enter OTP code',
-            showCancelButton: true,
-            confirmButtonText: 'Verify OTP',
-            cancelButtonText: 'Cancel'
-        }).then((result) => {
-            if (result.value) {
-                // Verify OTP
-                $.ajax({
-                    type: 'POST',
-                    url: 'otp_verify.php',
-                    data: {otp: result.value},
-                    success: function(response) {
-                        if (response == 'valid') {
-                            // OTP is valid, display success message
-                            Swal.fire({
-                                title: 'OTP Verified!',
-                                text: 'You will be redirected to the payment page in 3 seconds.',
-                                timer: 3000,
-                                showConfirmButton: false,
-                                willClose: () => {
-                                    window.location.href = 'index.php?view=payment';
-                                }
-                            });
-                        } else {
-                            // OTP is invalid, display error message
-                            Swal.fire({
-                                title: 'Invalid OTP!',
-                                text: 'Please try again.',
-                                timer: 3000,
-                                showConfirmButton: false
-                            });
-                        }
-                    }
-                });
-            }
+        $(document).ready(function() {
+            $('#verifyModal').modal('show');
         });
     </script>
     <?php
@@ -54,6 +11,29 @@ if (isset($_GET['view']) && $_GET['view'] == 'payment' && isset($_GET['verify'])
     // Payment page content
 }
 ?>
+
+<!-- Modal -->
+<div class="modal fade" id="verifyModal" tabindex="-1" role="dialog" aria-labelledby="verifyModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="verifyModalLabel">Verify OTP</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="otp">Enter OTP:</label>
+                        <input type="text" class="form-control" id="otp" name="otp">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Verify</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
