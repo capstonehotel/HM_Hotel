@@ -340,14 +340,14 @@ if (isset($_POST['submit']) && isset($_POST['otp'])) {
 }
 ?>
 
-<div id="otpModal" class="modal">
+<!-- <div id="otpModal" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
     <h2>Enter OTP</h2>
     <input type="text" id="otpInput" placeholder="Enter OTP">
     <button id="verifyOTP">Verify</button>
   </div>
-</div>
+</div> -->
 <script>
 // Function to open the OTP modal
 function openOTPModal() {
@@ -382,9 +382,13 @@ document.getElementById('confirmButton').addEventListener('click', function(even
     .catch(error => console.error('Error:', error));
 });
 </script>
+<div class="col-md-4">
+    <input name="submit" type="submit" value="Confirm" id="confirmButton" class="btn btn-primary" id="submitFormButton"/>
+</div>
+
 <!-- Modal for OTP Verification -->
-<!-- <div class="modal fade" id="otp-modal" tabindex="-1" role="dialog" aria-labelledby="otp-modal-label" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="otp-modal" tabindex="-1" role="dialog" aria-labelledby="otp-modal-label" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document"> <!-- Use modal-sm for a smaller modal -->
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="otp-modal-label">OTP Verification</h5>
@@ -395,19 +399,67 @@ document.getElementById('confirmButton').addEventListener('click', function(even
             <div class="modal-body">
                 <p>Please enter the OTP sent to your email address.</p>
                 <form method="post" id="otp-form-modal">
-                    <label for="otp-modal">Enter OTP:</label>
+                    <label for="otpInput">Enter OTP:</label>
                     <input type="text" name="otp" maxlength="6" id="otpInput" required>
                     <button type="button" class="btn btn-primary" id="verifyOtpButton">Verify OTP</button>
                 </form>
             </div>
         </div>
     </div>
-</div> -->
+</div>
 
+<!-- Include SweetAlert library -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<!-- <script>
+<script>
     $(document).ready(function() {
-        // Show the modal for OTP verification
-        $('#otp-modal').modal('show');
+        // Show the modal for OTP verification when Confirm button is clicked
+        $('#confirmButton').click(function(e) {
+            e.preventDefault(); // Prevent form submission
+
+            // Perform form validation
+            var isValid = true;
+
+            // Example: Validate all required fields here
+            $('form').find('input').each(function() {
+                if (!$(this).val()) {
+                    isValid = false;
+                    return false; // Exit each loop early if any field is empty
+                }
+            });
+
+            if (!isValid) {
+                // Show SweetAlert for empty fields
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Please fill out all fields before confirming!',
+                });
+                return;
+            }
+
+            // All fields are filled, show OTP modal
+            $('#otp-modal').modal('show');
+        });
+
+        // Example: Handle OTP verification button click
+        $('#verifyOtpButton').click(function() {
+            // Here you can handle OTP verification logic if needed
+            var otp = $('#otpInput').val();
+
+            // Example: Perform AJAX request to verify OTP
+            // This part depends on your backend implementation
+            // For simplicity, we'll assume the OTP is verified successfully
+            // and proceed with some action like redirecting to payment page
+            Swal.fire({
+                icon: 'success',
+                title: 'OTP Verified!',
+                text: 'Proceeding to payment page...',
+                timer: 2000, // Optional: Automatically close the alert after 2 seconds
+                showConfirmButton: false // Optional: Remove the "OK" button
+            }).then(function() {
+                window.location.href = 'index.php?view=payment'; // Redirect to payment page
+            });
+        });
     });
-</script> -->
+</script>
