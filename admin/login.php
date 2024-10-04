@@ -57,7 +57,7 @@ if (isset($_POST['btnlogin'])) {
 
         } else {
             echo <<<EOT
-            <script src="sweetalert.js"></script>  
+             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
             <script type="text/javascript">
                 swal({
                     text: "Username or Password Not Registered!\\nContact Your administrator."
@@ -122,7 +122,7 @@ if (isset($_POST['btnlogin'])) {
 
 </style>
   <body>
-        <div class="title">
+       <div class="title">
     
         <p><b><span style="color:#ffd6bb;">HM Hotel </span> <span style="color:whitesmoke;">Reservation </span><span style="color:WG;">System   </span></b></p>
      </div>
