@@ -2,7 +2,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script> -->
 
 <?php
-require_once 'sendOTP.php';
+// require_once 'sendOTP.php';
 if (isset($_POST['submit'])) {
 
     // Handle image upload
@@ -49,13 +49,24 @@ if (isset($_POST['submit'])) {
         $_SESSION['username'] = $_POST['username'];
         $_SESSION['pass'] = $_POST['pass'];
         $_SESSION['pending'] = 'pending';
-        $_SESSION['otp'] = sendOTP($_SESSION['username']);
+        // $_SESSION['otp'] = sendOTP($_SESSION['username']);
         // echo '<script>$("#otp-modal").modal("show");</script>';
         // Redirect to payment page
-         header('Location: index.php?view=payment');
-        exit();
+  //        header('Location: index.php?view=payment');
+  //       exit();
+  //   }
+  // }
+  require_once 'sendOTP.php';
+    $otp = sendOTP($_SESSION['username']);
+
+    if ($otp !== null) {
+        $_SESSION['otp'] = $otp;
+        // Redirect to payment page
+        redirect('index.php?view=payment');
+    } else {
+        echo 'Error sending OTP.';
     }
-  }
+}
 ?>
 
 <?php
