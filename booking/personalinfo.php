@@ -112,7 +112,7 @@ if (isset($_POST['submit']) && isset($_POST['otp'])) {
 					?>
 					<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
    
-         		<form class="form-horizontal" action="index.php?view=logininfo" method="post"  name="personal" enctype="multipart/form-data" onsubmit="return personalInfo();">
+         		<form class="form-horizontal" action="index.php?view=logininfo" method="post"  name="personal" enctype="multipart/form-data" >
 					 <h2>Personal Details</h2> 
 
 					 <div class="row">
