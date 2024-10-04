@@ -53,6 +53,34 @@ if (isset($_POST['submit'])) {
     }
   }
 ?>
+<?php
+// session_start(); // Start the session at the beginning
+
+// Check if the form was submitted and OTP was entered
+if (isset($_POST['submit']) && isset($_POST['otp'])) {
+    
+    // Check if OTP session key exists
+    if (isset($_SESSION['otp'])) {
+        
+        // Verify OTP
+        if ($_POST['otp'] == $_SESSION['otp']) {
+            // OTP verified, proceed with registration or other actions
+            echo "OTP verified for user: " . $_SESSION['username'];
+            
+            // Redirect to the next page (e.g., payment page)
+            header('Location: index.php?view=payment');
+            exit();
+        } else {
+            echo "Invalid OTP. Please try again.";
+        }
+        
+    } else {
+        echo "OTP session expired. Please request a new OTP.";
+    }
+} else {
+    echo "Please enter the OTP.";
+}
+?> 
 
 <?php
         // // Redirect to OTP verification page
@@ -315,145 +343,3 @@ document.querySelector('form').onsubmit = function () {
 };
 </script>
 
-
-			
-
-
-<!-- <div id="otpModal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <h2>Enter OTP</h2>
-    <input type="text" id="otpInput" placeholder="Enter OTP">
-    <button id="verifyOTP">Verify</button>
-  </div>
-</div> -->
-<!-- <script>
-// Function to open the OTP modal
-function openOTPModal() {
-    var modal = document.getElementById("otpModal");
-    modal.style.display = "block";
-}
-
-// Close the modal if user clicks outside of it
-window.onclick = function(event) {
-    var modal = document.getElementById("otpModal");
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-
-// Attach an event listener to the Confirm button
-document.getElementById('confirmButton').addEventListener('click', function(event) {
-    event.preventDefault();
-
-    // Send the form data and trigger OTP email via AJAX
-    var formData = new FormData(document.querySelector('form'));
-
-    fetch('sendOTP.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.text())
-    .then(data => {
-        console.log(data); // Optionally log the server response
-        openOTPModal(); // Open the OTP modal on success
-    })
-    .catch(error => console.error('Error:', error));
-});
-</script> -->
-
-<!-- Modal for OTP Verification -->
-<!-- <div class="modal fade" id="otp-modal" tabindex="-1" role="dialog" aria-labelledby="otp-modal-label" aria-hidden="true">
-    <div class="modal-dialog modal-sm" role="document"> >
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="otp-modal-label">OTP Verification</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Please enter the OTP sent to your email address.</p>
-                <form method="post" id="otp-form-modal">
-                    <label for="otpInput">Enter OTP:</label>
-                    <input type="text" name="otp" maxlength="6" id="otpInput" required>
-                    <button type="button" class="btn btn-primary" id="verifyOtpButton">Verify OTP</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div> -->
-
-<!-- Include SweetAlert library -->
-
- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
-
-
-<script>
-  document.getElementById('personalInfoForm').onsubmit = function(event) {
-    event.preventDefault(); // Prevent form from submitting normally
-
-    // Validate the form fields before proceeding
-    if (validatePassword() && validateDOB(document.querySelector('#dbirth'))) {
-      // Create FormData object to send form data via AJAX
-      var formData = new FormData(document.getElementById('personalInfoForm'));
-
-      // Send the form data and trigger OTP email via AJAX
-      fetch('sendOTP.php', {
-        method: 'POST',
-        body: formData
-      })
-      .then(response => response.json())  // Assuming sendOTP.php returns JSON
-      .then(data => {
-        if (data.status === 'success') {
-          // Display SweetAlert prompt for OTP input
-          Swal.fire({
-            title: 'Enter OTP',
-            input: 'text',
-            inputLabel: 'An OTP has been sent to your email.',
-            inputPlaceholder: 'Enter OTP',
-            showCancelButton: true,
-            confirmButtonText: 'Verify OTP',
-            showLoaderOnConfirm: true,
-            preConfirm: (otp) => {
-              return fetch('otp_verify.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ otp: otp })
-              })
-              .then(response => response.json())
-              .then(result => {
-                if (result.status !== 'verified') {
-                  throw new Error(result.message);
-                }
-                return result;
-              })
-              .catch(error => {
-                Swal.showValidationMessage(`Request failed: ${error}`);
-              });
-            },
-            allowOutsideClick: () => !Swal.isLoading()
-          }).then((result) => {
-            if (result.isConfirmed) {
-              Swal.fire({
-                icon: 'success',
-                title: 'OTP Verified',
-                text: 'Your OTP has been verified successfully!'
-              });
-              // Optionally, redirect to a new page or submit the rest of the form
-              // document.getElementById('personalInfoForm').submit();
-            }
-          });
-        } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: data.message
-          });
-        }
-      })
-      .catch(error => console.error('Error:', error));
-    }
-  };
-</script>
