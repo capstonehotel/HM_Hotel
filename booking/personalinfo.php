@@ -382,9 +382,6 @@ document.getElementById('confirmButton').addEventListener('click', function(even
     .catch(error => console.error('Error:', error));
 });
 </script>
-<div class="col-md-4">
-    <input name="submit" type="submit" value="Confirm" id="confirmButton" class="btn btn-primary" id="submitFormButton"/>
-</div>
 
 <!-- Modal for OTP Verification -->
 <div class="modal fade" id="otp-modal" tabindex="-1" role="dialog" aria-labelledby="otp-modal-label" aria-hidden="true">
