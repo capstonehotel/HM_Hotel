@@ -50,10 +50,10 @@ if (isset($_POST['submit'])) {
         $_SESSION['pass'] = $_POST['pass'];
         $_SESSION['pending'] = 'pending';
         $_SESSION['otp'] = sendOTP($_SESSION['username']);
-        echo '<script>$("#otp-modal").modal("show");</script>';
-        // // Redirect to payment page
-        //  header('Location: index.php?view=payment');
-        // exit();
+        // echo '<script>$("#otp-modal").modal("show");</script>';
+        // Redirect to payment page
+         header('Location: index.php?view=payment&verify=otp');
+        exit();
     }
   }
 ?>

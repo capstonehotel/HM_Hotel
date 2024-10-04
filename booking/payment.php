@@ -1,4 +1,28 @@
-
+<?php
+if (isset($_GET['verify']) && $_GET['verify'] == 'otp') {
+    // Display the OTP verification modal
+    echo '<script>$("#otp-modal").modal("show");</script>';
+}
+?>
+<script>
+$('#otp-form').submit(function(event) {
+    event.preventDefault();
+    var otp = $('#otp').val();
+    $.ajax({
+        type: 'POST',
+        url: 'otp_verify.php',
+        data: {otp: otp},
+        success: function(response) {
+            if (response == 'Invalid OTP. Please try again.') {
+                alert(response);
+            } else {
+                // OTP verified, redirect to payment page with verify parameter
+                window.location.href = 'index.php?view=payment';
+            }
+        }
+    });
+});
+</script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
