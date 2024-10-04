@@ -1,9 +1,11 @@
 
 <?php
 if (isset($_GET['view']) && $_GET['view'] == 'payment' && isset($_GET['verify'])) {
-    // Display the OTP verification form using SweetAlert2
+    var_dump($_GET['view']);
+    var_dump($_GET['verify']);
     ?>
     <script>
+        console.log('SweetAlert2 script is running');
         Swal.fire({
             title: 'Enter OTP',
             input: 'text',
