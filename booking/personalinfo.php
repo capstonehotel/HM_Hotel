@@ -49,7 +49,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['username'] = $_POST['username'];
         $_SESSION['pass'] = $_POST['pass'];
         $_SESSION['pending'] = 'pending';
-        $_SESSION['otp'] = sendOTP($_SESSION['username']);;
+        // $_SESSION['otp'] = sendOTP($_SESSION['username']);;
         // Redirect to payment page
          header('Location: index.php?view=payment');
         exit();
