@@ -48,13 +48,97 @@ if (isset($_POST['submit'])) {
         $_SESSION['pass'] = $_POST['pass'];
         $_SESSION['pending'] = 'pending';
         $_SESSION['otp'] = sendOTP($_SESSION['username']);;
+// After sending OTP, show SweetAlert for OTP input
+echo "<script>
+let otpTimeout; // Variable to store the timeout for the OTP countdown
 
+// Start OTP countdown timer
+let timeLeft = 300; // 5 minutes countdown (300 seconds)
+otpTimeout = setInterval(() => {
+    if (timeLeft <= 0) {
+        clearInterval(otpTimeout);
+        Swal.fire({
+            icon: 'error',
+            title: 'OTP Expired',
+            text: 'The OTP has expired. Please request a new one.',
+        });
+    } else {
+        timeLeft--;
+        // Update SweetAlert with remaining time
+        Swal.update({
+            title: 'OTP Verification',
+            text: `You have ${timeLeft} seconds to enter the OTP.`
+        });
+    }
+}, 1000);
+
+// Show SweetAlert for OTP input
+Swal.fire({
+    title: 'OTP Verification',
+    input: 'text',
+    inputLabel: 'Enter the OTP sent to your email',
+    inputAttributes: {
+        maxlength: 6
+    },
+    showCancelButton: true,
+    confirmButtonText: 'Verify',
+    cancelButtonText: 'Cancel',
+    preConfirm: (otp) => {
+        if (!otp) {
+            Swal.showValidationMessage('Please enter the OTP');
+        } else {
+            // Verify OTP directly in the same PHP file
+            return fetch('', { // The same page to verify OTP
+                method: 'POST',
+                body: JSON.stringify({ otp: otp, action: 'verify', username: '{$_SESSION['username']}' }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(response => {
+                if (!response.ok) {
+                    throw new Error('Invalid OTP');
+                }
+                return response.json(); // Assuming the server returns a JSON response
+            }).catch(error => {
+                Swal.showValidationMessage(error.message);
+            });
+        }
+    }
+}).then((result) => {
+    clearInterval(otpTimeout); // Clear the timer
+    if (result.isConfirmed) {
+        if (result.value === 'success') {
+            Swal.fire('Success!', 'OTP verified successfully.', 'success');
+            // Optionally redirect after successful verification
+            window.location.href = 'index.php?view=payment'; // Redirect to payment page
+        } else {
+            Swal.fire('Error', result.value, 'error');
+        }
+    }
+});
+</script>";
+}
+}
+
+// Handle OTP verification
+if (isset($_POST['action']) && $_POST['action'] === 'verify' && isset($_SESSION['otp'])) {
+// Verify OTP
+$receivedOtp = json_decode(file_get_contents('php://input'))->otp;
+if ($receivedOtp == $_SESSION['otp']) {
+echo json_encode("success"); // Return success response
+} else {
+echo json_encode("Invalid OTP. Please try again."); // Return error response
+}
+}
+?>
+
+<?php
         // // Redirect to OTP verification page
         // header('Location: otp_verify.php');
 //         // exit();
-    }
-}
-//         // Redirect to payment page
+//     }
+// }
+// //         // Redirect to payment page
 //         header('Location: index.php?view=payment');
 //         exit();
 //     }
@@ -311,7 +395,7 @@ document.querySelector('form').onsubmit = function () {
 
 
 			
-<?php
+<!-- <?php
 // session_start(); // Start the session at the beginning
 
 // Check if the form was submitted and OTP was entered
@@ -338,7 +422,7 @@ if (isset($_POST['submit']) && isset($_POST['otp'])) {
 } else {
     echo "Please enter the OTP.";
 }
-?>
+?> -->
 
 <!-- <div id="otpModal" class="modal">
   <div class="modal-content">
@@ -411,7 +495,7 @@ document.getElementById('confirmButton').addEventListener('click', function(even
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<script>
+<!-- <script>
     let otpTimeout; // Variable to store the timeout for the OTP countdown
 
     document.getElementById('confirmButton').addEventListener('click', function(event) {
@@ -498,4 +582,4 @@ document.getElementById('confirmButton').addEventListener('click', function(even
     });
 
 </script>
-
+ -->
