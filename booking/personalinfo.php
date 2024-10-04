@@ -313,6 +313,7 @@ document.querySelector('form').onsubmit = function () {
 
 			
 <?php
+session_start();
 if ($_POST['otp'] == $_SESSION['otp']) {
     // OTP verified, proceed with registration
     // Further actions like account creation, login, etc.
