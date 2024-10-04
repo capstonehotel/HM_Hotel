@@ -121,29 +121,51 @@ if (isset($_POST['btnlogin'])) {
 
 
 </style>
-<body>
-    <div class="container">
-        <!-- Your login form here -->
-        <form role="form" method="POST" action="login.php">
-            <fieldset>
-                <div class="form-group">
-                    <h5>Email</h5>
-                    <input class="form-control" required placeholder="ex.gmail.com" name="email" type="email" required>
-                </div>
-                <div class="form-group">
-                    <h5>Password</h5>
-                    <input class="form-control" placeholder="* * * * * * * * *" name="pass" type="password" minlength="6" maxlength="8">
-                    <a href="javascript:void(0)" class="text-reset text-decoration-none pass_view"><i class="fa fa-eye-slash"></i></a>
-                </div>
-                <div class="checkbox">
-                    <label><input name="remember" type="checkbox" value="Remember Me">Remember Me</label>
-                </div>
-                <button type="submit" name="btnlogin" class="btn btn-lg btn-success btn-block">Login</button><br>
-                <div class="text-center mt-3">
+  <body>
+        <div class="title">
+    
+        <p><b><span style="color:#ffd6bb;">HM Hotel </span> <span style="color:whitesmoke;">Reservation </span><span style="color:WG;">System   </span></b></p>
+     </div>
+       </br>
+        <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4" >
+                <div class="login-panel panel panel-default"style="  border-radius:8px; box-shadow: 0 2px 2px 0 rgba(2,2,2,2.1);">
+                    <div class="panel-heading" style="border-top-right-radius:8px; border-top-left-radius: 8px;">
+                        <h2 class="panel-title" style="font-size: 30px; font-family: Georgia;"><center>Login Credential</h2>
+                    </div>
+                    <div class="panel-body">
+                        <form role="form" method="POST" action="#">
+                            <fieldset>
+                                <div class="form-group">
+                                    <h5>Email</h5>
+                                    <input class="form-control" required placeholder="ex.gmail.com" name="email" type="email" required  >
+                                </div>
+                                <div class="form-group">
+                                    <h5>Password</h5>
+                                    <input class="form-control" placeholder="* * * * * * * * *" name="pass" type="password" value="" minlength="6" maxlength="8">
+                                    <a href="javascript:void(0)" class="text-reset text-decoration-none pass_view"> <i class="fa fa-eye-slash"></i></a>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                                    </label>
+                                </div>
+                                <!-- Change this to a button or input when using this as a form -->
+                                <button type="submit"  name="btnlogin" class="btn btn-lg btn-success btn-block">Login</button><br>
+                                <div class="text-center mt-3">
                     <a href="../index.php" class="text-primary">Back to the website</a>
                 </div>
-            </fieldset>
-        </form>
-    </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
   </body>
 </html>
