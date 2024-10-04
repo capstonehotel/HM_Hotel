@@ -112,7 +112,7 @@ if (isset($_POST['submit']) && isset($_POST['otp'])) {
 					?>
 					<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
    
-         		<form class="form-horizontal" action="index.php?view=logininfo" method="post"  name="personal" enctype="multipart/form-data" onsubmit="return false;">
+         		<form class="form-horizontal" action="index.php?view=logininfo" method="post"  name="personal" enctype="multipart/form-data" onsubmit="return personalInfo();">
 					 <h2>Personal Details</h2> 
 
 					 <div class="row">
@@ -351,95 +351,82 @@ document.querySelector('form').onsubmit = function () {
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 
 <script>
-    let otpTimeout; // Variable to store the timeout for the OTP countdown
+   document.getElementById('confirmButton').addEventListener('click', function(event) {
+    event.preventDefault(); 
 
-    document.getElementById('confirmButton').addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent default form submission
+    if (!personalInfo()) {
+        return;
+    }
 
-        // Check personal info first
-        if (!personalInfo()) {
-            return; // If personalInfo() returns false, do not proceed
-        }
+    const emailInput = document.getElementById('username').value;
 
-        // Extract the email input value
-        const emailInput = document.getElementById('username').value;
+    var formData = new FormData(document.querySelector('form'));
+    formData.append('email', emailInput);
 
-        // Prepare form data to send via AJAX
-        var formData = new FormData(document.querySelector('form'));
-        formData.append('email', emailInput); // Add the email to the formData
+    fetch('sendOTP.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log(data); 
 
+        let timeLeft = 300; 
+        otpTimeout = setInterval(() => {
+            if (timeLeft <= 0) {
+                clearInterval(otpTimeout);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'OTP Expired',
+                    text: 'The OTP has expired. Please request a new one.',
+                });
+            } else {
+                timeLeft--;
+                Swal.update({
+                    title: 'OTP Verification',
+                    text: `You have ${timeLeft} seconds to enter the OTP.`
+                });
+            }
+        }, 1000);
 
-        fetch('sendOTP.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.text())
-        .then(data => {
-            console.log(data); // Log server response for debugging
-
-            // Start OTP countdown timer
-            let timeLeft = 300; // 5 minutes countdown (300 seconds)
-            otpTimeout = setInterval(() => {
-                if (timeLeft <= 0) {
-                    clearInterval(otpTimeout);
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'OTP Expired',
-                        text: 'The OTP has expired. Please request a new one.',
-                    });
+        Swal.fire({
+            title: 'OTP Verification',
+            input: 'text',
+            inputLabel: 'Enter the OTP sent to your email',
+            inputAttributes: {
+                maxlength: 6
+            },
+            showCancelButton: true,
+            confirmButtonText: 'Verify',
+            cancelButtonText: 'Cancel',
+            preConfirm: (otp) => {
+                if (!otp) {
+                    Swal.showValidationMessage('Please enter the OTP');
                 } else {
-                    timeLeft--;
-                    // Update SweetAlert with remaining time
-                    Swal.update({
-                        title: 'OTP Verification',
-                        text: `You have ${timeLeft} seconds to enter the OTP.`
+                    return fetch('verifyOTP.php', {
+                        method: 'POST',
+                        body: JSON.stringify({ otp: otp }),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }).then(response => {
+                        if (!response.ok) {
+                            throw new Error('Invalid OTP');
+                        }
+                        return response.text();
+                    }).catch(error => {
+                        Swal.showValidationMessage('Invalid OTP. Please try again.');
                     });
                 }
-            }, 1000);
-
-            // Show SweetAlert for OTP input
-            Swal.fire({
-                title: 'OTP Verification',
-                input: 'text',
-                inputLabel: 'Enter the OTP sent to your email',
-                inputAttributes: {
-                    maxlength: 6
-                },
-                showCancelButton: true,
-                confirmButtonText: 'Verify',
-                cancelButtonText: 'Cancel',
-                preConfirm: (otp) => {
-                    if (!otp) {
-                        Swal.showValidationMessage('Please enter the OTP');
-                    } else {
-                        // Send OTP for verification
-                        return fetch('verifyOTP.php', {
-                            method: 'POST',
-                            body: JSON.stringify({ otp: otp }),
-                            headers: {
-                                'Content-Type': 'application/json'
-                            }
-                        }).then(response => {
-                            if (!response.ok) {
-                                throw new Error('Invalid OTP');
-                            }
-                            return response.json(); // Assuming the server returns a JSON response
-                        }).catch(error => {
-                            Swal.showValidationMessage(error.message);
-                        });
-                    }
-                }
-            }).then((result) => {
-                clearInterval(otpTimeout); // Clear the timer
-                if (result.isConfirmed) {
-                    Swal.fire('Success!', 'OTP verified successfully.', 'success');
-                    // Optionally redirect after successful verification
-                    window.location.href = 'index.php?view=payment';
-                }
-            });
-        })
-        .catch(error => console.error('Error:', error));
+            }
+        }).then(result => {
+            if (result.isConfirmed) {
+                // OTP is correct, proceed with form submission
+                document.querySelector('form').submit();
+            }
+        });
     });
+});
 
 </script>
  
