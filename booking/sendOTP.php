@@ -46,7 +46,7 @@ if (isset($_POST['submit'])) {
         echo 'OTP has been sent to your email.';
 
         // Redirect to the OTP input page (or update front-end accordingly)
-        header("Location: https://mcchmhotelreservation.com/booking/index.php?view=logininfo.php");
+        header("Location: otp_verify.php");
 
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
