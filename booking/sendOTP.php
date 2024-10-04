@@ -9,12 +9,12 @@ require '../PHPMailer/src/SMTP.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode(file_get_contents('php://input'), true);
-    $username = $data['email'];
+    $email = $data['email'];
 
     // Generate OTP
     $otp = rand(100000, 999999);
     $_SESSION['otp'] = $otp; // Store OTP in session
-    $_SESSION['username'] = $username; // Store email in session
+    $_SESSION['username'] = $email; // Store email in session
 
     // Send OTP via PHPMailer
     $mail = new PHPMailer(true);
