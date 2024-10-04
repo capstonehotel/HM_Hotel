@@ -1,4 +1,5 @@
 <?php
+session_start(); 
 if (isset($_POST['otp'])) {
     $otp = $_POST['otp'];
     var_dump($_SESSION['otp']);
