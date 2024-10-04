@@ -412,6 +412,8 @@ document.getElementById('confirmButton').addEventListener('click', function(even
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
+    let otpTimeout; // Variable to store the timeout for the OTP countdown
+
     document.getElementById('confirmButton').addEventListener('click', function(event) {
         event.preventDefault(); // Prevent default form submission
 
@@ -430,6 +432,28 @@ document.getElementById('confirmButton').addEventListener('click', function(even
         .then(response => response.text())
         .then(data => {
             console.log(data); // Log server response for debugging
+
+            // Start OTP countdown timer
+            let timeLeft = 300; // 5 minutes countdown (300 seconds)
+            otpTimeout = setInterval(() => {
+                if (timeLeft <= 0) {
+                    clearInterval(otpTimeout);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'OTP Expired',
+                        text: 'The OTP has expired. Please request a new one.',
+                    });
+                } else {
+                    timeLeft--;
+                    // Update SweetAlert with remaining time
+                    Swal.update({
+                        title: 'OTP Verification',
+                        text: `You have ${timeLeft} seconds to enter the OTP.`
+                    });
+                }
+            }, 1000);
+
+            // Show SweetAlert for OTP input
             Swal.fire({
                 title: 'OTP Verification',
                 input: 'text',
@@ -445,7 +469,7 @@ document.getElementById('confirmButton').addEventListener('click', function(even
                         Swal.showValidationMessage('Please enter the OTP');
                     } else {
                         // Send OTP for verification
-                        return fetch('verifyOTP.php', { // Make sure to create this endpoint
+                        return fetch('verifyOTP.php', {
                             method: 'POST',
                             body: JSON.stringify({ otp: otp }),
                             headers: {
@@ -462,6 +486,7 @@ document.getElementById('confirmButton').addEventListener('click', function(even
                     }
                 }
             }).then((result) => {
+                clearInterval(otpTimeout); // Clear the timer
                 if (result.isConfirmed) {
                     Swal.fire('Success!', 'OTP verified successfully.', 'success');
                     // Optionally redirect after successful verification
@@ -473,3 +498,4 @@ document.getElementById('confirmButton').addEventListener('click', function(even
     });
 
 </script>
+
