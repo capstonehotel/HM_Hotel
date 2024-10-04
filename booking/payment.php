@@ -7,6 +7,43 @@ if (isset($_GET['view']) && $_GET['view'] == 'payment' && isset($_GET['verify'])
             $('#verifyModal').modal('show');
         });
     </script>
+    // payment.php
+<?php
+if (isset($_GET['view']) && $_GET['view'] == 'payment' && isset($_GET['verify'])) {
+    ?>
+    <script>
+        $(document).ready(function() {
+            $('#verifyModal').modal('show');
+        });
+    </script>
+    <?php
+} else {
+    // Payment page content
+}
+?>
+
+<!-- Modal -->
+<div class="modal fade" id="verifyModal" tabindex="-1" role="dialog" aria-labelledby="verifyModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="verifyModalLabel">Verify OTP</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="otp">Enter OTP:</label>
+                        <input type="text" class="form-control" id="otp" name="otp">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Verify</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
     <?php
 } else {
     // Payment page content
