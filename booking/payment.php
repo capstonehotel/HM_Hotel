@@ -1,47 +1,52 @@
 
 <?php
 if (isset($_GET['verify'])) {
-    // Display the OTP verification form
+    // Display the OTP verification form using SweetAlert2
     ?>
-    <form action="" method="post">
-        <input type="text" name="otp" placeholder="Enter OTP code">
-        <button type="submit" name="verify_otp">Verify OTP</button>
-    </form>
+    <script>
+        Swal.fire({
+            title: 'Enter OTP',
+            input: 'text',
+            inputPlaceholder: 'Enter OTP code',
+            showCancelButton: true,
+            confirmButtonText: 'Verify OTP',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.value) {
+                // Verify OTP
+                $.ajax({
+                    type: 'POST',
+                    url: 'otp_verify.php',
+                    data: {otp: result.value},
+                    success: function(response) {
+                        if (response == 'valid') {
+                            // OTP is valid, display success message
+                            Swal.fire({
+                                title: 'OTP Verified!',
+                                text: 'You will be redirected to the payment page in 3 seconds.',
+                                timer: 3000,
+                                showConfirmButton: false,
+                                willClose: () => {
+                                    window.location.href = 'index.php?view=payment';
+                                }
+                            });
+                        } else {
+                            // OTP is invalid, display error message
+                            Swal.fire({
+                                title: 'Invalid OTP!',
+                                text: 'Please try again.',
+                                timer: 3000,
+                                showConfirmButton: false
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    </script>
     <?php
 } else {
     // Payment page content
-}
-
-if (isset($_POST['verify_otp'])) {
-    $otp = $_POST['otp'];
-    if ($otp == $_SESSION['otp']) {
-        // OTP is valid, redirect to payment page
-        ?>
-        <script>
-            Swal.fire({
-                title: 'OTP Verified!',
-                text: 'You will be redirected to the payment page in 3 seconds.',
-                timer: 3000,
-                showConfirmButton: false,
-                willClose: () => {
-                    window.location.href = 'index.php?view=payment';
-                }
-            });
-        </script>
-        <?php
-    } else {
-        // OTP is invalid, display error message
-        ?>
-        <script>
-            Swal.fire({
-                title: 'Invalid OTP!',
-                text: 'Please try again.',
-                timer: 3000,
-                showConfirmButton: false
-            });
-        </script>
-        <?php
-    }
 }
 ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
