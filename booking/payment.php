@@ -1,4 +1,4 @@
-// payment.php
+
 <?php
 if (isset($_GET['verify'])) {
     // Display the OTP verification form
@@ -16,12 +16,34 @@ if (isset($_POST['verify_otp'])) {
     $otp = $_POST['otp'];
     if ($otp == $_SESSION['otp']) {
         // OTP is valid, redirect to payment page
-        redirect('index.php?view=payment');
+        ?>
+        <script>
+            Swal.fire({
+                title: 'OTP Verified!',
+                text: 'You will be redirected to the payment page in 3 seconds.',
+                timer: 3000,
+                showConfirmButton: false,
+                willClose: () => {
+                    window.location.href = 'index.php?view=payment';
+                }
+            });
+        </script>
+        <?php
     } else {
         // OTP is invalid, display error message
-        echo 'Invalid OTP. Please try again.';
+        ?>
+        <script>
+            Swal.fire({
+                title: 'Invalid OTP!',
+                text: 'Please try again.',
+                timer: 3000,
+                showConfirmButton: false
+            });
+        </script>
+        <?php
     }
-}?>
+}
+?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
