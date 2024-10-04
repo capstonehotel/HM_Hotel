@@ -7,17 +7,9 @@ require '../PHPMailer/src/Exception.php';
 require '../PHPMailer/src/PHPMailer.php';
 require '../PHPMailer/src/SMTP.php';
 
-
-
-if (isset($_POST['submit'])) {
-    // Store form data in session
-    $_SESSION['name'] = $_POST['name'];
-    $_SESSION['last'] = $_POST['last'];
-    $_SESSION['email'] = $_POST['username'];
-
+function sendOTP($email) {
     // Generate OTP
     $otp = rand(100000, 999999);
-    $_SESSION['otp'] = $otp; // Store OTP in session
 
     // Send OTP via PHPMailer
     $mail = new PHPMailer(true);
@@ -34,18 +26,19 @@ if (isset($_POST['submit'])) {
 
         //Recipients
         $mail->setFrom('mcchmhotelreservation@gmail.com', 'Hotel Reservation');
-        $mail->addAddress($_SESSION['email'], $_SESSION['name']); 
+        $mail->addAddress($email); 
 
         // Content
         $mail->isHTML(true);                                
         $mail->Subject = 'Your OTP for Hotel Reservation';
-        $mail->Body    = "Hello {$_POST['name']},<br><br>Your OTP is: <b>{$otp}</b><br><br>Please enter this OTP to proceed.";
+        $mail->Body    = "Hello,<br><br>Your OTP is: <b>{$otp}</b><br><br>Please enter this OTP to proceed.";
 
         $mail->send();
-        echo 'OTP has been sent to your email.';  // Return success message
+        return $otp;
 
     } catch (Exception $e) {
-        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";  // Return error message
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";  
+        return null;
     }
 }
 ?>
