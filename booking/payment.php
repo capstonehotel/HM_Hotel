@@ -421,7 +421,7 @@ $guest->create();
 $_SESSION['GUESTID'] =   $lastguest;
 
 }
-}
+
     $count_cart = count($_SESSION['monbela_cart']);
   
 
@@ -490,7 +490,35 @@ $_SESSION['GUESTID'] =   $lastguest;
             $_SESSION['activity'] = 1;
 
             ?> 
-<script type="text/javascript">
+            
+    <script type="text/javascript">
+        Swal.fire({
+            title: 'Success!',
+            text: 'Booking is successfully submitted!',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Redirect after confirmation
+                window.location.href = "index.php";
+            }
+        });
+    </script>
+    <?php
+} else {
+    // Display error message
+    ?>
+    <script type="text/javascript">
+        Swal.fire({
+            title: 'Error!',
+            text: 'Invalid OTP code !',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+    </script>
+    <?php
+}?>
+<!-- <script type="text/javascript">
     Swal.fire({
         title: 'Success!',
         text: 'Booking is successfully submitted!',
@@ -503,7 +531,7 @@ $_SESSION['GUESTID'] =   $lastguest;
         }
     });
 </script>
-<?php }?>
+<?php }?> -->
 
  
 <!-- Add this in your HTML head section -->
