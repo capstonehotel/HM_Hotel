@@ -31,7 +31,7 @@ function sendOTP($email,$name, $lastname) {
         // Content
         $mail->isHTML(true);                                
         $mail->Subject = 'Your OTP for Hotel Reservation';
-        $mail->Body    = "Hello, $name, $lastname <br><br>Your OTP is: <b>{$otp}</b><br><br>Please enter this OTP to proceed.";
+        $mail->Body    = "Hello, $name $lastname <br><br>Your OTP is: <b>{$otp}</b><br>Please enter this OTP to proceed.";
 
         $mail->send();
         return $otp;
