@@ -1,6 +1,6 @@
 
 <?php
-if (isset($_GET['verify'])) {
+if (isset($_GET['view']) && $_GET['view'] == 'payment' && isset($_GET['verify'])) {
     // Display the OTP verification form using SweetAlert2
     ?>
     <script>
