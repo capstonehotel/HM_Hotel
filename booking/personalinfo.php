@@ -47,13 +47,12 @@ if (isset($_POST['submit'])) {
         $_SESSION['username'] = $_POST['username'];
         $_SESSION['pass'] = $_POST['pass'];
         $_SESSION['pending'] = 'pending';
-        require_once 'sendOTP.php';
         $otp = sendOTP($_SESSION['username']);
         $_SESSION['otp'] = $otp;
 
-        // Redirect to OTP verification page
-        header('Location: otp_verify.php');
-        exit();
+        // // Redirect to OTP verification page
+        // header('Location: otp_verify.php');
+        // exit();
     }
 }
 //         // Redirect to payment page
@@ -81,7 +80,7 @@ if (isset($_POST['submit'])) {
 					?>
 					<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
    
-         		<form class="form-horizontal" action="index.php?view=logininfo" method="post"  name="personal" enctype="multipart/form-data">
+         		<form class="form-horizontal" action="index.php?view=logininfo" method="post"  name="personal" enctype="multipart/form-data" onsubmit="return false;">
 					 <h2>Personal Details</h2> 
 
 					 <div class="row">
@@ -237,7 +236,7 @@ if (isset($_POST['submit'])) {
 						<!-- <img src="captcha_code_file.php?rand=<?php echo rand(); ?>" id='captchaimg' ><a href='javascript: refreshCaptcha();'><img src="<?php echo WEB_ROOT;?>images/refresh.png" alt="refresh" border="0" style="margin-top:5px; margin-left:5px;" /></a>
 						<br /><small>If you are a Human Enter the code above here :</small><input id="6_letters_code" name="6_letters_code" type="text" class="form-control input-sm" width="20"></p><br/>
 					 -->	<div class="col-md-4">
-					    	<input name="submit" type="submit" value="Confirm"  class="btn btn-primary" onclick="return personalInfo();"/>
+					    	<input name="submit" type="submit" value="Confirm" id="confirmButton"  class="btn btn-primary" id="submitFormButton"/>
 					    </div>
 					</div>
 					NOTE: 
@@ -313,3 +312,87 @@ document.querySelector('form').onsubmit = function () {
 
 
 			
+<?php
+if ($_POST['otp'] == $_SESSION['otp']) {
+    // OTP verified, proceed with registration
+    // Further actions like account creation, login, etc.
+    echo "OTP verified for user: " . $_SESSION['username'];
+    // Redirect to the next page
+    // header('Location: index.php?view=payment');
+    // exit();
+} else {
+    echo "Invalid OTP. Please try again.";
+}
+?>
+
+<div id="otpModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Enter OTP</h2>
+    <input type="text" id="otpInput" placeholder="Enter OTP">
+    <button id="verifyOTP">Verify</button>
+  </div>
+</div>
+<script>
+// Function to open the OTP modal
+function openOTPModal() {
+    var modal = document.getElementById("otpModal");
+    modal.style.display = "block";
+}
+
+// Close the modal if user clicks outside of it
+window.onclick = function(event) {
+    var modal = document.getElementById("otpModal");
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+// Attach an event listener to the Confirm button
+document.getElementById('confirmButton').addEventListener('click', function(event) {
+    event.preventDefault();
+
+    // Send the form data and trigger OTP email via AJAX
+    var formData = new FormData(document.querySelector('form'));
+
+    fetch('sendOTP.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log(data); // Optionally log the server response
+        openOTPModal(); // Open the OTP modal on success
+    })
+    .catch(error => console.error('Error:', error));
+});
+</script>
+<!-- Modal for OTP Verification -->
+<!-- <div class="modal fade" id="otp-modal" tabindex="-1" role="dialog" aria-labelledby="otp-modal-label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="otp-modal-label">OTP Verification</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Please enter the OTP sent to your email address.</p>
+                <form method="post" id="otp-form-modal">
+                    <label for="otp-modal">Enter OTP:</label>
+                    <input type="text" name="otp" maxlength="6" id="otpInput" required>
+                    <button type="button" class="btn btn-primary" id="verifyOtpButton">Verify OTP</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+<!-- <script>
+    $(document).ready(function() {
+        // Show the modal for OTP verification
+        $('#otp-modal').modal('show');
+    });
+</script> -->

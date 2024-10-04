@@ -1,14 +1,13 @@
 <?php
-
-
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// require 'vendor/autoload.php'; // Ensure PHPMailer is installed
 // Include PHPMailer files
 require '../PHPMailer/src/Exception.php';
 require '../PHPMailer/src/PHPMailer.php';
 require '../PHPMailer/src/SMTP.php';
+
+session_start();
 
 if (isset($_POST['submit'])) {
     // Store form data in session
@@ -26,30 +25,27 @@ if (isset($_POST['submit'])) {
     try {
         //Server settings
         $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';       // Gmail SMTP server
+        $mail->Host = 'smtp.gmail.com';       
         $mail->SMTPAuth = true;
-        $mail->Username = 'mcchmhotelreservation@gmail.com';  // SMTP username
-        $mail->Password = 'bkdb giql jcxw mmcc';      // SMTP password or app-specific password
+        $mail->Username = 'mcchmhotelreservation@gmail.com';  
+        $mail->Password = 'bkdb giql jcxw mmcc'; 
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
 
         //Recipients
         $mail->setFrom('mcchmhotelreservation@gmail.com', 'Hotel Reservation');
-        $mail->addAddress($_SESSION['email'], $_SESSION['name']); // Add recipient's email
+        $mail->addAddress($_SESSION['email'], $_SESSION['name']); 
 
         // Content
-        $mail->isHTML(true);                                  // Set email format to HTML
+        $mail->isHTML(true);                                
         $mail->Subject = 'Your OTP for Hotel Reservation';
         $mail->Body    = "Hello {$_POST['name']},<br><br>Your OTP is: <b>{$otp}</b><br><br>Please enter this OTP to proceed.";
 
         $mail->send();
-        echo 'OTP has been sent to your email.';
-
-        // Redirect to the OTP input page (or update front-end accordingly)
-        header("Location: otp_verify.php");
+        echo 'OTP has been sent to your email.';  // Return success message
 
     } catch (Exception $e) {
-        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";  // Return error message
     }
 }
 ?>
