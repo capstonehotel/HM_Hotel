@@ -37,29 +37,28 @@ if (isset($_POST['submit'])) {
         $_SESSION['last'] = $_POST['last'];
         $_SESSION['gender'] = $_POST['gender'];
         $_SESSION['dbirth'] = $_POST['dbirth'];
+        $_SESSION['zip'] = $_POST['zip'];
         $_SESSION['nationality'] = $_POST['nationality'];
         $_SESSION['city'] = $_POST['city'];
         $_SESSION['address'] = $_POST['address'];
         $_SESSION['company'] = $_POST['company'];
         $_SESSION['caddress'] = $_POST['caddress'];
-        $_SESSION['zip'] = $_POST['zip'];
         $_SESSION['phone'] = $_POST['phone'];
         $_SESSION['username'] = $_POST['username'];
         $_SESSION['pass'] = $_POST['pass'];
         $_SESSION['pending'] = 'pending';
-        $otp = sendOTP($_SESSION['username']);
-        $_SESSION['otp'] = $otp;
+        $_SESSION['otp'] = sendOTP($_SESSION['username']);;
 
         // // Redirect to OTP verification page
         // header('Location: otp_verify.php');
-        // exit();
-    }
-}
-//         // Redirect to payment page
-//         header('Location: index.php?view=payment');
-//         exit();
+//         // exit();
 //     }
 // }
+        // Redirect to payment page
+        header('Location: index.php?view=payment');
+        exit();
+    }
+}
 ?>
 
 
@@ -313,16 +312,31 @@ document.querySelector('form').onsubmit = function () {
 
 			
 <?php
-session_start();
-if ($_POST['otp'] == $_SESSION['otp']) {
-    // OTP verified, proceed with registration
-    // Further actions like account creation, login, etc.
-    echo "OTP verified for user: " . $_SESSION['username'];
-    // Redirect to the next page
-    // header('Location: index.php?view=payment');
-    // exit();
+// session_start(); // Start the session at the beginning
+
+// Check if the form was submitted and OTP was entered
+if (isset($_POST['submit']) && isset($_POST['otp'])) {
+    
+    // Check if OTP session key exists
+    if (isset($_SESSION['otp'])) {
+        
+        // Verify OTP
+        if ($_POST['otp'] == $_SESSION['otp']) {
+            // OTP verified, proceed with registration or other actions
+            echo "OTP verified for user: " . $_SESSION['username'];
+            
+            // Redirect to the next page (e.g., payment page)
+            header('Location: index.php?view=payment');
+            exit();
+        } else {
+            echo "Invalid OTP. Please try again.";
+        }
+        
+    } else {
+        echo "OTP session expired. Please request a new OTP.";
+    }
 } else {
-    echo "Invalid OTP. Please try again.";
+    echo "Please enter the OTP.";
 }
 ?>
 

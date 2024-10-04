@@ -351,14 +351,14 @@ $guest->G_GENDER         = $_SESSION['gender'];
 $guest->G_CITY           = $_SESSION['city'];
 $guest->G_ADDRESS        = $_SESSION['address'] ;        
 $guest->DBIRTH           = date_format(date_create($_SESSION['dbirth']), 'Y-m-d');   
-$guest->G_PHONE          = $_SESSION['phone'];    
+$guest->G_PHONE          = $_SESSION['phone'];  
+$guest->ZIP              = $_SESSION['zip'];  
 $guest->G_NATIONALITY    = $_SESSION['nationality'];          
 $guest->G_COMPANY        = $_SESSION['company'];      
 $guest->G_CADDRESS       = $_SESSION['caddress'];        
 $guest->G_TERMS          = 1;    
 $guest->G_UNAME          = $_SESSION['username'];    
 $guest->G_PASS           = sha1($_SESSION['pass']);    
-$guest->ZIP              = $_SESSION['zip'];
 $guest->create(); 
   $lastguest=$guest->id; 
    
