@@ -1,46 +1,4 @@
 
-<!-- <?php
-if (isset($_POST['otp'])) {
-    $input_otp = $_POST['otp'];
-    if ($input_otp == $_SESSION['otp']) {
-        // OTP matches, continue with payment process
-        redirect('index.php?view=payment');
-    } else {
-        // OTP doesn't match, display error message
-        echo 'Invalid OTP. Please try again.';
-    }
-}
-?> -->
-
-<!-- OTP modal form -->
-<!-- <form action="verify_otp.php" method="post">
-    <input type="text" name="otp" placeholder="Enter OTP">
-    <button type="submit">Verify</button>
-    <button type="button" onclick="resendOTP()">Resend OTP</button>
-</form> -->
-
-<!-- Resend OTP functionality (e.g., resend_otp.js) -->
-<!-- <script>
-function resendOTP() {
-    // Make an AJAX request to resend the OTP
-    $.ajax({
-        type: 'POST',
-        url: 'resend_otp.php',
-        success: function(data) {
-            // Update the session OTP variable
-            $_SESSION['otp'] = data;
-            alert('OTP resent. Please check your phone or email.');
-        }
-    });
-}
-</script> -->
-
-<!-- Resend OTP script (e.g., resend_otp.php) -->
-<!-- <?php
-// Regenerate a new OTP and update the session variable
-$_SESSION['otp'] = sendOTP($_SESSION['username'],$_SESSION['name'], $_SESSION['last']);
-echo $_SESSION['otp'];
-?> -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
