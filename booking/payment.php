@@ -1,4 +1,26 @@
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- On the payment page -->
+<form action="" method="post">
+    <label for="otp">Enter OTP:</label>
+    <input type="text" id="otp" name="otp" required>
+    <button type="submit">Verify OTP</button>
+</form>
+
+<?php
+if (isset($_POST['otp'])) {
+    $user_otp = $_POST['otp'];
+    $stored_otp = $_SESSION['otp'];
+    if ($user_otp === $stored_otp) {
+        // OTP is valid, proceed with payment processing
+        echo 'OTP is valid. Proceeding with payment processing...';
+        // ...
+    } else {
+        // OTP is invalid, display error message
+        echo 'Invalid OTP. Please try again.';
+    }
+}
+?>
+
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
 <?php
@@ -53,7 +75,7 @@ if (isset($_GET['view']) && $_GET['view'] == 'payment' && isset($_GET['verify'])
 } else {
     // Payment page content
 }
-?>
+?> -->
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
