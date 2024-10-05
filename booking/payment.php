@@ -20,10 +20,13 @@ if (isset($_GET['view']) && $_GET['view'] == 'payment' && isset($_GET['verify'])
         }).then((result) => {
             if (result.value) {
                 // Verify OTP
+                alert(result.value);
                 $.ajax({
+                    alert("<?php echo $_SESSION['email'];?>");
+                    
                     type: 'POST',
                     url: 'otp_verify.php',
-                    data: {otp: result.value},
+                    data: {otp: result.value, email:<?php echo $_SESSION['email'];?>},
                     success: function(response) {
                         if (response.trim() == 'valid') {
                             // OTP is valid, display success message
