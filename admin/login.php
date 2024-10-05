@@ -1,5 +1,5 @@
 <?php
-
+ob_start(); // Start output buffering
 require_once("../includes/initialize.php");
 
 // Prevent access if already logged in
@@ -16,7 +16,15 @@ if (isset($_POST['btnlogin'])) {
 
     // Validate input
     if (empty($uname) || empty($upass)) {
-        echo '<script type="text/javascript">alert("Invalid Username and Password!");</script>';
+        echo <<<EOT
+        <script type="text/javascript">
+            Swal.fire({
+                text: "Username or password cannot be empty.",
+                icon: "error",
+                confirmButtonText: 'OK'
+            });
+        </script>
+        EOT;
     } else {
         // Use prepared statements to prevent SQL Injection
         $stmt = $connection->prepare("SELECT * FROM tbluseraccount WHERE USER_NAME = ? AND UPASS = ?");
@@ -35,11 +43,25 @@ if (isset($_POST['btnlogin'])) {
 
             // Sanitize data before embedding in JavaScript
             $uname_escaped = json_encode($row['UNAME']);
-            
+
             echo <<<EOT
             <script type="text/javascript">
                 Swal.fire({
-                    text: "Username or Password Not Registered!\\nContact Your administrator.",
+                    title: "Hello, {$uname_escaped}! Welcome back!",
+                    icon: "success",
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location = "index.php";
+                    }
+                });
+            </script>
+            EOT;
+        } else {
+            echo <<<EOT
+            <script type="text/javascript">
+                Swal.fire({
+                    text: "Username or Password Not Registered!\\nContact your administrator.",
                     icon: "error",
                     confirmButtonText: 'OK'
                 }).then((result) => {
@@ -49,7 +71,7 @@ if (isset($_POST['btnlogin'])) {
                 });
             </script>
             EOT;
-        }            
+        }
 
         // Close the prepared statement
         $stmt->close();
@@ -60,7 +82,9 @@ if (isset($_POST['btnlogin'])) {
     $upass = ""; 
 }
 
+ob_end_flush(); // Flush the output buffer and send to browser
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
