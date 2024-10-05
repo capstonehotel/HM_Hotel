@@ -1,4 +1,4 @@
-// Verify OTP script (e.g., verify_otp.php)
+
 <!-- <?php
 if (isset($_POST['otp'])) {
     $input_otp = $_POST['otp'];
