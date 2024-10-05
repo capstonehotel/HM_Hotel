@@ -19,14 +19,12 @@ if (isset($_GET['view']) && $_GET['view'] == 'payment' && isset($_GET['verify'])
             cancelButtonText: 'Cancel'
         }).then((result) => {
             if (result.value) {
-                alert('test');
                 // Verify OTP
                 $.ajax({
                     type: 'POST',
                     url: 'otp_verify.php',
                     data: {otp: result.value},
                     success: function(response) {
-                        alert('test1');
                         if (response.trim() == 'valid') {
                             // OTP is valid, display success message
                             Swal.fire({
@@ -41,9 +39,9 @@ if (isset($_GET['view']) && $_GET['view'] == 'payment' && isset($_GET['verify'])
                         } else {
                             // OTP is invalid, display error message
                             Swal.fire({
-                                title: response,
+                                title: 'Invalid OTP!',
                                 text: response,
-                                timer: 3000,
+                                //timer: 3000,
                                 showConfirmButton: false
                             });
                         }
