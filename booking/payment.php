@@ -7,6 +7,8 @@
 if (isset($_GET['view']) && $_GET['view'] == 'payment' && isset($_GET['verify'])) {
     var_dump($_GET['view']);
     var_dump($_GET['verify']);
+
+    echo '<script>alert("'.$_SESSION['email'].'");</script>';
     ?>
   <script>
     console.log('SweetAlert2 script is running');
@@ -21,14 +23,14 @@ if (isset($_GET['view']) && $_GET['view'] == 'payment' && isset($_GET['verify'])
     }).then((result) => {
         if (result.value) {
             // Verify OTP
-            console.log('Entered OTP:', result.value);
+            //console.log('Entered OTP:', result.value);
 
             $.ajax({
                 type: 'POST',
                 url: 'otp_verify.php',
                 data: {
-                    otp: result.value, 
-                    email: '<?php echo $_SESSION['email']; ?>' // Echoing PHP variable inside JS
+                    otp: result.value
+                   
                 },
                 success: function(response) {
                     if (response.trim() == 'valid') {
