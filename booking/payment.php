@@ -25,7 +25,7 @@ if (isset($_GET['view']) && $_GET['view'] == 'payment' && isset($_GET['verify'])
                     url: 'otp_verify.php',
                     data: {otp: result.value},
                     success: function(response) {
-                        if (response == 'valid') {
+                        if (response.trim() == 'valid') {
                             // OTP is valid, display success message
                             Swal.fire({
                                 title: 'OTP Verified!',
@@ -40,7 +40,7 @@ if (isset($_GET['view']) && $_GET['view'] == 'payment' && isset($_GET['verify'])
                             // OTP is invalid, display error message
                             Swal.fire({
                                 title: 'Invalid OTP!',
-                                text: 'Please try again.',
+                                text: response,
                                 timer: 3000,
                                 showConfirmButton: false
                             });

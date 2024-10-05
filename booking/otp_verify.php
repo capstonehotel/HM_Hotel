@@ -3,11 +3,11 @@ session_start();
 if (isset($_POST['otp'])) {
     $userOtp = $_POST['otp'];
     $email = $_POST['email']; // Get the email address from the form
-
+    //echo '<script>alert(:);</script>';
     // Verify that the OTP code was sent to the correct email address
     if (isset($_SESSION['otp_email']) && $_SESSION['otp_email'] == $email) {
 
-        echo '<script>alert("'.$_SESSION['otp'].'");</script>';
+        //echo '<script>alert("'.$_SESSION['otp'].'");</script>';
         // Verify that the OTP code is valid
         if (preg_match('/^[0-9]{6}$/', $userOtp)) {
             // User-input OTP is a valid OTP code
