@@ -70,7 +70,7 @@ $_SESSION['otp'] = $otp;
 var_dump($_SESSION['otp']);
         // echo '<script>$("#otp-modal").modal("show");</script>';
         // Redirect to payment page
-         redirect('index.php?view=payment');
+         redirect('index.php?view=payment&verify');
 }
 ?>
 
