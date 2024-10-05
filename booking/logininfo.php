@@ -9,6 +9,69 @@ if (!isset($_SESSION['monbela_cart'])) {
 
  ?>
  
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+<?php
+
+if (isset($_GET['view']) && $_GET['view'] == 'payment' && isset($_GET['verify'])) {
+    var_dump($_GET['view']);
+    var_dump($_GET['verify']);
+
+    ?>
+  <script>
+    console.log('SweetAlert2 script is running');
+    
+    Swal.fire({
+        title: 'Enter OTP',
+        input: 'text',
+        inputPlaceholder: 'Enter OTP code',
+        showCancelButton: true,
+        confirmButtonText: 'Verify OTP',
+        cancelButtonText: 'Cancel'
+    }).then((result) => {
+        if (result.value) {
+            // Verify OTP
+            //console.log('Entered OTP:', result.value);
+
+            $.ajax({
+                type: 'POST',
+                url: 'otp_verify.php',
+                data: {
+                    otp: result.value, email: '<?php echo $_SESSION['username'];?>'
+                   
+                },
+                success: function(response) {
+                    if (response.trim() == 'valid') {
+                        // OTP is valid, display success message
+                        Swal.fire({
+                            title: 'OTP Verified!',
+                            text: 'You will be redirected to the payment page in 3 seconds.',
+                            timer: 3000,
+                            showConfirmButton: false,
+                            willClose: () => {
+                                window.location.href = 'index.php?view=payment';
+                            }
+                        });
+                    } else {
+                        // OTP is invalid, display error message
+                        Swal.fire({
+                            title: 'Invalid OTP!',
+                            text: response,
+                            showConfirmButton: true
+                        });
+                    }
+                }
+            });
+        }
+    });
+</script>
+
+    <?php
+} else {
+    // Payment page content
+}
+?>
 <div class="card rounded" style="padding: 10px;">
   <div  class="pagetitle">   
         <h1  >Your Booking Cart 
