@@ -37,36 +37,19 @@ if (isset($_POST['btnlogin'])) {
             $uname_escaped = json_encode($row['UNAME']);
             
             echo <<<EOT
-            <style> 
-                .swal2-popup { width: 400px !important; }
-                .swal2-title { font-size: 2.5rem !important; }
-                .swal2-confirm { padding: 10px 20px !important; }
-            </style>
-            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
             <script type="text/javascript">
                 Swal.fire({
-                    title: `Hello, {$uname_escaped}! Welcome back!`,
+                    text: "Username or Password Not Registered!\\nContact Your administrator.",
+                    icon: "error",
                     confirmButtonText: 'OK'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location = "index.php";
+                        window.location = "login.php";
                     }
                 });
             </script>
             EOT;
-
-        } else {
-            echo <<<EOT
-             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
-            <script type="text/javascript">
-                swal({
-                    text: "Username or Password Not Registered!\\nContact Your administrator."
-                }).then((value) => {
-                    window.location = "login.php";
-                });
-            </script>
-            EOT;
-        }
+        }            
 
         // Close the prepared statement
         $stmt->close();
@@ -92,7 +75,7 @@ if (isset($_POST['btnlogin'])) {
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Custom styles for this template -->
     <link href="css/signin.css" rel="stylesheet">
 
@@ -135,7 +118,7 @@ if (isset($_POST['btnlogin'])) {
                         <h2 class="panel-title" style="font-size: 30px; font-family: Georgia;"><center>Login Credential</h2>
                     </div>
                     <div class="panel-body">
-                        <form role="form" method="POST" action="#">
+                        <form role="form" method="POST" action="">
                             <fieldset>
                                 <div class="form-group">
                                     <h5>Email</h5>
