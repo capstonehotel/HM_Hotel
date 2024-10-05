@@ -1,132 +1,17 @@
 <?php
-require_once("../includes/initialize.php");
 
-// Generate a CSRF token
-$csrf_token = bin2hex(random_bytes(32));
-
-// Store the CSRF token in the session
-$_SESSION['csrf_token'] = $csrf_token;
-
-if (admin_logged_in()) {
-    ?>
-    <script type="text/javascript">
-        redirect('index.php');
-    </script>
-    <?php
-}
-
-if (isset($_POST['btnlogin'])) {
-    // Validate CSRF token
-    if ($_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-        // CSRF attack detected
-        ?>
-        <script type="text/javascript">
-            alert("CSRF attack detected!");
-        </script>
-        <?php
-    }
-
-    // Sanitize user input
-    $uname = htmlspecialchars(trim($_POST['email']));
-    $upass = htmlspecialchars(trim($_POST['pass']));
-
-    // Validate user input
-    if (!filter_var($uname, FILTER_VALIDATE_EMAIL)) {
-        // Invalid email address
-        ?>
-        <script type="text/javascript">
-            alert("Invalid email address!");
-        </script>
-        <?php
-    }
-
-    // Use prepared statements
-    $stmt = $connection->prepare("SELECT * FROM tbluseraccount WHERE USER_NAME = ? AND UPASS = ?");
-    $stmt->bind_param("ss", $uname, $h_upass);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    // Use secure password storage
-    $h_upass = password_hash($upass, PASSWORD_DEFAULT);
-
-    // Verify password
-    if ($row = $result->fetch_assoc()) {
-        if (password_verify($upass, $row['UPASS'])) {
-            // Password is valid
-            $_SESSION['ADMIN_ID'] = $row['USERID'];
-            $_SESSION['ADMIN_UNAME'] = $row['UNAME'];
-            $_SESSION['ADMIN_USERNAME'] = $row['USER_NAME'];
-            $_SESSION['ADMIN_UPASS'] = $row['UPASS'];
-            $_SESSION['ADMIN_UROLE'] = $row['ROLE'];
-            ?>
-            <style>
-                /* Adjust the width of the alert */
-                .swal2-popup {
-                    width: 400px !important; /* Ensure the width is applied */
-                }
-
-                /* Adjust the font size */
-                .swal2-title {
-                    font-size: 2.5rem !important; /* Ensure the font size is applied */
-                }
-
-                /* Adjust the button size */
-                .swal2-confirm {
-                    padding: 10px 20px !important; /* Ensure the padding is applied */
-                }
-            </style>
-            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
-            <script type="text/javascript">
-                Swal.fire({
-                    title: `Hello, <?php echo $row['UNAME']; ?>! Welcome back!`,
-                    confirmButtonText: 'OK'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location = "index.php";
-                    }
-                });
-            </script>
-            <?php
-        } else {
-            // Invalid password
-            ?>
-            <script src="sweetalert.js"></script>
-            <script type="text/javascript">
-                swal({
-                    text: "Username or Password Not Registered!\nContact Your administrator."
-                }).then((value) => {
-                    window.location = "login.php";
-                });
-            </script>
-            <?php
-        }
-    } else {
-        // Invalid username or password
-        ?>
-        <script src="sweetalert.js"></script>
-        <script type="text/javascript">
-            swal({
-                text: "Username or Password Not Registered!\nContact Your administrator."
-            }).then((value) => {
-                window.location = "login.php";
-            });
-        </script>
-        <?php
-    }
-} else {
-    $email = "";
-    $upass = "";
-}
+ require_once("../includes/initialize.php");
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
+
 
     <title>HM Hotel Reservation</title>
 
@@ -141,34 +26,130 @@ if (isset($_POST['btnlogin'])) {
       <script src="../../assets/js/html5shiv.js"></script>
       <script src="../../assets/js/respond.min.js"></script>
     <![endif]-->
-</head>
+  </head>
 <style>
-    body {
-        background-image: url("../images/room.jpg");
-        background-size: cover;
-        background-repeat: no -repeat;
-        background-position: center;
-        background-attachment: fixed;
-    }
+   body {
+    background-image: url("../images/room.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+.title{
+    text-align: center;
+    font-size: 66px;
+    font-family: serif;
+    color:ghostwhite;
+    text-shadow: 2px 2px 2px black;
 
-    .title {
-        text-align: center;
-        font-size: 66px;
-        font-family: serif;
-        color: ghostwhite;
-        text-shadow: 2px 2px 2px black;
-    }
+}
+
+
 </style>
+  <body>
+<?php
+ if (admin_logged_in()) {
+?>
+   <script type="text/javascript">
+            redirect('index.php');
+    </script>
+    <?php
+}
+if (isset($_POST['btnlogin'])) {
+    //form has been submitted1
+    
+   $uname = trim($_POST['email']);
+    $upass = trim($_POST['pass']);
+    $h_upass = sha1($upass);
+     //check if the email and password is equal to nothing or null then it will show message box
+   
+    if ($uname == '' OR $upass == '') {
+?>    <script type="text/javascript">
+                alert("Invalid Username and Password!");
+                </script>
+            <?php
+        
+    } else {
+    
+    $sql = "SELECT * FROM tbluseraccount WHERE USER_NAME = '$uname' AND UPASS = '$h_upass'";
+    $result = $connection->query($sql);
 
-<body>
-    <div class="title">
+    if (!$connection) {
+        die("Database connection failed: " . mysqli_connect_error());
+    }
+    if (!$result) {
+        die("Database query failed: " . mysqli_error($connection));
+    }
+    $row = mysqli_fetch_assoc($result);
+
+    if($row){
+            $_SESSION['ADMIN_ID'] 	 		=  $row['USERID'] ;
+            $_SESSION['ADMIN_UNAME']    	=  $row['UNAME'] ;
+            $_SESSION['ADMIN_USERNAME']		=  $row['USER_NAME'] ;
+            $_SESSION['ADMIN_UPASS']		=  $row['UPASS'] ;
+            $_SESSION['ADMIN_UROLE']    	=  $row['ROLE'];
+      ?>  
+      <style> 
+      /* Adjust the width of the alert */
+.swal2-popup {
+    width: 400px !important; /* Ensure the width is applied */
+}
+
+/* Adjust the font size */
+.swal2-title {
+    font-size: 2.5rem !important; /* Ensure the font size is applied */
+}
+
+/* Adjust the button size */
+.swal2-confirm {
+    padding: 10px 20px !important; /* Ensure the padding is applied */
+}
+</style>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+<script type="text/javascript">
+    Swal.fire({
+        title: `Hello, <?php echo $row['UNAME']; ?>! Welcome back!`,
+        confirmButtonText: 'OK'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location = "index.php";
+        }
+    });
+</script>
+
+
+      <?php
+    
+    
+    } else {
+?>  
+<script src="sweetalert.js"></script>  
+<script type="text/javascript">
+                swal({
+                    text: "Username or Password Not Registered!\nContact Your administrator."
+                }).then((value) => {
+               window.location = "login.php";
+            });
+                </script>
+        <?php
+        }
+        
+    }
+} else {
+    
+    $email = "";
+    $upass = ""; 
+}
+
+?>        <div class="title">
+    
         <p><b><span style="color:#ffd6bb;">HM Hotel </span> <span style="color:whitesmoke;">Reservation </span><span style="color:WG;">System   </span></b></p>
-    </div>
-    <br>
-    <div class="container">
+     </div>
+       </br>
+        <div class="container">
         <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                <div class="login-panel panel panel-default" style="  border-radius:8px; box-shadow: 0 2px 2px 0 rgba(2,2,2,2.1);">
+            <div class="col-md-4 col-md-offset-4" >
+                <div class="login-panel panel panel-default"style="  border-radius:8px; box-shadow: 0 2px 2px 0 rgba(2,2,2,2.1);">
                     <div class="panel-heading" style="border-top-right-radius:8px; border-top-left-radius: 8px;">
                         <h2 class="panel-title" style="font-size: 30px; font-family: Georgia;"><center>Login Credential</h2>
                     </div>
@@ -177,7 +158,7 @@ if (isset($_POST['btnlogin'])) {
                             <fieldset>
                                 <div class="form-group">
                                     <h5>Email</h5>
-                                    <input class="form-control" required placeholder="ex.gmail.com" name="email" type="email" required>
+                                    <input class="form-control" required placeholder="ex.gmail.com" name="email" type="email" required  >
                                 </div>
                                 <div class="form-group">
                                     <h5>Password</h5>
@@ -189,22 +170,21 @@ if (isset($_POST['btnlogin'])) {
                                         <input name="remember" type="checkbox" value="Remember Me">Remember Me
                                     </label>
                                 </div>
-                                <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
                                 <!-- Change this to a button or input when using this as a form -->
-                                <button type="submit" name="btnlogin" class="btn btn-lg btn-success btn-block">Login</button><br>
+                                <button type="submit"  name="btnlogin" class="btn btn-lg btn-success btn-block">Login</button><br>
                                 <div class="text-center mt-3">
-                                    <a href="../index.php" class="text-primary">Back to the website</a>
-                                </div>
+                    <a href="../index.php" class="text-primary">Back to the website</a>
+                </div>
                             </fieldset>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div> 
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-</body>
+  </body>
 </html>
