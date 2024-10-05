@@ -6,6 +6,8 @@ if (isset($_POST['otp'])) {
 
     // Verify that the OTP code was sent to the correct email address
     if (isset($_SESSION['otp_email']) && $_SESSION['otp_email'] == $email) {
+
+        echo '<script>alert("'.$_SESSION['otp'].'");</script>';
         // Verify that the OTP code is valid
         if (preg_match('/^[0-9]{6}$/', $userOtp)) {
             // User-input OTP is a valid OTP code
