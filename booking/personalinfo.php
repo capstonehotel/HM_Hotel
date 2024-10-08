@@ -77,46 +77,7 @@ var_dump($_SESSION['otp']);
 
  
                  <?php //include'navigator.php';?>
-                 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
-                 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        function detectXSS(inputField, fieldName) {
-            const xssPattern =  /[<>:\/\$\;\,\?\!]/;
-            inputField.addEventListener('input', function() {
-                if (xssPattern.test(this.value)) {
-                  Swal.fire("XSS Detected", `Please avoid using invalid characters in your ${fieldName}.`, "error");
-                    this.value = "";
-                }
-            });
-        }
-        
-        const firstInput = document.getElementById('name');
-        const lastInput = document.getElementById('last');
-        const phoneInput = document.getElementById('phone');
-        const cityInput = document.getElementById('city');
-        const addressInput = document.getElementById('address');
-        const zipInput = document.getElementById('zip');
-        const nationalityInput = document.getElementById('nationality');
-        const companyInput = document.getElementById('company');
-        const cadressInput = document.getElementById('cadress');
-        const emailInput = document.getElementById('username');
-        const passwordInput = document.getElementById('password');
-        detectXSS(firstInput, 'First Name');
-        detectXSS(lastInput, 'Last Name');
-        detectXSS(phoneInput, 'Phone');
-        detectXSS(cityInput, 'City');
-        detectXSS(addressInput, 'Address');
-        detectXSS(zipInput, 'Zip Code');
-        detectXSS(nationalityInput, 'Nationality');
-        detectXSS(companyInput, 'Company');
-        detectXSS(caddressInput, 'Company Address');
-        detectXSS(emailInput, 'Email');
-        detectXSS(passwordInput, 'Password');
-    });
-</script>
-
-
-                 
+                
 			 
 					<?php
 					if( isset($_SESSION['ERRMSG_ARR']) && is_array($_SESSION['ERRMSG_ARR']) && count($_SESSION['ERRMSG_ARR']) >0 ) {
@@ -335,6 +296,45 @@ function validatePassword() {
     }
 }
 </script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+                 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        function detectXSS(inputField, fieldName) {
+            const xssPattern =  /[<>:\/\$\;\,\?\!]/;
+            inputField.addEventListener('input', function() {
+                if (xssPattern.test(this.value)) {
+                  Swal.fire("XSS Detected", `Please avoid using invalid characters in your ${fieldName}.`, "error");
+                    this.value = "";
+                }
+            });
+        }
+        
+        const firstInput = document.getElementById('name');
+        const lastInput = document.getElementById('last');
+        const phoneInput = document.getElementById('phone');
+        const cityInput = document.getElementById('city');
+        const addressInput = document.getElementById('address');
+        const zipInput = document.getElementById('zip');
+        const nationalityInput = document.getElementById('nationality');
+        const companyInput = document.getElementById('company');
+        const cadressInput = document.getElementById('cadress');
+        const emailInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        detectXSS(firstInput, 'First Name');
+        detectXSS(lastInput, 'Last Name');
+        detectXSS(phoneInput, 'Phone');
+        detectXSS(cityInput, 'City');
+        detectXSS(addressInput, 'Address');
+        detectXSS(zipInput, 'Zip Code');
+        detectXSS(nationalityInput, 'Nationality');
+        detectXSS(companyInput, 'Company');
+        detectXSS(caddressInput, 'Company Address');
+        detectXSS(emailInput, 'Email');
+        detectXSS(passwordInput, 'Password');
+    });
+</script>
 
+
+                 
 			
  
