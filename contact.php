@@ -66,7 +66,7 @@
                   </div>
                 </div>
                 <div class="col-md-12 col-sm-12">
-                  <button type="submit" name="submit" class="btn btn-success">Send Message</button>
+                  <button type="submit" name="submit" onclick="disableInput()" class="btn btn-success">Send Message</button>
                 </div>
               </div>
             </form>
@@ -75,7 +75,11 @@
         </div>
     </div>
 </div>
-
+<script>
+    function disableInput() {
+        document.getElementById("myInput").disabled = true;
+    }
+</script>
 <script type="text/javascript">
   
 function displayCustomAlert(message) {
