@@ -77,8 +77,41 @@ var_dump($_SESSION['otp']);
 
  
                  <?php //include'navigator.php';?>
+                 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        function detectXSS(inputField, fieldName) {
+            const xssPattern =  /[<>:\/\$\;\,\?\!]/;
+            inputField.addEventListener('input', function() {
+                if (xssPattern.test(this.value)) {
+                  swal("XSS Detected", Please avoid using script tags in your ${fieldName}., "error");
+                    this.value = "";
+                }
+            });
+        }
+        
+        const firstInput = document.getElementById('name');
+        const lastInput = document.getElementById('last');.
+        const phoneInput = document.getElementById('phone');
+        const cityInput = document.getElementById('city');
+        const addressInput = document.getElementById('address');
+        const zipInput = document.getElementById('zip');
+        const nationalityInput = document.getElementById('nationality');
+        const companyInput = document.getElementById('company');
+        const companyadressInput = document.getElementById('cadress');
+        const emailInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        detectXSS(firstnameInput, 'First Name');
+        detectXSS(lastnameInput, 'last');
+        detectXSS(cityInput, 'City');
+        detectXSS(addressInput, 'Address');
+        detectXSS(nationalitInput, 'Nationality');
+        detectXSS(companyInput, 'Company');
+        detectXSS(companyadressInput, 'Company Address');
+    });
+</script>
 
 
+                 
 			 
 					<?php
 					if( isset($_SESSION['ERRMSG_ARR']) && is_array($_SESSION['ERRMSG_ARR']) && count($_SESSION['ERRMSG_ARR']) >0 ) {
