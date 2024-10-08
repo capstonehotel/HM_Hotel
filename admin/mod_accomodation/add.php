@@ -81,7 +81,7 @@ if (isset($_POST['save_accomodation'])) {
         }
         
         const ACCOMODATIONInput = document.getElementById('ACCOMODATION');
-        const lastInput = document.getElementById('last');
+        const ACCOMDESCInput = document.getElementById('ACCOMDESC');
         
         detectXSS(ACCOMODATIONInput, 'ACCOMODATION');
         detectXSS(ACCOMDESCInput, 'ACCOMDESC');
