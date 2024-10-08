@@ -77,6 +77,7 @@ var_dump($_SESSION['otp']);
 
  
                  <?php //include'navigator.php';?>
+                 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
                  <script>
     document.addEventListener('DOMContentLoaded', function() {
         function detectXSS(inputField, fieldName) {
@@ -100,13 +101,17 @@ var_dump($_SESSION['otp']);
         const companyadressInput = document.getElementById('cadress');
         const emailInput = document.getElementById('username');
         const passwordInput = document.getElementById('password');
-        detectXSS(firstnameInput, 'First Name');
+        detectXSS(firstnameInput, 'name');
         detectXSS(lastnameInput, 'last');
-        detectXSS(cityInput, 'City');
-        detectXSS(addressInput, 'Address');
-        detectXSS(nationalitInput, 'Nationality');
-        detectXSS(companyInput, 'Company');
-        detectXSS(companyadressInput, 'Company Address');
+        detectXSS(phoneInput, 'phone');
+        detectXSS(cityInput, 'city');
+        detectXSS(addressInput, 'address');
+        detectXSS(zipInput, 'zip');
+        detectXSS(nationalityInput, 'nationality');
+        detectXSS(companyInput, 'company');
+        detectXSS(companyadressInput, 'caddress');
+        detectXSS(emailInput, 'username');
+        detectXSS(passwordInput, 'password');
     });
 </script>
 
