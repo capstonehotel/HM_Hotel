@@ -106,7 +106,7 @@ if (isset($_POST['btnlogin'])) {
 }
 </style> -->
       <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script> -->
-<script type="text/javascript">
+<script >
     Swal.fire({
         title: `Hello, <?php echo $row['UNAME']; ?>! Welcome back!`,
         confirmButtonText: 'OK'
@@ -124,7 +124,7 @@ if (isset($_POST['btnlogin'])) {
     } else {
 ?>  
 <!-- <script src="sweetalert.js"></script>   -->
-<script type="text/javascript">
+<script >
      Swal.fire({
         title: `Username or Password Not Registered!\nContact Your administrator.`,
         confirmButtonText: 'OK'
@@ -193,7 +193,7 @@ if (isset($_POST['btnlogin'])) {
             </div>
         </div>
     </div> 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
                  <script>
     document.addEventListener('DOMContentLoaded', function() {
         function detectXSS(inputField, fieldName) {
