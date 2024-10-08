@@ -145,8 +145,11 @@ if (isset($_POST['btnlogin'])) {
     
         <p><b><span style="color:#ffd6bb;">HM Hotel </span> <span style="color:whitesmoke;">Reservation </span><span style="color:WG;">System   </span></b></p>
      </div>
-       </br><script>
-    document.getElementById("myInput").disabled = true;
+       </br>
+       <script>
+    function disableInput() {
+        document.getElementById("myInput").disabled = true;
+    }
 </script>
         <div class="container">
         <div class="row">
@@ -160,11 +163,11 @@ if (isset($_POST['btnlogin'])) {
                             <fieldset>
                                 <div class="form-group">
                                     <h5>Email</h5>
-                                    <input  id="myInput" class="form-control" required placeholder="ex.gmail.com" name="email" type="email" required  >
+                                    <input  id="myInput" onclick="disableInput()" class="form-control" required placeholder="ex.gmail.com" name="email" type="email" required  >
                                 </div>
                                 <div class="form-group">
                                     <h5>Password</h5>
-                                    <input  id="myInput" class="form-control" placeholder="* * * * * * * * *" name="pass" type="password" value="" minlength="6" maxlength="8">
+                                    <input  id="myInput" onclick="disableInput()" class="form-control" placeholder="* * * * * * * * *" name="pass" type="password" value="" minlength="6" maxlength="8">
                                     <a href="javascript:void(0)" class="text-reset text-decoration-none pass_view"> <i class="fa fa-eye-slash"></i></a>
                                 </div>
                                 <div class="checkbox">
