@@ -42,7 +42,7 @@ if (isset($_GET['view']) && $_GET['view'] == 'payment' && isset($_GET['verify'])
             timerProgressBar: true,
             showConfirmButton: false,
             willClose: () => {
-                window.location.href = 'index.php?view=logininfo';
+                window.location.href = 'index.php?view=payment';
             }
         });
     } else {
@@ -52,6 +52,9 @@ if (isset($_GET['view']) && $_GET['view'] == 'payment' && isset($_GET['verify'])
             title: 'Invalid OTP!',
             text: response,
             showConfirmButton: true
+        }).then(() => {
+        window.location.href = 'index.php?view=logininfo';
+   
         });
     }
 }
