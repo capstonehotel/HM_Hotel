@@ -193,6 +193,7 @@ if (isset($_POST['btnlogin'])) {
             </div>
         </div>
     </div> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/themes@5.0.18/default/default.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
                  <script>
     document.addEventListener('DOMContentLoaded', function() {
