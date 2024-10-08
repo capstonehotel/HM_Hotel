@@ -1,5 +1,5 @@
 <?php 
-echo '<script src="../sweetalert.js"></script>';
+echo '<script src="../sweetalert2.all.min.js"></script>';
 if (isset($_POST['save_user'])) {
     $UNAME = $_POST['UNAME'];
     $USERNAME = $_POST['USERNAME'];
@@ -105,3 +105,30 @@ if (isset($_POST['save_user'])) {
     </div>
   </form>
 </div>
+<!--<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script> -->
+                 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        function detectXSS(inputField, fieldName) {
+            const xssPattern =  /[<>:\/\$\;\,\?\!]/;
+            inputField.addEventListener('input', function() {
+                if (xssPattern.test(this.value)) {
+                  Swal.fire("XSS Detected", `Please avoid using invalid characters in your ${fieldName}.`, "error");
+                    this.value = "";
+                }
+            });
+        }
+        
+        const UNAMEInput = document.getElementById('UNAME');
+        const USERNAMEInput = document.getElementById('USERNAME');
+        const UPASSInput = document.getElementById('UPASS');
+        const PHONEInput = document.getElementById('PHONE');
+        
+        
+        detectXSS(UNAMEInput, 'Name');
+        detectXSS(USERNAMEInput, 'Email');
+        detectXSS(UPASSInput, 'Password');
+        detectXSS(PHONEInput, 'Contact');
+        
+        
+    });
+</script>
