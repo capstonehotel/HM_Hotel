@@ -105,7 +105,7 @@ if (isset($_POST['btnlogin'])) {
     padding: 10px 20px !important; /* Ensure the padding is applied */
 }
 </style>
-      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+      <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script> -->
 <script type="text/javascript">
     Swal.fire({
         title: `Hello, <?php echo $row['UNAME']; ?>! Welcome back!`,
@@ -123,14 +123,23 @@ if (isset($_POST['btnlogin'])) {
     
     } else {
 ?>  
-<script src="sweetalert.js"></script>  
+<!-- <script src="sweetalert.js"></script>   -->
 <script type="text/javascript">
-                swal({
+     Swal.fire({
+        title: `Username or Password Not Registered!\nContact Your administrator.`,
+        confirmButtonText: 'OK'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location = "login.php";
+        }
+    });
+</script>
+                <!-- swal({
                     text: "Username or Password Not Registered!\nContact Your administrator."
                 }).then((value) => {
                window.location = "login.php";
             });
-                </script>
+                </script> -->
         <?php
         }
         
