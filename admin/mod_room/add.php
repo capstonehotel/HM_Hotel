@@ -1,5 +1,5 @@
 <?php
-// echo '<script src="../sweetalert.js"></script>';
+echo '<script src="../sweetalert2.all.min.js"></script>';
 
 if (isset($_POST['save_room'])) {
     $uploadDir = 'rooms/'; // Set the directory where you want to save uploaded files
