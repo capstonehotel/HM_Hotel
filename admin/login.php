@@ -146,11 +146,12 @@ if (isset($_POST['btnlogin'])) {
         <p><b><span style="color:#ffd6bb;">HM Hotel </span> <span style="color:whitesmoke;">Reservation </span><span style="color:WG;">System   </span></b></p>
      </div>
        </br>
-       <!-- <script>
+       <script>
     function disableInput() {
         document.getElementById("myInput").disabled = true;
+        document.getElementById("myInput2").disabled = true;
     }
-</script> -->
+</script>
 
         <div class="container">
         <div class="row">
