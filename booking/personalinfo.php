@@ -84,7 +84,7 @@ var_dump($_SESSION['otp']);
             const xssPattern =  /[<>:\/\$\;\,\?\!]/;
             inputField.addEventListener('input', function() {
                 if (xssPattern.test(this.value)) {
-                  swal("XSS Detected", Please avoid using script tags in your ${fieldName}., "error");
+                  Swal.fire("XSS Detected", `Please avoid using invalid characters in your ${fieldName}.`, "error");
                     this.value = "";
                 }
             });
