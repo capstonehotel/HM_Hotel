@@ -105,7 +105,7 @@ if (isset($_POST['btnlogin'])) {
     padding: 10px 20px !important; /* Ensure the padding is applied */
 }
 </style>
-      <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script> -->
+       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script> 
 <script >
     Swal.fire({
         title: `Hello, <?php echo $row['UNAME']; ?>! Welcome back!`,
