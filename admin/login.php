@@ -89,7 +89,7 @@ if (isset($_POST['btnlogin'])) {
             $_SESSION['ADMIN_UPASS']		=  $row['UPASS'] ;
             $_SESSION['ADMIN_UROLE']    	=  $row['ROLE'];
       ?>  
-      <style> 
+      <!-- <style> 
       /* Adjust the width of the alert */
 .swal2-popup {
     width: 400px !important; /* Ensure the width is applied */
@@ -104,7 +104,7 @@ if (isset($_POST['btnlogin'])) {
 .swal2-confirm {
     padding: 10px 20px !important; /* Ensure the padding is applied */
 }
-</style>
+</style> -->
       <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script> -->
 <script type="text/javascript">
     Swal.fire({
