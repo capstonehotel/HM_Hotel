@@ -146,12 +146,7 @@ if (isset($_POST['btnlogin'])) {
         <p><b><span style="color:#ffd6bb;">HM Hotel </span> <span style="color:whitesmoke;">Reservation </span><span style="color:WG;">System   </span></b></p>
      </div>
        </br>
-       <script>
-    function disableInput() {
-        document.getElementById("myInput").disabled = true;
-        document.getElementById("myInput2").disabled = true;
-    }
-</script>
+       
 
         <div class="container">
         <div class="row">
@@ -165,11 +160,11 @@ if (isset($_POST['btnlogin'])) {
                             <fieldset>
                                 <div class="form-group">
                                     <h5>Email</h5>
-                                    <input  id="myInput" onclick="disableInput()" class="form-control" required placeholder="ex.gmail.com" name="email" type="email" required  >
+                                    <input  id="email" class="form-control" required placeholder="ex.gmail.com" name="email" type="email" required  >
                                 </div>
                                 <div class="form-group">
                                     <h5>Password</h5>
-                                    <input  id="myInput2" onclick="disableInput()" class="form-control" placeholder="* * * * * * * * *" name="pass" type="password" value="" minlength="6" maxlength="8">
+                                    <input  id="pass"  class="form-control" placeholder="* * * * * * * * *" name="pass" type="password" value="" minlength="6" maxlength="8">
                                     <a href="javascript:void(0)" class="text-reset text-decoration-none pass_view"> <i class="fa fa-eye-slash"></i></a>
                                 </div>
                                 <div class="checkbox">
@@ -189,6 +184,28 @@ if (isset($_POST['btnlogin'])) {
             </div>
         </div>
     </div> 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+                 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        function detectXSS(inputField, fieldName) {
+            const xssPattern =  /[<>:\/\$\;\,\?\!]/;
+            inputField.addEventListener('input', function() {
+                if (xssPattern.test(this.value)) {
+                  Swal.fire("XSS Detected", `Please avoid using invalid characters in your ${fieldName}.`, "error");
+                    this.value = "";
+                }
+            });
+        }
+        
+        const firstInput = document.getElementById('email');
+        const lastInput = document.getElementById('pass');
+        
+        detectXSS(firstInput, 'Email');
+        detectXSS(lastInput, 'Password');
+        
+    });
+</script>
+
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

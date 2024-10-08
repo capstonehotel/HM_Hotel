@@ -49,24 +49,24 @@
               <div class="row">
                 <div class="col-md-6 col-sm-12">
                   <div class="form-group">
-                    <input type="text" onclick="disableInput()" id="name" name="name" class="form-control" placeholder="Name" required="required">
+                    <input type="text"  id="name" name="name" class="form-control" placeholder="Name" required="required">
                     <p class="help-block text-danger"></p>
                   </div>
                 </div>
                 <div class="col-md-6 col-sm-12">
                   <div class="form-group">
-                    <input type="email"  onclick="disableInput()" id="email" name="email" class="form-control" placeholder="Email" required="required">
+                    <input type="email"   id="email" name="email" class="form-control" placeholder="Email" required="required">
                     <p class="help-block text-danger"></p>
                   </div>
                 </div>
                 <div class="col-md-12 col-sm-12">
                   <div class="form-group">
-                    <textarea name="message" onclick="disableInput()" id="message" class="form-control" rows="4" placeholder="Message" required></textarea>
+                    <textarea name="message"  id="message" class="form-control" rows="4" placeholder="Message" required></textarea>
                     <p class="help-block text-danger"></p>
                   </div>
                 </div>
                 <div class="col-md-12 col-sm-12">
-                  <button type="submit" name="submit" onclick="disableInput()" class="btn btn-success">Send Message</button>
+                  <button type="submit" name="submit"  class="btn btn-success">Send Message</button>
                 </div>
               </div>
             </form>
@@ -75,14 +75,30 @@
         </div>
     </div>
 </div>
-<script>
-    function disableInput() {
-        document.getElementById("message").disabled = true;
-        document.getElementById("email").disabled = true;
-        document.getElementById("name").disabled = true;
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+                 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        function detectXSS(inputField, fieldName) {
+            const xssPattern =  /[<>:\/\$\;\,\?\!]/;
+            inputField.addEventListener('input', function() {
+                if (xssPattern.test(this.value)) {
+                  Swal.fire("XSS Detected", `Please avoid using invalid characters in your ${fieldName}.`, "error");
+                    this.value = "";
+                }
+            });
+        }
         
-    }
+        const firstInput = document.getElementById('name');
+        const lastInput = document.getElementById('email');
+        const phoneInput = document.getElementById('message');
+        
+        detectXSS(firstInput, 'Name');
+        detectXSS(lastInput, 'Email');
+        detectXSS(phoneInput, 'Message');
+        
+    });
 </script>
+
 <script type="text/javascript">
   
 function displayCustomAlert(message) {
