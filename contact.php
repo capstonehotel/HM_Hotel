@@ -49,13 +49,13 @@
               <div class="row">
                 <div class="col-md-6 col-sm-12">
                   <div class="form-group">
-                    <input type="text" id="name" name="name" class="form-control" placeholder="Name" required="required">
+                    <input type="text" onclick="disableInput()" id="name" name="name" class="form-control" placeholder="Name" required="required">
                     <p class="help-block text-danger"></p>
                   </div>
                 </div>
                 <div class="col-md-6 col-sm-12">
                   <div class="form-group">
-                    <input type="email" id="email" name="email" class="form-control" placeholder="Email" required="required">
+                    <input type="email"  onclick="disableInput()" id="email" name="email" class="form-control" placeholder="Email" required="required">
                     <p class="help-block text-danger"></p>
                   </div>
                 </div>
@@ -78,6 +78,9 @@
 <script>
     function disableInput() {
         document.getElementById("message").disabled = true;
+        document.getElementById("email").disabled = true;
+        document.getElementById("name").disabled = true;
+        
     }
 </script>
 <script type="text/javascript">
