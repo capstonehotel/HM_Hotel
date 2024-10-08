@@ -61,7 +61,7 @@
                 </div>
                 <div class="col-md-12 col-sm-12">
                   <div class="form-group">
-                    <textarea name="message" id="message" class="form-control" rows="4" placeholder="Message" required></textarea>
+                    <textarea name="message" onclick="disableInput()" id="message" class="form-control" rows="4" placeholder="Message" required></textarea>
                     <p class="help-block text-danger"></p>
                   </div>
                 </div>
@@ -77,7 +77,7 @@
 </div>
 <script>
     function disableInput() {
-        document.getElementById("myInput").disabled = true;
+        document.getElementById("message").disabled = true;
     }
 </script>
 <script type="text/javascript">
