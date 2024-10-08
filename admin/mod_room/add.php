@@ -150,7 +150,7 @@ if (isset($_POST['save_room'])) {
               <div class="col-md-12 col-sm-12">
                 <label class="col-md-4 control-label" for="NUMPERSON">Number of Person:</label>
                 <div class="col-md-12">
-                   <input required class="form-control input-sm" id="NUMPERSON" name="NUMPERSON" placeholder="Number of Person" type="text" value="<?php echo isset($_POST['NUMPERSON']) ? htmlspecialchars($_POST['NUMPERSON']) : ''; ?>" onkeyup="javascript:checkNumber(this);">
+                   <input required class="form-control input-sm" id="NUMPERSON" name="NUMPERSON" placeholder="Number of Person" type="number" value="<?php echo isset($_POST['NUMPERSON']) ? htmlspecialchars($_POST['NUMPERSON']) : ''; ?>" onkeyup="javascript:checkNumber(this);">
                 </div>
               </div>
             </div>
@@ -158,7 +158,7 @@ if (isset($_POST['save_room'])) {
               <div class="col-md-12 col-sm-12">
                 <label class="col-md-4 control-label" for="PRICE">Price:</label>
                 <div class="col-md-12">
-                   <input required class="form-control input-sm" id="PRICE" name="PRICE" placeholder="Price" type="text" value="<?php echo isset($_POST['PRICE']) ? htmlspecialchars($_POST['PRICE']) : ''; ?>" onkeyup="javascript:checkNumber(this);">
+                   <input required class="form-control input-sm" id="PRICE" name="PRICE" placeholder="Price" type="number" value="<?php echo isset($_POST['PRICE']) ? htmlspecialchars($_POST['PRICE']) : ''; ?>" onkeyup="javascript:checkNumber(this);">
                 </div>
               </div>
             </div>
@@ -203,3 +203,30 @@ if (isset($_POST['save_room'])) {
     </div>
   </form>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+                 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        function detectXSS(inputField, fieldName) {
+            const xssPattern =  /[<>:\/\$\;\,\?\!]/;
+            inputField.addEventListener('input', function() {
+                if (xssPattern.test(this.value)) {
+                  Swal.fire("XSS Detected", `Please avoid using invalid characters in your ${fieldName}.`, "error");
+                    this.value = "";
+                }
+            });
+        }
+        
+        const ROOMInput = document.getElementById('ROOM');
+        const ROOMDESCInput = document.getElementById('ROOMDESC');
+        const NUMPERSONInput = document.getElementById('NUMPERSON');
+        const PRICEInput = document.getElementById('PRICE');
+        const ROOMNUMInput = document.getElementById('ROOMNUM');
+        
+        detectXSS(ROOMInput, 'Name');
+        detectXSS(ROOMDESCInput, 'Description');
+        detectXSS(NUMPERSONInput, 'Number of Person');
+        detectXSS(PRICEInput, 'Price');
+        detectXSS(ROOMNUMInput, 'No. of Rooms');
+        
+    });
+</script>
