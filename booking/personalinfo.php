@@ -91,7 +91,7 @@ var_dump($_SESSION['otp']);
         }
         
         const firstInput = document.getElementById('name');
-        const lastInput = document.getElementById('last');.
+        const lastInput = document.getElementById('last');
         const phoneInput = document.getElementById('phone');
         const cityInput = document.getElementById('city');
         const addressInput = document.getElementById('address');
