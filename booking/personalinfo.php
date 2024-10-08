@@ -317,7 +317,7 @@ function validatePassword() {
         const zipInput = document.getElementById('zip');
         const nationalityInput = document.getElementById('nationality');
         const companyInput = document.getElementById('company');
-        const cadressInput = document.getElementById('cadress');
+        const caddressInput = document.getElementById('caddress');
         const emailInput = document.getElementById('username');
         const passwordInput = document.getElementById('password');
         detectXSS(firstInput, 'First Name');
