@@ -32,26 +32,30 @@ if (isset($_GET['view']) && $_GET['view'] == 'payment' && isset($_GET['verify'])
                    
                 },
                 success: function(response) {
-                    if (response.trim() == 'valid') {
-                        // OTP is valid, display success message
-                        Swal.fire({
-                            title: 'OTP Verified!',
-                            text: 'You will be redirected to the payment page in 3 seconds.',
-                            timer: 3000,
-                            showConfirmButton: false,
-                            willClose: () => {
-                                window.location.href = 'index.php?view=payment';
-                            }
-                        });
-                    } else {
-                        // OTP is invalid, display error message
-                        Swal.fire({
-                            title: 'Invalid OTP!',
-                            text: response,
-                            showConfirmButton: true
-                        });
-                    }
-                }
+    if (response.trim() == 'valid') {
+        // OTP is valid, display success message with icon and timer
+        Swal.fire({
+            icon: 'success',
+            title: 'OTP Verified!',
+            text: 'You will be redirected to the payment in 3 seconds.',
+            timer: 3000,
+            timerProgressBar: true,
+            showConfirmButton: false,
+            willClose: () => {
+                window.location.href = 'index.php?view=payment';
+            }
+        });
+    } else {
+        // OTP is invalid, display error message with icon
+        Swal.fire({
+            icon: 'error',
+            title: 'Invalid OTP!',
+            text: response,
+            showConfirmButton: true
+        });
+    }
+}
+
             });
         }
     });
@@ -406,27 +410,30 @@ if(!isset($_SESSION['GUESTID'])){
 
   // var_dump($_SESSION);exit;
 
-$guest = New Guest();
-$guest->G_AVATAR          = $_SESSION['image'];
-$guest->G_FNAME          = $_SESSION['name'];    
-$guest->G_LNAME          = $_SESSION['last'];
-$guest->G_GENDER         = $_SESSION['gender'];    
-$guest->G_CITY           = $_SESSION['city'];
-$guest->G_ADDRESS        = $_SESSION['address'] ;        
-$guest->DBIRTH           = date_format(date_create($_SESSION['dbirth']), 'Y-m-d');   
-$guest->G_PHONE          = $_SESSION['phone'];  
-$guest->ZIP              = $_SESSION['zip'];  
-$guest->G_NATIONALITY    = $_SESSION['nationality'];          
-$guest->G_COMPANY        = $_SESSION['company'];      
-$guest->G_CADDRESS       = $_SESSION['caddress'];        
-$guest->G_TERMS          = 1;    
-$guest->G_UNAME          = $_SESSION['username'];    
-$guest->G_PASS           = sha1($_SESSION['pass']);
-// $guest->OTPCOde          = $_SESSION['otp'];    
-$guest->create(); 
-  $lastguest=$guest->id; 
+// $guest = New Guest();
+// $guest->G_AVATAR          = $_SESSION['image'];
+// $guest->G_FNAME          = $_SESSION['name'];    
+// $guest->G_LNAME          = $_SESSION['last'];
+// $guest->G_GENDER         = $_SESSION['gender'];    
+// $guest->G_CITY           = $_SESSION['city'];
+// $guest->G_ADDRESS        = $_SESSION['address'] ;        
+// $guest->DBIRTH           = date_format(date_create($_SESSION['dbirth']), 'Y-m-d');   
+// $guest->G_PHONE          = $_SESSION['phone'];  
+// $guest->ZIP              = $_SESSION['zip'];  
+// $guest->G_NATIONALITY    = $_SESSION['nationality'];          
+// $guest->G_COMPANY        = $_SESSION['company'];      
+// $guest->G_CADDRESS       = $_SESSION['caddress'];        
+// $guest->G_TERMS          = 1;    
+// $guest->G_UNAME          = $_SESSION['username'];    
+// $guest->G_PASS           = sha1($_SESSION['pass']);
+// $guest->OTPCODE          = $_SESSION['otp'];
+// $guest->OTP_EXPIRES_AT   = date('Y-m-d H:i:s', strtotime('+5 minutes')); 
    
-$_SESSION['GUESTID'] =   $lastguest;
+
+// $guest->create(); 
+//   $lastguest=$guest->id; 
+   
+// $_SESSION['GUESTID'] =   $lastguest;
 
 }
 
@@ -447,17 +454,17 @@ $_SESSION['GUESTID'] =   $lastguest;
             // }
             
 
-            $reservation = new Reservation();
-            $reservation->CONFIRMATIONCODE  = $_POST['realconfirmation'];
-            $reservation->TRANSDATE         = date('Y-m-d h:i:s'); 
-            $reservation->ROOMID            = $_SESSION['monbela_cart'][$i]['monbelaroomid'];
-            $reservation->ARRIVAL           = date_format(date_create( $_SESSION['monbela_cart'][$i]['monbelacheckin']), 'Y-m-d');  
-            $reservation->DEPARTURE         = date_format(date_create( $_SESSION['monbela_cart'][$i]['monbelacheckout']), 'Y-m-d'); 
-            $reservation->RPRICE            = $_SESSION['monbela_cart'][$i]['monbelaroomprice'];  
-            $reservation->GUESTID           = $_SESSION['GUESTID']; 
-            $reservation->PRORPOSE          = 'Travel';
-            $reservation->STATUS            = 'Pending';
-            $reservation->create(); 
+            // $reservation = new Reservation();
+            // $reservation->CONFIRMATIONCODE  = $_POST['realconfirmation'];
+            // $reservation->TRANSDATE         = date('Y-m-d h:i:s'); 
+            // $reservation->ROOMID            = $_SESSION['monbela_cart'][$i]['monbelaroomid'];
+            // $reservation->ARRIVAL           = date_format(date_create( $_SESSION['monbela_cart'][$i]['monbelacheckin']), 'Y-m-d');  
+            // $reservation->DEPARTURE         = date_format(date_create( $_SESSION['monbela_cart'][$i]['monbelacheckout']), 'Y-m-d'); 
+            // $reservation->RPRICE            = $_SESSION['monbela_cart'][$i]['monbelaroomprice'];  
+            // $reservation->GUESTID           = $_SESSION['GUESTID']; 
+            // $reservation->PRORPOSE          = 'Travel';
+            // $reservation->STATUS            = 'Pending';
+            // $reservation->create(); 
 
             
             @$tot += $_SESSION['monbela_cart'][$i]['monbelaroomprice'];
