@@ -151,6 +151,11 @@ if (isset($_POST['btnlogin'])) {
         document.getElementById("myInput").disabled = true;
     }
 </script>
+<script>
+    function disableInput() {
+        document.getElementById("myInput2").disabled = true;
+    }
+</script>
         <div class="container">
         <div class="row">
             <div class="col-md-4 col-md-offset-4" >
@@ -167,7 +172,7 @@ if (isset($_POST['btnlogin'])) {
                                 </div>
                                 <div class="form-group">
                                     <h5>Password</h5>
-                                    <input  id="myInput" onclick="disableInput()" class="form-control" placeholder="* * * * * * * * *" name="pass" type="password" value="" minlength="6" maxlength="8">
+                                    <input  id="myInput2" onclick="disableInput()" class="form-control" placeholder="* * * * * * * * *" name="pass" type="password" value="" minlength="6" maxlength="8">
                                     <a href="javascript:void(0)" class="text-reset text-decoration-none pass_view"> <i class="fa fa-eye-slash"></i></a>
                                 </div>
                                 <div class="checkbox">
