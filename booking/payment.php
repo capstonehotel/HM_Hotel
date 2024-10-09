@@ -37,7 +37,7 @@ if (isset($_GET['view']) && $_GET['view'] == 'payment' && isset($_GET['verify'])
         Swal.fire({
             icon: 'success',
             title: 'OTP Verified!',
-            text: 'Proceed to payment',
+            text: 'You will be redirected to the payment in 3 seconds.',
             timer: 3000,
             timerProgressBar: true,
             showConfirmButton: false,
@@ -52,8 +52,8 @@ if (isset($_GET['view']) && $_GET['view'] == 'payment' && isset($_GET['verify'])
             title: 'Invalid OTP!',
             text: response,
             showConfirmButton: true
-        }).then(() => {
-        window.location.href = 'index.php?view=logininfo';
+        // }).then(() => {
+        // window.location.href = 'index.php?view=logininfo';
    
         });
     }
