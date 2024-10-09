@@ -69,7 +69,6 @@ if (isset($_GET['view']) && $_GET['view'] == 'payment' && isset($_GET['verify'])
     // Payment page content
 }
 ?>
-
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
@@ -409,7 +408,7 @@ if(isset($_POST['btnsubmitbooking'])){
 // }
 //   $payable= $rate*$days;
 //   $_SESSION['pay']= $payable;
-// if (verifyOTP($_SESSION['otp'])) {
+if (verifyOTP($_SESSION['otp'])) {
 if(!isset($_SESSION['GUESTID'])){
 
   // var_dump($_SESSION);exit;
