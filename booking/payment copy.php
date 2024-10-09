@@ -65,8 +65,9 @@ if (isset($_GET['view']) && $_GET['view'] == 'payment' && isset($_GET['verify'])
 </script>
 
     <?php
-}  
-    // Payment page conten
+} else {
+    // Payment page content
+}
 ?>
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
@@ -407,117 +408,148 @@ if(isset($_POST['btnsubmitbooking'])){
 // }
 //   $payable= $rate*$days;
 //   $_SESSION['pay']= $payable;
-
+if (verifyOTP($_SESSION['otp'])) {
 if(!isset($_SESSION['GUESTID'])){
 
-    // var_dump($_SESSION);exit;
-  
-  $guest = New Guest();
-  $guest->G_AVATAR          = $_SESSION['image'];
-  $guest->G_FNAME          = $_SESSION['name'];    
-  $guest->G_LNAME          = $_SESSION['last'];
-  $guest->G_GENDER         = $_SESSION['gender'];    
-  $guest->G_CITY           = $_SESSION['city'];
-  $guest->G_ADDRESS        = $_SESSION['address'] ;        
-  $guest->DBIRTH           = date_format(date_create($_SESSION['dbirth']), 'Y-m-d');   
-  $guest->G_PHONE          = $_SESSION['phone'];    
-  $guest->G_NATIONALITY    = $_SESSION['nationality'];          
-  $guest->G_COMPANY        = $_SESSION['company'];      
-  $guest->G_CADDRESS       = $_SESSION['caddress'];        
-  $guest->G_TERMS          = 1;    
-  $guest->G_UNAME          = $_SESSION['username'];    
-  $guest->G_PASS           = sha1($_SESSION['pass']);    
-  $guest->ZIP              = $_SESSION['zip'];
-  $guest->create(); 
-    $lastguest=$guest->id; 
-     
-  $_SESSION['GUESTID'] =   $lastguest;
-  
-  }
+  // var_dump($_SESSION);exit;
+
+$guest = New Guest();
+$guest->G_AVATAR          = $_SESSION['image'];
+$guest->G_FNAME          = $_SESSION['name'];    
+$guest->G_LNAME          = $_SESSION['last'];
+$guest->G_GENDER         = $_SESSION['gender'];    
+$guest->G_CITY           = $_SESSION['city'];
+$guest->G_ADDRESS        = $_SESSION['address'] ;        
+$guest->DBIRTH           = date_format(date_create($_SESSION['dbirth']), 'Y-m-d');   
+$guest->G_PHONE          = $_SESSION['phone'];  
+$guest->ZIP              = $_SESSION['zip'];  
+$guest->G_NATIONALITY    = $_SESSION['nationality'];          
+$guest->G_COMPANY        = $_SESSION['company'];      
+$guest->G_CADDRESS       = $_SESSION['caddress'];        
+$guest->G_TERMS          = 1;    
+$guest->G_UNAME          = $_SESSION['username'];    
+$guest->G_PASS           = sha1($_SESSION['pass']);
+$guest->OTPCODE          = $_SESSION['otp'];
+$guest->OTP_EXPIRE_AT   = date('Y-m-d H:i:s', strtotime('+5 minutes')); 
    
-      $count_cart = count($_SESSION['monbela_cart']);
-    
+
+$guest->create(); 
+  $lastguest=$guest->id; 
+   
+$_SESSION['GUESTID'] =   $lastguest;
+
+}
+
+    $count_cart = count($_SESSION['monbela_cart']);
   
-      for ($i=0; $i < $count_cart  ; $i++) { 
-  
-              // $rm = new Room();
-              // $result = $rm->single_room($_SESSION['monbela_cart'][$i]['monbelaroomid']);
-  
-              // if($result->ROOMNUM>0){
-  
-              //   $room = new Room(); 
-              //   $room->ROOMNUM    = $room->ROOMNUM - 1; 
-              //   $room->update($_SESSION['monbela_cart'][$i]['monbelaroomid']); 
-        
-              // }
-              
-  
-              $reservation = new Reservation();
-              $reservation->CONFIRMATIONCODE  = $_POST['realconfirmation'];
-              $reservation->TRANSDATE         = date('Y-m-d h:i:s'); 
-              $reservation->ROOMID            = $_SESSION['monbela_cart'][$i]['monbelaroomid'];
-              $reservation->ARRIVAL           = date_format(date_create( $_SESSION['monbela_cart'][$i]['monbelacheckin']), 'Y-m-d');  
-              $reservation->DEPARTURE         = date_format(date_create( $_SESSION['monbela_cart'][$i]['monbelacheckout']), 'Y-m-d'); 
-              $reservation->RPRICE            = $_SESSION['monbela_cart'][$i]['monbelaroomprice'];  
-              $reservation->GUESTID           = $_SESSION['GUESTID']; 
-              $reservation->PRORPOSE          = 'Travel';
-              $reservation->STATUS            = 'Pending';
-              $reservation->create(); 
-  
-              
-              @$tot += $_SESSION['monbela_cart'][$i]['monbelaroomprice'];
-              }
-  
-             $item = count($_SESSION['monbela_cart']);
-             $paymentstatus = $_POST['txtstatus'];
-  
-              $target_dir = "../uploads/";
-              $target_file = $target_dir . $_POST['realconfirmation'] ."_". basename($_FILES["proofOfPayment"]["name"]);
-              $file_name = $_POST['realconfirmation'] ."_". basename($_FILES["proofOfPayment"]["name"]);
-  
-        $sql = "INSERT INTO `tblpayment` (`TRANSDATE`,`CONFIRMATIONCODE`,`PQTY`, `GUESTID`, `SPRICE`,`MSGVIEW`,`STATUS`,`PAYMENT_STATUS`, `PROOF_OF_PAYMENT`  )
-         VALUES ('" .date('Y-m-d h:i:s')."','" . $_POST['realconfirmation'] ."',".$item."," . $_SESSION['GUESTID'] . ",".$tot.",0,'Pending', '".$paymentstatus."', '".$file_name."' )" ;
-          // mysql_query($sql);
-  
-  
-  
-  
-  
-       $mydb->setQuery($sql);
-       $msg = $mydb->executeQuery();
-  
-       move_uploaded_file($_FILES["proofOfPayment"]["tmp_name"], $target_file);
-  
-      //   $lastreserv=mysql_insert_id(); 
-      //   $mydb->setQuery("INSERT INTO `comments` (`firstname`, `lastname`, `email`, `comment`) VALUES('$name','$last','$email','$message')");
-      //   $msg = $mydb->executeQuery();
-      //   message("New [". $name ."] created successfully!", "success");
-  
-    //  unsetSessions();
-  
-              unset($_SESSION['monbela_cart']);
-              // unset($_SESSION['confirmation']);
-              unset($_SESSION['pay']);
-              unset($_SESSION['from']);
-              unset($_SESSION['to']);
-              $_SESSION['activity'] = 1;
-  
-              ?> 
-  <script type="text/javascript">
-      Swal.fire({
-          title: 'Success!',
-          text: 'Booking is successfully submitted!',
-          icon: 'success',
-          confirmButtonText: 'OK'
-      }).then((result) => {
-          if (result.isConfirmed) {
-              // Redirect after confirmation
-              window.location.href = "<?php echo WEB_ROOT . 'index.php'; ?>";
-          }
-      });
-  </script>
-  <?php }?>
-  
+
+    for ($i=0; $i < $count_cart  ; $i++) { 
+
+            // $rm = new Room();
+            // $result = $rm->single_room($_SESSION['monbela_cart'][$i]['monbelaroomid']);
+
+            // if($result->ROOMNUM>0){
+
+            //   $room = new Room(); 
+            //   $room->ROOMNUM    = $room->ROOMNUM - 1; 
+            //   $room->update($_SESSION['monbela_cart'][$i]['monbelaroomid']); 
+      
+            // }
+            
+
+            $reservation = new Reservation();
+            $reservation->CONFIRMATIONCODE  = $_POST['realconfirmation'];
+            $reservation->TRANSDATE         = date('Y-m-d h:i:s'); 
+            $reservation->ROOMID            = $_SESSION['monbela_cart'][$i]['monbelaroomid'];
+            $reservation->ARRIVAL           = date_format(date_create( $_SESSION['monbela_cart'][$i]['monbelacheckin']), 'Y-m-d');  
+            $reservation->DEPARTURE         = date_format(date_create( $_SESSION['monbela_cart'][$i]['monbelacheckout']), 'Y-m-d'); 
+            $reservation->RPRICE            = $_SESSION['monbela_cart'][$i]['monbelaroomprice'];  
+            $reservation->GUESTID           = $_SESSION['GUESTID']; 
+            $reservation->PRORPOSE          = 'Travel';
+            $reservation->STATUS            = 'Pending';
+            $reservation->create(); 
+
+            
+            @$tot += $_SESSION['monbela_cart'][$i]['monbelaroomprice'];
+            }
+
+           $item = count($_SESSION['monbela_cart']);
+           $paymentstatus = $_POST['txtstatus'];
+
+            $target_dir = "../uploads/";
+            $target_file = $target_dir . $_POST['realconfirmation'] ."_". basename($_FILES["proofOfPayment"]["name"]);
+            $file_name = $_POST['realconfirmation'] ."_". basename($_FILES["proofOfPayment"]["name"]);
+
+      $sql = "INSERT INTO `tblpayment` (`TRANSDATE`,`CONFIRMATIONCODE`,`PQTY`, `GUESTID`, `SPRICE`,`MSGVIEW`,`STATUS`,`PAYMENT_STATUS`, `PROOF_OF_PAYMENT`  )
+       VALUES ('" .date('Y-m-d h:i:s')."','" . $_POST['realconfirmation'] ."',".$item."," . $_SESSION['GUESTID'] . ",".$tot.",0,'Pending', '".$paymentstatus."', '".$file_name."' )" ;
+        // mysql_query($sql);
+
+
+
+
+
+     $mydb->setQuery($sql);
+     $msg = $mydb->executeQuery();
+
+     move_uploaded_file($_FILES["proofOfPayment"]["tmp_name"], $target_file);
+
+    //   $lastreserv=mysql_insert_id(); 
+    //   $mydb->setQuery("INSERT INTO `comments` (`firstname`, `lastname`, `email`, `comment`) VALUES('$name','$last','$email','$message')");
+    //   $msg = $mydb->executeQuery();
+    //   message("New [". $name ."] created successfully!", "success");
+
+  //  unsetSessions();
+
+            unset($_SESSION['monbela_cart']);
+            // unset($_SESSION['confirmation']);
+            unset($_SESSION['pay']);
+            unset($_SESSION['from']);
+            unset($_SESSION['to']);
+            $_SESSION['activity'] = 1;
+
+            ?> 
+            
+    <script type="text/javascript">
+        Swal.fire({
+            title: 'Success!',
+            text: 'Booking is successfully submitted!',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Redirect after confirmation
+                window.location.href = "index.php";
+            }
+        });
+    </script>
+    <?php
+} else {
+    // Display error message
+    ?>
+    <script type="text/javascript">
+        Swal.fire({
+            title: 'Error!',
+            text: 'Invalid OTP code !',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+    </script>
+    <?php
+}?>
+<!-- <script type="text/javascript">
+    Swal.fire({
+        title: 'Success!',
+        text: 'Booking is successfully submitted!',
+        icon: 'success',
+        confirmButtonText: 'OK'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Redirect after confirmation
+            window.location.href = "index.php";
+        }
+    });
+</script>
+<?php }?> -->
 
  
 <!-- Add this in your HTML head section -->
