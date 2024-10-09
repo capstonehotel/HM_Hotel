@@ -217,7 +217,7 @@ var_dump($_SESSION['otp']);
 
       <div class="form-group">
     <label  class ="control-label" for="password">Password:</label>
-    <input name="pass" type="password" class="form-control input-sm" id="password"   oninput="validatePassword()" required /  placeholder="Ex@mple123" required >
+    <input name="pass" type="password" class="form-control input-sm" id="password"   onblur="validatePassword()" required /  placeholder="Ex@mple123" required >
     <span id="password-error" style="color: red;"></span>
 </div>
 			            </div>
@@ -272,6 +272,7 @@ function validateDOB(input) {
 function validatePassword() {
     var passwordInput = document.getElementById("password");
     var password = passwordInput.value;
+    console.log(password);
     var passwordError = document.getElementById("password-error");
     
     var hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password);
