@@ -217,8 +217,7 @@ var_dump($_SESSION['otp']);
 
       <div class="form-group">
     <label  class ="control-label" for="password">Password:</label>
-    <input name="pass" type="password" class="form-control input-sm" id="password"   onkeyup="validatePassword()" minlength="8" 
-    pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[\W_]).{8,}$"    placeholder="Ex@mple123" required >
+    <input name="pass" type="password" class="form-control input-sm" id="password" onkeyup="validatePassword()" required / placeholder="Ex@mple123">
     <span id="password-error" style="color: red;"></span>
 </div>
 			            </div>
@@ -270,26 +269,9 @@ function validateDOB(input) {
 }
 </script>
 <script>
-$('#password').on('keyup', function() {
-    var password = $(this).val();
-    var strength = 0;
-    if (password.length >= 8) strength++;
-    if (/[A-Z]/.test(password)) strength++;
-    if (/[a-z]/.test(password)) strength++;
-    if (/[0-9]/.test(password)) strength++;
-    if (/\W_/.test(password)) strength++;
-    if (strength === 5) {
-        $('#password-error').text('');
-    } else {
-        $('#password-error').text('Password must be at least 8 characters long and include uppercase, lowercase, number, and special character.');
-    }
-});
-</script>
-<!-- <script>
 function validatePassword() {
     var passwordInput = document.getElementById("password");
     var password = passwordInput.value;
-    console.log(password);
     var passwordError = document.getElementById("password-error");
     
     var hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password);
@@ -313,76 +295,7 @@ function validatePassword() {
         passwordInput.setCustomValidity("");
     }
 }
-</script> -->
-<!-- <script>
-    function validatePassword() {
-        var password = document.getElementById("password").value;
-        var passworderror = document.getElementById("password-error");
-
-        // Check password length
-        if (password.length < 8 || password.length > 12) {
-            passworderror.textContent = "Password must be between 8 and 12 characters long.";
-            return false;
-        }
-
-        // Check for at least one capital letter
-        if (!/[A-Z]/.test(password)) {
-            passworderror.textContent = "Password must contain at least one capital letter.";
-            return false;
-        }
-
-        // Check for at least one small letter
-        if (!/[a-z]/.test(password)) {
-            passworderror.textContent = "Password must contain at least one small letter.";
-            return false;
-        }
-
-        // Check for at least one number
-        if (!/\d/.test(password)) {
-            passworderror.textContent = "Password must contain at least one number.";
-            return false;
-        }
-
-        // Check for at least one special character
-        if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) {
-            passworderror.textContent = "Password must contain at least one special character.";
-            return false;
-        }
-
-        // If all checks pass, clear the error message
-        passworderror.textContent = "";
-        return true;
-    }
-</script> -->
-<!-- <script>
-function validatePassword() {
-    var passwordInput = document.getElementById("password");
-    var password = passwordInput.value;
-    var passwordError = document.getElementById("password-error");
-    
-    // Define password requirements
-    var passwordRequirements = [
-        { regex: /.{8,}/, message: "Password must be at least 8 characters long." },
-        { regex: /[A-Z]/, message: "Password must contain at least one capital letter." },
-        { regex: /[a-z]/, message: "Password must contain at least one lowercase letter." },
-        { regex: /\d/, message: "Password must contain at least one number." },
-        { regex: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/, message: "Password must contain at least one special character." }
-    ];
-    
-    // Check each password requirement
-    for (var i = 0; i < passwordRequirements.length; i++) {
-        if (!passwordRequirements[i].regex.test(password)) {
-            passwordError.textContent = passwordRequirements[i].message;
-            passwordInput.setCustomValidity(passwordRequirements[i].message);
-            return;
-        }
-    }
-    
-    // If all requirements are met, clear error message and validity
-    passwordError.textContent = "";
-    passwordInput.setCustomValidity("");
-}
-</script> -->
+</script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
                  <script>
     document.addEventListener('DOMContentLoaded', function() {
