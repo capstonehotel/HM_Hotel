@@ -268,6 +268,22 @@ function validateDOB(input) {
     }
 }
 </script>
+<script>
+$('#password').on('keyup', function() {
+    var password = $(this).val();
+    var strength = 0;
+    if (password.length >= 8) strength++;
+    if (/[A-Z]/.test(password)) strength++;
+    if (/[a-z]/.test(password)) strength++;
+    if (/[0-9]/.test(password)) strength++;
+    if (/\W_/.test(password)) strength++;
+    if (strength === 5) {
+        $('#password-error').text('');
+    } else {
+        $('#password-error').text('Password must be at least 8 characters long and include uppercase, lowercase, number, and special character.');
+    }
+});
+</script>
 <!-- <script>
 function validatePassword() {
     var passwordInput = document.getElementById("password");
@@ -297,7 +313,7 @@ function validatePassword() {
     }
 }
 </script> -->
-<script>
+<!-- <script>
     function validatePassword() {
         var password = document.getElementById("password").value;
         var passworderror = document.getElementById("password-error");
@@ -336,7 +352,7 @@ function validatePassword() {
         passworderror.textContent = "";
         return true;
     }
-</script>
+</script> -->
 <!-- <script>
 function validatePassword() {
     var passwordInput = document.getElementById("password");
