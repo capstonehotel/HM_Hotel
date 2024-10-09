@@ -268,7 +268,7 @@ function validateDOB(input) {
     }
 }
 </script>
-<script>
+<!-- <script>
 function validatePassword() {
     var passwordInput = document.getElementById("password");
     var password = passwordInput.value;
@@ -294,6 +294,35 @@ function validatePassword() {
         passwordError.textContent = "";
         passwordInput.setCustomValidity("");
     }
+}
+</script> -->
+<script>
+function validatePassword() {
+    var passwordInput = document.getElementById("password");
+    var password = passwordInput.value;
+    var passwordError = document.getElementById("password-error");
+    
+    // Define password requirements
+    var passwordRequirements = [
+        { regex: /.{8,}/, message: "Password must be at least 8 characters long." },
+        { regex: /[A-Z]/, message: "Password must contain at least one capital letter." },
+        { regex: /[a-z]/, message: "Password must contain at least one lowercase letter." },
+        { regex: /\d/, message: "Password must contain at least one number." },
+        { regex: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/, message: "Password must contain at least one special character." }
+    ];
+    
+    // Check each password requirement
+    for (var i = 0; i < passwordRequirements.length; i++) {
+        if (!passwordRequirements[i].regex.test(password)) {
+            passwordError.textContent = passwordRequirements[i].message;
+            passwordInput.setCustomValidity(passwordRequirements[i].message);
+            return;
+        }
+    }
+    
+    // If all requirements are met, clear error message and validity
+    passwordError.textContent = "";
+    passwordInput.setCustomValidity("");
 }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
