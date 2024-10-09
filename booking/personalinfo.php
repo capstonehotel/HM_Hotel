@@ -273,31 +273,31 @@ function validatePassword() {
     var passwordInput = document.getElementById("password");
     var password = passwordInput.value;
     console.log(password);
-    var passwordError = document.getElementById("password-error");
+    var passworderror = document.getElementById("password-error");
     
     var hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password);
     var hasNumber = /\d/.test(password);
     var hasCapital = /[A-Z]/.test(password);
     
     if (password.length < 8) {
-        passwordError.textContent = "Password must be at least 8 characters long.";
+        passworderror.textContent = "Password must be at least 8 characters long.";
         passwordInput.setCustomValidity("Password must be at least 8 characters long.");
     } else if (!hasSpecialChar) {
-        passwordError.textContent = "Password must contain at least one special character.";
+        passworderror.textContent = "Password must contain at least one special character.";
         passwordInput.setCustomValidity("Password must contain at least one special character.");
     } else if (!hasNumber) {
-        passwordError.textContent = "Password must contain at least one number.";
+        passworderror.textContent = "Password must contain at least one number.";
         passwordInput.setCustomValidity("Password must contain at least one number.");
     } else if (!hasCapital) {
-        passwordError.textContent = "Password must contain at least one capital letter.";
+        passworderror.textContent = "Password must contain at least one capital letter.";
         passwordInput.setCustomValidity("Password must contain at least one capital letter.");
     } else {
-        passwordError.textContent = "";
+        passworderror.textContent = "";
         passwordInput.setCustomValidity("");
     }
 }
 </script>
-<script>
+<!-- <script>
     function validatePassword() {
         var password = document.getElementById("password").value;
         var passworderror = document.getElementById("password-error");
@@ -336,7 +336,7 @@ function validatePassword() {
         passworderror.textContent = "";
         return true;
     }
-</script>
+</script> -->
 <!-- <script>
 function validatePassword() {
     var passwordInput = document.getElementById("password");
