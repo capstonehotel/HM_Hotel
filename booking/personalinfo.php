@@ -268,36 +268,36 @@ function validateDOB(input) {
     }
 }
 </script>
-<script>
+<!-- <script>
 function validatePassword() {
     var passwordInput = document.getElementById("password");
     var password = passwordInput.value;
     console.log(password);
-    var passworderror = document.getElementById("password-error");
+    var passwordError = document.getElementById("password-error");
     
     var hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password);
     var hasNumber = /\d/.test(password);
     var hasCapital = /[A-Z]/.test(password);
     
     if (password.length < 8) {
-        passworderror.textContent = "Password must be at least 8 characters long.";
+        passwordError.textContent = "Password must be at least 8 characters long.";
         passwordInput.setCustomValidity("Password must be at least 8 characters long.");
     } else if (!hasSpecialChar) {
-        passworderror.textContent = "Password must contain at least one special character.";
+        passwordError.textContent = "Password must contain at least one special character.";
         passwordInput.setCustomValidity("Password must contain at least one special character.");
     } else if (!hasNumber) {
-        passworderror.textContent = "Password must contain at least one number.";
+        passwordError.textContent = "Password must contain at least one number.";
         passwordInput.setCustomValidity("Password must contain at least one number.");
     } else if (!hasCapital) {
-        passworderror.textContent = "Password must contain at least one capital letter.";
+        passwordError.textContent = "Password must contain at least one capital letter.";
         passwordInput.setCustomValidity("Password must contain at least one capital letter.");
     } else {
-        passworderror.textContent = "";
+        passwordError.textContent = "";
         passwordInput.setCustomValidity("");
     }
 }
-</script>
-<!-- <script>
+</script> -->
+<script>
     function validatePassword() {
         var password = document.getElementById("password").value;
         var passworderror = document.getElementById("password-error");
@@ -336,7 +336,7 @@ function validatePassword() {
         passworderror.textContent = "";
         return true;
     }
-</script> -->
+</script>
 <!-- <script>
 function validatePassword() {
     var passwordInput = document.getElementById("password");
