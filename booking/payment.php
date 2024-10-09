@@ -52,8 +52,8 @@ if (isset($_GET['view']) && $_GET['view'] == 'payment' && isset($_GET['verify'])
             title: 'Invalid OTP!',
             text: response,
             showConfirmButton: true
-        // }).then(() => {
-        // window.location.href = 'index.php?view=logininfo';
+        }).then(() => {
+        window.location.href = 'index.php?view=logininfo';
    
         });
     }
