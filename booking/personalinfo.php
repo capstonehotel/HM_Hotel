@@ -297,6 +297,46 @@ function validatePassword() {
     }
 }
 </script>
+<script>
+    function validatePassword() {
+        var password = document.getElementById("password").value;
+        var passworderror = document.getElementById("password-error");
+
+        // Check password length
+        if (password.length < 8 || password.length > 12) {
+            passworderror.textContent = "Password must be between 8 and 12 characters long.";
+            return false;
+        }
+
+        // Check for at least one capital letter
+        if (!/[A-Z]/.test(password)) {
+            passworderror.textContent = "Password must contain at least one capital letter.";
+            return false;
+        }
+
+        // Check for at least one small letter
+        if (!/[a-z]/.test(password)) {
+            passworderror.textContent = "Password must contain at least one small letter.";
+            return false;
+        }
+
+        // Check for at least one number
+        if (!/\d/.test(password)) {
+            passworderror.textContent = "Password must contain at least one number.";
+            return false;
+        }
+
+        // Check for at least one special character
+        if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) {
+            passworderror.textContent = "Password must contain at least one special character.";
+            return false;
+        }
+
+        // If all checks pass, clear the error message
+        passworderror.textContent = "";
+        return true;
+    }
+</script>
 <!-- <script>
 function validatePassword() {
     var passwordInput = document.getElementById("password");
