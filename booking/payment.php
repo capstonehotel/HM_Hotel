@@ -37,7 +37,7 @@ if (isset($_GET['view']) && $_GET['view'] == 'payment' && isset($_GET['verify'])
         Swal.fire({
             icon: 'success',
             title: 'OTP Verified!',
-            text: 'You will be redirected to the payment in 3 seconds.',
+            text: 'Proceed to payment',
             timer: 3000,
             timerProgressBar: true,
             showConfirmButton: false,
