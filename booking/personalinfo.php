@@ -217,7 +217,7 @@ var_dump($_SESSION['otp']);
 
       <div class="form-group">
     <label  class ="control-label" for="password">Password:</label>
-    <input name="pass" type="password" class="form-control input-sm" id="password"  required onkeyup="validatePassword()" placeholder="Ex@mple123">
+    <input name="pass" type="password" class="form-control input-sm" id="password"   oninput="validatePassword()" required /  placeholder="Ex@mple123" required >
     <span id="password-error" style="color: red;"></span>
 </div>
 			            </div>
@@ -268,7 +268,7 @@ function validateDOB(input) {
     }
 }
 </script>
-<!-- <script>
+<script>
 function validatePassword() {
     var passwordInput = document.getElementById("password");
     var password = passwordInput.value;
@@ -295,8 +295,8 @@ function validatePassword() {
         passwordInput.setCustomValidity("");
     }
 }
-</script> -->
-<script>
+</script>
+<!-- <script>
 function validatePassword() {
     var passwordInput = document.getElementById("password");
     var password = passwordInput.value;
@@ -324,7 +324,7 @@ function validatePassword() {
     passwordError.textContent = "";
     passwordInput.setCustomValidity("");
 }
-</script>
+</script> -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
                  <script>
     document.addEventListener('DOMContentLoaded', function() {
