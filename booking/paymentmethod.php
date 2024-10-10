@@ -17,7 +17,7 @@ $client = new Client([
     'timeout'  => 10.0,
 ]);
 // Your PayMongo secret key (ensure you keep this secure!)
-$secretKey = 'sk_test_8FHikGJxuzFP3ix4itFTcQCv'; // Replace with your actual secret key
+$secretKey = ''; // Replace with your actual secret key
 
 // Prepare the request headers
 $headers = [
