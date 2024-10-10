@@ -2,7 +2,7 @@
 require_once('../paymentmethod/vendor/autoload.php');
 
 // Replace with your PayMongo API keys
-$api_key = 'pk_test_WLnVGBjNdZeqPjoSUpyDk7qu';
+// $api_key = 'pk_test_WLnVGBjNdZeqPjoSUpyDk7qu';
 $api_secret = 'sk_test_8FHikGJxuzFP3ix4itFTcQCv';
 
 // Get the payment method from the form data
@@ -23,7 +23,7 @@ $endpoint = 'https://api.paymongo.com/v1/links';
 $headers = [
     'accept' => 'application/json',
     'content-type' => 'application/json',
-    'authorization' => 'Basic ' . base64_encode($api_key . ':' . $api_secret),
+    'authorization' => 'Basic ' . base64_encode( $api_secret),
 ];
 
 // Set the payment data
