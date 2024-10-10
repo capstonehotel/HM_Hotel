@@ -217,7 +217,7 @@ var_dump($_SESSION['otp']);
 
       <div class="form-group">
     <label  class ="control-label" for="password">Password:</label>
-    <input name="pass" type="password" class="form-control input-sm" id="password" onkeyup="validatePassword()" required / placeholder="Ex@mple123">
+    <input name="pass" type="password" class="form-control input-sm" id="password"  required / placeholder="Ex@mple123">
     <span id="password-error" style="color: red;"></span>
 </div>
 			            </div>
@@ -269,32 +269,40 @@ function validateDOB(input) {
 }
 </script>
 <script>
-function validatePassword() {
-    var passwordInput = document.getElementById("password");
-    var password = passwordInput.value;
-    var passwordError = document.getElementById("password-error");
-    
-    var hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password);
-    var hasNumber = /\d/.test(password);
-    var hasCapital = /[A-Z]/.test(password);
-    
-    if (password.length < 8) {
-        passwordError.textContent = "Password must be at least 8 characters long.";
-        passwordInput.setCustomValidity("Password must be at least 8 characters long.");
-    } else if (!hasSpecialChar) {
-        passwordError.textContent = "Password must contain at least one special character.";
-        passwordInput.setCustomValidity("Password must contain at least one special character.");
-    } else if (!hasNumber) {
-        passwordError.textContent = "Password must contain at least one number.";
-        passwordInput.setCustomValidity("Password must contain at least one number.");
-    } else if (!hasCapital) {
-        passwordError.textContent = "Password must contain at least one capital letter.";
-        passwordInput.setCustomValidity("Password must contain at least one capital letter.");
-    } else {
-        passwordError.textContent = "";
-        passwordInput.setCustomValidity("");
-    }
-}
+    document.getElementById('password').addEventListener('input', function () {
+        const password = this.value;
+        const errorSpan = document.getElementById('password-error');
+        
+        let errorMessage = '';
+        const minLength = 8;
+        const maxLength = 12;
+        const uppercaseRegex = /[A-Z]/;
+        const lowercaseRegex = /[a-z]/;
+        const numberRegex = /[0-9]/;
+        const specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;
+
+        if (password.length < minLength || password.length > maxLength) {
+            errorMessage += `Password must be between ${minLength}-${maxLength} characters long.<br>`;
+        }
+        if (!uppercaseRegex.test(password)) {
+            errorMessage += 'Password must contain at least one uppercase letter.<br>';
+        }
+        if (!lowercaseRegex.test(password)) {
+            errorMessage += 'Password must contain at least one lowercase letter.<br>';
+        }
+        if (!numberRegex.test(password)) {
+            errorMessage += 'Password must contain at least one number.<br>';
+        }
+        if (!specialCharRegex.test(password)) {
+            errorMessage += 'Password must contain at least one special character (e.g. @, #, $).<br>';
+        }
+
+        if (errorMessage === '') {
+            errorSpan.innerHTML = ''; // No error, clear the message
+        } else {
+            errorSpan.innerHTML = errorMessage;
+        }
+    });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
                  <script>
