@@ -335,14 +335,36 @@ $_SESSION['GUESTID'] =   $lastguest;
                     <div class="col-md-12 col-sm-2">
     <label id="paymentLabel">Payment Method:</label>
 
+    <form method="POST" action="your_payment_endpoint.php">
+    <input type="hidden" name="payment_method" id="payment_method" value="">
     
-        <button type="button" class="btn btn-primary" id="gcash-btn">
+    <button type="button" class="btn btn-primary" onclick="selectPaymentMethod('gcash')">
+        <img src="path/to/gcash_image.png" alt="Pay with GCash" style="height: 20px; margin-right: 5px;">
+        Pay with GCash
+    </button>
+    
+    <button type="button" class="btn btn-primary" onclick="selectPaymentMethod('paymaya')">
+        <img src="path/to/paymaya_image.png" alt="Pay with PayMaya" style="height: 20px; margin-right: 5px;">
+        Pay with PayMaya
+    </button>
+</form>
+
+<script>
+function selectPaymentMethod(method) {
+    document.getElementById('payment_method').value = method;
+    
+    // Automatically submit the form to trigger the payment process
+    document.querySelector('form').submit();
+}
+</script>
+
+        <!-- <button type="button" class="btn btn-primary" id="gcash-btn">
             <img src="../gcash.png" alt="GCash Icon" class="payment-icon" onclick="payWithGcash()"> GCash
         </button>
         <button type="button" class="btn btn-primary" id="paymaya-btn" onclick="payWithPaymaya()">
             <img src="../paymaya.png" alt="PayMaya Icon" class="payment-icon"> PayMaya
         </button>
-        </div>
+        </div> -->
     </div>
 </div>
 
