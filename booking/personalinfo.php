@@ -304,7 +304,9 @@ function validatePassword() {
 </script> -->
 <script>
 function validatePassword() {
-    const password = document.getElementById('password').value;
+    // const password = document.getElementById('password').value;
+    const passwordInput = document.getElementById('password');
+passwordInput.addEventListener('input', validatePassword);
 
     // Regex patterns for validation
     const lengthPattern = /.{8,12}/;  // 8-12 characters
