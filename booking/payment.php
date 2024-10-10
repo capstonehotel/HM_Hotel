@@ -277,46 +277,7 @@ $_SESSION['GUESTID'] =   $lastguest;
 </script>-->
 <?php }?> 
 <style>
-  .custom-radio {
-    display: none; /* Hide the default radio button */
-}
-
-.payment-method-label {
-    background-color: #f0f8ff; /* Light blue background */
-    padding: 10px;
-    border-radius: 5px;
-    display: inline-flex;
-    align-items: center;
-    cursor: pointer;
-    position: relative; /* Position for check mark */
-    transition: background-color 0.3s;
-}
-
-.payment-method-label:before {
-    content: ""; /* Check mark */
-    position: absolute;
-    top: 10px; /* Adjust to your layout */
-    left: 10px; /* Adjust to your layout */
-    width: 20px;
-    height: 20px;
-    border: 2px solid #007bff; /* Blue border */
-    border-radius: 3px; /* Square corners */
-    background-color: white; /* Background color */
-    transition: background-color 0.3s;
-}
-
-.custom-radio:checked + .payment-method-label:before {
-    background-color: #007bff; /* Change to blue when checked */
-    content: "✔"; /* Unicode check mark */
-    color: white; /* Change check mark color */
-    text-align: center; /* Center check mark */
-    line-height: 20px; /* Center vertically */
-    font-size: 16px; /* Adjust check mark size */
-}
-
-.payment-method-label:hover {
-    background-color: #e0f7fa; /* Darker blue on hover */
-}
+ 
 
 </style>
  
