@@ -276,6 +276,17 @@ $_SESSION['GUESTID'] =   $lastguest;
     });
 </script>-->
 <?php }?> 
+<style>
+    .payment-method-label {
+    background-color: #f0f8ff; /* Light blue background */
+    padding: 10px; /* Add some padding */
+    border-radius: 5px; /* Rounded corners */
+    display: inline-flex; /* Flex display to align icon and text */
+    align-items: center; /* Center the items vertically */
+    margin-right: 10px; /* Add space between items */
+}
+
+</style>
  
 <!-- Add this in your HTML head section -->
 
@@ -322,24 +333,23 @@ $_SESSION['GUESTID'] =   $lastguest;
     <label id="paymentLabel">Payment Method</label>
 
     <div class="form-group">
-    <div class="custom-control custom-radio">
+        <div class="custom-control custom-radio">
             <input type="radio" id="gcash" name="paymentMethod" value="GCash" class="custom-control-input" required>
-            <label class="custom-control-label" for="gcash">
+            <label class="custom-control-label payment-method-label" for="gcash">
                 <img src="../gcash.png" alt="GCash" style="width: 30px; height: 30px;"> GCash
             </label>
         </div>
         <div class="custom-control custom-radio">
             <input type="radio" id="paymaya" name="paymentMethod" value="PayMaya" class="custom-control-input" required>
-            <label class="custom-control-label" for="paymaya">
+            <label class="custom-control-label payment-method-label" for="paymaya">
                 <img src="path/to/paymaya-icon.png" alt="PayMaya" style="width: 30px; height: 30px;"> PayMaya
             </label>
         </div>
         <div class="custom-control custom-radio">
             <input type="radio" id="creditCard" name="paymentMethod" value="Credit Card" class="custom-control-input" required>
-            <label class="custom-control-label" for="creditCard">
+            <label class="custom-control-label payment-method-label" for="creditCard">
                 <i class="fas fa-credit-card"></i> Credit Card
             </label>
-        </div>
         </div>
     </div>
 </div>
