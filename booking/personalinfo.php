@@ -301,21 +301,44 @@ function validatePassword() {
     const password = document.getElementById('password').value;
     const errorMessage = document.getElementById('password-error');
     
-    // Regex pattern: 
-    //  - ^(?=.*[a-z]): At least one lowercase letter
-    //  - (?=.*[A-Z]): At least one uppercase letter
-    //  - (?=.*\d): At least one digit
-    //  - (?=.*[@$!%*?&]): At least one special character
-    //  - [A-Za-z\d@$!%*?&]{8,12}$: Between 8-12 characters
-    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$/;
-    
-    if (!passwordPattern.test(password)) {
-        errorMessage.textContent = 'Password must be 8-12 characters, include uppercase, lowercase, a number, and a special character.';
+    // Password criteria
+    const lengthPattern = /^.{8,12}$/;  // 8-12 characters
+    const lowercasePattern = /[a-z]/;   // at least one lowercase letter
+    const uppercasePattern = /[A-Z]/;   // at least one uppercase letter
+    const numberPattern = /\d/;         // at least one number
+    const specialCharPattern = /[@$!%*?&]/; // at least one special character
+
+    // Clear previous error messages
+    let errors = [];
+
+    // Check each requirement and push the message if it fails
+    if (!lengthPattern.test(password)) {
+        errors.push("• Password must be 8-12 characters long.");
+    }
+    if (!lowercasePattern.test(password)) {
+        errors.push("• Password must include at least one lowercase letter.");
+    }
+    if (!uppercasePattern.test(password)) {
+        errors.push("• Password must include at least one uppercase letter.");
+    }
+    if (!numberPattern.test(password)) {
+        errors.push("• Password must include at least one number.");
+    }
+    if (!specialCharPattern.test(password)) {
+        errors.push("• Password must include at least one special character (e.g., @$!%*?&).");
+    }
+
+    // Display error messages or clear them if password meets all conditions
+    if (errors.length > 0) {
+        errorMessage.innerHTML = errors.join('<br>'); // Display the errors as bullet points
+        document.getElementById('password').setCustomValidity("Invalid password");
     } else {
         errorMessage.textContent = '';  // Clear the error message when the password is valid
+        document.getElementById('password').setCustomValidity("");
     }
 }
 </script>
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
                  <script>
     document.addEventListener('DOMContentLoaded', function() {
