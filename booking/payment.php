@@ -277,7 +277,17 @@ $_SESSION['GUESTID'] =   $lastguest;
 </script>-->
 <?php }?> 
 <style>
- 
+ .btn-group .btn {
+    padding: 5px 10px; /* Reduce padding for smaller button size */
+}
+
+.payment-icon {
+    width: 20px; /* Set a smaller width for the icons */
+    height: 20px; /* Set a smaller height for the icons */
+    margin-right: 5px; /* Space between the icon and text */
+    vertical-align: middle; /* Align image vertically in the middle of the button */
+}
+
 
 </style>
  
