@@ -217,7 +217,8 @@ var_dump($_SESSION['otp']);
 
       <div class="form-group">
     <label class="control-label" for="password">Password:</label>
-    <input name="pass" type="password" class="form-control input-sm" id="password" onkeyup="validatePassword()" minlength="8" maxlength="12" required placeholder="Ex@mple123"/>
+    <input name="pass" type="password" class="form-control input-sm" id="password" onkeyup="validatePassword()" minlength="8" maxlength="12" required placeholder="Ex@mple123" />
+    
     <ul id="password-requirements" style="color: red; list-style-type: none; padding-left: 0; display: none;">
         <li id="length-error">Password must be 8-12 characters long.</li>
         <li id="capital-error">Password must contain at least one uppercase letter.</li>
@@ -225,6 +226,7 @@ var_dump($_SESSION['otp']);
         <li id="special-error">Password must contain at least one special character.</li>
     </ul>
 </div>
+
 
 			            </div>
 			          </div>
@@ -311,26 +313,26 @@ passwordInput.addEventListener('input', validatePassword); -->
 <script>
 function validatePassword() {
     const password = document.getElementById('password').value;
+
+    // Show the password requirements list when user starts typing
     const passwordRequirements = document.getElementById('password-requirements');
-    
+    if (password.length > 0) {
+        passwordRequirements.style.display = 'block';
+    } else {
+        passwordRequirements.style.display = 'none'; // Hide the list if input is empty
+    }
+
     // Regex patterns for validation
-    const lengthPattern = /.{8,12}/;  // 8-12 characters
-    const capitalPattern = /[A-Z]/;   // At least one uppercase letter
-    const numberPattern = /\d/;       // At least one number
-    const specialPattern = /[@$!%*?&]/; // At least one special character
+    const lengthPattern = /.{8,12}/;        // 8-12 characters
+    const capitalPattern = /[A-Z]/;         // At least one uppercase letter
+    const numberPattern = /\d/;             // At least one number
+    const specialPattern = /[@$!%*?&]/;     // At least one special character
 
     // Select the error messages
     const lengthError = document.getElementById('length-error');
     const capitalError = document.getElementById('capital-error');
     const numberError = document.getElementById('number-error');
     const specialError = document.getElementById('special-error');
-
-    // Show password requirements once the user starts typing
-    if (password.length > 0) {
-        passwordRequirements.style.display = 'block';  // Show requirements
-    } else {
-        passwordRequirements.style.display = 'none';   // Hide requirements when input is empty
-    }
 
     // Validate each rule and hide or show the corresponding error message
     lengthError.style.display = lengthPattern.test(password) ? 'none' : 'list-item';
@@ -348,8 +350,6 @@ function validatePassword() {
     document.getElementById('password').setCustomValidity(allValid ? '' : 'Invalid password');
 }
 </script>
-
-
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
                  <script>
     document.addEventListener('DOMContentLoaded', function() {
