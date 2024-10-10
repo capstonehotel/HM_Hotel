@@ -332,31 +332,32 @@ $_SESSION['GUESTID'] =   $lastguest;
     <input type="hidden" name="realconfirmation" value="<?php echo $_SESSION['confirmation']; ?>" />
     <input type="hidden" id="payment_status_input"  name="txtstatus">
 </div>
-                    <div class="col-md-12 col-sm-2">
+<div class="col-md-12 col-sm-2">
     <label id="paymentLabel">Payment Method:</label>
 
-    <form method="POST" action="paymongo.php">
-    <input type="hidden" name="payment_method" id="payment_method" value="">
-    
-    <button type="button" class="btn btn-primary" onclick="selectPaymentMethod('Gcash')">
-        <img src="../gcash.png" alt="Pay with GCash" style="height: 20px; margin-right: 5px;">
-        Pay with GCash
-    </button>
-    
-    <button type="button" class="btn btn-primary" onclick="selectPaymentMethod('Paymaya')">
-        <img src="../paymaya.png" alt="Pay with PayMaya" style="height: 20px; margin-right: 5px;">
-        Pay with PayMaya
-    </button>
-</form>
+    <form method="POST" action="paymongo.php" id="payment-form">
+        <input type="hidden" name="payment_method" id="payment_method" value="">
+        
+        <button type="button" class="btn btn-primary" onclick="selectPaymentMethod('Gcash')">
+            <img src="../gcash.png" alt="Pay with GCash" style="height: 20px; margin-right: 5px;">
+            Pay with GCash
+        </button>
+        
+        <button type="button" class="btn btn-primary" onclick="selectPaymentMethod('Paymaya')">
+            <img src="../paymaya.png" alt="Pay with PayMaya" style="height: 20px; margin-right: 5px;">
+            Pay with PayMaya
+        </button>
+    </form>
 
-<script>
-function selectPaymentMethod(method) {
-    document.getElementById('payment_method').value = method;
-    
-    // Automatically submit the form to trigger the payment process
-    document.querySelector('form').submit();
-}
-</script>
+    <script>
+        function selectPaymentMethod(method) {
+            document.getElementById('payment_method').value = method;
+            
+            // Automatically submit the form to trigger the payment process
+            document.getElementById('payment-form').submit();
+        }
+    </script>
+</div>
 
         <!-- <button type="button" class="btn btn-primary" id="gcash-btn">
             <img src="../gcash.png" alt="GCash Icon" class="payment-icon" onclick="payWithGcash()"> GCash
