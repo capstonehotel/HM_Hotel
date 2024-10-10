@@ -322,17 +322,23 @@ $_SESSION['GUESTID'] =   $lastguest;
     <label id="paymentLabel">Payment Method</label>
 
     <div class="form-group">
+    <div class="custom-control custom-radio">
+            <input type="radio" id="gcash" name="paymentMethod" value="GCash" class="custom-control-input" required>
+            <label class="custom-control-label" for="gcash">
+                <img src="../gcash.png" alt="GCash" style="width: 30px; height: 30px;"> GCash
+            </label>
+        </div>
+        <div class="custom-control custom-radio">
+            <input type="radio" id="paymaya" name="paymentMethod" value="PayMaya" class="custom-control-input" required>
+            <label class="custom-control-label" for="paymaya">
+                <img src="path/to/paymaya-icon.png" alt="PayMaya" style="width: 30px; height: 30px;"> PayMaya
+            </label>
+        </div>
         <div class="custom-control custom-radio">
             <input type="radio" id="creditCard" name="paymentMethod" value="Credit Card" class="custom-control-input" required>
-            <label class="custom-control-label" for="creditCard">Credit Card</label>
-        </div>
-        <div class="custom-control custom-radio">
-            <input type="radio" id="bankTransfer" name="paymentMethod" value="Bank Transfer" class="custom-control-input" required>
-            <label class="custom-control-label" for="bankTransfer">Bank Transfer</label>
-        </div>
-        <div class="custom-control custom-radio">
-            <input type="radio" id="paypal" name="paymentMethod" value="PayPal" class="custom-control-input" required>
-            <label class="custom-control-label" for="paypal">PayPal</label>
+            <label class="custom-control-label" for="creditCard">
+                <i class="fas fa-credit-card"></i> Credit Card
+            </label>
         </div>
         </div>
     </div>
