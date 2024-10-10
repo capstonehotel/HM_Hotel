@@ -327,7 +327,7 @@ $_SESSION['GUESTID'] =   $lastguest;
                         <?php echo date("m/d/Y"); ?>
                     </div>
                     <div class="col-md-12">
-    <label style="dispaly: none;">Transaction Id:</label>
+    <label style="display: none;">Transaction Id:</label>
     <span><?php echo $_SESSION['confirmation']; ?></span>
     <input type="hidden" name="realconfirmation" value="<?php echo $_SESSION['confirmation']; ?>" />
     <input type="hidden" id="payment_status_input"  name="txtstatus">
