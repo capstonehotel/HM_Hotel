@@ -338,12 +338,12 @@ $_SESSION['GUESTID'] =   $lastguest;
     <form method="POST" action="paymongo.php">
     <input type="hidden" name="payment_method" id="payment_method" value="">
     
-    <button type="button" class="btn btn-primary" onclick="selectPaymentMethod('gcash')">
+    <button type="button" class="btn btn-primary" onclick="selectPaymentMethod('Gcash')">
         <img src="../gcash.png" alt="Pay with GCash" style="height: 20px; margin-right: 5px;">
         Pay with GCash
     </button>
     
-    <button type="button" class="btn btn-primary" onclick="selectPaymentMethod('paymaya')">
+    <button type="button" class="btn btn-primary" onclick="selectPaymentMethod('Paymaya')">
         <img src="../paymaya.png" alt="Pay with PayMaya" style="height: 20px; margin-right: 5px;">
         Pay with PayMaya
     </button>
