@@ -325,21 +325,15 @@ $_SESSION['GUESTID'] =   $lastguest;
                     <div class="col-md-12 col-sm-2">
     <label id="paymentLabel">Payment Method</label>
 
-    <div class="form-group">
-    <input type="radio" id="gcash" name="paymentMethod" value="GCash" class="custom-radio" required>
-        <label class="payment-method-label" for="gcash">
-            <img src="../gcash.png" alt="GCash" style="width: 30px; height: 30px; margin-right: 5px;"> GCash
-        </label>
+    <div class="btn-group">
+        <button type="button" class="btn btn-primary" id="gcash-btn">
+            <img src="../gcash.png" alt="GCash Icon"> GCash
+        </button>
+        <button type="button" class="btn btn-primary" id="paymaya-btn">
+            <img src="../paymaya.png" alt="PayMaya Icon"> PayMaya
+        </button>
+    </div>
 
-        <input type="radio" id="paymaya" name="paymentMethod" value="PayMaya" class="custom-radio" required>
-        <label class="payment-method-label" for="paymaya">
-            <img src="path/to/paymaya-icon.png" alt="PayMaya" style="width: 30px; height: 30px;"> PayMaya
-        </label>
-
-        <input type="radio" id="creditCard" name="paymentMethod" value="Credit Card" class="custom-radio" required>
-        <label class="payment-method-label" for="creditCard">
-            <i class="fas fa-credit-card"></i> Credit Card
-        </label>
         </div>
     </div>
 </div>
