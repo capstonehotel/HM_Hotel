@@ -365,9 +365,9 @@ $_SESSION['GUESTID'] =   $lastguest;
     <label id="paymentLabel">Payment Method</label>
 
     <div class="form-group">
-        <input type="radio" id="gcash" name="paymentMethod" value="GCash" class="custom-radio" required>
+    <input type="radio" id="gcash" name="paymentMethod" value="GCash" class="custom-radio" required>
         <label class="payment-method-label" for="gcash">
-            <img src="../gcash.png" alt="GCash" style="width: 30px; height: 30px;"> GCash
+            <img src="path/to/gcash-icon.png" alt="GCash" style="width: 30px; height: 30px; margin-right: 5px;"> GCash
         </label>
 
         <input type="radio" id="paymaya" name="paymentMethod" value="PayMaya" class="custom-radio" required>
