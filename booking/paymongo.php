@@ -1,6 +1,7 @@
 <?php
 require_once('../paymentmethod/vendor/autoload.php');
 
+// Start the session to access session variables
 
 
 // Set content type to application/json to ensure the response is valid JSON
@@ -10,12 +11,15 @@ header('Content-Type: application/json');
 $input = json_decode(file_get_contents('php://input'), true);
 $payment_method = $input['payment_method'] ?? '';
 
-if ($payment_method) {
+if ($payment_method && isset($_SESSION['pay'])) {
     // PayMongo API Key (replace with your actual test key)
     $apiKey = 'sk_test_8FHikGJxuzFP3ix4itFTcQCv';
 
     try {
         $client = new \GuzzleHttp\Client();
+
+        // Fetch the payment amount from session and convert to centavos
+        $amount = $_SESSION['pay'] * 100; // PHP to centavos conversion
 
         // Create the payment link request
         $response = $client->request('POST', 'https://api.paymongo.com/v1/links', [
@@ -27,7 +31,7 @@ if ($payment_method) {
             'json' => [
                 'data' => [
                     'attributes' => [
-                        'amount' => 10000, // Example amount in centavos (100 PHP)
+                        'amount' => $amount, // Use the session amount
                         'description' => 'Test Payment',
                         'payment_method_types' => [$payment_method]
                     ]
@@ -46,7 +50,7 @@ if ($payment_method) {
         echo json_encode(['error' => $e->getMessage()]);
     }
 } else {
-    // Return an error if no payment method is selected
-    echo json_encode(['error' => 'No payment method selected']);
+    // Return an error if no payment method is selected or session variable is missing
+    echo json_encode(['error' => 'No payment method selected or payment amount not set']);
 }
 ?>
