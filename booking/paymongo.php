@@ -1,17 +1,18 @@
 <?php
 require_once('../paymentmethod/vendor/autoload.php');
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Retrieve selected payment method
-    $payment_method = $_POST['payment_method'];
+// Retrieve the POST data
+$input = json_decode(file_get_contents('php://input'), true);
+$payment_method = $input['payment_method'] ?? '';
 
-    // PayMongo API Key (replace with your actual test key if needed)
+if ($payment_method) {
+    // PayMongo API Key (replace with your actual test key)
     $apiKey = 'sk_test_8FHikGJxuzFP3ix4itFTcQCv';
 
-    // Create a payment link using Guzzle HTTP client
     try {
         $client = new \GuzzleHttp\Client();
 
+        // Create the payment link request
         $response = $client->request('POST', 'https://api.paymongo.com/v1/links', [
             'headers' => [
                 'accept' => 'application/json',
@@ -23,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     'attributes' => [
                         'amount' => 10000, // Example amount in centavos (100 PHP)
                         'description' => 'Test Payment',
-                        'payment_method_types' => [$payment_method] // Dynamic payment method (Gcash or Paymaya)
+                        'payment_method_types' => [$payment_method]
                     ]
                 ]
             ]
@@ -32,12 +33,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $body = json_decode($response->getBody(), true);
         $paymentLink = $body['data']['attributes']['checkout_url'];
 
-        // Redirect user to the payment link
-        header('Location: ' . $paymentLink);
-        exit;
+        // Return the payment link as a JSON response
+        echo json_encode(['checkout_url' => $paymentLink]);
 
     } catch (Exception $e) {
-        echo 'Error: ' . $e->getMessage();
+        echo json_encode(['error' => $e->getMessage()]);
     }
+} else {
+    echo json_encode(['error' => 'No payment method selected']);
 }
 ?>
