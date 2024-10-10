@@ -1,58 +1,43 @@
 <?php
 require_once('../paymentmethod/vendor/autoload.php');
 
-// Replace with your PayMongo API keys
-// $api_key = 'pk_test_WLnVGBjNdZeqPjoSUpyDk7qu';
-$api_secret = 'sk_test_8FHikGJxuzFP3ix4itFTcQCv';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Retrieve selected payment method
+    $payment_method = $_POST['payment_method'];
 
-// Get the payment method from the form data
-$payment_method = $_POST['payment_method'];
+    // PayMongo API Key (replace with your actual test key if needed)
+    $apiKey = 'sk_test_8FHikGJxuzFP3ix4itFTcQCv';
 
+    // Create a payment link using Guzzle HTTP client
+    try {
+        $client = new \GuzzleHttp\Client();
 
-// Get the payment amount from the session
-$amount = $_SESSION['pay'];
+        $response = $client->request('POST', 'https://api.paymongo.com/v1/links', [
+            'headers' => [
+                'accept' => 'application/json',
+                'authorization' => 'Basic ' . base64_encode($apiKey . ':'),
+                'content-type' => 'application/json',
+            ],
+            'json' => [
+                'data' => [
+                    'attributes' => [
+                        'amount' => 10000, // Example amount in centavos (100 PHP)
+                        'description' => 'Test Payment',
+                        'payment_method_types' => [$payment_method] // Dynamic payment method (Gcash or Paymaya)
+                    ]
+                ]
+            ]
+        ]);
 
-// Set the payment description (replace with your desired description)
-$description = 'Test payment';
+        $body = json_decode($response->getBody(), true);
+        $paymentLink = $body['data']['attributes']['checkout_url'];
 
-// Create a new PayMongo client
-$client = new \GuzzleHttp\Client();
+        // Redirect user to the payment link
+        header('Location: ' . $paymentLink);
+        exit;
 
-// Set the API endpoint and authentication headers
-$endpoint = 'https://api.paymongo.com/v1/links';
-$headers = [
-    'accept' => 'application/json',
-    'content-type' => 'application/json',
-    'authorization' => 'Basic ' . base64_encode( $api_secret),
-];
-
-// Set the payment data
-$data = [
-    'data' => [
-        'attributes' => [
-            'amount' => $amount,
-            'description' => $description,
-            'currency' => 'PHP',
-            'payment_method_types' => [$payment_method],
-        ],
-    ],
-];
-
-// Convert the data to JSON
-$json_data = json_encode($data);
-
-// Send the request to PayMongo
-$response = $client->request('POST', $endpoint, [
-    'headers' => $headers,
-    'body' => $json_data,
-]);
-
-// Get the response data
-$response_data = json_decode($response->getBody(), true);
-
-// Get the payment link
-$payment_link = $response_data['data']['attributes']['url'];
-
-// Redirect the user to the payment link
-header('Location: ' . $payment_link);
-exit;
+    } catch (Exception $e) {
+        echo 'Error: ' . $e->getMessage();
+    }
+}
+?>
