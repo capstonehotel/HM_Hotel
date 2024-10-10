@@ -216,16 +216,16 @@ var_dump($_SESSION['otp']);
       </div>
 
       <div class="form-group">
-    <label  class ="control-label" for="password">Password:</label>
-    <input name="pass" type="password" class="form-control input-sm" id="password" onkeyup="validatePassword()" minlength="8" maxlength="12" required  placeholder="Ex@mple123"/>
-    <!-- <span id="password-error" style="color: red;"></span> -->
-    <ul id="password-requirements" style="color: red; list-style-type: none; padding-left: 0;">
+    <label class="control-label" for="password">Password:</label>
+    <input name="pass" type="password" class="form-control input-sm" id="password" onkeyup="validatePassword()" minlength="8" maxlength="12" required placeholder="Ex@mple123"/>
+    <ul id="password-requirements" style="color: red; list-style-type: none; padding-left: 0; display: none;">
         <li id="length-error">Password must be 8-12 characters long.</li>
         <li id="capital-error">Password must contain at least one uppercase letter.</li>
         <li id="number-error">Password must contain at least one number.</li>
         <li id="special-error">Password must contain at least one special character.</li>
     </ul>
 </div>
+
 			            </div>
 			          </div>
  
@@ -302,12 +302,17 @@ function validatePassword() {
     }
 }
 </script> -->
-<script>
+<!-- <script>
 function validatePassword() {
     // const password = document.getElementById('password').value;
     const passwordInput = document.getElementById('password');
-passwordInput.addEventListener('input', validatePassword);
+passwordInput.addEventListener('input', validatePassword); -->
 
+<script>
+function validatePassword() {
+    const password = document.getElementById('password').value;
+    const passwordRequirements = document.getElementById('password-requirements');
+    
     // Regex patterns for validation
     const lengthPattern = /.{8,12}/;  // 8-12 characters
     const capitalPattern = /[A-Z]/;   // At least one uppercase letter
@@ -319,6 +324,13 @@ passwordInput.addEventListener('input', validatePassword);
     const capitalError = document.getElementById('capital-error');
     const numberError = document.getElementById('number-error');
     const specialError = document.getElementById('special-error');
+
+    // Show password requirements once the user starts typing
+    if (password.length > 0) {
+        passwordRequirements.style.display = 'block';  // Show requirements
+    } else {
+        passwordRequirements.style.display = 'none';   // Hide requirements when input is empty
+    }
 
     // Validate each rule and hide or show the corresponding error message
     lengthError.style.display = lengthPattern.test(password) ? 'none' : 'list-item';
@@ -336,6 +348,7 @@ passwordInput.addEventListener('input', validatePassword);
     document.getElementById('password').setCustomValidity(allValid ? '' : 'Invalid password');
 }
 </script>
+
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
                  <script>
