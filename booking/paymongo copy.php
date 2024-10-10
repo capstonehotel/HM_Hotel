@@ -1,4 +1,4 @@
-<!-- <?php
+ <?php
 session_start(); // Start the session to access session variables
 
 require_once('../paymentmethod/vendor/autoload.php'); // Include PayMongo's library
@@ -59,4 +59,5 @@ try {
     // Handle errors and display an appropriate message
     echo "Error: " . $e->getMessage();
     exit;
-} -->
+}
+?>
