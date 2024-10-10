@@ -218,7 +218,13 @@ var_dump($_SESSION['otp']);
       <div class="form-group">
     <label  class ="control-label" for="password">Password:</label>
     <input name="pass" type="password" class="form-control input-sm" id="password" onkeyup="validatePassword()" minlength="8" maxlength="12" required  placeholder="Ex@mple123"/>
-    <span id="password-error" style="color: red;"></span>
+    <!-- <span id="password-error" style="color: red;"></span> -->
+    <ul id="password-requirements" style="color: red; list-style-type: none; padding-left: 0;">
+        <li id="length-error">Password must be 8-12 characters long.</li>
+        <li id="capital-error">Password must contain at least one uppercase letter.</li>
+        <li id="number-error">Password must contain at least one number.</li>
+        <li id="special-error">Password must contain at least one special character.</li>
+    </ul>
 </div>
 			            </div>
 			          </div>
@@ -299,43 +305,51 @@ function validatePassword() {
 <script>
 function validatePassword() {
     const password = document.getElementById('password').value;
-    const errorMessage = document.getElementById('password-error');
-    
-    // Password criteria
-    const lengthPattern = /^.{8,12}$/;  // 8-12 characters
-    const lowercasePattern = /[a-z]/;   // at least one lowercase letter
-    const uppercasePattern = /[A-Z]/;   // at least one uppercase letter
-    const numberPattern = /\d/;         // at least one number
-    const specialCharPattern = /[@$!%*?&]/; // at least one special character
 
-    // Clear previous error messages
-    let errors = [];
+    // Regex patterns
+    const lengthPattern = /.{8,12}/;  // 8-12 characters
+    const capitalPattern = /[A-Z]/;   // At least one uppercase letter
+    const numberPattern = /\d/;       // At least one number
+    const specialPattern = /[@$!%*?&]/; // At least one special character
 
-    // Check each requirement and push the message if it fails
-    if (!lengthPattern.test(password)) {
-        errors.push("• Password must be 8-12 characters long.");
-    }
-    if (!lowercasePattern.test(password)) {
-        errors.push("• Password must include at least one lowercase letter.");
-    }
-    if (!uppercasePattern.test(password)) {
-        errors.push("• Password must include at least one uppercase letter.");
-    }
-    if (!numberPattern.test(password)) {
-        errors.push("• Password must include at least one number.");
-    }
-    if (!specialCharPattern.test(password)) {
-        errors.push("• Password must include at least one special character (e.g., @$!%*?&).");
-    }
+    // Error message elements
+    const lengthError = document.getElementById('length-error');
+    const capitalError = document.getElementById('capital-error');
+    const numberError = document.getElementById('number-error');
+    const specialError = document.getElementById('special-error');
 
-    // Display error messages or clear them if password meets all conditions
-    if (errors.length > 0) {
-        errorMessage.innerHTML = errors.join('<br>'); // Display the errors as bullet points
-        document.getElementById('password').setCustomValidity("Invalid password");
+    // Validate password length (8-12 characters)
+    if (lengthPattern.test(password)) {
+        lengthError.style.display = 'none';  // Hide if condition is met
     } else {
-        errorMessage.textContent = '';  // Clear the error message when the password is valid
-        document.getElementById('password').setCustomValidity("");
+        lengthError.style.display = 'list-item';  // Show if condition is not met
     }
+
+    // Validate uppercase letter
+    if (capitalPattern.test(password)) {
+        capitalError.style.display = 'none';  // Hide if condition is met
+    } else {
+        capitalError.style.display = 'list-item';  // Show if condition is not met
+    }
+
+    // Validate number
+    if (numberPattern.test(password)) {
+        numberError.style.display = 'none';  // Hide if condition is met
+    } else {
+        numberError.style.display = 'list-item';  // Show if condition is not met
+    }
+
+    // Validate special character
+    if (specialPattern.test(password)) {
+        specialError.style.display = 'none';  // Hide if condition is met
+    } else {
+        specialError.style.display = 'list-item';  // Show if condition is not met
+    }
+
+    // Set form validation state
+    const errorMessages = [lengthError, capitalError, numberError, specialError];
+    const allValid = errorMessages.every(error => error.style.display === 'none');
+    document.getElementById('password').setCustomValidity(allValid ? '' : 'Invalid password');
 }
 </script>
 
