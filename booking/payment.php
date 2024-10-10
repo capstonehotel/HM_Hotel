@@ -335,14 +335,14 @@ $_SESSION['GUESTID'] =   $lastguest;
                     <div class="col-md-12 col-sm-2">
     <label id="paymentLabel">Payment Method</label>
 
-    
+    <div class="btn-group">
         <button type="button" class="btn btn-primary" id="gcash-btn">
             <img src="../gcash.png" alt="GCash Icon" class="payment-icon"> GCash
         </button>
         <button type="button" class="btn btn-primary" id="paymaya-btn">
             <img src="../paymaya.png" alt="PayMaya Icon" class="payment-icon"> PayMaya
         </button>
-    <
+    </div>
 
         </div>
     </div>
