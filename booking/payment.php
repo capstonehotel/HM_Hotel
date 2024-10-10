@@ -321,7 +321,19 @@ $_SESSION['GUESTID'] =   $lastguest;
                     <div class="col-md-12 col-sm-2">
     <label id="paymentLabel">Payment Method</label>
 
-  
+    <div class="form-group">
+        <div class="custom-control custom-radio">
+            <input type="radio" id="creditCard" name="paymentMethod" value="Credit Card" class="custom-control-input" required>
+            <label class="custom-control-label" for="creditCard">Credit Card</label>
+        </div>
+        <div class="custom-control custom-radio">
+            <input type="radio" id="bankTransfer" name="paymentMethod" value="Bank Transfer" class="custom-control-input" required>
+            <label class="custom-control-label" for="bankTransfer">Bank Transfer</label>
+        </div>
+        <div class="custom-control custom-radio">
+            <input type="radio" id="paypal" name="paymentMethod" value="PayPal" class="custom-control-input" required>
+            <label class="custom-control-label" for="paypal">PayPal</label>
+        </div>
         </div>
     </div>
 </div>
