@@ -1,62 +1,58 @@
 <?php
-session_start(); // Start the session to access session variables
+require_once('../paymentmethod/vendor/autoload.php');
 
-require_once('../paymentmethod/vendor/autoload.php'); // Include PayMongo's library
+// Replace with your PayMongo API keys
+$api_key = 'pk_test_WLnVGBjNdZeqPjoSUpyDk7qu';
+$api_secret = 'sk_test_8FHikGJxuzFP3ix4itFTcQCv';
 
+// Get the payment method from the form data
+$payment_method = $_POST['payment_method'];
+
+
+// Get the payment amount from the session
+$amount = $_SESSION['pay'];
+
+// Set the payment description (replace with your desired description)
+$description = 'Test payment';
+
+// Create a new PayMongo client
 $client = new \GuzzleHttp\Client();
 
-// Check if the session variable 'pay' is set and is a positive integer
-$amountInCents = isset($_SESSION['pay']) && is_numeric($_SESSION['pay']) ? (int)$_SESSION['pay'] : 0;
+// Set the API endpoint and authentication headers
+$endpoint = 'https://api.paymongo.com/v1/links';
+$headers = [
+    'accept' => 'application/json',
+    'content-type' => 'application/json',
+    'authorization' => 'Basic ' . base64_encode($api_key . ':' . $api_secret),
+];
 
-if ($amountInCents <= 0) {
-    echo "Error: Invalid payment amount.";
-    exit;
-}
-
-// Define payment data
-$paymentMethod = isset($_POST['payment_method']) ? strtolower(trim($_POST['payment_method'])) : 'gcash'; // Ensure it's lowercase and trimmed
-
-// Prepare the payment data
-$paymentData = [
+// Set the payment data
+$data = [
     'data' => [
         'attributes' => [
-            'amount' => $amountInCents, // Amount in cents
+            'amount' => $amount,
+            'description' => $description,
             'currency' => 'PHP',
-            'description' => 'Payment for booking', // Description of the payment
-            'payment_method' => [
-                'type' => $paymentMethod, // Payment method type
-            ],
+            'payment_method_types' => [$payment_method],
         ],
     ],
 ];
 
-try {
-    // Make a request to PayMongo API
-    $response = $client->request('POST', 'https://api.paymongo.com/v1/links', [
-        'headers' => [
-            'accept' => 'application/json',
-            'content-type' => 'application/json',
-            'Authorization' => 'Bearer sk_test_8FHikGJxuzFP3ix4itFTcQCv', // Replace with your actual PayMongo secret key
-        ],
-        'json' => $paymentData,
-    ]);
+// Convert the data to JSON
+$json_data = json_encode($data);
 
-    // Decode the response
-    $responseData = json_decode($response->getBody(), true);
+// Send the request to PayMongo
+$response = $client->request('POST', $endpoint, [
+    'headers' => $headers,
+    'body' => $json_data,
+]);
 
-    // Check if the response contains the payment link
-    if (isset($responseData['data']['attributes']['url'])) {
-        $paymentLink = $responseData['data']['attributes']['url']; // Get the payment link
-        // Redirect the user to the payment link
-        header("Location: $paymentLink");
-        exit;
-    } else {
-        echo "Error: Payment link not found.";
-        exit;
-    }
+// Get the response data
+$response_data = json_decode($response->getBody(), true);
 
-} catch (\GuzzleHttp\Exception\RequestException $e) {
-    // Handle errors and display an appropriate message
-    echo "Error: " . $e->getMessage();
-    exit;
-}
+// Get the payment link
+$payment_link = $response_data['data']['attributes']['url'];
+
+// Redirect the user to the payment link
+header('Location: ' . $payment_link);
+exit;
