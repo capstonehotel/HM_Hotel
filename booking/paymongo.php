@@ -1,5 +1,5 @@
 <?php
-// require_once('../paymentmethod/vendor/autoload.php');
+require_once('../paymentmethod/vendor/autoload.php');
 
 // Replace with your PayMongo API keys
 $api_key = 'pk_test_WLnVGBjNdZeqPjoSUpyDk7qu';
