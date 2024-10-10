@@ -337,10 +337,10 @@ $_SESSION['GUESTID'] =   $lastguest;
 
     
         <button type="button" class="btn btn-primary" id="gcash-btn">
-            <img src="../gcash.png" alt="GCash Icon"> GCash
+            <img src="../gcash.png" alt="GCash Icon" class="payment-icon"> GCash
         </button>
         <button type="button" class="btn btn-primary" id="paymaya-btn">
-            <img src="../paymaya.png" alt="PayMaya Icon"> PayMaya
+            <img src="../paymaya.png" alt="PayMaya Icon" class="payment-icon"> PayMaya
         </button>
     <
 
