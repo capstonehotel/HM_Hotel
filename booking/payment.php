@@ -335,29 +335,38 @@ $_SESSION['GUESTID'] =   $lastguest;
                     <div class="col-md-12 col-sm-2">
     <label id="paymentLabel">Payment Method:</label>
 
-    <form method="POST" action="paymongo.php" id="paymentForm">
-    <input type="hidden" name="payment_method" id="payment_method" value="">
-    
-    <button type="button" class="btn btn-primary" onclick="selectPaymentMethod('Gcash')">
+    <button type="button" class="btn btn-primary" onclick="generatePaymentLink('Gcash')">
         <img src="../gcash.png" alt="Pay with GCash" style="height: 20px; margin-right: 5px;">
         Pay with GCash
     </button>
-    
-    <button type="button" class="btn btn-primary" onclick="selectPaymentMethod('Paymaya')">
+
+    <button type="button" class="btn btn-primary" onclick="generatePaymentLink('Paymaya')">
         <img src="../paymaya.png" alt="Pay with PayMaya" style="height: 20px; margin-right: 5px;">
         Pay with PayMaya
     </button>
-</form>
 
-<script>
-        function selectPaymentMethod(method) {
-            document.getElementById('payment_method').value = method;
-
-            // Automatically submit the form to trigger the payment process
-            document.getElementById('paymentForm').submit();
+    <script>
+        function generatePaymentLink(method) {
+            fetch('paymongo.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ payment_method: method })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.checkout_url) {
+                    window.location.href = data.checkout_url;
+                } else {
+                    console.error('Payment link generation failed:', data);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
         }
     </script>
-
         <!-- <button type="button" class="btn btn-primary" id="gcash-btn">
             <img src="../gcash.png" alt="GCash Icon" class="payment-icon" onclick="payWithGcash()"> GCash
         </button>
