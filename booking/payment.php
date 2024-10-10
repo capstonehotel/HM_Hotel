@@ -277,13 +277,45 @@ $_SESSION['GUESTID'] =   $lastguest;
 </script>-->
 <?php }?> 
 <style>
-    .payment-method-label {
+  .custom-radio {
+    display: none; /* Hide the default radio button */
+}
+
+.payment-method-label {
     background-color: #f0f8ff; /* Light blue background */
-    padding: 10px; /* Add some padding */
-    border-radius: 5px; /* Rounded corners */
-    display: inline-flex; /* Flex display to align icon and text */
-    align-items: center; /* Center the items vertically */
-    margin-right: 10px; /* Add space between items */
+    padding: 10px;
+    border-radius: 5px;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative; /* Position for check mark */
+    transition: background-color 0.3s;
+}
+
+.payment-method-label:before {
+    content: ""; /* Check mark */
+    position: absolute;
+    top: 10px; /* Adjust to your layout */
+    left: 10px; /* Adjust to your layout */
+    width: 20px;
+    height: 20px;
+    border: 2px solid #007bff; /* Blue border */
+    border-radius: 3px; /* Square corners */
+    background-color: white; /* Background color */
+    transition: background-color 0.3s;
+}
+
+.custom-radio:checked + .payment-method-label:before {
+    background-color: #007bff; /* Change to blue when checked */
+    content: "✔"; /* Unicode check mark */
+    color: white; /* Change check mark color */
+    text-align: center; /* Center check mark */
+    line-height: 20px; /* Center vertically */
+    font-size: 16px; /* Adjust check mark size */
+}
+
+.payment-method-label:hover {
+    background-color: #e0f7fa; /* Darker blue on hover */
 }
 
 </style>
@@ -333,23 +365,20 @@ $_SESSION['GUESTID'] =   $lastguest;
     <label id="paymentLabel">Payment Method</label>
 
     <div class="form-group">
-        <div class="custom-control custom-radio">
-            <input type="radio" id="gcash" name="paymentMethod" value="GCash" class="custom-control-input" required>
-            <label class="custom-control-label payment-method-label" for="gcash">
-                <img src="../gcash.png" alt="GCash" style="width: 30px; height: 30px;"> GCash
-            </label>
-        </div>
-        <div class="custom-control custom-radio">
-            <input type="radio" id="paymaya" name="paymentMethod" value="PayMaya" class="custom-control-input" required>
-            <label class="custom-control-label payment-method-label" for="paymaya">
-                <img src="path/to/paymaya-icon.png" alt="PayMaya" style="width: 30px; height: 30px;"> PayMaya
-            </label>
-        </div>
-        <div class="custom-control custom-radio">
-            <input type="radio" id="creditCard" name="paymentMethod" value="Credit Card" class="custom-control-input" required>
-            <label class="custom-control-label payment-method-label" for="creditCard">
-                <i class="fas fa-credit-card"></i> Credit Card
-            </label>
+        <input type="radio" id="gcash" name="paymentMethod" value="GCash" class="custom-radio" required>
+        <label class="payment-method-label" for="gcash">
+            <img src="../gcash.png" alt="GCash" style="width: 30px; height: 30px;"> GCash
+        </label>
+
+        <input type="radio" id="paymaya" name="paymentMethod" value="PayMaya" class="custom-radio" required>
+        <label class="payment-method-label" for="paymaya">
+            <img src="path/to/paymaya-icon.png" alt="PayMaya" style="width: 30px; height: 30px;"> PayMaya
+        </label>
+
+        <input type="radio" id="creditCard" name="paymentMethod" value="Credit Card" class="custom-radio" required>
+        <label class="payment-method-label" for="creditCard">
+            <i class="fas fa-credit-card"></i> Credit Card
+        </label>
         </div>
     </div>
 </div>
