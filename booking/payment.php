@@ -347,25 +347,36 @@ $_SESSION['GUESTID'] =   $lastguest;
 
     <script>
         function generatePaymentLink(method) {
-            fetch('paymongo.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ payment_method: method })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.checkout_url) {
-                    window.location.href = data.checkout_url;
-                } else {
-                    console.error('Payment link generation failed:', data);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
+    console.log("Selected payment method:", method); // Log the method
+
+    fetch('paymongo.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ payment_method: method })
+    })
+    .then(response => {
+        console.log("Response status:", response.status); // Check the response status
+        return response.json();
+    })
+    .then(data => {
+        console.log("Response data:", data); // Log the data
+
+        if (data.checkout_url) {
+            console.log("Redirecting to:", data.checkout_url); // Log the checkout URL
+            window.location.href = data.checkout_url;
+        } else if (data.error) {
+            console.error("Error:", data.error); // Log errors
+            alert("Payment error: " + data.error);
         }
+    })
+    .catch(error => {
+        console.error("Fetch error:", error); // Log fetch errors
+        alert("Fetch error: " + error.message);
+    });
+}
+
     </script>
         <!-- <button type="button" class="btn btn-primary" id="gcash-btn">
             <img src="../gcash.png" alt="GCash Icon" class="payment-icon" onclick="payWithGcash()"> GCash

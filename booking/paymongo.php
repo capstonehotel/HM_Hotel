@@ -33,13 +33,17 @@ if ($payment_method) {
         $body = json_decode($response->getBody(), true);
         $paymentLink = $body['data']['attributes']['checkout_url'];
 
+        // Log the generated payment link
+        error_log("Payment link generated: " . $paymentLink);
+
         // Return the payment link as a JSON response
         echo json_encode(['checkout_url' => $paymentLink]);
 
     } catch (Exception $e) {
+        error_log("Error: " . $e->getMessage()); // Log any exceptions
         echo json_encode(['error' => $e->getMessage()]);
     }
 } else {
+    error_log("No payment method selected");
     echo json_encode(['error' => 'No payment method selected']);
 }
-?>
