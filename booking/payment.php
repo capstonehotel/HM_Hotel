@@ -282,8 +282,8 @@ $_SESSION['GUESTID'] =   $lastguest;
 }
 
 .payment-icon {
-    width: 30px; /* Set a smaller width for the icons */
-    height: 30px; /* Set a smaller height for the icons */
+    width: 25px; /* Set a smaller width for the icons */
+    height: 25px; /* Set a smaller height for the icons */
     margin-right: 5px; /* Space between the icon and text */
     vertical-align: middle; /* Align image vertically in the middle of the button */
 }
