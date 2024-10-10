@@ -335,49 +335,29 @@ $_SESSION['GUESTID'] =   $lastguest;
                     <div class="col-md-12 col-sm-2">
     <label id="paymentLabel">Payment Method:</label>
 
-    <button type="button" class="btn btn-primary" onclick="generatePaymentLink('Gcash')">
+    <form method="POST" action="paymongo.php" id="paymentForm">
+    <input type="hidden" name="payment_method" id="payment_method" value="">
+    
+    <button type="button" class="btn btn-primary" onclick="selectPaymentMethod('Gcash')">
         <img src="../gcash.png" alt="Pay with GCash" style="height: 20px; margin-right: 5px;">
         Pay with GCash
     </button>
-
-    <button type="button" class="btn btn-primary" onclick="generatePaymentLink('Paymaya')">
+    
+    <button type="button" class="btn btn-primary" onclick="selectPaymentMethod('Paymaya')">
         <img src="../paymaya.png" alt="Pay with PayMaya" style="height: 20px; margin-right: 5px;">
         Pay with PayMaya
     </button>
+</form>
 
-    <script>
-        function generatePaymentLink(method) {
-    console.log("Selected payment method:", method); // Log the method
+<script>
+        function selectPaymentMethod(method) {
+            document.getElementById('payment_method').value = method;
 
-    fetch('paymongo.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ payment_method: method })
-    })
-    .then(response => {
-        console.log("Response status:", response.status); // Check the response status
-        return response.json();
-    })
-    .then(data => {
-        console.log("Response data:", data); // Log the data
-
-        if (data.checkout_url) {
-            console.log("Redirecting to:", data.checkout_url); // Log the checkout URL
-            window.location.href = data.checkout_url;
-        } else if (data.error) {
-            console.error("Error:", data.error); // Log errors
-            alert("Payment error: " + data.error);
+            // Automatically submit the form to trigger the payment process
+            document.getElementById('paymentForm').submit();
         }
-    })
-    .catch(error => {
-        console.error("Fetch error:", error); // Log fetch errors
-        alert("Fetch error: " + error.message);
-    });
-}
-
     </script>
+
         <!-- <button type="button" class="btn btn-primary" id="gcash-btn">
             <img src="../gcash.png" alt="GCash Icon" class="payment-icon" onclick="payWithGcash()"> GCash
         </button>

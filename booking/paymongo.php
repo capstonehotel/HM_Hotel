@@ -1,6 +1,11 @@
 <?php
 require_once('../paymentmethod/vendor/autoload.php');
 
+
+
+// Set content type to application/json to ensure the response is valid JSON
+header('Content-Type: application/json');
+
 // Retrieve the POST data
 $input = json_decode(file_get_contents('php://input'), true);
 $payment_method = $input['payment_method'] ?? '';
@@ -33,17 +38,15 @@ if ($payment_method) {
         $body = json_decode($response->getBody(), true);
         $paymentLink = $body['data']['attributes']['checkout_url'];
 
-        // Log the generated payment link
-        error_log("Payment link generated: " . $paymentLink);
-
         // Return the payment link as a JSON response
         echo json_encode(['checkout_url' => $paymentLink]);
 
     } catch (Exception $e) {
-        error_log("Error: " . $e->getMessage()); // Log any exceptions
+        // Return an error message in JSON format
         echo json_encode(['error' => $e->getMessage()]);
     }
 } else {
-    error_log("No payment method selected");
+    // Return an error if no payment method is selected
     echo json_encode(['error' => 'No payment method selected']);
 }
+?>
