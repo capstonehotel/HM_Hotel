@@ -282,8 +282,8 @@ $_SESSION['GUESTID'] =   $lastguest;
 }
 
 .payment-icon {
-    width: 20px; /* Set a smaller width for the icons */
-    height: 20px; /* Set a smaller height for the icons */
+    width: 30px; /* Set a smaller width for the icons */
+    height: 30px; /* Set a smaller height for the icons */
     margin-right: 5px; /* Space between the icon and text */
     vertical-align: middle; /* Align image vertically in the middle of the button */
 }
@@ -333,7 +333,7 @@ $_SESSION['GUESTID'] =   $lastguest;
     <input type="hidden" id="payment_status_input"  name="txtstatus">
 </div>
                     <div class="col-md-12 col-sm-2">
-    <label id="paymentLabel">Payment Method</label>
+    <label id="paymentLabel">Payment Method:</label>
 
     
         <button type="button" class="btn btn-primary" id="gcash-btn">
