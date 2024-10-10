@@ -327,7 +327,7 @@ $_SESSION['GUESTID'] =   $lastguest;
                         <?php echo date("m/d/Y"); ?>
                     </div>
                     <div class="col-md-12">
-    <label>Transaction Id:</label>
+    <label style="dispaly: none;">Transaction Id:</label>
     <span><?php echo $_SESSION['confirmation']; ?></span>
     <input type="hidden" name="realconfirmation" value="<?php echo $_SESSION['confirmation']; ?>" />
     <input type="hidden" id="payment_status_input"  name="txtstatus">
@@ -337,13 +337,11 @@ $_SESSION['GUESTID'] =   $lastguest;
 
     
         <button type="button" class="btn btn-primary" id="gcash-btn">
-            <img src="../gcash.png" alt="GCash Icon" class="payment-icon"> GCash
+            <img src="../gcash.png" alt="GCash Icon" class="payment-icon" onclick="payWithGcash()"> GCash
         </button>
-        <button type="button" class="btn btn-primary" id="paymaya-btn">
+        <button type="button" class="btn btn-primary" id="paymaya-btn" onclick="payWithPaymaya()">
             <img src="../paymaya.png" alt="PayMaya Icon" class="payment-icon"> PayMaya
         </button>
-    
-
         </div>
     </div>
 </div>
@@ -454,5 +452,47 @@ function submitBooking() {
       </div>
 </div>
 
+<?php
+
+
+$client = new \GuzzleHttp\Client();
+
+// Check if the session variable 'pay' is set
+$amountInCents = isset($_SESSION['pay']) ? $_SESSION['pay'] : 0; // Use the session value or default to 0
+
+// Define payment data
+$paymentData = [
+    'data' => [
+        'attributes' => [
+            'amount' => $amountInCents, // Amount in cents
+            'currency' => 'PHP',
+            'description' => 'Payment for booking', // Description of the payment
+            'payment_method' => [
+                'type' => isset($_POST['payment_method']) ? $_POST['payment_method'] : 'gcash', // Get payment method from POST data
+            ],
+        ],
+    ],
+];
+
+try {
+    // Make request to PayMongo API
+    $response = $client->request('POST', 'https://api.paymongo.com/v1/links', [
+        'headers' => [
+            'accept' => 'application/json',
+            'content-type' => 'application/json',
+            'Authorization' => 'sk_test_8FHikGJxuzFP3ix4itFTcQCv', // Replace with your actual PayMongo secret key
+        ],
+        'json' => $paymentData,
+    ]);
+
+    // Decode the response
+    $responseData = json_decode($response->getBody(), true);
+    $paymentLink = $responseData['data']['attributes']['url']; // Get the payment link
+
+} catch (\GuzzleHttp\Exception\RequestException $e) {
+    echo "Error: " . $e->getMessage();
+    exit;
+}
+?>
 
    
