@@ -455,6 +455,8 @@ function submitBooking() {
 <?php
 
 
+require_once('../paymentmethod/vendor/autoload.php');
+
 $client = new \GuzzleHttp\Client();
 
 // Check if the session variable 'pay' is set
