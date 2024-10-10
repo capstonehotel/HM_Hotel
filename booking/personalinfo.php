@@ -268,7 +268,7 @@ function validateDOB(input) {
     }
 }
 </script>
-<script>
+<!-- <script>
 function validatePassword() {
     var passwordInput = document.getElementById("password");
     var password = passwordInput.value;
@@ -293,6 +293,26 @@ function validatePassword() {
     } else {
         passwordError.textContent = "";
         passwordInput.setCustomValidity("");
+    }
+}
+</script> -->
+<script>
+function validatePassword() {
+    const password = document.getElementById('password').value;
+    const errorMessage = document.getElementById('password-error');
+    
+    // Regex pattern: 
+    //  - ^(?=.*[a-z]): At least one lowercase letter
+    //  - (?=.*[A-Z]): At least one uppercase letter
+    //  - (?=.*\d): At least one digit
+    //  - (?=.*[@$!%*?&]): At least one special character
+    //  - [A-Za-z\d@$!%*?&]{8,12}$: Between 8-12 characters
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$/;
+    
+    if (!passwordPattern.test(password)) {
+        errorMessage.textContent = 'Password must be 8-12 characters, include uppercase, lowercase, a number, and a special character.';
+    } else {
+        errorMessage.textContent = '';  // Clear the error message when the password is valid
     }
 }
 </script>
