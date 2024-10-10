@@ -274,9 +274,8 @@ $_SESSION['GUESTID'] =   $lastguest;
             window.location.href = "index.php";
         }
     });
-</script>
-<?php }?> -->
-
+</script>-->
+<?php }?> 
  
 <!-- Add this in your HTML head section -->
 
@@ -320,7 +319,7 @@ $_SESSION['GUESTID'] =   $lastguest;
     <input type="hidden" id="payment_status_input"  name="txtstatus">
 </div>
                     <div class="col-md-12 col-sm-2">
-    <label id="paymentLabel">Payment Options:</label>
+    <label id="paymentLabel">Payment Method</label>
 
   
         </div>
