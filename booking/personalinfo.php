@@ -217,7 +217,7 @@ var_dump($_SESSION['otp']);
 
       <div class="form-group">
     <label  class ="control-label" for="password">Password:</label>
-    <input name="pass" type="password" class="form-control input-sm" id="password" onkeyup="validatePassword()" required / placeholder="Ex@mple123">
+    <input name="pass" type="password" class="form-control input-sm" id="password" onkeyup="validatePassword()" minlength="8" maxlength="12" required  placeholder="Ex@mple123"/>
     <span id="password-error" style="color: red;"></span>
 </div>
 			            </div>
