@@ -306,49 +306,31 @@ function validatePassword() {
 function validatePassword() {
     const password = document.getElementById('password').value;
 
-    // Regex patterns
+    // Regex patterns for validation
     const lengthPattern = /.{8,12}/;  // 8-12 characters
     const capitalPattern = /[A-Z]/;   // At least one uppercase letter
     const numberPattern = /\d/;       // At least one number
     const specialPattern = /[@$!%*?&]/; // At least one special character
 
-    // Error message elements
+    // Select the error messages
     const lengthError = document.getElementById('length-error');
     const capitalError = document.getElementById('capital-error');
     const numberError = document.getElementById('number-error');
     const specialError = document.getElementById('special-error');
 
-    // Validate password length (8-12 characters)
-    if (lengthPattern.test(password)) {
-        lengthError.style.display = 'none';  // Hide if condition is met
-    } else {
-        lengthError.style.display = 'list-item';  // Show if condition is not met
-    }
+    // Validate each rule and hide or show the corresponding error message
+    lengthError.style.display = lengthPattern.test(password) ? 'none' : 'list-item';
+    capitalError.style.display = capitalPattern.test(password) ? 'none' : 'list-item';
+    numberError.style.display = numberPattern.test(password) ? 'none' : 'list-item';
+    specialError.style.display = specialPattern.test(password) ? 'none' : 'list-item';
 
-    // Validate uppercase letter
-    if (capitalPattern.test(password)) {
-        capitalError.style.display = 'none';  // Hide if condition is met
-    } else {
-        capitalError.style.display = 'list-item';  // Show if condition is not met
-    }
+    // Check if all requirements are met
+    const allValid = lengthPattern.test(password) &&
+                     capitalPattern.test(password) &&
+                     numberPattern.test(password) &&
+                     specialPattern.test(password);
 
-    // Validate number
-    if (numberPattern.test(password)) {
-        numberError.style.display = 'none';  // Hide if condition is met
-    } else {
-        numberError.style.display = 'list-item';  // Show if condition is not met
-    }
-
-    // Validate special character
-    if (specialPattern.test(password)) {
-        specialError.style.display = 'none';  // Hide if condition is met
-    } else {
-        specialError.style.display = 'list-item';  // Show if condition is not met
-    }
-
-    // Set form validation state
-    const errorMessages = [lengthError, capitalError, numberError, specialError];
-    const allValid = errorMessages.every(error => error.style.display === 'none');
+    // Set form validation state based on all requirements being met or not
     document.getElementById('password').setCustomValidity(allValid ? '' : 'Invalid password');
 }
 </script>
