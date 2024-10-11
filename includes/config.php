@@ -6,7 +6,7 @@
 * Revised By:		
 */
 
-//Database Constants
+//Database Constantss
 defined('DB_SERVER') ? null : define('DB_SERVER','127.0.0.1');//define our database server
 defined('DB_USER') ? null : define('DB_USER','u510162695_hmsystemdb');		  //define our database user	
 defined('DB_PASS') ? null : define('DB_PASS','1Hmsystemdb');			  //define our database Password	
