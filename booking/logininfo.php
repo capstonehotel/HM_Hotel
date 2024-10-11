@@ -1,4 +1,74 @@
 <?php 
+// require_once 'db_connection.php'; // Assuming you have a file for DB connection
+
+if (isset($_POST['gsubmit'])) {
+    $username = $_POST['username'];
+    $password = $_POST['pass'];
+
+    // Fetch user from the database
+    $query = "SELECT * FROM tblguest WHERE G_UNAME = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows == 1) {
+        $user = $result->fetch_assoc();
+
+        // Check if password matches
+        if (password_verify($password, $user['password'])) {
+            // Check if email is verified
+            if ($user['email_verified'] == 1) {
+                // Email is verified, proceed with login
+                $_SESSION['user_id'] = $user['id'];
+                header("Location: https://mcchmhotelreservation.com/dashboard.php");
+                exit();
+            } else {
+                // Email not verified, send verification link
+                $verification_link = "https://mcchmhotelreservation.com/verify.php?token=" . $user['verification_token'];
+
+                // Send email (Assuming you're using PHPMailer)
+                $mail = new PHPMailer(true);
+                try {
+                    $mail->setFrom('no-reply@mcchmhotelreservation.com', 'MCCHM Hotel Reservation');
+                    $mail->addAddress($user['email']); // Add recipient
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Email Verification';
+                    $mail->Body    = "Please verify your email by clicking <a href='$verification_link'>here</a>.";
+                    $mail->send();
+
+                    // Notify user that a verification link has been sent
+                    echo "<script>
+                        Swal.fire({
+                            icon: 'info',
+                            title: 'Verify Email',
+                            text: 'A verification link has been sent to your email. Please verify your email before logging in.'
+                        });
+                    </script>";
+                } catch (Exception $e) {
+                    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                }
+            }
+        } else {
+            echo "<script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Invalid username or password!'
+                });
+            </script>";
+        }
+    } else {
+        echo "<script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Invalid username or password!'
+            });
+        </script>";
+    }
+}
+
 
 if (!isset($_SESSION['monbela_cart'])) {
   # code...
@@ -52,9 +122,8 @@ if (!isset($_SESSION['monbela_cart'])) {
 
 <?php
 
-  function logintab(){
-
-    ?>  
+function logintab(){
+  ?>  
   <div class="col-md-12">
     <form action="<?php echo "https://mcchmhotelreservation.com/login.php" ?>" method="post" onsubmit="return validateForm()" >
       <div class="form-group has-feedback">
@@ -81,6 +150,7 @@ if (!isset($_SESSION['monbela_cart'])) {
       </div>
     </form> 
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 function validateForm() {
@@ -99,7 +169,8 @@ function validateForm() {
   return true; // Allow form submission
 }
 </script>
- 
+
+
 
 <?php
   }
